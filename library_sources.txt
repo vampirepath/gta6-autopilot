@@ -1,8 +1,7 @@
-# Official Rockstar videos used as background footage.
-# One per line. Either a YouTube link, or "search: <words>" (only videos uploaded
-# by the official "Rockstar Games" channel are accepted for searches).
-# Add the next official trailer here the day it comes out, then run: ./build_library.sh
+# Official Rockstar videos used as background footage. One per line.
+#  - a direct .mp4 link from Rockstar's own site (works from GitHub's servers), or
+#  - a YouTube link / "search: <words>" (YouTube often blocks cloud servers).
+# Add the next official video here, then run the "Build clip library" workflow again.
 
-search: Grand Theft Auto VI Trailer 1
-search: Grand Theft Auto VI Trailer 2
-search: Grand Theft Auto VI An Extended Look
+# Grand Theft Auto VI: An Extended Look (26 min, in-game PS5 footage) – rockstargames.com/videos/rk721912
+https://videos-rockstargames-com.akamaized.net/v4/rk721912/flv/en-us-1080p.mp4

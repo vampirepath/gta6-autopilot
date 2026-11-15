@@ -48,6 +48,20 @@ def download_sources():
     with yt_dlp.YoutubeDL(opts) as ydl:
         for line in lines:
             try:
+                if line.lower().split("?")[0].endswith(".mp4"):      # direct file (e.g. Rockstar CDN)
+                    import requests
+                    name = "rockstar_" + re.sub(r"[^A-Za-z0-9]", "_", line.split("/v4/")[-1])[:60]
+                    dst = SRC_DIR / (name.removesuffix("_mp4") + ".mp4")
+                    if dst.exists():
+                        continue
+                    log.info("downloading %s", line)
+                    with requests.get(line, stream=True, timeout=60,
+                                      headers={"User-Agent": "Mozilla/5.0", "Referer": "https://www.rockstargames.com/"}) as r:
+                        r.raise_for_status()
+                        with open(dst, "wb") as f:
+                            for chunk in r.iter_content(1 << 20):
+                                f.write(chunk)
+                    continue
                 if line.lower().startswith("search:"):
                     q = line.split(":", 1)[1].strip()
                     res = ydl.extract_info(f"ytsearch8:{q}", download=False)
