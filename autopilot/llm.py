@@ -13,7 +13,7 @@ URL = "https://generativelanguage.googleapis.com/v1beta/models/{m}:generateConte
 
 
 def ask(prompt: str, system: str = "", image_jpeg_b64: str | None = None, json_out=True,
-        max_tokens=2048, retries: int = 6) -> str:
+        max_tokens=8192, retries: int = 6) -> str:
     models = config().get("gemini_models") or ["gemini-flash-latest"]
     parts = []
     if image_jpeg_b64:
@@ -35,6 +35,9 @@ def ask(prompt: str, system: str = "", image_jpeg_b64: str | None = None, json_o
                 last = e
                 time.sleep(5)
                 continue
+            if r.status_code >= 500 and attempt >= 1:          # model overloaded -> try the next model
+                last = f"{model} busy"
+                break
             if r.status_code == 429 or r.status_code >= 500:   # free-tier speed limit / busy
                 wait = 20 * (attempt + 1) if retries > 2 else 8
                 log.info("gemini %s busy (%s), waiting %ss", model, r.status_code, wait)
@@ -48,7 +51,12 @@ def ask(prompt: str, system: str = "", image_jpeg_b64: str | None = None, json_o
                 raise RuntimeError(f"Gemini error {r.status_code}: {r.text[:400]}")
             data = r.json()
             try:
-                return "".join(p.get("text", "") for p in data["candidates"][0]["content"]["parts"])
+                text = "".join(p.get("text", "") for p in data["candidates"][0]["content"]["parts"]
+                               if not p.get("thought"))
+                if text.strip():
+                    return text
+                last = f"{model} returned empty text ({data['candidates'][0].get('finishReason')})"
+                break
             except (KeyError, IndexError):
                 last = str(data)[:300]
                 break

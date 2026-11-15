@@ -145,7 +145,7 @@ def tag_clips(idx: list[dict], retag=False):
                         len(todo) - i + 1)
             break
         try:
-            raw = ask(prompt, image_jpeg_b64=_frame_b64(CLIPS_DIR / c["file"]), max_tokens=200, retries=2)
+            raw = ask(prompt, image_jpeg_b64=_frame_b64(CLIPS_DIR / c["file"]), max_tokens=2048, retries=2)
             d = json.loads(re.search(r"\{.*\}", raw, re.S).group(0))
             time.sleep(4)   # stay under the free-tier speed limit
             c["tags"] = [t for t in d.get("tags", []) if t in TAGS] or ["any"]
