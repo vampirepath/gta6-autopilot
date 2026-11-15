@@ -13,7 +13,7 @@ URL = "https://generativelanguage.googleapis.com/v1beta/models/{m}:generateConte
 
 
 def ask(prompt: str, system: str = "", image_jpeg_b64: str | None = None, json_out=True,
-        max_tokens=2048) -> str:
+        max_tokens=2048, retries: int = 6) -> str:
     models = config().get("gemini_models") or ["gemini-flash-latest"]
     parts = []
     if image_jpeg_b64:
@@ -27,7 +27,7 @@ def ask(prompt: str, system: str = "", image_jpeg_b64: str | None = None, json_o
         body["generationConfig"]["responseMimeType"] = "application/json"
     last = None
     for model in models:
-        for attempt in range(6):
+        for attempt in range(retries):
             try:
                 r = requests.post(URL.format(m=model), json=body, timeout=120,
                                   headers={"x-goog-api-key": env("GEMINI_API_KEY")})
@@ -36,7 +36,7 @@ def ask(prompt: str, system: str = "", image_jpeg_b64: str | None = None, json_o
                 time.sleep(5)
                 continue
             if r.status_code == 429 or r.status_code >= 500:   # free-tier speed limit / busy
-                wait = 20 * (attempt + 1)
+                wait = 20 * (attempt + 1) if retries > 2 else 8
                 log.info("gemini %s busy (%s), waiting %ss", model, r.status_code, wait)
                 time.sleep(wait)
                 last = r.text[:300]

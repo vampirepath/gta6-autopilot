@@ -37,9 +37,12 @@ jobs:
           mkdir -p library/clips
           gh release download library -p clips.tar -D /tmp && tar -xf /tmp/clips.tar -C library/clips || echo "no library yet"
       - name: Download, cut and tag
+        continue-on-error: true
+        timeout-minutes: 90
         run: |
           if [ "${{ github.event.inputs.retag }}" = "true" ]; then python -m autopilot.library --retag; else python -m autopilot.library; fi
       - name: Upload library
+        if: always()
         run: |
           tar -cf /tmp/clips.tar -C library/clips .
           gh release view library >/dev/null 2>&1 || gh release create library --title "Clip library" --notes "Background clips used by the autopilot (no audio)."

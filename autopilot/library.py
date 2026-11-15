@@ -133,21 +133,28 @@ def _frame_b64(clip: Path) -> str:
 def tag_clips(idx: list[dict], retag=False):
     todo = [c for c in idx if retag or not c["tags"]][:400]   # free tier: max 400 per run
     log.info("tagging %d clips", len(todo))
+    t0, fails = time.time(), 0
     prompt = ("This is a frame from a GTA 6 video. Reply ONLY JSON: "
               '{"tags": [1-3 tags from ' + json.dumps(TAGS) + "], "
               '"text_card": true if the frame is mostly a logo, title text, black screen or date card, '
               '"graphic": true if it shows blood/gore or a gun pointed at someone up close}')
     for i, c in enumerate(todo, 1):
+        if time.time() - t0 > 25 * 60 or fails >= 6:
+            log.warning("stopping tagging early (time limit or free-tier limit) – %d left untagged; "
+                        "they are still used as general clips. Run the build again tomorrow to tag them.",
+                        len(todo) - i + 1)
+            break
         try:
-            raw = ask(prompt, image_jpeg_b64=_frame_b64(CLIPS_DIR / c["file"]), max_tokens=200)
+            raw = ask(prompt, image_jpeg_b64=_frame_b64(CLIPS_DIR / c["file"]), max_tokens=200, retries=2)
             d = json.loads(re.search(r"\{.*\}", raw, re.S).group(0))
             time.sleep(4)   # stay under the free-tier speed limit
             c["tags"] = [t for t in d.get("tags", []) if t in TAGS] or ["any"]
             c["ok"] = not d.get("text_card", False)
             c["graphic"] = bool(d.get("graphic", False))
+            fails = 0
         except Exception as e:
             log.warning("tag failed %s: %s", c["file"], e)
-            c["tags"] = ["any"]
+            fails += 1
         if i % 20 == 0:
             save_index(idx)
             log.info("  tagged %d/%d", i, len(todo))
