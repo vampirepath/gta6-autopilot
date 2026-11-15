@@ -1,0 +1,58 @@
+# ================================================================
+#  GTA 6 AUTOPILOT – settings you can change (no coding needed)
+# ================================================================
+
+channel_name: "GTA 6 Daily"          # used in descriptions
+
+# ---- How many Shorts per run --------------------------------------
+# The cron job runs the system 3 times a day. Each run makes this many.
+videos_per_run: 1
+
+# ---- Voice (free Microsoft Edge voices) ---------------------------
+# Good English options:  en-US-AndrewNeural (deep, YouTuber style)
+#                        en-US-GuyNeural    (energetic news)
+#                        en-US-ChristopherNeural (serious)
+#                        en-GB-RyanNeural   (British)
+voice: "en-US-AndrewNeural"
+voice_rate: "+12%"                    # faster = more retention
+voice_pitch: "-2Hz"
+
+# ---- Script --------------------------------------------------------
+claude_model: "claude-sonnet-5-5"
+target_words: 120                     # about 40 seconds of voice
+
+# ---- Background music ---------------------------------------------
+# Put royalty-free .mp3 files in the  music/  folder.
+# A random one is picked for each video. Leave the folder empty for no music.
+music_volume: 0.12                    # 0.0 – 1.0 (voice is 1.0)
+
+# ---- Captions ------------------------------------------------------
+caption_color: "&H00FFFFFF"           # white  (ASS colour format &HAABBGGRR)
+caption_highlight: "&H0000E5FF"       # GTA yellow-orange for the spoken word
+caption_words_per_line: 3
+
+# ---- Uploading -----------------------------------------------------
+upload_youtube: true
+upload_instagram: true
+upload_facebook: true
+youtube_privacy: "public"             # public / unlisted / private
+youtube_category: "20"                # 20 = Gaming
+
+# REVIEW MODE: each video is sent to your Telegram first with ✅ Post / 🗑 Skip buttons.
+review_mode: true
+review_timeout_minutes: 40      # how long to wait for your tap
+on_timeout: "post"              # "post" = keeps running while you sleep, "skip" = only post what you approve
+
+# ---- News sources --------------------------------------------------
+feeds:
+  - https://news.google.com/rss/search?q=%22GTA+6%22+OR+%22GTA+VI%22+when:2d&hl=en-US&gl=US&ceid=US:en
+  - https://www.reddit.com/r/GTA6/hot/.rss?limit=25
+  - https://www.reddit.com/r/GTAVI/hot/.rss?limit=25
+  - https://www.rockstargames.com/newswire/rss
+  - https://rockstarintel.com/feed
+  - https://www.gtaboom.com/rss
+
+# A story must mention one of these to be used
+must_contain_any: ["gta 6", "gta vi", "gta6", "grand theft auto vi", "grand theft auto 6", "vice city", "leonida", "jason", "lucia"]
+# Stories containing these are skipped
+skip_if_contains: ["giveaway", "free download", "apk", "crack", "mod menu"]

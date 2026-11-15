@@ -1,0 +1,49 @@
+name: Build clip library
+
+on:
+  workflow_dispatch:
+    inputs:
+      retag:
+        description: "Only re-tag existing clips (true/false)"
+        required: false
+        default: "false"
+
+concurrency:
+  group: autopilot
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q -r requirements.txt
+      - name: Get existing library (if any)
+        run: |
+          mkdir -p library/clips
+          gh release download library -p clips.tar -D /tmp && tar -xf /tmp/clips.tar -C library/clips || echo "no library yet"
+      - name: Download, cut and tag
+        run: |
+          if [ "${{ github.event.inputs.retag }}" = "true" ]; then python -m autopilot.library --retag; else python -m autopilot.library; fi
+      - name: Upload library
+        run: |
+          tar -cf /tmp/clips.tar -C library/clips .
+          gh release view library >/dev/null 2>&1 || gh release create library --title "Clip library" --notes "Background clips used by the autopilot (no audio)."
+          gh release upload library /tmp/clips.tar --clobber
+          git config user.name "autopilot-bot"
+          git config user.email "autopilot-bot@users.noreply.github.com"
+          git add -f library/index.json && git commit -m "library updated" && git pull --rebase -q && git push -q || true

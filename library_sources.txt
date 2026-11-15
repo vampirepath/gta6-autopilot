@@ -1,0 +1,8 @@
+# Official Rockstar videos used as background footage.
+# One per line. Either a YouTube link, or "search: <words>" (only videos uploaded
+# by the official "Rockstar Games" channel are accepted for searches).
+# Add the next official trailer here the day it comes out, then run: ./build_library.sh
+
+search: Grand Theft Auto VI Trailer 1
+search: Grand Theft Auto VI Trailer 2
+search: Grand Theft Auto VI An Extended Look
