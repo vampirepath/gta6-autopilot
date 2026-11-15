@@ -13,9 +13,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-import anthropic
+import time
 
-from .common import CLIPS_DIR, LIB_DIR, LIB_INDEX, ROOT, config, env, log
+from .common import CLIPS_DIR, LIB_DIR, LIB_INDEX, ROOT, log
+from .llm import ask
 
 TAGS = ["jason", "lucia", "jason_and_lucia", "city_skyline", "beach", "car_driving",
         "police_chase", "robbery_action", "boat_water", "nightlife_party", "swamp_wildlife",
@@ -116,9 +117,7 @@ def _frame_b64(clip: Path) -> str:
 
 
 def tag_clips(idx: list[dict], retag=False):
-    client = anthropic.Anthropic(api_key=env("ANTHROPIC_API_KEY"))
-    model = config()["claude_model"]
-    todo = [c for c in idx if retag or not c["tags"]]
+    todo = [c for c in idx if retag or not c["tags"]][:400]   # free tier: max 400 per run
     log.info("tagging %d clips", len(todo))
     prompt = ("This is a frame from a GTA 6 video. Reply ONLY JSON: "
               '{"tags": [1-3 tags from ' + json.dumps(TAGS) + "], "
@@ -126,11 +125,9 @@ def tag_clips(idx: list[dict], retag=False):
               '"graphic": true if it shows blood/gore or a gun pointed at someone up close}')
     for i, c in enumerate(todo, 1):
         try:
-            r = client.messages.create(model=model, max_tokens=120, messages=[{"role": "user", "content": [
-                {"type": "image", "source": {"type": "base64", "media_type": "image/jpeg",
-                                             "data": _frame_b64(CLIPS_DIR / c["file"])}},
-                {"type": "text", "text": prompt}]}])
-            d = json.loads(re.search(r"\{.*\}", r.content[0].text, re.S).group(0))
+            raw = ask(prompt, image_jpeg_b64=_frame_b64(CLIPS_DIR / c["file"]), max_tokens=200)
+            d = json.loads(re.search(r"\{.*\}", raw, re.S).group(0))
+            time.sleep(4)   # stay under the free-tier speed limit
             c["tags"] = [t for t in d.get("tags", []) if t in TAGS] or ["any"]
             c["ok"] = not d.get("text_card", False)
             c["graphic"] = bool(d.get("graphic", False))

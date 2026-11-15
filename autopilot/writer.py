@@ -2,9 +2,8 @@
 import json
 import re
 
-import anthropic
-
-from .common import config, env, log
+from .common import config, log
+from .llm import ask
 
 SYSTEM = """You write viral YouTube Shorts scripts for a faceless GTA 6 news channel.
 Style: fast, hype, conversational, like a GTA superfan talking to friends. Short punchy sentences.
@@ -34,16 +33,7 @@ Return ONLY JSON:
 
 def write_script(story: dict, tags: list[str]) -> dict:
     cfg = config()
-    client = anthropic.Anthropic(api_key=env("ANTHROPIC_API_KEY"))
-    user = (f"SOURCE: {story['source']}\nHEADLINE: {story['title']}\nURL: {story['url']}\n\n"
-            f"ARTICLE:\n{story['body']}\n\n"
-            f"OTHER GTA 6 HEADLINES PEOPLE ARE TALKING ABOUT TODAY:\n- " + "\n- ".join(story.get("related", [])))
-    msg = client.messages.create(
-        model=cfg["claude_model"], max_tokens=1500,
-        system=SYSTEM.format(words=cfg["target_words"], tags=", ".join(tags)),
-        messages=[{"role": "user", "content": user}],
-    )
-    raw = msg.content[0].text
+    raw = ask(user, system=SYSTEM.format(words=cfg["target_words"], tags=", ".join(tags)))
     data = json.loads(re.search(r"\{.*\}", raw, re.S).group(0))
     lines = [l for l in data["lines"] if l.get("text", "").strip()]
     if len(lines) < 3:
