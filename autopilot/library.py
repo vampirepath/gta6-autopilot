@@ -29,9 +29,24 @@ for d in (SRC_DIR, INBOX):
 
 
 def load_index() -> list[dict]:
-    if LIB_INDEX.exists():
-        return json.loads(LIB_INDEX.read_text())
-    return []
+    idx = json.loads(LIB_INDEX.read_text()) if LIB_INDEX.exists() else []
+    # add any clip files the index doesn't know about yet (e.g. index lost) as general clips
+    known = {c["file"] for c in idx}
+    new = [p for p in sorted(CLIPS_DIR.glob("*.mp4")) if p.name not in known]
+    for p in new:
+        try:
+            out = subprocess.run(["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+                                  "-of", "csv=p=0", str(p)], capture_output=True, text=True).stdout
+            dur = float(out.strip() or 0)
+        except Exception:
+            dur = 0
+        if dur >= 1:
+            idx.append({"file": p.name, "source": p.name.rsplit("_", 1)[0], "dur": round(dur, 2),
+                        "tags": [], "ok": True})
+    if new:
+        LIB_INDEX.parent.mkdir(parents=True, exist_ok=True)
+        LIB_INDEX.write_text(json.dumps(idx, indent=1))
+    return idx
 
 
 def save_index(idx: list[dict]):
