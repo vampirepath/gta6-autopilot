@@ -4,3 +4,10 @@
 2026-11-16 00:42:15,155 INFO rendering 12 cuts, 32.0s
 2026-11-16 00:42:40,561 INFO video ready: 20261116_004041.mp4 (32.0s)
 2026-11-16 01:23:26,155 INFO YouTube: https://youtube.com/shorts/ach68ANQkic
+2026-11-16 04:08:29,074 INFO fetched 54 candidate stories
+2026-11-16 04:16:50,323 INFO gemini gemini-flash-latest busy (429), waiting 100s
+2026-11-16 04:18:37,036 INFO script: GTA 6 Just Broke a 25-Year Franchise Rule (14 lines)
+2026-11-16 04:19:54,745 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-16 04:21:46,084 INFO rendered 33 shots, 46.1s
+2026-11-16 04:21:46,102 INFO video ready: 20261116_040829.mp4 (46.1s)
+2026-11-16 04:21:50,911 INFO skipped by review: 20261116_040829.mp4
