@@ -51,7 +51,7 @@ caption_words_per_line: 3
 word_captions: true
 label_icons: true                     # 3D icon on top of each label
 mascot: true                          # cartoon flamingo mascot reacts on key lines
-mascot_pick: 0                        # which of the 4 generated mascot candidates to use (0-3)                   # word-by-word captions at the bottom
+mascot_pick: 2                        # which of the 4 generated mascot candidates to use (0-3)                   # word-by-word captions at the bottom
 
 # ---- Uploading -----------------------------------------------------
 # YouTube auto-upload stays OFF until Google approves the API audit (before that, API uploads
