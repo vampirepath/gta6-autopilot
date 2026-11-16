@@ -45,11 +45,6 @@ jobs:
         timeout-minutes: 90
         run: |
           if [ "${{ github.event.inputs.retag }}" = "true" ]; then python -m autopilot.library --retag; else python -m autopilot.library; fi
-      - name: Make mascot poses (once)
-        continue-on-error: true
-        run: |
-          pip install -q "rembg[cpu]" onnxruntime
-          python -m autopilot.mascot
       - name: Upload library
         if: always()
         run: |

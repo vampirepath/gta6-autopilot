@@ -1,0 +1,47 @@
+name: Make mascot
+
+on:
+  workflow_dispatch:
+    inputs:
+      redo:
+        description: "Make 4 new candidates (true/false)"
+        required: false
+        default: "false"
+
+concurrency:
+  group: autopilot
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  mascot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: |
+          pip install -q -r requirements.txt "rembg[cpu]" onnxruntime
+      - name: Get library images
+        run: |
+          mkdir -p library/stills
+          gh release download library -p stills.tar -D /tmp && tar -xf /tmp/stills.tar -C library/stills || true
+          rm -f library/stills/mascot_*.png
+      - name: Generate
+        run: |
+          if [ "${{ github.event.inputs.redo }}" = "true" ]; then python -m autopilot.mascot --redo; else python -m autopilot.mascot; fi
+      - name: Save
+        run: |
+          tar -cf /tmp/stills.tar -C library/stills .
+          gh release upload library /tmp/stills.tar --clobber
+          git config user.name "autopilot-bot"
+          git config user.email "autopilot-bot@users.noreply.github.com"
+          git add -f debug/ && (git commit -m "mascot candidates" || true) && git pull --rebase --autostash -q && git push -q || true

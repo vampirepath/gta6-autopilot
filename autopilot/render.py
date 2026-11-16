@@ -486,9 +486,9 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
         # mascot reaction on this line's shots
         pose = line.get("mascot")
         if pose and config().get("mascot", True):
-            from .mascot import pose_path
-            pp = pose_path(pose)
-            if pp.exists():
+            from .mascot import base_path, pose_path
+            pp = pose_path(pose, work) if base_path() else None
+            if pp and pp.exists():
                 for k, sp in enumerate(shots[shots_before:]):
                     try:
                         overlay_mascot(sp, pp, enter=(k == 0))
