@@ -63,3 +63,10 @@ edge_tts.exceptions.NoAudioReceived: No audio was received. Please verify that y
 2026-11-16 06:17:25,048 INFO rendered 17 shots, 33.4s
 2026-11-16 06:17:25,052 INFO video ready: 20261116_060924.mp4 (33.4s)
 2026-11-16 06:17:29,032 INFO skipped by review: 20261116_060924.mp4
+2026-11-16 06:26:49,030 INFO fetched 54 candidate stories
+2026-11-16 06:31:08,433 INFO script: GTA 6 Panic Is Back And Everyone Is Talking About It (14 lines, 146 words)
+2026-11-16 06:31:08,434 INFO visuals: clip, clip, clip, stat, stat, clip, clip, clip, clip, clip, clip, clip, clip[Vice City], clip
+2026-11-16 06:31:12,372 INFO voice: ElevenLabs (917 chars)
+2026-11-16 06:33:20,521 INFO rendered 34 shots, 52.5s
+2026-11-16 06:33:24,364 INFO video ready: 20261116_062649.mp4 (52.5s)
+2026-11-16 06:33:32,551 INFO skipped by review: 20261116_062649.mp4
