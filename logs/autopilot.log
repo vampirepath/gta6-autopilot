@@ -154,3 +154,22 @@ Traceback (most recent call last):
     raise RuntimeError(f"Gemini failed: {last}")
 RuntimeError: Gemini failed: gemini-2.5-flash not found
 
+2026-11-16 13:48:24,035 INFO fetched 59 candidate stories
+2026-11-16 13:48:24,739 INFO story: A GTA 6 Fan Booked a Hotel for a Week to Play and His Wife Is Not Happy (GTA BOOM – Latest Articles, 2135 chars)
+2026-11-16 13:48:27,073 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-16 13:48:34,245 INFO used backup model gemini-flash-lite-latest
+2026-11-16 13:48:34,246 INFO article photo rejected: {'game': False, 'real_person': True, 'text_heavy': False}
+2026-11-16 13:51:39,564 INFO gemini gemini-flash-latest 429 – trying next
+2026-11-16 13:51:50,421 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-16 13:51:56,721 INFO all models busy – waiting 60 s (round 1)
+2026-11-16 13:56:02,010 INFO gemini gemini-flash-latest 429 – trying next
+2026-11-16 13:56:10,383 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-16 13:56:16,671 INFO all models busy – waiting 60 s (round 2)
+2026-11-16 13:57:16,845 INFO gemini gemini-flash-latest 429 – trying next
+2026-11-16 13:57:36,644 INFO used backup model gemini-flash-lite-latest
+2026-11-16 13:57:36,726 INFO script: GTA 6 Fan Books Hotel Room For Launch Week! (15 lines, 144 words)
+2026-11-16 13:57:36,726 INFO visuals: clip, stat, subject[Vice City], article, ai, clip, clip, clip, detective, clip, list, stat, clip, subject[Jason And Lucia], subject[Leonida Keys]
+2026-11-16 13:57:40,525 INFO voice: ElevenLabs (846 chars)
+2026-11-16 14:00:15,955 INFO rendered 25 shots, 47.6s
+2026-11-16 14:00:19,580 INFO video ready: 20261116_134824.mp4 (47.6s)
+2026-11-16 14:00:26,881 INFO skipped by review: 20261116_134824.mp4
