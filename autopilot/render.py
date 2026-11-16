@@ -17,6 +17,7 @@ from .pill import make_pill
 from .sfx import path as sfx, pick as sfx_pick
 
 W, H, FPS = 1080, 1920, 30
+TR = 0.3                     # transition overlap between shots (seconds)
 ENC = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p", "-r", str(FPS), "-an"]
 
 
@@ -65,9 +66,9 @@ class ClipPicker:
 # ---------------- shot builders ---------------------------------------------------
 def _zoom_expr(dur: float, punch: bool) -> str:
     """Punch-in on the cut (1.12 → 1.0 in 0.18 s) then a slow push-in."""
-    slow = f"(1+0.04*t/{dur:.3f})"
-    if punch:
-        return f"if(lt(t,0.18),1.12-0.12*t/0.18,1)*{slow}"
+    slow = f"(1+0.05*t/{dur:.3f})"
+    if punch:   # gentle ease-out settle: 1.06 -> 1.0 over 0.35 s
+        return f"(1+0.06*pow(1-min(1,t/0.35),3))*{slow}"
     return slow
 
 
@@ -170,7 +171,7 @@ def shot_still(img: Path, dur: float, out: Path, pill: Path | None = None, pill_
     """Ken-Burns pan across an official image / article photo (fills the 9:16 frame)."""
     direction = random.choice([1, -1])
     cmd = ["ffmpeg", "-y", "-v", "error", "-loop", "1", "-t", f"{dur + 0.2:.3f}", "-i", str(img)]
-    z = f"if(lt(t,0.18),1.18-0.12*t/0.18,1.06+0.04*t/{dur:.3f})"
+    z = f"(1.06+0.06*pow(1-min(1,t/0.35),3)+0.04*t/{dur:.3f})"
     xexpr = f"(iw-{W})*({0.5 - 0.25 * direction}+{0.5 * direction}*t/{dur:.3f})"
     fl = (f"[0:v]fps={FPS},scale=w=-2:h='trunc({H}*{z}/2)*2':eval=frame,"
           f"crop={W}:{H}:x='max(0,min(iw-{W},{xexpr}))':y='(ih-{H})/2',setsar=1,format=yuv420p[base]")
@@ -185,7 +186,8 @@ def shot_still(img: Path, dur: float, out: Path, pill: Path | None = None, pill_
 def shot_frames(fdir: Path, dur: float, out: Path):
     """Pre-rendered animation frames (e.g. spinning globe)."""
     cmd = ["ffmpeg", "-y", "-v", "error", "-framerate", str(FPS), "-i", str(fdir / "%04d.png")]
-    _run(cmd + ["-vf", f"scale={W}:{H},setsar=1,format=yuv420p", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
+    _run(cmd + ["-vf", f"scale={W}:{H},setsar=1,format=yuv420p,tpad=stop_mode=clone:stop_duration=2",
+                "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
 
 
 def shot_zoom(img: Path, dur: float, out: Path, start: float = 1.0):
@@ -208,6 +210,56 @@ def shot_card(kind: str, params: dict, bg: dict, dur: float, out: Path, work: Pa
           f"tpad=stop_mode=clone:stop_duration=2[bg];[1:v]format=rgba[c];"
           f"[bg][c]overlay=x=(W-w)/2:y=330:shortest=0,format=yuv420p[vout]")
     _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
+
+
+def overlay_mascot(shot: Path, pose_png: Path, enter: bool):
+    """Mascot in the lower-left corner: slides in with a bounce on the first shot of the line, then bobs."""
+    tmp = shot.with_name(shot.stem + "_m.mp4")
+    x = ("if(lt(t,0.28),-520+560*(t/0.28)+60*sin(3.14*t/0.28),20)" if enter else "20")
+    y = "1440-h+8*sin(2*3.14159*t*1.6)"
+    cmd = ["ffmpeg", "-y", "-v", "error", "-i", str(shot), "-loop", "1", "-i", str(pose_png),
+           "-filter_complex", f"[1:v]scale=-2:500,format=rgba[m];[0:v][m]overlay=x='{x}':y='{y}':shortest=1:eval=frame,format=yuv420p[v]",
+           "-map", "[v]"] + ENC + [str(tmp)]
+    _run(cmd)
+    tmp.replace(shot)
+
+
+# ---------------- transitions --------------------------------------------------------
+BIG_TRANSITIONS = ["smoothleft", "smoothright", "smoothup", "zoomin", "circleopen", "slideleft", "radial", "wipeup"]
+SMALL_TRANSITIONS = ["fade", "smoothleft", "smoothright", "fadeblack", "dissolve"]
+
+
+def _frames(p: Path) -> int:
+    out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v", "-count_packets",
+                          "-show_entries", "stream=nb_read_packets", "-of", "csv=p=0", str(p)],
+                         capture_output=True, text=True).stdout.strip()
+    return int(out or 0)
+
+
+def join_with_transitions(shots: list[Path], line_starts: set[int], caps: Path, video: Path, total: float):
+    """Chain all shots with xfade transitions placed exactly on the original cut times, then burn captions."""
+    trf = round(TR * FPS)
+    durs = [max(1, _frames(p) - trf) / FPS for p in shots]     # each shot's own slot (without the overlap)
+    cmd = ["ffmpeg", "-y", "-v", "error"]
+    for p in shots:
+        cmd += ["-i", str(p)]
+    fl = [f"[{i}:v]settb=1/{FPS},setpts=N/{FPS}/TB,fps={FPS},format=yuv420p[s{i}]" for i in range(len(shots))]
+    prev, acc = "s0", durs[0]
+    last_kind = ""
+    for i in range(1, len(shots)):
+        pool = BIG_TRANSITIONS if i in line_starts else SMALL_TRANSITIONS
+        kind = random.choice([k for k in pool if k != last_kind])
+        last_kind = kind
+        out = f"x{i}"
+        fl.append(f"[{prev}][s{i}]xfade=transition={kind}:duration={TR}:offset={max(0.04, acc - TR / 2):.4f}[{out}]")
+        prev, acc = out, acc + durs[i]
+    cap_esc = str(caps).replace(":", r"\:")
+    if config().get("word_captions", True):
+        fl.append(f"[{prev}]subtitles='{cap_esc}':fontsdir='{FONT_DIR}',trim=duration={total:.3f}[v]")
+    else:
+        fl.append(f"[{prev}]trim=duration={total:.3f}[v]")
+    _run(cmd + ["-filter_complex", ";".join(fl), "-map", "[v]", "-c:v", "libx264", "-preset", "medium", "-crf", "19",
+                "-pix_fmt", "yuv420p", "-r", str(FPS), "-profile:v", "high", str(video)])
 
 
 # ---------------- captions ---------------------------------------------------------
@@ -301,6 +353,8 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
         frame_t = f_end
         return d
 
+    line_starts: set[int] = set()        # shot indexes that start a new line (bigger transitions there)
+
     def new_shot():
         nonlocal n
         p = work / f"shot_{n:03d}.mp4"
@@ -312,9 +366,13 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
         start, end = line["start"], line["end"]
         vis = line.get("visual", "clip")
         pill = None
+        shots_before = len(shots)
+        line_starts.add(len(shots))
+        LY = 700 if line.get("mascot") else LABEL_Y
         if line["label"]:
             pill = make_pill(line["label"], work / f"pill_{li}.png",
-                             size=124 if line["big"] else 96, max_w=990 if line["big"] else 920)
+                             size=124 if line["big"] else 96, max_w=990 if line["big"] else 920,
+                             icon=line.get("icon", "") if config().get("label_icons", True) else "")
         if li > 0:
             lab = line["label"].upper()
             if any(w in lab for w in ("TWIST", "LEAK", "BUT ", "SECRET", "HACK", "BANNED", "BAN")):
@@ -327,7 +385,7 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
         if li == 0:
             seg_end = min(end, 3.0)
             d = place(seg_end)
-            shot_hook(picker.pick(line["tag"], 0, d), picker.pick("city_skyline", 0, d), d, pill, new_shot())
+            shot_hook(picker.pick(line["tag"], 0, d), picker.pick("city_skyline", 0, d), d + TR, pill, new_shot())
             events.append((0.03, "pop", 0.6))
             t, first = seg_end, False
 
@@ -337,18 +395,22 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
             d = place(seg_end)
             done = False
             try:
-                if vis in ("stat", "compare", "list", "quote", "person"):
+                if vis in ("stat", "compare", "list", "quote", "person", "blocks"):
                     shot_card(vis, line[vis] if vis != "list" else {"title": line["list"].get("title", line["label"]),
                                                                    "items": line["list"].get("items", [])},
-                              picker.pick("any", t, d), d, new_shot(), work)
+                              picker.pick("any", t, d), d + TR, new_shot(), work)
                     money = vis == "stat" and "$" in str(line["stat"].get("value", ""))
                     events.append((t + 0.02, sfx_pick("impact"), 0.45))
                     events.append((t + 0.05, "cash" if money else ("ding" if vis == "stat" else "pop"), 0.45))
+                    if vis == "blocks":
+                        nb = min(48, int(float(str(line["blocks"].get("total", 10)).replace(",", ""))))
+                        events += [(t + 0.15 + k * 0.025 * max(1, nb // 12), "pop", 0.25) for k in range(0, min(nb, 12))]
+                        events.append((t + 1.2, "glitch" if line["blocks"].get("mode") != "add" else "ding", 0.4))
                     if vis == "list":
                         events += [(t + 0.35 + k * 0.45, "pop", 0.4) for k in range(len(line["list"]["items"][:4]))]
                     done = True
                 elif vis == "article" and article:
-                    shot_article(picker.pick("any", t, 1), article[0], article[1], d, new_shot())
+                    shot_article(picker.pick("any", t, 1), article[0], article[1], d + TR, new_shot())
                     events.append((t, "shutter", 0.6))
                     events.append((t + 0.35, "typing", 0.45))
                     done = True
@@ -358,14 +420,14 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
                     style = random.choice(styles)
                     used_map_styles.add(style)
                     if style == "globe":
-                        fdir = render_globe_frames(line["country"], work / f"globe_{li}", d)
+                        fdir = render_globe_frames(line["country"], work / f"globe_{li}", d + TR)
                         if fdir:
-                            shot_frames(fdir, d, new_shot())
+                            shot_frames(fdir, d + TR, new_shot())
                             done = True
                     else:
                         m = (render_flag_silhouette if style == "flag" else render_map)(line["country"], work / f"map_{li}.jpg")
                         if m:
-                            shot_zoom(m, d, new_shot(), start=1.25 if style == "neon" else 1.0)
+                            shot_zoom(m, d + TR, new_shot(), start=1.25 if style == "neon" else 1.0)
                             done = True
                     if done:
                         events.append((t + 0.05, "ping", 0.5))
@@ -373,7 +435,7 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
                     from .stock import stock_clip
                     c = stock_clip(line.get("stock_query", ""), d, work / f"stock_{li}.mp4")
                     if c:
-                        shot_clip(c, d, new_shot(), punch=True, pill=pill, pill_y=LABEL_Y, pop=True)
+                        shot_clip(c, d + TR, new_shot(), punch=True, pill=pill, pill_y=LY, pop=True)
                         events.append((t + 0.03, "pop", 0.6))
                         done = True
                 elif vis in ("subject", "photo", "ai"):
@@ -382,7 +444,7 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
                         subj_clips = [c for c in picker.idx if line["subject"] in c.get("subjects", [])]
                         if subj_clips and random.random() < 0.5:
                             c = random.choice(subj_clips)
-                            shot_clip(c, d, new_shot(), punch=True, pill=pill, pill_y=LABEL_Y, pop=True)
+                            shot_clip(c, d + TR, new_shot(), punch=True, pill=pill, pill_y=LY, pop=True)
                             done = True
                         else:
                             img = stills.pick(line["subject"])
@@ -392,7 +454,7 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
                         from .aiimage import ai_image
                         img = ai_image(line["ai_prompt"], work / f"ai_{li}.jpg")
                     if img and not done:
-                        shot_still(img, d, new_shot(), pill=pill, pill_y=LABEL_Y, pop=True)
+                        shot_still(img, d + TR, new_shot(), pill=pill, pill_y=LY, pop=True)
                         done = True
                     if done:
                         events.append((t + 0.03, "swish" if vis == "subject" else "pop", 0.4))
@@ -418,24 +480,28 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
             if d <= 0:
                 t = seg_end
                 continue
-            shot_clip(picker.pick(line["tag"], t, d), d, new_shot(), punch=True, pill=pill,
-                      pill_y=BIG_Y if line["big"] else LABEL_Y, pop=first)
+            shot_clip(picker.pick(line["tag"], t, d), d + TR, new_shot(), punch=True, pill=pill,
+                      pill_y=(BIG_Y if line["big"] else LABEL_Y) if not line.get("mascot") else LY, pop=first)
             t, first = seg_end, False
+        # mascot reaction on this line's shots
+        pose = line.get("mascot")
+        if pose and config().get("mascot", True):
+            from .mascot import pose_path
+            pp = pose_path(pose)
+            if pp.exists():
+                for k, sp in enumerate(shots[shots_before:]):
+                    try:
+                        overlay_mascot(sp, pp, enter=(k == 0))
+                    except Exception as e:
+                        log.warning("mascot overlay failed: %s", e)
+                events.append((start + 0.05, "swish", 0.4))
     picker.save()
 
     # join shots (exact frame timing) + burn word-by-word captions
     caps = work / "captions.ass"
     write_captions(words, total, caps)
     video = work / "video.mp4"
-    cmd = ["ffmpeg", "-y", "-v", "error"]
-    for p in shots:
-        cmd += ["-i", str(p)]
-    fl = "".join(f"[{i}:v]settb=1/{FPS},setpts=N/{FPS}/TB[c{i}];" for i in range(len(shots)))
-    cap_esc = str(caps).replace(":", r"\:")
-    fl += "".join(f"[c{i}]" for i in range(len(shots))) + f"concat=n={len(shots)}:v=1:a=0[cat];"
-    fl += f"[cat]subtitles='{cap_esc}':fontsdir='{FONT_DIR}'[v]" if config().get("word_captions", True) else "[cat]null[v]"
-    _run(cmd + ["-filter_complex", fl, "-map", "[v]", "-c:v", "libx264", "-preset", "medium", "-crf", "19",
-                "-pix_fmt", "yuv420p", "-r", str(FPS), "-profile:v", "high", str(video)])
+    join_with_transitions(shots, line_starts, caps, video, total)
     audio = mix_audio(voice_mp3, total, events, work)
     _run(["ffmpeg", "-y", "-v", "error", "-i", str(video), "-i", str(audio), "-map", "0:v", "-map", "1:a",
           "-c:v", "copy", "-c:a", "copy", "-shortest", "-movflags", "+faststart", str(out)])

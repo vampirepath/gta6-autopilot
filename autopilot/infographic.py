@@ -232,9 +232,8 @@ def card_blocks(t, total, highlight, caption, icon="music", mode="remove"):
         total, highlight = int(float(str(total).replace(",", ""))), int(float(str(highlight).replace(",", "")))
     except ValueError:
         return img
-    per = 1
-    while total / per > 60:
-        per *= 10 if total / per > 600 else 2
+    steps = [m * 10 ** e for e in range(0, 10) for m in (1, 2, 5)]
+    per = next(x for x in steps if total / x <= 60)
     n, h = max(1, round(total / per)), max(1, round(highlight / per))
     h = min(h, n)
     cols = 8 if n > 40 else 6 if n > 18 else 5 if n > 8 else 4
@@ -249,7 +248,12 @@ def card_blocks(t, total, highlight, caption, icon="music", mode="remove"):
         ic = Image.open(ICON_DIR / f"{icon}.png").convert("RGBA")
     except Exception:
         ic = Image.open(ICON_DIR / "music.png").convert("RGBA")
-    ic = ic.resize((int(cell * 0.82),) * 2, Image.LANCZOS)
+    icon_img = ic.resize((int(cell * 0.62),) * 2, Image.LANCZOS)
+    ic = Image.new("RGBA", (int(cell * 0.86),) * 2, (0, 0, 0, 0))
+    ImageDraw.Draw(ic).rounded_rectangle((0, 0, ic.width - 1, ic.height - 1), int(cell * 0.18),
+                                         fill=(236, 214, 255, 255), outline=(255, 255, 255, 255), width=3)
+    off = (ic.width - icon_img.width) // 2
+    ic.alpha_composite(icon_img, (off, off))
     x0 = (CW - gw) // 2
     hl_idx = set(range(n - h, n))     # last blocks are the affected ones
     for i in range(n):
@@ -282,7 +286,8 @@ def card_blocks(t, total, highlight, caption, icon="music", mode="remove"):
     # counter
     shown = h if t > 1.2 else 0
     cnt = int(h * per * _ease_out((t - 1.2) / 0.6)) if t > 1.2 else 0
-    label = (f"-{cnt:,}" if mode == "remove" else f"+{cnt:,}") + (f"  (1 = {per})" if per > 1 else "")
+    cnt = int(round(highlight * _ease_out((t - 1.2) / 0.6))) if t > 1.2 else 0
+    label = (f"-{cnt:,}" if mode == "remove" else f"+{cnt:,}") + (f"  (1 BLOCK = {per:,})" if per >= 5 else "")
     bf = _f(110)
     _center(d, top + gh + 60, label, bf, fill=(255, 80, 110) if mode == "remove" else (120, 255, 150))
     return _scale(img, k)

@@ -4,6 +4,7 @@ import re
 
 from .common import config, env, log
 from .llm import ask
+from .pill import icon_names
 
 LANG = {
     "en": "Write the spoken lines in simple, punchy spoken English.",
@@ -33,6 +34,8 @@ THE STYLE (copy it exactly – learned from a top GTA news channel):
 
 EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual that matches what is said.
 
+"icon" (every line): one 3D icon that fits the line, from: {icons}
+
 "label" (every line, never empty): 2–5 word UPPERCASE ENGLISH summary of the line's key fact
 ("17TH & LAST LEAK", "LEAKS STARTED AUG 18", "$270,000 CASHED OUT"). Line 1's label is the hook question.
 "big": true when the label is just a date / money / number.
@@ -45,6 +48,9 @@ EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual
    Set "stat": {{"value": "$7.6 BILLION", "caption": "expected first-year revenue"}}
 - "compare": two growing bars. Use when two things are compared.
    Set "compare": {{"a_label": "GTA 5 map", "a_value": "49", "b_label": "GTA 6 map", "b_value": "100", "unit": "sq km"}}
+- "blocks": a grid of icon blocks where some drop out / light up. Use when something is COUNTED
+   (songs removed, players, missions, cities…). Set "blocks": {{"total": 50, "highlight": 17,
+   "caption": "tracks removed from GTA 4", "icon": "music", "mode": "remove"}}  (mode "add" = they light up)
 - "list": checklist that ticks in. Use when the line lists 2–4 things.
    Set "list": {{"title": "WHAT'S NEW", "items": ["Two playable leads", "Vice City", "Online at launch"]}}
 - "quote": quote card. Use when someone is quoted. Set "quote": {{"text": "...", "by": "Take-Two CEO"}}
@@ -61,12 +67,15 @@ EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual
 - "ai": AI-generated image, ONLY when nothing above fits (max 2). Set "ai_prompt" to a GENERIC scene
    (e.g. "courtroom with lawyers and legal papers", "hacker in dark room with monitors") – never name
    game characters, brands, logos or real people.
+"mascot": our cartoon flamingo mascot reacts on screen – use on 3–4 lines max (hook, twist, shocking fact,
+ending). One of: shocked, pointing, laughing, thinking, money, thumbsup, angry. "" for other lines.
+
 Use at least 8 non-"clip" visuals per script; "clip" is the LAST choice. Never two "stat"/"compare"/"list"/"quote" in a row.
 
 Return ONLY JSON:
 {{
  "title": "YouTube title, max 70 chars, curiosity + 'GTA 6', no clickbait lies",
- "lines": [{{"text": "...", "label": "...", "big": false, "visual": "clip", "tag": "...", "subject": "", "stat": null, "compare": null, "list": null, "quote": null, "ai_prompt": "", "stock_query": "", "country": "", "person": null}}],
+ "lines": [{{"text": "...", "label": "...", "big": false, "visual": "clip", "tag": "...", "subject": "", "stat": null, "compare": null, "list": null, "quote": null, "ai_prompt": "", "stock_query": "", "country": "", "person": null, "blocks": null, "icon": "", "mascot": ""}}],
  "description": "2-3 sentence description in English",
  "hashtags": ["#GTA6", "..."],
  "is_rumour": true/false
@@ -84,6 +93,7 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
     can_article = bool(story.get("url")) and "news.google.com" not in story["url"] and "reddit.com" not in story["url"]
     raw = ask(user, system=SYSTEM.format(
         words=cfg["target_words"], tags=", ".join(tags), lang=LANG.get(lang, LANG["en"]),
+        icons=", ".join(icon_names()),
         subjects=", ".join(subjects) or "(none available – don't use subject)",
         article_note="" if can_article else " – NOT AVAILABLE for this story, don't use",
         photo_note="" if has_photo else " – NOT AVAILABLE for this story, don't use",
@@ -113,7 +123,17 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
               from .geomap import resolve
               if not (l.get("country") and resolve(l["country"])):
                   v = "clip"
-          if v in ("stat", "compare", "list", "quote", "person") and not isinstance(l.get(v), dict):
+          if v == "blocks":
+              b = l.get("blocks") or {}
+              try:
+                  tot, hl = float(str(b.get("total", 0)).replace(",", "")), float(str(b.get("highlight", 0)).replace(",", ""))
+                  if not (tot >= 2 and 0 < hl <= tot):
+                      v = "clip"
+                  elif b.get("icon") not in icon_names():
+                      b["icon"] = l.get("icon") if l.get("icon") in icon_names() else "star"
+              except (TypeError, ValueError, AttributeError):
+                  v = "clip"
+          if v in ("stat", "compare", "list", "quote", "person", "blocks") and not isinstance(l.get(v), dict):
               v = "clip"
           if v == "stat":
               val = str(l["stat"].get("value", ""))
@@ -130,9 +150,11 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
               v = "clip"
           if v == "ai" and not (l.get("ai_prompt") or "").strip():
               v = "clip"
-          if i == 0 and v in ("article", "stat", "compare", "list", "quote", "ai", "stock", "person"):
+          if i == 0 and v in ("article", "stat", "compare", "list", "quote", "ai", "stock", "person", "blocks"):
               v = "clip"
           l["visual"] = v
+          l["icon"] = l.get("icon") if l.get("icon") in icon_names() else ""
+          l["mascot"] = l.get("mascot") if l.get("mascot") in _mascots() else ""
           l["label"] = (l.get("label") or "").strip().upper()[:40] or " ".join(re.sub(r"[^\w$%,.' -]", "", l["text"]).split()[:4]).upper()
           l["big"] = bool(l.get("big"))
       except Exception as e:                 # a weird value in one line must never kill the video
@@ -150,6 +172,15 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
     return data
 
 
+def _mascots():
+    try:
+        from .mascot import available
+        return available()
+    except Exception:
+        return []
+
+
+MASCOT_POSES = ["shocked", "pointing", "laughing", "thinking", "money", "thumbsup", "angry"]
 COUNTRY_WORDS = ["South Korea", "North Korea", "Japan", "China", "India", "Australia", "Germany", "United Kingdom", "UK",
                  "Saudi Arabia", "United Arab Emirates", "UAE", "Brazil", "Russia", "Canada", "Mexico", "France",
                  "Indonesia", "Malaysia", "Singapore", "Thailand", "Vietnam", "Turkey", "Egypt", "Qatar", "Kuwait",
@@ -192,6 +223,15 @@ def _enforce_variety(lines: list[dict], subjects: list[str]):
             if re.search(rf"\b{re.escape(cname)}\b", l["text"], re.I) and resolve(cname):
                 l["visual"], l["country"] = "map", cname
                 break
+    # mascot on max 4 lines, not on two lines in a row
+    m_used, prev = 0, False
+    lines[0]["mascot"] = ""                  # hook layout has its own label in the middle
+    for l in lines:
+        if l.get("mascot") and (m_used >= 4 or prev):
+            l["mascot"] = ""
+        if l.get("mascot"):
+            m_used += 1
+        prev = bool(l.get("mascot"))
     # max 2 maps per video, and never the same country twice
     seen, maps = set(), 0
     for l in lines:
