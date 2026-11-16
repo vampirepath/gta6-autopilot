@@ -90,3 +90,19 @@ edge_tts.exceptions.NoAudioReceived: No audio was received. Please verify that y
 2026-11-16 07:17:40,169 INFO rendered 26 shots, 49.3s
 2026-11-16 07:17:43,613 INFO video ready: 20261116_071439.mp4 (49.3s)
 2026-11-16 07:17:49,272 INFO skipped by review: 20261116_071439.mp4
+2026-11-16 10:40:51,655 INFO fetched 56 candidate stories
+2026-11-16 10:40:52,946 INFO story: New GTA VI Update Released And Here’s What You Need To Know (RockstarINTEL, 1850 chars)
+2026-11-16 10:43:11,530 INFO gemini gemini-flash-latest busy (503), waiting 20s
+2026-11-16 10:43:42,325 ERROR failed on 'New GTA VI Update Released And Here’s What You Need To Know': could not convert string to float: '01.002.000'
+Traceback (most recent call last):
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 125, in main
+    out = make_one(s)
+          ^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 31, in make_one
+    data = write_script(story, TAGS, lib_subjects(), has_photo=photo is not None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/writer.py", line 120, in write_script
+    if not val or (num and float(num or 0) < 2 and not re.search(r"[$%]|billion|million", val, re.I)):
+                           ^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '01.002.000'
+
