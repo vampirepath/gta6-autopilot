@@ -51,3 +51,15 @@ edge_tts.exceptions.NoAudioReceived: No audio was received. Please verify that y
 2026-11-16 05:22:25,489 INFO rendered 35 shots, 50.6s
 2026-11-16 05:22:25,503 INFO video ready: 20261116_051134.mp4 (50.6s)
 2026-11-16 05:22:30,465 INFO skipped by review: 20261116_051134.mp4
+2026-11-16 06:09:24,840 INFO fetched 25 candidate stories
+2026-11-16 06:09:25,009 INFO gemini gemini-flash-latest busy (429), waiting 20s
+2026-11-16 06:09:45,095 INFO gemini gemini-flash-latest busy (429), waiting 40s
+2026-11-16 06:10:25,189 INFO gemini gemini-flash-latest busy (429), waiting 60s
+2026-11-16 06:11:25,282 INFO gemini gemini-flash-latest busy (429), waiting 80s
+2026-11-16 06:12:45,378 INFO gemini gemini-flash-latest busy (429), waiting 100s
+2026-11-16 06:14:25,484 INFO gemini gemini-flash-latest busy (429), waiting 120s
+2026-11-16 06:16:28,337 INFO script: Rockstar's GTA 6 Marketing Is Already Taking Over Cities (10 lines)
+2026-11-16 06:16:30,964 INFO voice: ElevenLabs (598 chars)
+2026-11-16 06:17:25,048 INFO rendered 17 shots, 33.4s
+2026-11-16 06:17:25,052 INFO video ready: 20261116_060924.mp4 (33.4s)
+2026-11-16 06:17:29,032 INFO skipped by review: 20261116_060924.mp4

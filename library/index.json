@@ -41,7 +41,7 @@
    "nightlife_party"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -176,7 +176,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -210,7 +210,7 @@
    "crowd_people"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -233,7 +233,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -531,7 +531,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -631,7 +631,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0057.mp4",
@@ -991,7 +991,7 @@
   "dur": 1.7,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0102.mp4",
@@ -1327,7 +1327,7 @@
   "dur": 2.7,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0144.mp4",
@@ -1367,7 +1367,7 @@
   "dur": 3.5,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0149.mp4",
@@ -1495,7 +1495,7 @@
   "dur": 1.6,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0165.mp4",
@@ -1959,7 +1959,7 @@
   "dur": 4.5,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0223.mp4",
@@ -1999,7 +1999,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0228.mp4",
@@ -2951,7 +2951,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0347.mp4",
@@ -3233,7 +3233,8 @@
   "ok": true,
   "subjects": [
    "Cover Art"
-  ]
+  ],
+  "uses": 0
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0001.mp4",
@@ -3243,7 +3244,8 @@
   "ok": true,
   "subjects": [
    "Cover Art"
-  ]
+  ],
+  "uses": 0
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0002.mp4",
@@ -3253,7 +3255,8 @@
   "ok": true,
   "subjects": [
    "Cover Art"
-  ]
+  ],
+  "uses": 0
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0003.mp4",
@@ -3263,7 +3266,8 @@
   "ok": true,
   "subjects": [
    "Cover Art"
-  ]
+  ],
+  "uses": 1
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0004.mp4",
@@ -3273,7 +3277,8 @@
   "ok": true,
   "subjects": [
    "Cover Art"
-  ]
+  ],
+  "uses": 0
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0005.mp4",
@@ -3283,6 +3288,7 @@
   "ok": true,
   "subjects": [
    "Cover Art"
-  ]
+  ],
+  "uses": 0
  }
 ]
