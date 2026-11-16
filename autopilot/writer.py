@@ -28,7 +28,7 @@ THE STYLE (copy it exactly – learned from a top GTA news channel):
 - Leaks/rumours/insider claims MUST be labelled ("according to a rumour", "an insider claims") and the
   script must say when something is not confirmed.
 - Never explain how to get leaked or pirated content.
-- 12–16 lines, about {words} words total.
+- 14–16 lines and AT LEAST {words} words total (about 55–60 seconds spoken). Shorter scripts are rejected.
 {lang}
 
 EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual that matches what is said.
@@ -112,5 +112,6 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
         lines[0]["label"] = data.get("title", "GTA 6 NEWS").upper()[:30]
     data["lines"] = lines
     data["title"] = data["title"][:95]
-    log.info("script: %s (%d lines)", data["title"], len(lines))
+    log.info("script: %s (%d lines, %d words)", data["title"], len(lines), sum(len(l["text"].split()) for l in lines))
+    log.info("visuals: %s", ", ".join(l["visual"] + (f"[{l['subject']}]" if l.get("subject") else "") for l in lines))
     return data

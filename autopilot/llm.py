@@ -38,6 +38,9 @@ def ask(prompt: str, system: str = "", image_jpeg_b64: str | None = None, json_o
             if r.status_code >= 500 and attempt >= 1:          # model overloaded -> try the next model
                 last = f"{model} busy"
                 break
+            if r.status_code == 429 and attempt >= 1 and model != models[-1]:   # quota hit -> next model
+                last = f"{model} rate-limited"
+                break
             if r.status_code == 429 or r.status_code >= 500:   # free-tier speed limit / busy
                 wait = 20 * (attempt + 1) if retries > 2 else 8
                 log.info("gemini %s busy (%s), waiting %ss", model, r.status_code, wait)
