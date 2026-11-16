@@ -227,6 +227,8 @@ def _enforce_variety(lines: list[dict], subjects: list[str]):
     m_used, prev = 0, False
     lines[0]["mascot"] = ""                  # hook layout has its own label in the middle
     for l in lines:
+        if l.get("visual") in ("article", "stat", "compare", "list", "blocks", "quote", "person", "map"):
+            l["mascot"] = ""                 # never cover text / infographics
         if l.get("mascot") and (m_used >= 4 or prev):
             l["mascot"] = ""
         if l.get("mascot"):
