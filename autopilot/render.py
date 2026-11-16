@@ -182,9 +182,16 @@ def shot_still(img: Path, dur: float, out: Path, pill: Path | None = None, pill_
     _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
 
 
-def shot_zoom(img: Path, dur: float, out: Path):
-    """Centred zoom-in on a 9:16 image (maps)."""
-    z = f"(1.0+0.22*min(1,t/{dur:.3f}))"
+def shot_frames(fdir: Path, dur: float, out: Path):
+    """Pre-rendered animation frames (e.g. spinning globe)."""
+    cmd = ["ffmpeg", "-y", "-v", "error", "-framerate", str(FPS), "-i", str(fdir / "%04d.png")]
+    _run(cmd + ["-vf", f"scale={W}:{H},setsar=1,format=yuv420p", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
+
+
+def shot_zoom(img: Path, dur: float, out: Path, start: float = 1.0):
+    """Centred zoom on a 9:16 image (maps). start>1.0 = zoom out from close then in."""
+    z = (f"(1.0+0.22*min(1,t/{dur:.3f}))" if start <= 1.0
+         else f"(1.0+0.35*(1-min(1,t/0.6))*(1-min(1,t/0.6))+0.12*min(1,t/{dur:.3f}))")
     cmd = ["ffmpeg", "-y", "-v", "error", "-loop", "1", "-t", f"{dur + 0.2:.3f}", "-i", str(img)]
     fl = (f"[0:v]fps={FPS},scale=w='trunc({W}*{z}/2)*2':h=-2:eval=frame,crop={W}:{H},setsar=1,format=yuv420p[vout]")
     _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
@@ -281,6 +288,7 @@ def mix_audio(voice: str, total: float, events: list[tuple[float, str, float]], 
 def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, work: Path,
            article: tuple[Path, Path] | None = None, photo: Path | None = None):
     picker, stills = ClipPicker(), StillPicker()
+    used_map_styles: set[str] = set()
     shots, events = [], [(0.0, "impact2", 0.8), (0.0, "boom", 0.5)]
     frame_t = 0
     n = 0
@@ -345,12 +353,22 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
                     events.append((t + 0.35, "typing", 0.45))
                     done = True
                 elif vis == "map":
-                    from .geomap import render_map
-                    m = render_map(line["country"], work / f"map_{li}.jpg")
-                    if m:
-                        shot_zoom(m, d, new_shot())
+                    from .geomap import render_flag_silhouette, render_globe_frames, render_map
+                    styles = [s_ for s_ in ("globe", "flag", "neon") if s_ not in used_map_styles] or ["globe", "flag", "neon"]
+                    style = random.choice(styles)
+                    used_map_styles.add(style)
+                    if style == "globe":
+                        fdir = render_globe_frames(line["country"], work / f"globe_{li}", d)
+                        if fdir:
+                            shot_frames(fdir, d, new_shot())
+                            done = True
+                    else:
+                        m = (render_flag_silhouette if style == "flag" else render_map)(line["country"], work / f"map_{li}.jpg")
+                        if m:
+                            shot_zoom(m, d, new_shot(), start=1.25 if style == "neon" else 1.0)
+                            done = True
+                    if done:
                         events.append((t + 0.05, "ping", 0.5))
-                        done = True
                 elif vis == "stock":
                     from .stock import stock_clip
                     c = stock_clip(line.get("stock_query", ""), d, work / f"stock_{li}.mp4")

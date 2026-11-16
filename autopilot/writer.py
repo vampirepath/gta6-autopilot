@@ -192,6 +192,15 @@ def _enforce_variety(lines: list[dict], subjects: list[str]):
             if re.search(rf"\b{re.escape(cname)}\b", l["text"], re.I) and resolve(cname):
                 l["visual"], l["country"] = "map", cname
                 break
+    # max 2 maps per video, and never the same country twice
+    seen, maps = set(), 0
+    for l in lines:
+        if l["visual"] == "map":
+            key = (l.get("country") or "").lower()
+            if maps >= 2 or key in seen:
+                l["visual"] = "clip"
+            else:
+                seen.add(key); maps += 1
     # 2) real numbers in plain lines -> stat card
     prev_card = False
     for l in lines[1:]:
