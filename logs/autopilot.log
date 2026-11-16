@@ -42,3 +42,12 @@ Traceback (most recent call last):
     raise NoAudioReceived(
 edge_tts.exceptions.NoAudioReceived: No audio was received. Please verify that your parameters are correct.
 
+2026-11-16 05:11:33,646 INFO fetched 55 candidate stories
+2026-11-16 05:11:34,253 INFO gemini gemini-flash-latest busy (429), waiting 20s
+2026-11-16 05:13:59,482 INFO gemini gemini-flash-latest busy (429), waiting 60s
+2026-11-16 05:17:04,759 INFO gemini gemini-flash-latest busy (429), waiting 100s
+2026-11-16 05:20:53,494 INFO script: GTA 6 Is Breaking Every Record In Gaming History (12 lines)
+2026-11-16 05:20:57,797 INFO voice: ElevenLabs (809 chars)
+2026-11-16 05:22:25,489 INFO rendered 35 shots, 50.6s
+2026-11-16 05:22:25,503 INFO video ready: 20261116_051134.mp4 (50.6s)
+2026-11-16 05:22:30,465 INFO skipped by review: 20261116_051134.mp4
