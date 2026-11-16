@@ -1,0 +1,8 @@
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 system-ui,Segoe UI,Roboto,sans-serif;background:#0d0716;color:#eee}
+header{padding:28px 6vw;background:linear-gradient(120deg,#3b0f5c,#140a24);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{margin:0;font-size:26px}nav a{color:#f5c542;margin-right:18px;text-decoration:none;font-weight:600}
+main{max-width:860px;margin:0 auto;padding:32px 6vw}h2{color:#d9a8ff}a{color:#f5c542}
+.card{background:#1b1030;border:1px solid #4a2a70;border-radius:14px;padding:18px 22px;margin:18px 0}
+footer{padding:26px 6vw;border-top:1px solid #2c1a45;color:#aaa;font-size:14px}
+.yt{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#111;border-radius:8px;padding:6px 12px;font-weight:700}
+.yt b{background:#ff0000;color:#fff;border-radius:6px;padding:0 7px}
