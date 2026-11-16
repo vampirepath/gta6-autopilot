@@ -64,3 +64,46 @@ def article_shots(url: str, out_dir: Path) -> tuple[Path, Path] | None:
     except Exception as e:
         log.warning("article screenshot failed: %s", e)
         return None
+
+
+def article_photo(url: str, out_dir: Path) -> Path | None:
+    """The article's main image (og:image) – used only if the AI confirms it's a GTA game screenshot/artwork
+    (never photos of real people, never other outlets' thumbnails with their own branding)."""
+    import base64
+    import json
+    import re
+
+    import requests
+    from PIL import Image
+
+    from .llm import ask
+    if not url or "news.google.com" in url or "reddit.com" in url:
+        return None
+    try:
+        html = requests.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"}).text
+        m = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)', html) or \
+            re.search(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+(?:property|name)=["\']og:image', html)
+        if not m:
+            return None
+        img_url = m.group(1).replace("&amp;", "&")
+        raw = requests.get(img_url, timeout=30, headers={"User-Agent": "Mozilla/5.0", "Referer": url}).content
+        p = out_dir / "photo.jpg"
+        im = Image.open(__import__("io").BytesIO(raw)).convert("RGB")
+        if im.width < 700:
+            return None
+        im.save(p, quality=90)
+        small = im.copy(); small.thumbnail((512, 512))
+        from io import BytesIO
+        buf = BytesIO(); small.save(buf, "JPEG", quality=80)
+        verdict = ask('Reply ONLY JSON {"game": true/false, "real_person": true/false, "text_heavy": true/false}. '
+                      '"game": is this a video game screenshot or official game artwork (e.g. from GTA)? '
+                      '"real_person": does it show a real (non-game) human photo? '
+                      '"text_heavy": is it mostly text, a logo, or a thumbnail with big added text?',
+                      image_jpeg_b64=base64.b64encode(buf.getvalue()).decode(), max_tokens=1024, retries=2)
+        v = json.loads(re.search(r"\{.*\}", verdict, re.S).group(0))
+        if v.get("game") and not v.get("real_person") and not v.get("text_heavy"):
+            return p
+        log.info("article photo rejected: %s", v)
+    except Exception as e:
+        log.warning("article photo failed: %s", e)
+    return None

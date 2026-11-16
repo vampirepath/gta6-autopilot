@@ -11,8 +11,8 @@ import random
 import subprocess
 from pathlib import Path
 
-from .common import CLIPS_DIR, MUSIC_DIR, config, log
-from .library import load_index, save_index
+from .common import CLIPS_DIR, FONT_DIR, MUSIC_DIR, config, log
+from .library import STILLS_DIR, load_index, load_stills, save_index
 from .pill import make_pill
 from .sfx import path as sfx
 
@@ -125,6 +125,91 @@ def shot_article(bg: dict, plain: Path, hi: Path, dur: float, out: Path):
     _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
 
 
+class StillPicker:
+    def __init__(self):
+        self.stills = [x for x in load_stills() if (STILLS_DIR / x["file"]).exists()]
+        self.used = set()
+
+    def pick(self, subject: str) -> Path | None:
+        pool = [x for x in self.stills if x["subject"].lower() == subject.lower()] or \
+               [x for x in self.stills if subject.lower() in x["subject"].lower() or x["subject"].lower() in subject.lower()]
+        fresh = [x for x in pool if x["file"] not in self.used] or pool
+        if not fresh:
+            return None
+        x = random.choice(fresh)
+        self.used.add(x["file"])
+        return STILLS_DIR / x["file"]
+
+
+def shot_still(img: Path, dur: float, out: Path, pill: Path | None = None, pill_y=1000, pop=False):
+    """Ken-Burns pan across an official image / article photo (fills the 9:16 frame)."""
+    direction = random.choice([1, -1])
+    cmd = ["ffmpeg", "-y", "-v", "error", "-loop", "1", "-t", f"{dur + 0.2:.3f}", "-i", str(img)]
+    z = f"if(lt(t,0.18),1.18-0.12*t/0.18,1.06+0.04*t/{dur:.3f})"
+    xexpr = f"(iw-{W})*({0.5 - 0.25 * direction}+{0.5 * direction}*t/{dur:.3f})"
+    fl = (f"[0:v]fps={FPS},scale=w=-2:h='trunc({H}*{z}/2)*2':eval=frame,"
+          f"crop={W}:{H}:x='max(0,min(iw-{W},{xexpr}))':y='(ih-{H})/2',setsar=1,format=yuv420p[base]")
+    if pill:
+        cmd += ["-loop", "1", "-t", f"{dur + 0.2:.3f}", "-i", str(pill)]
+        fl += ";" + _pill_filters(1, "base", pill_y, pop)
+    else:
+        fl += ";[base]null[vout]"
+    _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
+
+
+def shot_card(kind: str, params: dict, bg: dict, dur: float, out: Path, work: Path):
+    """Infographic card animating over darkened gameplay."""
+    from .infographic import render_frames
+    fdir = render_frames(kind, dur, work / f"card_{out.stem}", **params)
+    off = max(0.0, random.uniform(0, max(0.0, bg["dur"] - dur - 0.05)))
+    cmd = ["ffmpeg", "-y", "-v", "error", "-ss", f"{off:.2f}", "-t", f"{dur + 0.2:.3f}", "-i", str(CLIPS_DIR / bg["file"]),
+           "-framerate", str(FPS), "-i", str(fdir / "%04d.png")]
+    fl = (f"[0:v]setpts=PTS-STARTPTS,fps={FPS},scale={W}:{H},boxblur=8:1,eq=brightness=-0.22:saturation=0.8,setsar=1,"
+          f"tpad=stop_mode=clone:stop_duration=2[bg];[1:v]format=rgba[c];"
+          f"[bg][c]overlay=x=(W-w)/2:y=330:shortest=0,format=yuv420p[vout]")
+    _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
+
+
+# ---------------- captions ---------------------------------------------------------
+def _ts(t: float) -> str:
+    h, rem = divmod(max(t, 0), 3600)
+    m, sec = divmod(rem, 60)
+    return f"{int(h)}:{int(m):02d}:{sec:05.2f}"
+
+
+def write_captions(words: list[dict], total: float, path: Path):
+    """Word-by-word captions: 3 words at a time, the spoken word turns yellow and pops."""
+    per = config().get("caption_words_per_line", 3)
+    head = f"""[Script Info]
+ScriptType: v4.00+
+PlayResX: {W}
+PlayResY: {H}
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Anton,132,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,2,0,1,10,5,5,40,40,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+"""
+    ev = []
+    groups = [words[i:i + per] for i in range(0, len(words), per)]
+    for gi, g in enumerate(groups):
+        g_end = groups[gi + 1][0]["start"] if gi + 1 < len(groups) else total
+        for wi, w in enumerate(g):
+            end = g[wi + 1]["start"] if wi + 1 < len(g) else g_end
+            parts = []
+            for k, x in enumerate(g):
+                txt = x["w"].upper().replace("{", "").replace("}", "")
+                if k == wi:
+                    parts.append(r"{\c&H0040D8FF&\fscx115\fscy115}" + txt + r"{\c&H00FFFFFF&\fscx100\fscy100}")
+                else:
+                    parts.append(txt)
+            ev.append(f"Dialogue: 0,{_ts(w['start'])},{_ts(end)},Cap,,0,0,0,,{{\\pos(540,1520)}}{' '.join(parts)}")
+    path.write_text(head + "\n".join(ev) + "\n", encoding="utf-8")
+
+
 # ---------------- audio ----------------------------------------------------------
 def _music(total: float, work: Path) -> Path:
     tracks = sorted(MUSIC_DIR.glob("*.mp3")) + sorted(MUSIC_DIR.glob("*.m4a")) + sorted(MUSIC_DIR.glob("*.wav"))
@@ -158,51 +243,97 @@ def mix_audio(voice: str, total: float, events: list[tuple[float, str, float]], 
 
 # ---------------- main ---------------------------------------------------------------
 def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, work: Path,
-           article: tuple[Path, Path] | None = None):
-    picker = ClipPicker()
+           article: tuple[Path, Path] | None = None, photo: Path | None = None):
+    picker, stills = ClipPicker(), StillPicker()
     shots, events = [], [(0.0, "boom", 0.8)]
-    frame_t = 0                      # frames already placed (keeps picture in sync with voice)
+    frame_t = 0
     n = 0
+    LABEL_Y, BIG_Y = 1010, 960
 
-    def place(dur_target_end: float):
+    def place(end_t: float):
         nonlocal frame_t
-        f_end = round(dur_target_end * FPS)
+        f_end = round(end_t * FPS)
         d = (f_end - frame_t) / FPS
         frame_t = f_end
         return d
 
+    def new_shot():
+        nonlocal n
+        p = work / f"shot_{n:03d}.mp4"
+        n += 1
+        shots.append(p)
+        return p
+
     for li, line in enumerate(lines):
         start, end = line["start"], line["end"]
+        vis = line.get("visual", "clip")
         pill = None
         if line["label"]:
             pill = make_pill(line["label"], work / f"pill_{li}.png",
                              size=118 if line["big"] else 84, max_w=980 if line["big"] else 860)
         if li > 0:
             events.append((start, "whoosh", 0.35))
-        if pill is not None:
-            events.append((start + 0.03, "ding" if line["big"] else "pop", 0.45 if line["big"] else 0.6))
+        t, first = start, True
 
-        t = start
-        first = True
-        # hook: split screen for up to 3 s
+        # 1) hook – split screen (first ≤3 s)
         if li == 0:
             seg_end = min(end, 3.0)
             d = place(seg_end)
-            p = work / f"shot_{n:03d}.mp4"; n += 1
-            shot_hook(picker.pick(line["tag"], 0, d), picker.pick("city_skyline", 0, d), d, pill, p)
-            shots.append(p)
+            shot_hook(picker.pick(line["tag"], 0, d), picker.pick("city_skyline", 0, d), d, pill, new_shot())
+            events.append((0.03, "pop", 0.6))
             t, first = seg_end, False
-        # article proof shot
-        if line["visual"] == "article" and article and t < end - 0.5:
+
+        # 2) the line's main visual (≤4 s), then gameplay cuts keep the label on screen
+        if t < end - 0.4 and vis != "clip":
             seg_end = min(end, t + 4.0)
             d = place(seg_end)
-            p = work / f"shot_{n:03d}.mp4"; n += 1
-            shot_article(picker.pick("any", t, 1), article[0], article[1], d, p)
-            events.append((t, "click", 0.7))
-            shots.append(p)
-            t, first = seg_end, False
-            pill = None              # the article itself carries the text
-        # fast gameplay cuts
+            done = False
+            try:
+                if vis in ("stat", "compare", "list", "quote"):
+                    shot_card(vis, line[vis] if vis != "list" else {"title": line["list"].get("title", line["label"]),
+                                                                   "items": line["list"].get("items", [])},
+                              picker.pick("any", t, d), d, new_shot(), work)
+                    events.append((t + 0.03, "ding" if vis == "stat" else "pop", 0.5))
+                    if vis == "list":
+                        events += [(t + 0.35 + k * 0.45, "pop", 0.4) for k in range(len(line["list"]["items"][:4]))]
+                    done = True
+                elif vis == "article" and article:
+                    shot_article(picker.pick("any", t, 1), article[0], article[1], d, new_shot())
+                    events.append((t, "click", 0.7))
+                    done = True
+                elif vis in ("subject", "photo", "ai"):
+                    img = None
+                    if vis == "subject":
+                        subj_clips = [c for c in picker.idx if line["subject"] in c.get("subjects", [])]
+                        if subj_clips and random.random() < 0.5:
+                            c = random.choice(subj_clips)
+                            shot_clip(c, d, new_shot(), punch=True, pill=pill, pill_y=LABEL_Y, pop=True)
+                            done = True
+                        else:
+                            img = stills.pick(line["subject"])
+                    elif vis == "photo":
+                        img = photo
+                    else:
+                        from .aiimage import ai_image
+                        img = ai_image(line["ai_prompt"], work / f"ai_{li}.jpg")
+                    if img and not done:
+                        shot_still(img, d, new_shot(), pill=pill, pill_y=LABEL_Y, pop=True)
+                        done = True
+                    if done:
+                        events.append((t + 0.03, "pop", 0.6))
+            except Exception as e:
+                log.warning("visual %s failed (%s) – using gameplay", vis, e)
+                if shots and not shots[-1].exists():
+                    shots.pop()
+                done = False
+            if done:
+                t, first = seg_end, False
+            else:
+                frame_t = round(t * FPS)       # undo the placement, fall back to gameplay below
+        elif pill is not None and li > 0:
+            events.append((start + 0.03, "ding" if line["big"] else "pop", 0.45 if line["big"] else 0.6))
+
+        # 3) fast gameplay cuts for the rest of the line
         while end - t > 0.05:
             seg = random.uniform(0.9, 2.0)
             if end - (t + seg) < 0.6:
@@ -212,19 +343,22 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
             if d <= 0:
                 t = seg_end
                 continue
-            p = work / f"shot_{n:03d}.mp4"; n += 1
-            shot_clip(picker.pick(line["tag"], t, d), d, p, punch=True, pill=pill,
-                      pill_y=960 if line["big"] else 1010, pop=first)
-            shots.append(p)
+            shot_clip(picker.pick(line["tag"], t, d), d, new_shot(), punch=True, pill=pill,
+                      pill_y=BIG_Y if line["big"] else LABEL_Y, pop=first)
             t, first = seg_end, False
     picker.save()
 
+    # join shots (exact frame timing) + burn word-by-word captions
+    caps = work / "captions.ass"
+    write_captions(words, total, caps)
     video = work / "video.mp4"
     cmd = ["ffmpeg", "-y", "-v", "error"]
     for p in shots:
         cmd += ["-i", str(p)]
     fl = "".join(f"[{i}:v]settb=1/{FPS},setpts=N/{FPS}/TB[c{i}];" for i in range(len(shots)))
-    fl += "".join(f"[c{i}]" for i in range(len(shots))) + f"concat=n={len(shots)}:v=1:a=0[v]"
+    cap_esc = str(caps).replace(":", r"\:")
+    fl += "".join(f"[c{i}]" for i in range(len(shots))) + f"concat=n={len(shots)}:v=1:a=0[cat];"
+    fl += f"[cat]subtitles='{cap_esc}':fontsdir='{FONT_DIR}'[v]" if config().get("word_captions", True) else "[cat]null[v]"
     _run(cmd + ["-filter_complex", fl, "-map", "[v]", "-c:v", "libx264", "-preset", "medium", "-crf", "19",
                 "-pix_fmt", "yuv420p", "-r", str(FPS), "-profile:v", "high", str(video)])
     audio = mix_audio(voice_mp3, total, events, work)

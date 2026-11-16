@@ -25,7 +25,10 @@ def make_one(story: dict) -> Path:
     vid = time.strftime("%Y%m%d_%H%M%S")
     work = WORK_DIR / vid
     work.mkdir(parents=True, exist_ok=True)
-    data = write_script(story, TAGS)
+    from .library import subjects as lib_subjects
+    from .screenshot import article_photo
+    photo = article_photo(story.get("url", ""), work)
+    data = write_script(story, TAGS, lib_subjects(), has_photo=photo is not None)
     voice_mp3 = str(work / "voice.mp3")
     words, total = make_voice(data["lines"], voice_mp3)
     badge = "GTA 6 RUMOUR" if data.get("is_rumour") else "GTA 6 NEWS"
@@ -34,7 +37,7 @@ def make_one(story: dict) -> Path:
         from .screenshot import article_shots
         article = article_shots(story.get("url", ""), work)
     out = READY_DIR / f"{vid}.mp4"
-    render(data["lines"], words, voice_mp3, total, badge, out, work, article=article)
+    render(data["lines"], words, voice_mp3, total, badge, out, work, article=article, photo=photo)
 
     tags = [h.lstrip("#") for h in data.get("hashtags", [])]
     hashtags = " ".join(data.get("hashtags", ["#GTA6"]))

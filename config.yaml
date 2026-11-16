@@ -16,7 +16,7 @@ language: "en"
 # Used when the ELEVENLABS_API_KEY secret is set. When credits run out it
 # automatically falls back to the free Edge voice below.
 elevenlabs:
-  voice_id: "nPczCjzI2devNBz1zQrb"   # "Brian" – deep, energetic narrator (change to any voice ID you like)
+  voice_id: "duTgFVzDLeGav17YDHYo"   # "Ben" (your pick). Change to any ElevenLabs voice ID
   model: "eleven_multilingual_v2"    # also speaks Hindi. "eleven_flash_v2_5" = half the credits, slightly lower quality
   stability: 0.4
   similarity: 0.8
@@ -47,6 +47,7 @@ music_volume: 0.22                    # 0.0 – 1.0 (voice is 1.0). Music ducks 
 caption_color: "&H00FFFFFF"           # white  (ASS colour format &HAABBGGRR)
 caption_highlight: "&H0000E5FF"       # GTA yellow-orange for the spoken word
 caption_words_per_line: 3
+word_captions: true                   # word-by-word captions at the bottom
 
 # ---- Uploading -----------------------------------------------------
 # YouTube auto-upload stays OFF until Google approves the API audit (before that, API uploads

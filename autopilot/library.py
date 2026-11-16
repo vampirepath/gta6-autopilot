@@ -24,8 +24,85 @@ TAGS = ["jason", "lucia", "jason_and_lucia", "city_skyline", "beach", "car_drivi
 
 SRC_DIR = LIB_DIR / "sources"
 INBOX = LIB_DIR / "inbox"
-for d in (SRC_DIR, INBOX):
+STILLS_DIR = LIB_DIR / "stills"
+STILLS_INDEX = LIB_DIR / "stills.json"
+for d in (SRC_DIR, INBOX, STILLS_DIR):
     d.mkdir(parents=True, exist_ok=True)
+
+# Rockstar's official GTA VI media kit (rockstargames.com/VI/media – "download and share")
+OFFICIAL_ZIPS = {
+    "screens": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+    "art": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+    "videos": "https://media-rockstargames-com.akamaized.net/VI/downloads/videos/GTAVI_Videos.zip",
+}
+SKIP_WORDS = ("logo", "badge", "esrb", "rating", "pre_order", "preorder")
+
+
+def subject_from_name(stem: str) -> str:
+    """'Lucia_Caminos_12' -> 'Lucia Caminos', 'Jason_Duval_Video_Clip' -> 'Jason Duval'."""
+    s = re.sub(r"(?i)^gtavi[_ ]*|[_ ]*(video[_ ]clip|landscape|portrait|wallpaper|artwork|official|\d+x\d+)", " ", stem)
+    s = re.sub(r"[_\-]+", " ", s)
+    s = re.sub(r"\b\d+\b", " ", s)
+    return re.sub(r"\s+", " ", s).strip().title() or "Vice City"
+
+
+def load_stills() -> list[dict]:
+    return json.loads(STILLS_INDEX.read_text()) if STILLS_INDEX.exists() else []
+
+
+def subjects() -> list[str]:
+    """Named things we have official footage/images of (characters, places, cars…)."""
+    names = {s["subject"] for s in load_stills()}
+    for c in (json.loads(LIB_INDEX.read_text()) if LIB_INDEX.exists() else []):
+        names.update(c.get("subjects", []))
+    return sorted(names)
+
+
+def download_official():
+    """Download Rockstar's official media kit; screenshots/art -> stills, character clips -> clip sources."""
+    import io
+    import zipfile
+
+    import requests
+    from PIL import Image
+
+    stills = load_stills()
+    have = {s["file"] for s in stills}
+    for kind, url in OFFICIAL_ZIPS.items():
+        try:
+            log.info("downloading official %s: %s", kind, url)
+            r = requests.get(url, timeout=600, headers={"User-Agent": "Mozilla/5.0", "Referer": "https://www.rockstargames.com/"})
+            r.raise_for_status()
+            z = zipfile.ZipFile(io.BytesIO(r.content))
+        except Exception as e:
+            log.warning("official %s download failed: %s", kind, e)
+            continue
+        for name in z.namelist():
+            stem, ext = Path(name).stem, Path(name).suffix.lower()
+            if name.endswith("/") or any(w in stem.lower() for w in SKIP_WORDS):
+                continue
+            slug = re.sub(r"[^A-Za-z0-9]+", "_", stem)[:80]
+            if ext in (".jpg", ".jpeg", ".png", ".webp"):
+                out = f"{kind}_{slug}.jpg"
+                if out in have:
+                    continue
+                try:
+                    im = Image.open(io.BytesIO(z.read(name))).convert("RGB")
+                    k = 1920 / im.height
+                    if im.width * k < 1080:
+                        k = 1080 / im.width
+                    im = im.resize((max(1080, round(im.width * k)), max(1920, round(im.height * k))), Image.LANCZOS)
+                    im.save(STILLS_DIR / out, quality=88)
+                    stills.append({"file": out, "subject": subject_from_name(stem), "w": im.width, "h": im.height, "kind": kind})
+                    have.add(out)
+                except Exception as e:
+                    log.warning("skip image %s: %s", name, e)
+            elif ext in (".mp4", ".mov", ".m4v", ".webm"):
+                dst = SRC_DIR / f"official_{slug}{ext}"
+                if not dst.exists():
+                    dst.write_bytes(z.read(name))
+    STILLS_INDEX.write_text(json.dumps(stills, indent=1))
+    log.info("official stills: %d (%d subjects)", len(stills), len({s['subject'] for s in stills}))
 
 
 def load_index() -> list[dict]:
@@ -131,8 +208,10 @@ def process_new_sources(idx: list[dict]) -> list[dict]:
                 cut(src, s, e, dst)
             except subprocess.CalledProcessError:
                 continue
-            idx.append({"file": dst.name, "source": src.name, "dur": round(e - s, 2),
-                        "tags": [], "ok": True})
+            entry = {"file": dst.name, "source": src.name, "dur": round(e - s, 2), "tags": [], "ok": True}
+            if src.name.startswith("official_"):
+                entry["subjects"] = [subject_from_name(src.stem.removeprefix("official_"))]
+            idx.append(entry)
         save_index(idx)
     return idx
 
@@ -179,6 +258,7 @@ def tag_clips(idx: list[dict], retag=False):
 def build(retag=False):
     idx = load_index()
     if not retag:
+        download_official()
         download_sources()
         idx = process_new_sources(idx)
     tag_clips(idx, retag=retag)

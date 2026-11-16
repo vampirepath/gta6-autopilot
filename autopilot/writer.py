@@ -31,44 +31,82 @@ THE STYLE (copy it exactly – learned from a top GTA news channel):
 - 12–16 lines, about {words} words total.
 {lang}
 
-ON-SCREEN LABELS (the purple text boxes):
-- "label": 2–5 word UPPERCASE ENGLISH summary of the line's key fact ("NO UPDATE & NO LEAKS",
-  "17TH & LAST LEAK", "LEAKS STARTED AUG 18"). Give a label to about 2 of every 3 lines; "" for the rest.
-  Line 1 ALWAYS has a label (the hook question, e.g. "WHERE IS CYBERLEEK?").
-- "big": true when the label is a date, money amount or big number that should fill the screen.
+EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual that matches what is said.
 
-VISUALS for each line – "visual" is one of:
-- "clip": gameplay background. Also give "tag" from: {tags}
-- "article": show the news article screenshot (use for the 1–2 lines that cite the source; only if a source URL exists)
+"label" (every line, never empty): 2–5 word UPPERCASE ENGLISH summary of the line's key fact
+("17TH & LAST LEAK", "LEAKS STARTED AUG 18", "$270,000 CASHED OUT"). Line 1's label is the hook question.
+"big": true when the label is just a date / money / number.
+
+"visual" – pick the BEST match for each line:
+- "subject": an official Rockstar image/clip of a named character/place/vehicle. Use whenever the line
+   mentions one. Set "subject" to one EXACT name from: {subjects}
+- "stat": animated big number. Use for ANY number, price, date countdown, sales, size, percentage.
+   Set "stat": {{"value": "$7.6 BILLION", "caption": "expected first-year revenue"}}
+- "compare": two growing bars. Use when two things are compared.
+   Set "compare": {{"a_label": "GTA 5 map", "a_value": "49", "b_label": "GTA 6 map", "b_value": "100", "unit": "sq km"}}
+- "list": checklist that ticks in. Use when the line lists 2–4 things.
+   Set "list": {{"title": "WHAT'S NEW", "items": ["Two playable leads", "Vice City", "Online at launch"]}}
+- "quote": quote card. Use when someone is quoted. Set "quote": {{"text": "...", "by": "Take-Two CEO"}}
+- "article": screenshot of the source article with the headline highlighted (1 line max, when citing the source{article_note})
+- "photo": the main image from the news article (1–2 lines max{photo_note})
+- "clip": gameplay footage. Set "tag" from: {tags}
+- "ai": AI-generated image, ONLY when nothing above fits (max 2). Set "ai_prompt" to a GENERIC scene
+   (e.g. "courtroom with lawyers and legal papers", "hacker in dark room with monitors") – never name
+   game characters, brands, logos or real people.
+Use at least 5 non-"clip" visuals per script. Never two "stat"/"compare"/"list"/"quote" in a row.
 
 Return ONLY JSON:
 {{
  "title": "YouTube title, max 70 chars, curiosity + 'GTA 6', no clickbait lies",
- "lines": [{{"text": "...", "visual": "clip", "tag": "...", "label": "...", "big": false}}],
+ "lines": [{{"text": "...", "label": "...", "big": false, "visual": "clip", "tag": "...", "subject": "", "stat": null, "compare": null, "list": null, "quote": null, "ai_prompt": ""}}],
  "description": "2-3 sentence description in English",
  "hashtags": ["#GTA6", "..."],
  "is_rumour": true/false
 }}"""
 
 
-def write_script(story: dict, tags: list[str]) -> dict:
+def write_script(story: dict, tags: list[str], subjects: list[str] | None = None,
+                 has_photo: bool = False) -> dict:
     cfg = config()
+    subjects = subjects or []
     lang = cfg.get("language", "en")
     user = (f"SOURCE: {story['source']}\nHEADLINE: {story['title']}\nURL: {story['url'] or 'none'}\n\n"
             f"ARTICLE:\n{story['body']}\n\n"
             "OTHER GTA 6 HEADLINES PEOPLE ARE TALKING ABOUT TODAY:\n- " + "\n- ".join(story.get("related", [])))
-    raw = ask(user, system=SYSTEM.format(words=cfg["target_words"], tags=", ".join(tags), lang=LANG.get(lang, LANG["en"])))
+    can_article = bool(story.get("url")) and "news.google.com" not in story["url"] and "reddit.com" not in story["url"]
+    raw = ask(user, system=SYSTEM.format(
+        words=cfg["target_words"], tags=", ".join(tags), lang=LANG.get(lang, LANG["en"]),
+        subjects=", ".join(subjects) or "(none available – don't use subject)",
+        article_note="" if can_article else " – NOT AVAILABLE for this story, don't use",
+        photo_note="" if has_photo else " – NOT AVAILABLE for this story, don't use"))
     data = json.loads(re.search(r"\{.*\}", raw, re.S).group(0))
     lines = [l for l in data["lines"] if l.get("text", "").strip()]
     if len(lines) < 5:
         raise ValueError("script too short")
-    can_article = bool(story.get("url")) and "news.google.com" not in story["url"] and "reddit.com" not in story["url"]
+    low = {x.lower(): x for x in subjects}
     for i, l in enumerate(lines):
         if l.get("tag") not in tags:
             l["tag"] = "any"
-        if l.get("visual") != "article" or not can_article or i == 0:
-            l["visual"] = "clip"
-        l["label"] = (l.get("label") or "").strip().upper()[:40]
+        v = l.get("visual", "clip")
+        if v == "subject":
+            subj = low.get((l.get("subject") or "").lower())
+            l["subject"] = subj or ""
+            if not subj:
+                v = "clip"
+        if v == "article" and not can_article:
+            v = "clip"
+        if v == "photo" and not has_photo:
+            v = "clip"
+        if v in ("stat", "compare", "list", "quote") and not isinstance(l.get(v), dict):
+            v = "clip"
+        if v == "list" and not (l["list"].get("items")):
+            v = "clip"
+        if v == "ai" and not (l.get("ai_prompt") or "").strip():
+            v = "clip"
+        if i == 0 and v in ("article", "stat", "compare", "list", "quote", "ai"):
+            v = "clip"
+        l["visual"] = v
+        l["label"] = (l.get("label") or "").strip().upper()[:40] or " ".join(re.sub(r"[^\w$%,.' -]", "", l["text"]).split()[:4]).upper()
         l["big"] = bool(l.get("big"))
     if not lines[0]["label"]:
         lines[0]["label"] = data.get("title", "GTA 6 NEWS").upper()[:30]

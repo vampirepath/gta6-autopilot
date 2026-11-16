@@ -49,6 +49,8 @@ jobs:
         run: |
           gh release download library -p clips.tar -D /tmp
           mkdir -p library/clips && tar -xf /tmp/clips.tar -C library/clips
+          mkdir -p library/stills
+          gh release download library -p stills.tar -D /tmp && tar -xf /tmp/stills.tar -C library/stills || echo "no stills yet"
       - name: Upload settings for platforms that are not connected yet
         run: |
           [ -n "$YT_REFRESH_TOKEN" ] || sed -i 's/^upload_youtube: true/upload_youtube: false/' config.yaml
@@ -74,6 +76,6 @@ jobs:
           git checkout -- config.yaml
           git config user.name "autopilot-bot"
           git config user.email "autopilot-bot@users.noreply.github.com"
-          git add -f autopilot.db library/index.json logs/autopilot.log || true
+          git add -f autopilot.db library/index.json library/stills.json logs/autopilot.log || true
           git commit -m "autopilot run $(date -u +%F_%H%M)" || exit 0
           git pull --rebase --autostash -q && git push -q

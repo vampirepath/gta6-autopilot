@@ -1,6 +1,8 @@
 name: Build clip library
 
 on:
+  schedule:
+    - cron: "17 21 * * *"     # every night (2:47 AM India) – tags more clips, picks up new official media
   workflow_dispatch:
     inputs:
       retag:
@@ -36,6 +38,8 @@ jobs:
         run: |
           mkdir -p library/clips
           gh release download library -p clips.tar -D /tmp && tar -xf /tmp/clips.tar -C library/clips || echo "no library yet"
+          mkdir -p library/stills
+          gh release download library -p stills.tar -D /tmp && tar -xf /tmp/stills.tar -C library/stills || echo "no stills yet"
       - name: Download, cut and tag
         continue-on-error: true
         timeout-minutes: 90
@@ -45,8 +49,9 @@ jobs:
         if: always()
         run: |
           tar -cf /tmp/clips.tar -C library/clips .
+          tar -cf /tmp/stills.tar -C library/stills .
           gh release view library >/dev/null 2>&1 || gh release create library --title "Clip library" --notes "Background clips used by the autopilot (no audio)."
-          gh release upload library /tmp/clips.tar --clobber
+          gh release upload library /tmp/clips.tar /tmp/stills.tar --clobber
           git config user.name "autopilot-bot"
           git config user.email "autopilot-bot@users.noreply.github.com"
-          git add -f library/index.json && (git commit -m "library updated" || true) && git pull --rebase --autostash -q && git push -q || true
+          git add -f library/index.json library/stills.json && (git commit -m "library updated" || true) && git pull --rebase --autostash -q && git push -q || true
