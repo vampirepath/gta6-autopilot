@@ -108,3 +108,23 @@ ValueError: could not convert string to float: '01.002.000'
 
 2026-11-16 11:48:34,006 INFO script: t (6 lines, 8 words)
 2026-11-16 11:48:34,007 INFO visuals: clip, stat, stat, compare, clip, clip
+2026-11-16 11:50:26,196 INFO fetched 30 candidate stories
+2026-11-16 11:50:26,437 INFO story: The UK Culture Secretary Says Britain Should Be Proud of GTA VI (GTA BOOM – Latest Articles, 2645 chars)
+2026-11-16 11:54:37,499 INFO article photo rejected: {'game': False, 'real_person': False, 'text_heavy': False}
+2026-11-16 11:58:59,692 ERROR failed on 'The UK Culture Secretary Says Britain Should Be Proud of GTA VI': No module named 'pycountry'
+Traceback (most recent call last):
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 125, in main
+    out = make_one(s)
+          ^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 31, in make_one
+    data = write_script(story, TAGS, lib_subjects(), has_photo=photo is not None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/writer.py", line 143, in write_script
+    _enforce_variety(lines, subjects)
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/writer.py", line 192, in _enforce_variety
+    if re.search(rf"\b{re.escape(cname)}\b", l["text"], re.I) and resolve(cname):
+                                                                  ^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/geomap.py", line 62, in resolve
+    import pycountry
+ModuleNotFoundError: No module named 'pycountry'
+
