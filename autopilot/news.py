@@ -90,11 +90,17 @@ def article_text(story: dict) -> str:
 
 
 def pick_story() -> dict | None:
+    """Best fresh story that has a real article behind it (facts, numbers, names) – not just a headline."""
     ranked = rank(fetch_stories())
     if not ranked:
         return None
-    top = ranked[0]
-    # related headlines give Claude extra context ("what others are saying")
-    top["related"] = [s["title"] for s in ranked[1:8]]
-    top["body"] = article_text(top)
-    return top
+    direct = [s for s in ranked if s["url"] and "news.google.com" not in s["url"] and not s["reddit"]]
+    for cand in (direct + [s for s in ranked if s not in direct])[:10]:
+        body = article_text(cand)
+        if len(body) >= 700:
+            cand["body"] = body
+            cand["related"] = [s["title"] for s in ranked if s is not cand][:7]
+            log.info("story: %s (%s, %d chars)", cand["title"], cand["source"], len(body))
+            return cand
+        log.info("skip (too little text): %s", cand["title"])
+    return None

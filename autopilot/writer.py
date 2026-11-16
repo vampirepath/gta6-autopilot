@@ -40,7 +40,8 @@ EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual
 "visual" – pick the BEST match for each line:
 - "subject": an official Rockstar image/clip of a named character/place/vehicle. Use whenever the line
    mentions one. Set "subject" to one EXACT name from: {subjects}
-- "stat": animated big number. Use for ANY number, price, date countdown, sales, size, percentage.
+- "stat": animated big number. Use for real, meaningful numbers from the source (money, sales, dates, sizes,
+   percentages, version numbers) – never invent a number just to fill a stat.
    Set "stat": {{"value": "$7.6 BILLION", "caption": "expected first-year revenue"}}
 - "compare": two growing bars. Use when two things are compared.
    Set "compare": {{"a_label": "GTA 5 map", "a_value": "49", "b_label": "GTA 6 map", "b_value": "100", "unit": "sq km"}}
@@ -56,7 +57,7 @@ EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual
 - "ai": AI-generated image, ONLY when nothing above fits (max 2). Set "ai_prompt" to a GENERIC scene
    (e.g. "courtroom with lawyers and legal papers", "hacker in dark room with monitors") – never name
    game characters, brands, logos or real people.
-Use at least 5 non-"clip" visuals per script. Never two "stat"/"compare"/"list"/"quote" in a row.
+Use at least 8 non-"clip" visuals per script; "clip" is the LAST choice. Never two "stat"/"compare"/"list"/"quote" in a row.
 
 Return ONLY JSON:
 {{
@@ -103,6 +104,11 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
             v = "clip"
         if v in ("stat", "compare", "list", "quote") and not isinstance(l.get(v), dict):
             v = "clip"
+        if v == "stat":
+            val = str(l["stat"].get("value", ""))
+            num = re.sub(r"[^\d.]", "", val)
+            if not val or (num and float(num or 0) < 2 and not re.search(r"[$%]|billion|million", val, re.I)):
+                v = "clip"
         if v == "list" and not (l["list"].get("items")):
             v = "clip"
         if v == "stock" and not ((l.get("stock_query") or "").strip() and env("PEXELS_API_KEY")):
@@ -114,6 +120,7 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
         l["visual"] = v
         l["label"] = (l.get("label") or "").strip().upper()[:40] or " ".join(re.sub(r"[^\w$%,.' -]", "", l["text"]).split()[:4]).upper()
         l["big"] = bool(l.get("big"))
+    _enforce_variety(lines, subjects)
     if not lines[0]["label"]:
         lines[0]["label"] = data.get("title", "GTA 6 NEWS").upper()[:30]
     data["lines"] = lines
@@ -121,3 +128,48 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
     log.info("script: %s (%d lines, %d words)", data["title"], len(lines), sum(len(l["text"].split()) for l in lines))
     log.info("visuals: %s", ", ".join(l["visual"] + (f"[{l['subject']}]" if l.get("subject") else "") for l in lines))
     return data
+
+
+GENERIC_SUBJECTS = ["Vice City", "Jason And Lucia", "Leonida Keys", "Lucia Caminos", "Jason Duval",
+                    "Port Gellhorn", "Grassrivers", "Ambrosia", "Mount Kalaga National Park"]
+NUM = re.compile(r"(\$\s?\d[\d,.]*\s*(?:million|billion|k)?|\d[\d,.]*\s*(?:million|billion|%|percent|copies|players|hours|km|miles))", re.I)
+
+
+def _enforce_variety(lines: list[dict], subjects: list[str]):
+    """Gemini likes to fall back to plain gameplay. Guarantee that most lines show something specific."""
+    if not subjects:
+        return
+    by_len = sorted(subjects, key=len, reverse=True)
+    first_names = {}
+    for sname in subjects:
+        for part in sname.split():
+            if len(part) > 3 and part.lower() not in ("and", "the", "city", "keys", "park", "mount", "national", "cover", "art", "album"):
+                first_names.setdefault(part.lower(), sname)
+    # 1) any line naming a character/place -> show that character/place
+    for l in lines[1:]:
+        if l["visual"] != "clip":
+            continue
+        low = l["text"].lower()
+        hit = next((sn for sn in by_len if sn.lower() in low), None) or \
+              next((sn for fn, sn in first_names.items() if re.search(rf"\b{re.escape(fn)}\b", low)), None)
+        if not hit and re.search(r"\bvice city\b|\bmiami\b", low):
+            hit = "Vice City" if "Vice City" in subjects else None
+        if not hit and "leonida" in low:
+            hit = next((x for x in subjects if "Leonida" in x), None)
+        if hit:
+            l["visual"], l["subject"] = "subject", hit
+    # 2) real numbers in plain lines -> stat card
+    prev_card = False
+    for l in lines[1:]:
+        if l["visual"] == "clip" and not prev_card:
+            m = NUM.search(l["text"])
+            if m:
+                l["visual"] = "stat"
+                l["stat"] = {"value": m.group(1).strip().upper(), "caption": l["label"] or ""}
+        prev_card = l["visual"] in ("stat", "compare", "list", "quote")
+    # 3) keep gameplay to about a third of the lines – the rest get official Rockstar imagery
+    clips = [l for l in lines[1:] if l["visual"] == "clip"]
+    allowed = max(2, len(lines) // 3)
+    pool = [x for x in GENERIC_SUBJECTS if x in subjects] or subjects
+    for k, l in enumerate(clips[::2][: max(0, len(clips) - allowed)]):
+        l["visual"], l["subject"] = "subject", pool[k % len(pool)]
