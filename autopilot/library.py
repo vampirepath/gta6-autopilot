@@ -43,11 +43,15 @@ def subject_from_name(stem: str) -> str:
     s = re.sub(r"(?i)^gtavi[_ ]*|[_ ]*(video[_ ]clip|landscape|portrait|wallpaper|artwork|official|\d+x\d+)", " ", stem)
     s = re.sub(r"[_\-]+", " ", s)
     s = re.sub(r"\b\d+\b", " ", s)
+    s = re.sub(r"(?i)\b(phone|square|tablet|ultrawide|desktop|mobile|postcard|landscape|portrait|wide)\b", " ", s)
     return re.sub(r"\s+", " ", s).strip().title() or "Vice City"
 
 
 def load_stills() -> list[dict]:
-    return json.loads(STILLS_INDEX.read_text()) if STILLS_INDEX.exists() else []
+    st = json.loads(STILLS_INDEX.read_text()) if STILLS_INDEX.exists() else []
+    for x in st:   # normalise names like "Boobie Ike Phone" -> "Boobie Ike"
+        x["subject"] = subject_from_name(x["subject"].replace(" ", "_"))
+    return st
 
 
 def subjects() -> list[str]:
