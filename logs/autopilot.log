@@ -70,3 +70,13 @@ edge_tts.exceptions.NoAudioReceived: No audio was received. Please verify that y
 2026-11-16 06:33:20,521 INFO rendered 34 shots, 52.5s
 2026-11-16 06:33:24,364 INFO video ready: 20261116_062649.mp4 (52.5s)
 2026-11-16 06:33:32,551 INFO skipped by review: 20261116_062649.mp4
+2026-11-16 06:36:03,271 INFO fetched 54 candidate stories
+2026-11-16 06:36:03,776 INFO story: From Hot Coffee to GTA 6, the Panic Around Grand Theft Auto Never Changes (GTA BOOM – Latest Articles, 2891 chars)
+2026-11-16 06:36:04,478 INFO gemini gemini-flash-latest busy (429), waiting 8s
+2026-11-16 06:36:19,836 INFO gemini gemini-flash-latest busy (429), waiting 20s
+2026-11-16 06:36:44,397 INFO script: GTA 6 Just Survived A Massive Last-Minute Ban Threat (15 lines, 166 words)
+2026-11-16 06:36:44,397 INFO visuals: clip, subject[Vice City], stat, article, clip, subject[Jason And Lucia], ai, article, clip, stat, clip[Vice City], clip[Lucia Caminos], list, stat, clip[Jason Duval]
+2026-11-16 06:36:48,813 INFO voice: ElevenLabs (977 chars)
+2026-11-16 06:38:21,187 INFO rendered 27 shots, 57.6s
+2026-11-16 06:38:23,576 INFO video ready: 20261116_063603.mp4 (57.6s)
+2026-11-16 06:38:27,463 INFO skipped by review: 20261116_063603.mp4

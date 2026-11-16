@@ -96,7 +96,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -176,7 +176,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -187,7 +187,7 @@
    "lucia"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -245,7 +245,7 @@
    "social_media"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -256,7 +256,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -325,7 +325,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -382,7 +382,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -406,7 +406,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -442,7 +442,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -486,7 +486,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -509,7 +509,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -531,7 +531,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -687,7 +687,7 @@
   "dur": 2.5,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0064.mp4",
@@ -799,7 +799,7 @@
   "dur": 4.37,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0078.mp4",
@@ -863,7 +863,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0086.mp4",
@@ -1055,7 +1055,7 @@
   "dur": 4.83,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0110.mp4",
@@ -1119,7 +1119,7 @@
   "dur": 4.83,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0118.mp4",
@@ -1703,7 +1703,7 @@
   "dur": 2.4,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0191.mp4",
@@ -1935,7 +1935,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0220.mp4",
@@ -1943,7 +1943,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0221.mp4",
@@ -2255,7 +2255,7 @@
   "dur": 2.67,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0260.mp4",
@@ -2375,7 +2375,7 @@
   "dur": 4.83,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0275.mp4",
@@ -2607,7 +2607,7 @@
   "dur": 2.0,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0304.mp4",
@@ -2871,7 +2871,7 @@
   "dur": 4.77,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0337.mp4",
@@ -3234,7 +3234,7 @@
   "subjects": [
    "Cover Art"
   ],
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0001.mp4",
