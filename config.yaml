@@ -33,7 +33,9 @@ caption_highlight: "&H0000E5FF"       # GTA yellow-orange for the spoken word
 caption_words_per_line: 3
 
 # ---- Uploading -----------------------------------------------------
-upload_youtube: true
+# YouTube auto-upload stays OFF until Google approves the API audit (before that, API uploads
+# are locked to Private forever). Videos come to Telegram instead. After approval: set to true.
+upload_youtube: false
 upload_instagram: true
 upload_facebook: true
 youtube_privacy: "public"             # public / unlisted / private

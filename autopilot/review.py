@@ -35,6 +35,15 @@ def review(video, title: str) -> str:
         return "post"
     chat = env("TELEGRAM_CHAT_ID")
     mins, default = cfg.get("review_timeout_minutes", 40), cfg.get("on_timeout", "post")
+    if not any(cfg.get(k) for k in ("upload_youtube", "upload_instagram", "upload_facebook")):
+        # manual mode: just deliver the finished Short + ready-to-paste text to the phone
+        meta = json.loads(video.with_suffix(".json").read_text())
+        cap = (f"🎬 New GTA 6 Short ready – save the video and post it from the YouTube app.\n\n"
+               f"TITLE:\n{meta['yt_title']}\n\nDESCRIPTION:\n{meta['description']}")
+        with open(video, "rb") as f:
+            _api("sendVideo", data={"chat_id": chat, "caption": cap[:1024], "supports_streaming": "true"},
+                 files={"video": f})
+        return "skip"
     offset = _latest_offset()
     kb = {"inline_keyboard": [[{"text": "✅ Post now", "callback_data": f"post:{video.stem}"},
                                {"text": "🗑 Skip", "callback_data": f"skip:{video.stem}"}]]}
