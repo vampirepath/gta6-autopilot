@@ -50,6 +50,10 @@ EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual
 - "quote": quote card. Use when someone is quoted. Set "quote": {{"text": "...", "by": "Take-Two CEO"}}
 - "article": screenshot of the source article with the headline highlighted (1 line max, when citing the source{article_note})
 - "photo": the main image from the news article (1–2 lines max{photo_note})
+- "map": animated map that zooms to a COUNTRY with its flag. Use whenever a country is mentioned
+   (bans, ratings, sales in a country, studios). Set "country": "South Korea"
+- "person": name card for a real person or organisation (we never show real people's photos).
+   Set "person": {{"name": "Strauss Zelnick", "role": "Take-Two CEO", "country": "USA"}}
 - "stock": REAL-LIFE footage{stock_note}. Use for real-world things: courts, lawyers, money, hackers,
    police, Miami streets, crowds, gaming setups, stock market, offices. Set "stock_query" (2–4 English words,
    e.g. "courtroom judge", "counting money", "miami night traffic"). Use 2–4 times per script when relevant.
@@ -62,7 +66,7 @@ Use at least 8 non-"clip" visuals per script; "clip" is the LAST choice. Never t
 Return ONLY JSON:
 {{
  "title": "YouTube title, max 70 chars, curiosity + 'GTA 6', no clickbait lies",
- "lines": [{{"text": "...", "label": "...", "big": false, "visual": "clip", "tag": "...", "subject": "", "stat": null, "compare": null, "list": null, "quote": null, "ai_prompt": "", "stock_query": ""}}],
+ "lines": [{{"text": "...", "label": "...", "big": false, "visual": "clip", "tag": "...", "subject": "", "stat": null, "compare": null, "list": null, "quote": null, "ai_prompt": "", "stock_query": "", "country": "", "person": null}}],
  "description": "2-3 sentence description in English",
  "hashtags": ["#GTA6", "..."],
  "is_rumour": true/false
@@ -104,7 +108,11 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
             v = "clip"
         if v == "photo" and not has_photo:
             v = "clip"
-        if v in ("stat", "compare", "list", "quote") and not isinstance(l.get(v), dict):
+        if v == "map":
+            from .geomap import resolve
+            if not (l.get("country") and resolve(l["country"])):
+                v = "clip"
+        if v in ("stat", "compare", "list", "quote", "person") and not isinstance(l.get(v), dict):
             v = "clip"
         if v == "stat":
             val = str(l["stat"].get("value", ""))
@@ -117,7 +125,7 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
             v = "clip"
         if v == "ai" and not (l.get("ai_prompt") or "").strip():
             v = "clip"
-        if i == 0 and v in ("article", "stat", "compare", "list", "quote", "ai", "stock"):
+        if i == 0 and v in ("article", "stat", "compare", "list", "quote", "ai", "stock", "person"):
             v = "clip"
         l["visual"] = v
         l["label"] = (l.get("label") or "").strip().upper()[:40] or " ".join(re.sub(r"[^\w$%,.' -]", "", l["text"]).split()[:4]).upper()
@@ -132,6 +140,11 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
     return data
 
 
+COUNTRY_WORDS = ["South Korea", "North Korea", "Japan", "China", "India", "Australia", "Germany", "United Kingdom", "UK",
+                 "Saudi Arabia", "United Arab Emirates", "UAE", "Brazil", "Russia", "Canada", "Mexico", "France",
+                 "Indonesia", "Malaysia", "Singapore", "Thailand", "Vietnam", "Turkey", "Egypt", "Qatar", "Kuwait",
+                 "Pakistan", "Bangladesh", "Philippines", "Italy", "Spain", "Poland", "Netherlands", "Sweden",
+                 "Scotland", "Ireland", "New Zealand", "South Africa", "Argentina", "Colombia"]
 GENERIC_SUBJECTS = ["Vice City", "Jason And Lucia", "Leonida Keys", "Lucia Caminos", "Jason Duval",
                     "Port Gellhorn", "Grassrivers", "Ambrosia", "Mount Kalaga National Park"]
 NUM = re.compile(r"(\$\s?\d[\d,.]*\s*(?:million|billion|k)?|\d[\d,.]*\s*(?:million|billion|%|percent|copies|players|hours|km|miles))", re.I)
@@ -160,6 +173,15 @@ def _enforce_variety(lines: list[dict], subjects: list[str]):
             hit = next((x for x in subjects if "Leonida" in x), None)
         if hit:
             l["visual"], l["subject"] = "subject", hit
+    # 1b) a country named in a plain line -> map
+    from .geomap import resolve
+    for l in lines[1:]:
+        if l["visual"] != "clip":
+            continue
+        for cname in COUNTRY_WORDS:
+            if re.search(rf"\b{re.escape(cname)}\b", l["text"], re.I) and resolve(cname):
+                l["visual"], l["country"] = "map", cname
+                break
     # 2) real numbers in plain lines -> stat card
     prev_card = False
     for l in lines[1:]:

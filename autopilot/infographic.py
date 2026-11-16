@@ -196,6 +196,28 @@ def card_quote(t, text, by):
     return _scale(img, k)
 
 
+def card_person(t, name, role, country=""):
+    """Name card for a real person/organisation (no photo): initials badge + name + role (+ country)."""
+    img = Image.new("RGBA", (CW, CH), (0, 0, 0, 0))
+    k = _ease(t / 0.3)
+    if k <= 0.01:
+        return img
+    d = _panel(img, (40, 300, CW - 40, 860))
+    initials = "".join(w[0] for w in name.split()[:2]).upper() or "?"
+    d.ellipse((CW // 2 - 110, 340, CW // 2 + 110, 560), fill=PURPLE2, outline=WHITE, width=6)
+    f = _f(120)
+    w = d.textlength(initials, font=f)
+    d.text((CW / 2 - w / 2, 365), initials, font=f, fill=WHITE)
+    nf = _fit(d, name.upper(), 96, CW - 140)
+    _center(d, 590, name.upper(), nf, fill=GOLD)
+    rf = _fit(d, role.upper(), 60, CW - 160)
+    _center(d, 710, role.upper(), rf)
+    if country:
+        cf = _fit(d, country.upper(), 46, CW - 200)
+        _center(d, 790, country.upper(), cf, fill=(235, 190, 255))
+    return _scale(img, k)
+
+
 def _scale(img, k):
     if abs(k - 1) < 0.01:
         return img
@@ -206,7 +228,7 @@ def _scale(img, k):
     return out
 
 
-CARDS = {"stat": card_stat, "compare": card_compare, "list": card_list, "quote": card_quote}
+CARDS = {"stat": card_stat, "compare": card_compare, "list": card_list, "quote": card_quote, "person": card_person}
 
 
 def render_frames(kind: str, dur: float, out_dir: Path, **kw) -> Path:

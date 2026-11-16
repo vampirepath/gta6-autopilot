@@ -14,7 +14,7 @@ from pathlib import Path
 from .common import CLIPS_DIR, FONT_DIR, MUSIC_DIR, config, log
 from .library import STILLS_DIR, load_index, load_stills, save_index
 from .pill import make_pill
-from .sfx import path as sfx
+from .sfx import path as sfx, pick as sfx_pick
 
 W, H, FPS = 1080, 1920, 30
 ENC = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p", "-r", str(FPS), "-an"]
@@ -112,19 +112,43 @@ def shot_hook(top: dict, bottom: dict, dur: float, pill: Path, out: Path):
 
 
 def shot_article(bg: dict, plain: Path, hi: Path, dur: float, out: Path):
-    """News 'proof': article screenshot on a blurred dark background, headline highlight wipes in."""
+    """News 'proof': article screenshot; a yellow highlighter sweeps across the key sentence, slow push-in."""
+    from PIL import Image
+    fdir = out.with_suffix("")
+    fdir.mkdir(exist_ok=True)
+    a = Image.open(plain).convert("RGB")
+    b = Image.open(hi).convert("RGB").resize(a.size)
+    tw = 940
+    th = int(a.height * tw / a.width)
+    a, b = a.resize((tw, th)), b.resize((tw, th))
+    from PIL import ImageChops
+    diff = ImageChops.difference(a, b).convert("L").point(lambda v: 255 if v > 24 else 0)
+    box = diff.getbbox() or (0, 0, tw, th)
+    n = round(dur * FPS)
+    start, sweep = int(0.35 * FPS), int(0.7 * FPS)
+    last = None
+    for f in range(n):
+        p = fdir / f"{f:04d}.png"
+        if f < start + sweep + 1:
+            prog = min(1, max(0, (f - start) / sweep))
+            x = int(box[0] + (box[2] - box[0]) * prog)
+            fr = a.copy()
+            if x > box[0]:
+                fr.paste(b.crop((box[0], box[1], x, box[3])), (box[0], box[1]))
+            fr.save(p, compress_level=1)
+            last = p
+        else:
+            p.write_bytes(last.read_bytes())
+    cy = (box[1] + box[3]) / 2 / th
     cmd = ["ffmpeg", "-y", "-v", "error", "-t", f"{dur + 0.2:.3f}", "-i", str(CLIPS_DIR / bg["file"]),
-           "-loop", "1", "-t", f"{dur + 0.2:.3f}", "-i", str(plain),
-           "-loop", "1", "-t", f"{dur + 0.2:.3f}", "-i", str(hi)]
-    z = f"(1+0.06*t/{dur:.3f})"
-    fl = (f"[0:v]setpts=PTS-STARTPTS,fps={FPS},scale={W}:{H},boxblur=25:2,eq=brightness=-0.25,setsar=1,"
-          f"tpad=stop_mode=clone:stop_duration=1[bg];"
-          f"[1:v]scale=920:-2,format=rgba[p];"
-          f"[2:v]scale=920:-2,format=rgba,fade=in:st=0.45:d=0.3:alpha=1[h];"
-          f"[bg][p]overlay=(W-w)/2:(H-h)/2[b1];[b1][h]overlay=(W-w)/2:(H-h)/2,"
-          f"scale=w='trunc({W}*{z}/2)*2':h=-2:eval=frame,crop={W}:{H},format=yuv420p[vout]")
-    _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
-
+           "-framerate", str(FPS), "-i", str(fdir / "%04d.png")]
+    z = f"(1+0.10*t/{dur:.3f})"
+    fl = (f"[0:v]setpts=PTS-STARTPTS,fps={FPS},scale={W}:{H},boxblur=25:2,eq=brightness=-0.3,setsar=1,"
+          f"tpad=stop_mode=clone:stop_duration=2[bg];"
+          f"[bg][1:v]overlay=(W-w)/2:(H-h)/2:shortest=0,"
+          f"scale=w='trunc({W}*{z}/2)*2':h=-2:eval=frame,"
+          f"crop={W}:{H}:x='(iw-{W})/2':y='max(0,min(ih-{H},(ih-{H})*{cy:.3f}*1.0))',format=yuv420p[vout]")
+    _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(n)] + ENC + [str(out)])
 
 class StillPicker:
     def __init__(self):
@@ -155,6 +179,14 @@ def shot_still(img: Path, dur: float, out: Path, pill: Path | None = None, pill_
         fl += ";" + _pill_filters(1, "base", pill_y, pop)
     else:
         fl += ";[base]null[vout]"
+    _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
+
+
+def shot_zoom(img: Path, dur: float, out: Path):
+    """Centred zoom-in on a 9:16 image (maps)."""
+    z = f"(1.0+0.22*min(1,t/{dur:.3f}))"
+    cmd = ["ffmpeg", "-y", "-v", "error", "-loop", "1", "-t", f"{dur + 0.2:.3f}", "-i", str(img)]
+    fl = (f"[0:v]fps={FPS},scale=w='trunc({W}*{z}/2)*2':h=-2:eval=frame,crop={W}:{H},setsar=1,format=yuv420p[vout]")
     _run(cmd + ["-filter_complex", fl, "-map", "[vout]", "-frames:v", str(round(dur * FPS))] + ENC + [str(out)])
 
 
@@ -249,7 +281,7 @@ def mix_audio(voice: str, total: float, events: list[tuple[float, str, float]], 
 def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, work: Path,
            article: tuple[Path, Path] | None = None, photo: Path | None = None):
     picker, stills = ClipPicker(), StillPicker()
-    shots, events = [], [(0.0, "boom", 0.8)]
+    shots, events = [], [(0.0, "impact2", 0.8), (0.0, "boom", 0.5)]
     frame_t = 0
     n = 0
     LABEL_Y, BIG_Y = 1010, 960
@@ -276,7 +308,11 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
             pill = make_pill(line["label"], work / f"pill_{li}.png",
                              size=124 if line["big"] else 96, max_w=990 if line["big"] else 920)
         if li > 0:
-            events.append((start, "whoosh", 0.35))
+            lab = line["label"].upper()
+            if any(w in lab for w in ("TWIST", "LEAK", "BUT ", "SECRET", "HACK", "BANNED", "BAN")):
+                events.append((start, "glitch", 0.35))
+            elif random.random() < 0.7:
+                events.append((start, sfx_pick("whoosh"), 0.22))
         t, first = start, True
 
         # 1) hook – split screen (first ≤3 s)
@@ -293,18 +329,28 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
             d = place(seg_end)
             done = False
             try:
-                if vis in ("stat", "compare", "list", "quote"):
+                if vis in ("stat", "compare", "list", "quote", "person"):
                     shot_card(vis, line[vis] if vis != "list" else {"title": line["list"].get("title", line["label"]),
                                                                    "items": line["list"].get("items", [])},
                               picker.pick("any", t, d), d, new_shot(), work)
-                    events.append((t + 0.03, "ding" if vis == "stat" else "pop", 0.5))
+                    money = vis == "stat" and "$" in str(line["stat"].get("value", ""))
+                    events.append((t + 0.02, sfx_pick("impact"), 0.45))
+                    events.append((t + 0.05, "cash" if money else ("ding" if vis == "stat" else "pop"), 0.45))
                     if vis == "list":
                         events += [(t + 0.35 + k * 0.45, "pop", 0.4) for k in range(len(line["list"]["items"][:4]))]
                     done = True
                 elif vis == "article" and article:
                     shot_article(picker.pick("any", t, 1), article[0], article[1], d, new_shot())
-                    events.append((t, "click", 0.7))
+                    events.append((t, "shutter", 0.6))
+                    events.append((t + 0.35, "typing", 0.45))
                     done = True
+                elif vis == "map":
+                    from .geomap import render_map
+                    m = render_map(line["country"], work / f"map_{li}.jpg")
+                    if m:
+                        shot_zoom(m, d, new_shot())
+                        events.append((t + 0.05, "ping", 0.5))
+                        done = True
                 elif vis == "stock":
                     from .stock import stock_clip
                     c = stock_clip(line.get("stock_query", ""), d, work / f"stock_{li}.mp4")
@@ -331,7 +377,7 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
                         shot_still(img, d, new_shot(), pill=pill, pill_y=LABEL_Y, pop=True)
                         done = True
                     if done:
-                        events.append((t + 0.03, "pop", 0.6))
+                        events.append((t + 0.03, "swish" if vis == "subject" else "pop", 0.4))
             except Exception as e:
                 log.warning("visual %s failed (%s) – using gameplay", vis, e)
                 if shots and not shots[-1].exists():

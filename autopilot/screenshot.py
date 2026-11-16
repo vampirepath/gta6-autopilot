@@ -20,19 +20,41 @@ JS_CLEAN = """
 }
 """
 
+JS_FIND = """
+(keywords) => {
+  // find the paragraph that best matches what the voiceover says, put it in view
+  const kws = keywords.map(k => k.toLowerCase());
+  let best = null, bestScore = 0;
+  for (const el of document.querySelectorAll('article p, main p, p, li')) {
+    const t = (el.innerText || '').toLowerCase();
+    if (t.length < 60 || t.length > 900) continue;
+    let sc = 0; for (const k of kws) if (t.includes(k)) sc += k.length > 5 ? 2 : 1;
+    if (sc > bestScore) { bestScore = sc; best = el; }
+  }
+  const target = (best && bestScore >= 2) ? best : document.querySelector('h1');
+  if (!target) return false;
+  target.setAttribute('data-hl', '1');
+  target.scrollIntoView({block: 'center'});
+  window.scrollBy(0, -Math.round(window.innerHeight * 0.05));
+  return true;
+}
+"""
+
 JS_HIGHLIGHT = """
 () => {
-  const h = document.querySelector('h1');
-  if (!h) return false;
-  h.style.background = '#000'; h.style.color = '#fff';
-  h.style.boxDecorationBreak = 'clone'; h.style.webkitBoxDecorationBreak = 'clone';
-  h.style.display = 'inline'; h.style.padding = '2px 6px'; h.style.lineHeight = '1.45';
+  const el = document.querySelector('[data-hl]') || document.querySelector('h1');
+  if (!el) return false;
+  // highlighter-marker look (like news Shorts): yellow marker behind the text
+  el.style.backgroundImage = 'linear-gradient(transparent 12%, #ffe23d 12%, #ffe23d 88%, transparent 88%)';
+  el.style.boxDecorationBreak = 'clone'; el.style.webkitBoxDecorationBreak = 'clone';
+  el.style.color = '#000'; el.style.display = 'inline'; el.style.fontWeight = '700';
+  el.style.padding = '0 4px';
   return true;
 }
 """
 
 
-def article_shots(url: str, out_dir: Path) -> tuple[Path, Path] | None:
+def article_shots(url: str, out_dir: Path, keywords: list[str] | None = None) -> tuple[Path, Path] | None:
     """Returns (plain, highlighted) 1080x1920 PNGs, or None if the page can't be captured."""
     if not url or "news.google.com" in url or "reddit.com" in url:
         return None
@@ -54,6 +76,7 @@ def article_shots(url: str, out_dir: Path) -> tuple[Path, Path] | None:
             if not page.evaluate(JS_CLEAN):
                 b.close()
                 return None
+            page.evaluate(JS_FIND, keywords or [])
             page.wait_for_timeout(800)
             page.screenshot(path=str(plain))
             page.evaluate(JS_HIGHLIGHT)

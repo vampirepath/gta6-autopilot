@@ -35,7 +35,9 @@ def make_one(story: dict) -> Path:
     article = None
     if any(l["visual"] == "article" for l in data["lines"]):
         from .screenshot import article_shots
-        article = article_shots(story.get("url", ""), work)
+        aline = next(l for l in data["lines"] if l["visual"] == "article")
+        kws = [w.strip(".,!?'\"") for w in aline["text"].split() if len(w) > 4][:10]
+        article = article_shots(story.get("url", ""), work, kws)
     out = READY_DIR / f"{vid}.mp4"
     render(data["lines"], words, voice_mp3, total, badge, out, work, article=article, photo=photo)
 

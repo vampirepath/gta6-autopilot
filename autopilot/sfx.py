@@ -84,13 +84,74 @@ def build():
     _save("ding", ding)
 
 
+def build_more():
+    """Extra variety so transitions don't all sound the same."""
+    t = lambda d: np.arange(int(d * SR)) / SR
+    rng = np.random.default_rng(7)
+    # whoosh variants: short/long, up/down, airy
+    for i, (d, f0, f1, q) in enumerate([(0.30, 600, 6000, 2.5), (0.55, 4000, 400, 3), (0.40, 200, 2500, 5), (0.25, 1500, 9000, 1.5)], 1):
+        w = _sweep_noise(d, f0, f1, q=q, seed=10 + i) * np.sin(np.pi * t(d) / d) ** (1.5 + i * 0.3)
+        _save(f"whoosh{i}", w)
+    # swish (very short)
+    d = 0.16
+    _save("swish", _sweep_noise(d, 2000, 8000, q=2, seed=21) * np.sin(np.pi * t(d) / d))
+    # impacts: punchy low hits
+    for i, (f, dec) in enumerate([(70, 6), (55, 4), (90, 9)], 1):
+        d = 0.9
+        tt = t(d)
+        hit = np.sin(2 * np.pi * np.cumsum(f * np.exp(-tt * 4) + 30) / SR) * np.exp(-tt * dec)
+        hit += 0.4 * rng.standard_normal(len(tt)) * np.exp(-tt * 45)
+        _save(f"impact{i}", np.tanh(hit * 2))
+    # typing (article on screen)
+    d = 0.9
+    ty = np.zeros(int(d * SR))
+    for k in range(9):
+        p0 = int((0.03 + k * 0.09 + rng.uniform(-0.02, 0.02)) * SR)
+        n = int(0.025 * SR)
+        ty[p0:p0 + n] += rng.standard_normal(n) * np.exp(-np.arange(n) / SR * 260) * rng.uniform(0.5, 1)
+    _save("typing", ty)
+    # cash register / coins (money)
+    d = 0.8
+    tt = t(d)
+    cash = sum(np.sin(2 * np.pi * f * tt) * np.exp(-tt * k) for f, k in [(2093, 9), (2637, 11), (3136, 13)])
+    cash[: int(0.03 * SR)] += rng.standard_normal(int(0.03 * SR)) * 0.8
+    _save("cash", cash)
+    # glitch (for twists / leaks)
+    d = 0.35
+    g = np.sign(np.sin(2 * np.pi * 180 * t(d))) * (rng.random(int(d * SR)) > 0.3)
+    g = g * np.repeat(rng.random(int(d * 40) + 1), int(SR / 40) + 1)[: int(d * SR)]
+    _save("glitch", g)
+    # radar ping (maps)
+    d = 1.0
+    tt = t(d)
+    _save("ping", np.sin(2 * np.pi * 1760 * tt) * np.exp(-tt * 5) + 0.5 * np.sin(2 * np.pi * 880 * tt) * np.exp(-tt * 4))
+    # shutter
+    d = 0.2
+    n = rng.standard_normal(int(d * SR))
+    e = np.exp(-t(d) * 90) + 0.8 * np.exp(-np.clip(t(d) - 0.09, 0, None) * 110) * (t(d) > 0.09)
+    _save("shutter", n * e)
+
+
+VARIANTS = {
+    "whoosh": ["whoosh", "whoosh1", "whoosh2", "whoosh3", "whoosh4", "swish"],
+    "impact": ["impact1", "impact2", "impact3", "boom"],
+}
+
+
+def pick(kind: str) -> str:
+    import random
+    return random.choice(VARIANTS.get(kind, [kind]))
+
+
 def path(name: str) -> Path:
     p = SFX_DIR / f"{name}.wav"
     if not p.exists():
         build()
+        build_more()
     return p
 
 
 if __name__ == "__main__":
     build()
+    build_more()
     print("built", sorted(x.name for x in SFX_DIR.glob("*.wav")))
