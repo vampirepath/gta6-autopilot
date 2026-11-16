@@ -93,6 +93,8 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
         if l.get("tag") not in tags:
             l["tag"] = "any"
         v = l.get("visual", "clip")
+        if v == "clip" and i > 0 and low.get((l.get("subject") or "").lower()):
+            v = "subject"                      # Gemini named a subject but forgot to use it
         if v == "subject":
             subj = low.get((l.get("subject") or "").lower())
             l["subject"] = subj or ""

@@ -104,7 +104,8 @@ def card_stat(t, value: str, caption: str):
         return img
     d = _panel(img, (40, 300, CW - 40, 820))
     parts = _split_number(value)
-    if parts and parts[1] >= 2:
+    is_year = parts and parts[3] == 0 and not parts[4] and 1900 <= parts[1] <= 2100 and not parts[0].strip()
+    if parts and parts[1] >= 2 and not is_year:
         pre, v, post, dec, commas = parts
         shown = v * _ease_out(t / 0.9)
         text = f"{pre}{_fmt(shown, dec, commas)}{post}".upper()

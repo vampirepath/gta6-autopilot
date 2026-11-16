@@ -23,7 +23,8 @@ def ai_image(prompt: str, out: Path) -> Path | None:
             if r.status_code == 200 and r.headers.get("content-type", "").startswith("image"):
                 out.write_bytes(r.content)
                 im = Image.open(out).convert("RGB")
-                k = max(1080 / im.width, 1920 / im.height) * 1.0
+                im = im.crop((0, 0, im.width, int(im.height * 0.93)))      # cut off the corner watermark
+                k = max(1080 / im.width, 1920 / im.height)
                 im.resize((round(im.width * k), round(im.height * k))).save(out, quality=90)
                 return out
         except Exception as e:

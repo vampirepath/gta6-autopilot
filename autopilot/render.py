@@ -29,7 +29,8 @@ def _run(cmd):
 # ---------------- clip picking --------------------------------------------------
 class ClipPicker:
     def __init__(self):
-        self.idx = [c for c in load_index() if c.get("ok")]
+        self.idx = [c for c in load_index() if c.get("ok") and "Cover_Art" not in c.get("source", "")
+                    and "Pre_Load" not in c.get("source", "")]
         if len(self.idx) < 10:
             raise RuntimeError("clip library is empty – run the 'Build clip library' workflow first")
         self.used = set()
