@@ -134,3 +134,23 @@ ModuleNotFoundError: No module named 'pycountry'
 2026-11-16 12:05:21,728 INFO rendered 27 shots, 52.9s
 2026-11-16 12:05:24,717 INFO video ready: 20261116_120108.mp4 (52.9s)
 2026-11-16 12:05:30,785 INFO skipped by review: 20261116_120108.mp4
+2026-11-16 13:44:19,992 INFO fetched 59 candidate stories
+2026-11-16 13:44:22,253 INFO story: New GTA VI Update Released And Not Everyone Has Gotten It, Here’s Why (RockstarINTEL, 1937 chars)
+2026-11-16 13:44:24,287 INFO gemini gemini-flash-latest busy (429), waiting 8s
+2026-11-16 13:44:36,885 INFO gemini gemini-flash-latest busy (429), waiting 20s
+2026-11-16 13:44:58,994 INFO gemini gemini-flash-lite-latest busy (503), waiting 20s
+2026-11-16 13:45:19,733 ERROR failed on 'New GTA VI Update Released And Not Everyone Has Gotten It, Here’s Why': Gemini failed: gemini-2.5-flash not found
+Traceback (most recent call last):
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 125, in main
+    out = make_one(s)
+          ^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 31, in make_one
+    data = write_script(story, TAGS, lib_subjects(), has_photo=photo is not None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/writer.py", line 94, in write_script
+    raw = ask(user, system=SYSTEM.format(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/llm.py", line 66, in ask
+    raise RuntimeError(f"Gemini failed: {last}")
+RuntimeError: Gemini failed: gemini-2.5-flash not found
+
