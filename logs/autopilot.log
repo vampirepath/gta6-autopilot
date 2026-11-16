@@ -128,3 +128,9 @@ Traceback (most recent call last):
     import pycountry
 ModuleNotFoundError: No module named 'pycountry'
 
+2026-11-16 12:03:32,616 INFO script: UK Government Speaks Out About GTA 6 (15 lines, 153 words)
+2026-11-16 12:03:32,616 INFO visuals: clip, person, map, person, ai, map, clip, subject[Jason And Lucia], person, clip, clip, ai, map, subject[Vice City], subject[Jason Duval]
+2026-11-16 12:03:36,944 INFO voice: ElevenLabs (962 chars)
+2026-11-16 12:05:21,728 INFO rendered 27 shots, 52.9s
+2026-11-16 12:05:24,717 INFO video ready: 20261116_120108.mp4 (52.9s)
+2026-11-16 12:05:30,785 INFO skipped by review: 20261116_120108.mp4
