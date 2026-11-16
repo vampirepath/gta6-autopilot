@@ -96,7 +96,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -176,7 +176,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -256,7 +256,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -509,7 +509,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -520,7 +520,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -531,7 +531,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -758,7 +758,7 @@
    "jason_and_lucia"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -828,7 +828,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -840,7 +840,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -851,7 +851,7 @@
    "lucia"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -896,7 +896,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -908,7 +908,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -1356,7 +1356,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0135.mp4",
@@ -1452,7 +1452,7 @@
   "dur": 2.73,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0147.mp4",
@@ -1756,7 +1756,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0185.mp4",
@@ -1844,7 +1844,7 @@
   "dur": 4.2,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0196.mp4",
@@ -2092,7 +2092,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0227.mp4",
@@ -3116,7 +3116,7 @@
   "dur": 4.5,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0355.mp4",
@@ -3204,7 +3204,7 @@
   "dur": 2.03,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0366.mp4",
@@ -3212,7 +3212,7 @@
   "dur": 1.57,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0367.mp4",

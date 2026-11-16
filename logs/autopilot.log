@@ -173,3 +173,45 @@ RuntimeError: Gemini failed: gemini-2.5-flash not found
 2026-11-16 14:00:15,955 INFO rendered 25 shots, 47.6s
 2026-11-16 14:00:19,580 INFO video ready: 20261116_134824.mp4 (47.6s)
 2026-11-16 14:00:26,881 INFO skipped by review: 20261116_134824.mp4
+2026-11-16 23:13:41,125 INFO fetched 61 candidate stories
+2026-11-16 23:13:41,733 INFO story: Rockstar Just Got The Weather Channel to Forecast GTA 6 Weather (GTA BOOM – Latest Articles, 2845 chars)
+2026-11-16 23:13:46,463 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-16 23:13:53,302 INFO used backup model gemini-flash-lite-latest
+2026-11-16 23:14:00,244 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-16 23:14:11,973 INFO used backup model gemini-flash-lite-latest
+2026-11-16 23:14:12,016 INFO script: The Weather Channel Just Forecasted GTA 6?! (15 lines, 143 words)
+2026-11-16 23:14:12,016 INFO visuals: clip, subject[Leonida Keys], subject[Port Gellhorn], person, quote, clip, stat, subject[Leonida Keys], subject[Grassrivers], subject[Vice City], subject[Port Gellhorn], clip, clip, clip, subject[Vice City]
+2026-11-16 23:14:16,260 INFO voice: ElevenLabs (903 chars)
+2026-11-16 23:14:19,954 WARNING visual subject failed (ffmpeg failed: [Parsed_crop_2 @ 0x7f7c84010a80] Invalid too big or non positive size for width '1080' or height '1920'
+[Parsed_crop_2 @ 0x7f7c84010a80] Failed to configure input pad on Parsed_crop_2
+[fc#0 @ 0x6536551ccec0] Error reinitializing filters!
+[fc#0 @ 0x6536551ccec0] Task finished with error code: -22 (Invalid argument)
+[fc#0 @ 0x6536551ccec0] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x6536551d34c0] [enc:libx264 @ 0x6536551d3cc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x6536551d34c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x6536551d34c0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x6536551dbf80] Nothing was written into output file, because at least one of its streams received no packets.
+) – using gameplay
+2026-11-16 23:15:04,267 ERROR failed on 'Rockstar Just Got The Weather Channel to Forecast GTA 6 Weather': ffmpeg failed: [mov,mp4,m4a,3gp,3g2,mj2 @ 0x5f8f7a415780] moov atom not found
+[in#2 @ 0x5f8f7a3fbe40] Error opening input: Invalid data found when processing input
+Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/work/20261116_231342/shot_002.mp4.
+Error opening input files: Invalid data found when processing input
+
+Traceback (most recent call last):
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 125, in main
+    out = make_one(s)
+          ^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 42, in make_one
+    render(data["lines"], words, voice_mp3, total, badge, out, work, article=article, photo=photo)
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/render.py", line 504, in render
+    join_with_transitions(shots, line_starts, caps, video, total)
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/render.py", line 261, in join_with_transitions
+    _run(cmd + ["-filter_complex", ";".join(fl), "-map", "[v]", "-c:v", "libx264", "-preset", "medium", "-crf", "19",
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/render.py", line 27, in _run
+    raise RuntimeError(f"ffmpeg failed: {r.stderr[-1500:]}")
+RuntimeError: ffmpeg failed: [mov,mp4,m4a,3gp,3g2,mj2 @ 0x5f8f7a415780] moov atom not found
+[in#2 @ 0x5f8f7a3fbe40] Error opening input: Invalid data found when processing input
+Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/work/20261116_231342/shot_002.mp4.
+Error opening input files: Invalid data found when processing input
+
+
