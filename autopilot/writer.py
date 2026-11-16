@@ -94,42 +94,52 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
         raise ValueError("script too short")
     low = {x.lower(): x for x in subjects}
     for i, l in enumerate(lines):
-        if l.get("tag") not in tags:
-            l["tag"] = "any"
-        v = l.get("visual", "clip")
-        if v == "clip" and i > 0 and low.get((l.get("subject") or "").lower()):
-            v = "subject"                      # Gemini named a subject but forgot to use it
-        if v == "subject":
-            subj = low.get((l.get("subject") or "").lower())
-            l["subject"] = subj or ""
-            if not subj:
-                v = "clip"
-        if v == "article" and not can_article:
-            v = "clip"
-        if v == "photo" and not has_photo:
-            v = "clip"
-        if v == "map":
-            from .geomap import resolve
-            if not (l.get("country") and resolve(l["country"])):
-                v = "clip"
-        if v in ("stat", "compare", "list", "quote", "person") and not isinstance(l.get(v), dict):
-            v = "clip"
-        if v == "stat":
-            val = str(l["stat"].get("value", ""))
-            num = re.sub(r"[^\d.]", "", val)
-            if not val or (num and float(num or 0) < 2 and not re.search(r"[$%]|billion|million", val, re.I)):
-                v = "clip"
-        if v == "list" and not (l["list"].get("items")):
-            v = "clip"
-        if v == "stock" and not ((l.get("stock_query") or "").strip() and env("PEXELS_API_KEY")):
-            v = "clip"
-        if v == "ai" and not (l.get("ai_prompt") or "").strip():
-            v = "clip"
-        if i == 0 and v in ("article", "stat", "compare", "list", "quote", "ai", "stock", "person"):
-            v = "clip"
-        l["visual"] = v
-        l["label"] = (l.get("label") or "").strip().upper()[:40] or " ".join(re.sub(r"[^\w$%,.' -]", "", l["text"]).split()[:4]).upper()
-        l["big"] = bool(l.get("big"))
+      try:
+          if l.get("tag") not in tags:
+              l["tag"] = "any"
+          v = l.get("visual", "clip")
+          if v == "clip" and i > 0 and low.get((l.get("subject") or "").lower()):
+              v = "subject"                      # Gemini named a subject but forgot to use it
+          if v == "subject":
+              subj = low.get((l.get("subject") or "").lower())
+              l["subject"] = subj or ""
+              if not subj:
+                  v = "clip"
+          if v == "article" and not can_article:
+              v = "clip"
+          if v == "photo" and not has_photo:
+              v = "clip"
+          if v == "map":
+              from .geomap import resolve
+              if not (l.get("country") and resolve(l["country"])):
+                  v = "clip"
+          if v in ("stat", "compare", "list", "quote", "person") and not isinstance(l.get(v), dict):
+              v = "clip"
+          if v == "stat":
+              val = str(l["stat"].get("value", ""))
+              digits = re.sub(r"\D", "", val)
+              try:
+                  tiny = bool(digits) and int(digits) < 2
+              except ValueError:
+                  tiny = False
+              if not val or (tiny and not re.search(r"[$%]|billion|million", val, re.I)):
+                  v = "clip"
+          if v == "list" and not (l["list"].get("items")):
+              v = "clip"
+          if v == "stock" and not ((l.get("stock_query") or "").strip() and env("PEXELS_API_KEY")):
+              v = "clip"
+          if v == "ai" and not (l.get("ai_prompt") or "").strip():
+              v = "clip"
+          if i == 0 and v in ("article", "stat", "compare", "list", "quote", "ai", "stock", "person"):
+              v = "clip"
+          l["visual"] = v
+          l["label"] = (l.get("label") or "").strip().upper()[:40] or " ".join(re.sub(r"[^\w$%,.' -]", "", l["text"]).split()[:4]).upper()
+          l["big"] = bool(l.get("big"))
+      except Exception as e:                 # a weird value in one line must never kill the video
+        log.warning("line %d visual reset to clip: %s", i, e)
+        l["visual"], l["tag"] = "clip", l.get("tag") if l.get("tag") in tags else "any"
+        l["label"] = (l.get("label") or "").strip().upper()[:40] or "GTA 6"
+        l["big"] = False
     _enforce_variety(lines, subjects)
     if not lines[0]["label"]:
         lines[0]["label"] = data.get("title", "GTA 6 NEWS").upper()[:30]

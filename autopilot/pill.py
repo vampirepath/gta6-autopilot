@@ -30,8 +30,16 @@ def _wrap(text: str, font, max_w: int, draw) -> list[str]:
     return lines
 
 
+ICON_DIR = FONT_DIR.parent / "icons"
+
+
+def icon_names() -> list[str]:
+    return sorted(p.stem for p in ICON_DIR.glob("*.png"))
+
+
 def make_pill(text: str, out: Path, size: int = 84, max_w: int = 900,
-              fill=(150, 26, 190), fill2=(184, 52, 214), border=(255, 230, 255), glow=(214, 80, 255)) -> Path:
+              fill=(150, 26, 190), fill2=(184, 52, 214), border=(255, 230, 255), glow=(214, 80, 255),
+              icon: str = "") -> Path:
     """Render a label PNG (transparent background) with a purple gradient, light border and glow."""
     text = text.upper().strip()
     font = _font(size)
@@ -71,5 +79,19 @@ def make_pill(text: str, out: Path, size: int = 84, max_w: int = 900,
         d.text((x + 3, y + 4), l, font=font, fill=(60, 0, 80, 160))
         d.text((x, y), l, font=font, fill=(255, 255, 255, 255))
         y += line_h
+    if icon and (ICON_DIR / f"{icon}.png").exists():
+        # 3D icon sitting on top of the label, slightly tilted
+        ic = Image.open(ICON_DIR / f"{icon}.png").convert("RGBA")
+        isz = int(size * 2.1)
+        ic = ic.resize((isz, isz), Image.LANCZOS).rotate(-8, expand=True, resample=Image.BICUBIC)
+        canvas = Image.new("RGBA", (max(W, ic.width), H + ic.height - int(size * 0.55)), (0, 0, 0, 0))
+        canvas.alpha_composite(img, ((canvas.width - W) // 2, canvas.height - H))
+        sh = Image.new("RGBA", ic.size, (0, 0, 0, 0))
+        sh.paste((0, 0, 0, 110), mask=ic.split()[3])
+        sh = sh.filter(ImageFilter.GaussianBlur(10))
+        cx = (canvas.width - ic.width) // 2
+        canvas.alpha_composite(sh, (cx + 8, 14))
+        canvas.alpha_composite(ic, (cx, 0))
+        img = canvas
     img.save(out)
     return out

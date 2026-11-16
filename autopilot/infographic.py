@@ -79,10 +79,12 @@ def _wrap(d, text, font, max_w):
 # ---------------- number parsing for count-up ------------------------------------
 def _split_number(value: str):
     """'$7.6 billion' -> ('$', 7.6, ' BILLION', 1 decimal). Returns None if no number."""
-    m = re.search(r"(\d[\d,]*\.?\d*)", value)
+    m = re.search(r"(\d[\d.,]*\d|\d)", value)
     if not m:
         return None
     num = m.group(1)
+    if num.count(".") > 1 or (num.count(".") == 1 and len(num.split(".")[1]) == 3 and "," not in num):
+        num = num.replace(".", ",")          # European thousands separators: 1.002.000
     dec = len(num.split(".")[1]) if "." in num else 0
     try:
         v = float(num.replace(",", ""))
@@ -218,6 +220,74 @@ def card_person(t, name, role, country=""):
     return _scale(img, k)
 
 
+def card_blocks(t, total, highlight, caption, icon="music", mode="remove"):
+    """Grid of icon blocks; the highlighted ones drop out (remove) or light up (add).
+    e.g. 50 songs, 17 removed -> 17 blocks fall away."""
+    from .pill import ICON_DIR
+    img = Image.new("RGBA", (CW, CH), (0, 0, 0, 0))
+    k = _ease(t / 0.25)
+    if k <= 0.01:
+        return img
+    try:
+        total, highlight = int(float(str(total).replace(",", ""))), int(float(str(highlight).replace(",", "")))
+    except ValueError:
+        return img
+    per = 1
+    while total / per > 60:
+        per *= 10 if total / per > 600 else 2
+    n, h = max(1, round(total / per)), max(1, round(highlight / per))
+    h = min(h, n)
+    cols = 8 if n > 40 else 6 if n > 18 else 5 if n > 8 else 4
+    rows = math.ceil(n / cols)
+    cell = min((CW - 140) // cols, 640 // max(rows, 1))
+    gw, gh = cols * cell, rows * cell
+    top = 260
+    d = _panel(img, (40, 90, CW - 40, top + gh + 300))
+    cf = _fit(d, caption.upper(), 74, CW - 160)
+    _center(d, 130, caption.upper(), cf, fill=GOLD)
+    try:
+        ic = Image.open(ICON_DIR / f"{icon}.png").convert("RGBA")
+    except Exception:
+        ic = Image.open(ICON_DIR / "music.png").convert("RGBA")
+    ic = ic.resize((int(cell * 0.82),) * 2, Image.LANCZOS)
+    x0 = (CW - gw) // 2
+    hl_idx = set(range(n - h, n))     # last blocks are the affected ones
+    for i in range(n):
+        appear = _ease_out((t - 0.15 - i * 0.025) / 0.2)
+        if appear <= 0:
+            continue
+        r, c = divmod(i, cols)
+        x, y = x0 + c * cell + int(cell * 0.09), top + r * cell + int(cell * 0.09)
+        tile = ic
+        if i in hl_idx:
+            fall = _ease_out((t - 1.2 - (i - (n - h)) * 0.03) / 0.5)
+            if mode == "remove" and fall > 0:
+                red = Image.new("RGBA", tile.size, (255, 40, 60, 0))
+                red.putalpha(tile.split()[3].point(lambda a: int(a * 0.55)))
+                tile = Image.alpha_composite(tile, red)
+                y += int(fall * 520)
+                tile = tile.copy()
+                tile.putalpha(tile.split()[3].point(lambda a, f=fall: int(a * (1 - f))))
+                if fall >= 0.99:
+                    continue
+            elif mode == "add" and fall > 0:
+                g = Image.new("RGBA", (tile.width + 30, tile.height + 30), (0, 0, 0, 0))
+                ImageDraw.Draw(g).ellipse((0, 0, g.width, g.height), fill=(255, 214, 64, int(150 * fall)))
+                img.alpha_composite(g.filter(ImageFilter.GaussianBlur(10)), (x - 15, y - 15))
+        if appear < 1:
+            s_ = max(1, int(tile.width * appear))
+            tile = tile.resize((s_, s_))
+            x += (ic.width - s_) // 2; y += (ic.height - s_) // 2
+        img.alpha_composite(tile, (x, max(0, min(CH - tile.height, y))))
+    # counter
+    shown = h if t > 1.2 else 0
+    cnt = int(h * per * _ease_out((t - 1.2) / 0.6)) if t > 1.2 else 0
+    label = (f"-{cnt:,}" if mode == "remove" else f"+{cnt:,}") + (f"  (1 = {per})" if per > 1 else "")
+    bf = _f(110)
+    _center(d, top + gh + 60, label, bf, fill=(255, 80, 110) if mode == "remove" else (120, 255, 150))
+    return _scale(img, k)
+
+
 def _scale(img, k):
     if abs(k - 1) < 0.01:
         return img
@@ -228,7 +298,7 @@ def _scale(img, k):
     return out
 
 
-CARDS = {"stat": card_stat, "compare": card_compare, "list": card_list, "quote": card_quote, "person": card_person}
+CARDS = {"stat": card_stat, "compare": card_compare, "list": card_list, "quote": card_quote, "person": card_person, "blocks": card_blocks}
 
 
 def render_frames(kind: str, dur: float, out_dir: Path, **kw) -> Path:

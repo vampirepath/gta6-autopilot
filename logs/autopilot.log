@@ -106,3 +106,5 @@ Traceback (most recent call last):
                            ^^^^^^^^^^^^^^^
 ValueError: could not convert string to float: '01.002.000'
 
+2026-11-16 11:48:34,006 INFO script: t (6 lines, 8 words)
+2026-11-16 11:48:34,007 INFO visuals: clip, stat, stat, compare, clip, clip
