@@ -80,3 +80,13 @@ edge_tts.exceptions.NoAudioReceived: No audio was received. Please verify that y
 2026-11-16 06:38:21,187 INFO rendered 27 shots, 57.6s
 2026-11-16 06:38:23,576 INFO video ready: 20261116_063603.mp4 (57.6s)
 2026-11-16 06:38:27,463 INFO skipped by review: 20261116_063603.mp4
+2026-11-16 07:14:38,358 INFO fetched 55 candidate stories
+2026-11-16 07:14:39,038 INFO story: How GTA 6 Fixes Rockstar Games' Problem With Games Losing Its Music (GTA BOOM – Latest Articles, 3477 chars)
+2026-11-16 07:14:39,473 INFO gemini gemini-flash-latest busy (429), waiting 8s
+2026-11-16 07:14:55,683 INFO gemini gemini-flash-latest busy (503), waiting 20s
+2026-11-16 07:15:20,113 INFO script: How GTA 6 Fixes Rockstar's Biggest Music Problem (15 lines, 132 words)
+2026-11-16 07:15:20,113 INFO visuals: subject[Vice City], subject[Vice City], stat, stat, clip, article, stat, subject[Jason And Lucia], stat, clip, clip, ai, clip, subject[Leonida Keys], clip
+2026-11-16 07:15:24,122 INFO voice: ElevenLabs (792 chars)
+2026-11-16 07:17:40,169 INFO rendered 26 shots, 49.3s
+2026-11-16 07:17:43,613 INFO video ready: 20261116_071439.mp4 (49.3s)
+2026-11-16 07:17:49,272 INFO skipped by review: 20261116_071439.mp4
