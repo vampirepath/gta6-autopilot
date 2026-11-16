@@ -91,7 +91,15 @@ def make_voice(lines: list[dict], mp3: str) -> tuple[list[dict], float]:
     words = _elevenlabs(text, mp3)
     exact = words is not None
     if not exact:
-        words = asyncio.run(_edge_async(text, mp3))
+        for attempt in range(4):           # Edge TTS sometimes drops a request – retry
+            try:
+                words = asyncio.run(_edge_async(text, mp3))
+                if words:
+                    break
+            except Exception as e:
+                log.warning("Edge TTS attempt %d failed: %s", attempt + 1, e)
+            import time
+            time.sleep(5 * (attempt + 1))
     if not words:
         raise RuntimeError("voice returned no word timings")
     total = duration(mp3)
