@@ -41,7 +41,7 @@ def load_index() -> list[dict]:
         except Exception:
             dur = 0
         if dur >= 1:
-            idx.append({"file": p.name, "source": p.name.rsplit("_", 1)[0], "dur": round(dur, 2),
+            idx.append({"file": p.name, "source": p.name.rsplit("_", 1)[0] + ".mp4", "dur": round(dur, 2),
                         "tags": [], "ok": True})
     if new:
         LIB_INDEX.parent.mkdir(parents=True, exist_ok=True)

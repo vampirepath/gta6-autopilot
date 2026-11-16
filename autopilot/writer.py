@@ -33,6 +33,9 @@ Return ONLY JSON:
 
 def write_script(story: dict, tags: list[str]) -> dict:
     cfg = config()
+    user = (f"SOURCE: {story['source']}\nHEADLINE: {story['title']}\nURL: {story['url']}\n\n"
+            f"ARTICLE:\n{story['body']}\n\n"
+            "OTHER GTA 6 HEADLINES PEOPLE ARE TALKING ABOUT TODAY:\n- " + "\n- ".join(story.get("related", [])))
     raw = ask(user, system=SYSTEM.format(words=cfg["target_words"], tags=", ".join(tags)))
     data = json.loads(re.search(r"\{.*\}", raw, re.S).group(0))
     lines = [l for l in data["lines"] if l.get("text", "").strip()]
