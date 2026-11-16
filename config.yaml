@@ -8,7 +8,23 @@ channel_name: "GTA 6 Daily"          # used in descriptions
 # The cron job runs the system 3 times a day. Each run makes this many.
 videos_per_run: 1
 
-# ---- Voice (free Microsoft Edge voices) ---------------------------
+# ---- Language of the voiceover: "en" (English) or "hi" (Hindi) ------
+# On-screen labels always stay in English (like the reference channel).
+language: "en"
+
+# ---- ElevenLabs voice (best quality) --------------------------------
+# Used when the ELEVENLABS_API_KEY secret is set. When credits run out it
+# automatically falls back to the free Edge voice below.
+elevenlabs:
+  voice_id: "nPczCjzI2devNBz1zQrb"   # "Brian" – deep, energetic narrator (change to any voice ID you like)
+  model: "eleven_multilingual_v2"    # also speaks Hindi. "eleven_flash_v2_5" = half the credits, slightly lower quality
+  stability: 0.4
+  similarity: 0.8
+  style: 0.35
+  speed: 1.08
+
+# ---- Free fallback voice (Microsoft Edge voices) --------------------
+# English: en-US-AndrewNeural / en-US-GuyNeural   Hindi: hi-IN-MadhurNeural
 # Good English options:  en-US-AndrewNeural (deep, YouTuber style)
 #                        en-US-GuyNeural    (energetic news)
 #                        en-US-ChristopherNeural (serious)
@@ -20,12 +36,12 @@ voice_pitch: "-2Hz"
 # ---- Script (free Google Gemini API) ---------------------------------
 # Tried in order; if Google retires a name, the next one is used.
 gemini_models: ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.5-flash"]
-target_words: 120                     # about 40 seconds of voice
+target_words: 145                     # about 55-60 seconds of voice
 
 # ---- Background music ---------------------------------------------
-# Put royalty-free .mp3 files in the  music/  folder.
-# A random one is picked for each video. Leave the folder empty for no music.
-music_volume: 0.12                    # 0.0 – 1.0 (voice is 1.0)
+# Put royalty-free .mp3 files in the  music/  folder (a random one is used per video).
+# If the folder is empty, a copyright-free beat is generated automatically.
+music_volume: 0.22                    # 0.0 – 1.0 (voice is 1.0). Music ducks while the voice talks.
 
 # ---- Captions ------------------------------------------------------
 caption_color: "&H00FFFFFF"           # white  (ASS colour format &HAABBGGRR)

@@ -29,8 +29,12 @@ def make_one(story: dict) -> Path:
     voice_mp3 = str(work / "voice.mp3")
     words, total = make_voice(data["lines"], voice_mp3)
     badge = "GTA 6 RUMOUR" if data.get("is_rumour") else "GTA 6 NEWS"
+    article = None
+    if any(l["visual"] == "article" for l in data["lines"]):
+        from .screenshot import article_shots
+        article = article_shots(story.get("url", ""), work)
     out = READY_DIR / f"{vid}.mp4"
-    render(data["lines"], words, voice_mp3, total, badge, out, work)
+    render(data["lines"], words, voice_mp3, total, badge, out, work, article=article)
 
     tags = [h.lstrip("#") for h in data.get("hashtags", [])]
     hashtags = " ".join(data.get("hashtags", ["#GTA6"]))

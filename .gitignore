@@ -4,6 +4,5 @@ library/clips/
 library/sources/
 library/inbox/*.mp4
 output/
-music/*.mp3
 __pycache__/
 .venv/

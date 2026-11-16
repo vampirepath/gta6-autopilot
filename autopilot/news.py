@@ -70,7 +70,8 @@ def rank(stories: list[dict]) -> list[dict]:
         s["key"] = k
         buzz = sum(1 for o in stories if o is not s and
                    SequenceMatcher(None, s["title"].lower(), o["title"].lower()).ratio() > 0.45)
-        s["score"] = 100 / (1 + s["age_h"]) + 15 * buzz + (5 if not s["reddit"] else 0)
+        s["score"] = (100 / (1 + s["age_h"]) + 15 * buzz + (5 if not s["reddit"] else 0)
+                      + (10 if s["url"] and "news.google.com" not in s["url"] and not s["reddit"] else 0))
         ranked.append(s)
     ranked.sort(key=lambda s: s["score"], reverse=True)
     return ranked
