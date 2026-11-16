@@ -11,3 +11,34 @@
 2026-11-16 04:21:46,084 INFO rendered 33 shots, 46.1s
 2026-11-16 04:21:46,102 INFO video ready: 20261116_040829.mp4 (46.1s)
 2026-11-16 04:21:50,911 INFO skipped by review: 20261116_040829.mp4
+2026-11-16 05:05:10,591 INFO fetched 55 candidate stories
+2026-11-16 05:07:26,439 INFO script: Miami is turning into GTA 6 before our eyes (10 lines)
+2026-11-16 05:07:26,529 WARNING ElevenLabs error 401: {"detail":{"type":"authentication_error","code":"unauthorized","message":"Invalid API key","status":"invalid_api_key","request_id":"8cea4f84d4f40e087592b9ad59aeb3c2"}} – using free voice
+2026-11-16 05:07:29,544 ERROR failed on 'Miami evokes Vice City ahead of Grand Theft Auto 6 launch - The Straits Times': No audio was received. Please verify that your parameters are correct.
+Traceback (most recent call last):
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 111, in main
+    out = make_one(s)
+          ^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 30, in make_one
+    words, total = make_voice(data["lines"], voice_mp3)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/voice.py", line 94, in make_voice
+    words = asyncio.run(_edge_async(text, mp3))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/voice.py", line 78, in _edge_async
+    async for chunk in com.stream():
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/edge_tts/communicate.py", line 588, in stream
+    async for message in self.__stream():
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/edge_tts/communicate.py", line 562, in __stream
+    raise NoAudioReceived(
+edge_tts.exceptions.NoAudioReceived: No audio was received. Please verify that your parameters are correct.
+
