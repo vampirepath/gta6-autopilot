@@ -12,7 +12,7 @@ import traceback
 from pathlib import Path
 
 from . import uploaders
-from .common import (POSTED_DIR, READY_DIR, WORK_DIR, config, env, log, mark_story, notify,
+from .common import (ROOT, POSTED_DIR, READY_DIR, WORK_DIR, config, env, log, mark_story, notify,
                      save_video, set_platform)
 from .library import TAGS
 from .news import pick_story
@@ -51,6 +51,15 @@ def make_one(story: dict) -> Path:
         "story_url": story["url"], "duration": round(total, 1),
     }
     out.with_suffix(".json").write_text(json.dumps(meta, indent=2))
+    # preview sheet (every ~1.5 s) so the build can be checked without downloading the video
+    try:
+        import subprocess as sp
+        dbg = ROOT / "debug"; dbg.mkdir(exist_ok=True)
+        sp.run(["ffmpeg", "-y", "-v", "error", "-i", str(out), "-vf",
+                "fps=2/3,scale=216:-1,tile=10x4", "-frames:v", "1", "-q:v", "5", str(dbg / "latest_sheet.jpg")], check=True)
+        (dbg / "latest_script.json").write_text(json.dumps(data, indent=1, ensure_ascii=False))
+    except Exception as e:
+        log.warning("preview sheet failed: %s", e)
     save_video(vid, data["title"], str(out), meta)
     mark_story(story["key"], story["title"], story["url"])
     shutil.rmtree(work, ignore_errors=True)

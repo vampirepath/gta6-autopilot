@@ -2,7 +2,7 @@
 import json
 import re
 
-from .common import config, log
+from .common import config, env, log
 from .llm import ask
 
 LANG = {
@@ -49,6 +49,9 @@ EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual
 - "quote": quote card. Use when someone is quoted. Set "quote": {{"text": "...", "by": "Take-Two CEO"}}
 - "article": screenshot of the source article with the headline highlighted (1 line max, when citing the source{article_note})
 - "photo": the main image from the news article (1–2 lines max{photo_note})
+- "stock": REAL-LIFE footage{stock_note}. Use for real-world things: courts, lawyers, money, hackers,
+   police, Miami streets, crowds, gaming setups, stock market, offices. Set "stock_query" (2–4 English words,
+   e.g. "courtroom judge", "counting money", "miami night traffic"). Use 2–4 times per script when relevant.
 - "clip": gameplay footage. Set "tag" from: {tags}
 - "ai": AI-generated image, ONLY when nothing above fits (max 2). Set "ai_prompt" to a GENERIC scene
    (e.g. "courtroom with lawyers and legal papers", "hacker in dark room with monitors") – never name
@@ -58,7 +61,7 @@ Use at least 5 non-"clip" visuals per script. Never two "stat"/"compare"/"list"/
 Return ONLY JSON:
 {{
  "title": "YouTube title, max 70 chars, curiosity + 'GTA 6', no clickbait lies",
- "lines": [{{"text": "...", "label": "...", "big": false, "visual": "clip", "tag": "...", "subject": "", "stat": null, "compare": null, "list": null, "quote": null, "ai_prompt": ""}}],
+ "lines": [{{"text": "...", "label": "...", "big": false, "visual": "clip", "tag": "...", "subject": "", "stat": null, "compare": null, "list": null, "quote": null, "ai_prompt": "", "stock_query": ""}}],
  "description": "2-3 sentence description in English",
  "hashtags": ["#GTA6", "..."],
  "is_rumour": true/false
@@ -78,7 +81,8 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
         words=cfg["target_words"], tags=", ".join(tags), lang=LANG.get(lang, LANG["en"]),
         subjects=", ".join(subjects) or "(none available – don't use subject)",
         article_note="" if can_article else " – NOT AVAILABLE for this story, don't use",
-        photo_note="" if has_photo else " – NOT AVAILABLE for this story, don't use"))
+        photo_note="" if has_photo else " – NOT AVAILABLE for this story, don't use",
+        stock_note="" if env("PEXELS_API_KEY") else " – NOT AVAILABLE, don't use"))
     data = json.loads(re.search(r"\{.*\}", raw, re.S).group(0))
     lines = [l for l in data["lines"] if l.get("text", "").strip()]
     if len(lines) < 5:
@@ -101,9 +105,11 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
             v = "clip"
         if v == "list" and not (l["list"].get("items")):
             v = "clip"
+        if v == "stock" and not ((l.get("stock_query") or "").strip() and env("PEXELS_API_KEY")):
+            v = "clip"
         if v == "ai" and not (l.get("ai_prompt") or "").strip():
             v = "clip"
-        if i == 0 and v in ("article", "stat", "compare", "list", "quote", "ai"):
+        if i == 0 and v in ("article", "stat", "compare", "list", "quote", "ai", "stock"):
             v = "clip"
         l["visual"] = v
         l["label"] = (l.get("label") or "").strip().upper()[:40] or " ".join(re.sub(r"[^\w$%,.' -]", "", l["text"]).split()[:4]).upper()

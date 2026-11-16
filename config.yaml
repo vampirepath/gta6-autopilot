@@ -41,6 +41,7 @@ target_words: 145                     # about 55-60 seconds of voice
 # ---- Background music ---------------------------------------------
 # Put royalty-free .mp3 files in the  music/  folder (a random one is used per video).
 # If the folder is empty, a copyright-free beat is generated automatically.
+music_style: "synthwave"             # "synthwave" = 80s Vice City vibe, "trap" = dark trap beat
 music_volume: 0.22                    # 0.0 – 1.0 (voice is 1.0). Music ducks while the voice talks.
 
 # ---- Captions ------------------------------------------------------

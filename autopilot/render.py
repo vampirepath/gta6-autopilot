@@ -82,8 +82,8 @@ def _pill_filters(pill_in: int, base: str, y_center: int, pop: bool) -> str:
 def shot_clip(clip: dict, dur: float, out: Path, punch=True, pill: Path | None = None,
               pill_y=1000, pop=False):
     off = max(0.0, random.uniform(0, max(0.0, clip["dur"] - dur - 0.05)))
-    cmd = ["ffmpeg", "-y", "-v", "error", "-ss", f"{off:.2f}", "-t", f"{dur + 0.2:.3f}",
-           "-i", str(CLIPS_DIR / clip["file"])]
+    src = clip["file"] if clip.get("abs") else str(CLIPS_DIR / clip["file"])
+    cmd = ["ffmpeg", "-y", "-v", "error", "-ss", f"{off:.2f}", "-t", f"{dur + 0.2:.3f}", "-i", src]
     z = _zoom_expr(dur, punch)
     fl = (f"[0:v]setpts=PTS-STARTPTS,fps={FPS},scale=w='trunc({W}*{z}/2)*2':h=-2:eval=frame,"
           f"crop={W}:{H},setsar=1,format=yuv420p,tpad=stop_mode=clone:stop_duration=1[base]")
@@ -215,8 +215,11 @@ def _music(total: float, work: Path) -> Path:
     tracks = sorted(MUSIC_DIR.glob("*.mp3")) + sorted(MUSIC_DIR.glob("*.m4a")) + sorted(MUSIC_DIR.glob("*.wav"))
     if tracks:
         return random.choice(tracks)
-    from .beat import make_beat
-    return make_beat(work / "beat.wav", total + 2, seed=random.randint(0, 999), bpm=random.choice([130, 140, 145]))
+    from .beat import make_beat, make_synthwave
+    style = config().get("music_style", "synthwave")
+    if style == "trap":
+        return make_beat(work / "beat.wav", total + 2, seed=random.randint(0, 999), bpm=random.choice([130, 140, 145]))
+    return make_synthwave(work / "beat.wav", total + 2, seed=random.randint(0, 999), bpm=random.choice([100, 104, 108]))
 
 
 def mix_audio(voice: str, total: float, events: list[tuple[float, str, float]], work: Path) -> Path:
@@ -270,7 +273,7 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
         pill = None
         if line["label"]:
             pill = make_pill(line["label"], work / f"pill_{li}.png",
-                             size=118 if line["big"] else 84, max_w=980 if line["big"] else 860)
+                             size=124 if line["big"] else 96, max_w=990 if line["big"] else 920)
         if li > 0:
             events.append((start, "whoosh", 0.35))
         t, first = start, True
@@ -301,6 +304,13 @@ def render(lines, words, voice_mp3: str, total: float, badge: str, out: Path, wo
                     shot_article(picker.pick("any", t, 1), article[0], article[1], d, new_shot())
                     events.append((t, "click", 0.7))
                     done = True
+                elif vis == "stock":
+                    from .stock import stock_clip
+                    c = stock_clip(line.get("stock_query", ""), d, work / f"stock_{li}.mp4")
+                    if c:
+                        shot_clip(c, d, new_shot(), punch=True, pill=pill, pill_y=LABEL_Y, pop=True)
+                        events.append((t + 0.03, "pop", 0.6))
+                        done = True
                 elif vis in ("subject", "photo", "ai"):
                     img = None
                     if vis == "subject":
