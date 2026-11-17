@@ -29,7 +29,7 @@ THE STYLE (copy it exactly – learned from a top GTA news channel):
 - Leaks/rumours/insider claims MUST be labelled ("according to a rumour", "an insider claims") and the
   script must say when something is not confirmed.
 - Never explain how to get leaked or pirated content.
-- 14–16 lines and AT LEAST {words} words total (about 55–60 seconds spoken). Shorter scripts are rejected.
+- 14–16 lines and between {words} and {words_max} words total (about 50–60 seconds spoken). Never longer.
 {lang}
 
 EVERYTHING MUST BE ON SCREEN – viewers watch on mute. Every line gets a visual that matches what is said.
@@ -92,7 +92,7 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
             "OTHER GTA 6 HEADLINES PEOPLE ARE TALKING ABOUT TODAY:\n- " + "\n- ".join(story.get("related", [])))
     can_article = bool(story.get("url")) and "news.google.com" not in story["url"] and "reddit.com" not in story["url"]
     raw = ask(user, system=SYSTEM.format(
-        words=cfg["target_words"], tags=", ".join(tags), lang=LANG.get(lang, LANG["en"]),
+        words=cfg["target_words"], words_max=cfg["target_words"] + 20, tags=", ".join(tags), lang=LANG.get(lang, LANG["en"]),
         icons=", ".join(icon_names()),
         subjects=", ".join(subjects) or "(none available – don't use subject)",
         article_note="" if can_article else " – NOT AVAILABLE for this story, don't use",
@@ -162,6 +162,12 @@ def write_script(story: dict, tags: list[str], subjects: list[str] | None = None
         l["visual"], l["tag"] = "clip", l.get("tag") if l.get("tag") in tags else "any"
         l["label"] = (l.get("label") or "").strip().upper()[:40] or "GTA 6"
         l["big"] = False
+    # keep Shorts under ~60 s: drop the wordiest middle lines if the AI wrote too much
+    max_w = cfg.get("max_words", 170)
+    while sum(len(l["text"].split()) for l in lines) > max_w and len(lines) > 10:
+        mid = range(2, len(lines) - 2)
+        drop = max(mid, key=lambda k: len(lines[k]["text"].split()) - (5 if lines[k]["visual"] != "clip" else 0))
+        log.info("trimmed long line: %s", lines.pop(drop)["text"][:60])
     _enforce_variety(lines, subjects)
     if not lines[0]["label"]:
         lines[0]["label"] = data.get("title", "GTA 6 NEWS").upper()[:30]

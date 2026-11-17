@@ -28,6 +28,18 @@ def _latest_offset() -> int:
     return upd[-1]["update_id"] + 1 if upd else 0
 
 
+def _small(video):
+    """Telegram bots can only send files up to 50 MB – make a lighter preview copy if needed."""
+    import subprocess
+    if video.stat().st_size < 45e6:
+        return video
+    out = video.with_name(video.stem + "_tg.mp4")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(video), "-vf", "scale=720:-2",
+                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "28", "-c:a", "aac", "-b:a", "128k",
+                    str(out)], check=False)
+    return out if out.exists() and out.stat().st_size < 49e6 else video
+
+
 def review(video, title: str) -> str:
     """Send the video, wait for a button press. Returns 'post' or 'skip'."""
     cfg = config()
@@ -40,7 +52,7 @@ def review(video, title: str) -> str:
         meta = json.loads(video.with_suffix(".json").read_text())
         cap = (f"🎬 New GTA 6 Short ready – save the video and post it from the YouTube app.\n\n"
                f"TITLE:\n{meta['yt_title']}\n\nDESCRIPTION:\n{meta['description']}")
-        with open(video, "rb") as f:
+        with open(_small(video), "rb") as f:
             _api("sendVideo", data={"chat_id": chat, "caption": cap[:1024], "supports_streaming": "true"},
                  files={"video": f})
         return "skip"
@@ -48,7 +60,7 @@ def review(video, title: str) -> str:
     kb = {"inline_keyboard": [[{"text": "✅ Post now", "callback_data": f"post:{video.stem}"},
                                {"text": "🗑 Skip", "callback_data": f"skip:{video.stem}"}]]}
     cap = f"{title}\n\nNo answer in {mins} min = {'auto-post' if default == 'post' else 'skip'}."
-    with open(video, "rb") as f:
+    with open(_small(video), "rb") as f:
         r = _api("sendVideo", data={"chat_id": chat, "caption": cap[:1000], "supports_streaming": "true",
                                     "reply_markup": json.dumps(kb)}, files={"video": f})
     if not r.get("ok"):
