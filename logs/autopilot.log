@@ -215,3 +215,16 @@ Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/
 Error opening input files: Invalid data found when processing input
 
 
+2026-11-17 11:30:39,095 INFO fetched 59 candidate stories
+2026-11-17 11:30:39,938 INFO story: Xbox Is Prescribing GTA 6 Players a Day Off Without Naming the Game (GTA BOOM – Latest Articles, 2965 chars)
+2026-11-17 11:30:44,689 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-17 11:30:53,352 INFO used backup model gemini-flash-lite-latest
+2026-11-17 11:30:53,353 INFO article photo rejected: {'game': False, 'real_person': True, 'text_heavy': False}
+2026-11-17 11:31:11,616 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-17 11:31:25,057 INFO used backup model gemini-flash-lite-latest
+2026-11-17 11:31:25,136 INFO script: Why Xbox Is Banned From Saying GTA 6 (15 lines, 184 words)
+2026-11-17 11:31:25,136 INFO visuals: clip, person, ai, person, article, list, clip, clip, subject[Jason And Lucia], subject[Mount Kalaga National Park], clip, clip, subject[Grassrivers], article, ai
+2026-11-17 11:31:29,805 INFO voice: ElevenLabs (1118 chars)
+2026-11-17 11:34:28,471 INFO rendered 31 shots, 64.2s
+2026-11-17 11:34:32,699 INFO video ready: 20261117_113039.mp4 (64.2s)
+2026-11-17 11:34:39,350 INFO skipped by review: 20261117_113039.mp4
