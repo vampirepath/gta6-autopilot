@@ -64,7 +64,7 @@ youtube_category: "20"                # 20 = Gaming
 
 # REVIEW MODE: each video is sent to your Telegram first with ✅ Post / 🗑 Skip buttons.
 review_mode: true
-review_timeout_minutes: 40      # how long to wait for your tap
+review_timeout_minutes: 10      # how long to wait for your tap
 on_timeout: "post"              # "post" = keeps running while you sleep, "skip" = only post what you approve
 
 # ---- News sources --------------------------------------------------
