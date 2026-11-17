@@ -2,8 +2,13 @@ name: GTA 6 Autopilot
 
 on:
   schedule:
-    # 8:33 AM, 1:33 PM, 7:33 PM India time (UTC +5:30)
-    - cron: "3 3,8,14 * * *"
+    # 6 a day, India time (UTC +5:30)
+    # day:   9:13 AM, 12:43 PM, 4:13 PM
+    # night: 7:43 PM, 9:43 PM, 11:43 PM
+    - cron: "43 3 * * *"
+    - cron: "13 7 * * *"
+    - cron: "43 10 * * *"
+    - cron: "13 14,16,18 * * *"
   workflow_dispatch:
     inputs:
       topic:
