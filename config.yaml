@@ -56,7 +56,7 @@ mascot_pick: 2                        # which of the 4 generated mascot candidat
 # ---- Uploading -----------------------------------------------------
 # YouTube auto-upload stays OFF until Google approves the API audit (before that, API uploads
 # are locked to Private forever). Videos come to Telegram instead. After approval: set to true.
-upload_youtube: false
+upload_youtube: true            # Google confirmed API uploads are not forced to private
 upload_instagram: true
 upload_facebook: true
 youtube_privacy: "public"             # public / unlisted / private
