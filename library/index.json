@@ -96,7 +96,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 7,
+  "uses": 8,
   "graphic": false
  },
  {
@@ -176,7 +176,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 8,
+  "uses": 9,
   "graphic": false
  },
  {
@@ -256,7 +256,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 7,
+  "uses": 8,
   "graphic": false
  },
  {
@@ -267,7 +267,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -370,7 +370,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -429,7 +429,7 @@
    "social_media"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -509,7 +509,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 7,
+  "uses": 8,
   "graphic": false
  },
  {
@@ -531,7 +531,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 8,
+  "uses": 9,
   "graphic": false
  },
  {
@@ -598,7 +598,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -681,7 +681,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -692,7 +692,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -781,7 +781,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -840,7 +840,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 4,
+  "uses": 5,
   "graphic": false
  },
  {
@@ -931,7 +931,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1095,7 +1095,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1118,7 +1118,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1196,7 +1196,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -1219,7 +1219,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1286,7 +1286,7 @@
   "dur": 4.83,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0113.mp4",
@@ -1354,7 +1354,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1377,7 +1377,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1507,7 +1507,7 @@
    "crowd_people"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1600,7 +1600,7 @@
    "lucia"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1658,7 +1658,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -1706,7 +1706,7 @@
    "nightlife_party"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1742,7 +1742,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2371,7 +2371,7 @@
   "dur": 4.83,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0229.mp4",
@@ -2459,7 +2459,7 @@
   "dur": 2.5,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0240.mp4",
@@ -2483,7 +2483,7 @@
   "dur": 1.7,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0243.mp4",
@@ -2835,7 +2835,7 @@
   "dur": 1.67,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0287.mp4",
@@ -2915,7 +2915,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0297.mp4",
@@ -3555,7 +3555,7 @@
   "dur": 4.8,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0377.mp4",

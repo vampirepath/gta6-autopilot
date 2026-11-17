@@ -228,3 +228,17 @@ Error opening input files: Invalid data found when processing input
 2026-11-17 11:34:28,471 INFO rendered 31 shots, 64.2s
 2026-11-17 11:34:32,699 INFO video ready: 20261117_113039.mp4 (64.2s)
 2026-11-17 11:34:39,350 INFO skipped by review: 20261117_113039.mp4
+2026-11-17 16:35:35,098 INFO fetched 60 candidate stories
+2026-11-17 16:35:35,854 INFO story: Former Rockstar Researcher Reveals the Gang Ride-Alongs and Smuggler Interviews Behind GTA (GTA BOOM – Latest Articles, 3191 chars)
+2026-11-17 16:39:01,791 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-17 16:39:39,802 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-17 16:39:46,059 WARNING article photo failed: Gemini failed: gemma-3-12b-it can't see images
+2026-11-17 16:39:52,563 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-17 16:40:09,427 INFO used backup model gemini-flash-lite-latest
+2026-11-17 16:40:09,490 INFO script: Former Rockstar insider reveals the dark truth behind GTA 6 (16 lines, 203 words)
+2026-11-17 16:40:09,490 INFO visuals: clip, subject[Vice City], subject[Leonida Keys], clip, subject[Jason And Lucia], subject[Jason Lucia Rooftop], clip, quote, article, clip, subject[Real Dimez], list, person, clip, stat, clip
+2026-11-17 16:40:13,312 INFO voice: ElevenLabs (1280 chars)
+2026-11-17 16:43:05,064 INFO rendered 36 shots, 73.9s
+2026-11-17 16:43:09,053 INFO video ready: 20261117_163535.mp4 (73.9s)
+2026-11-17 16:43:12,548 WARNING telegram sendVideo failed: {'ok': False, 'error_code': 413, 'description': 'Request Entity Too Large'}
+2026-11-17 16:43:15,678 INFO YouTube: https://youtube.com/shorts/bQVGZKbV0Qk
