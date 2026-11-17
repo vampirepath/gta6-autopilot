@@ -938,241 +938,347 @@
   "file": "rockstar_rk721912_flv_en_us_1080p_0082.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.6,
-  "tags": [],
+  "tags": [
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0083.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.3,
-  "tags": [],
+  "tags": [
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0084.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.3,
-  "tags": [],
+  "tags": [
+   "jason_and_lucia",
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0085.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0086.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "interior_home",
+   "social_media"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0087.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.0,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "interior_home",
+   "social_media"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0088.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "nightlife_party"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0089.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.73,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0090.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "jason",
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0091.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0092.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "interior_home",
+   "jason"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0093.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0094.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0095.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "interior_home",
+   "jason"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0096.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.63,
-  "tags": [],
+  "tags": [
+   "interior_home",
+   "jason"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0097.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "any"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0098.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.3,
-  "tags": [],
+  "tags": [
+   "social_media"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0099.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "interior_home",
+   "social_media"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0100.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "swamp_wildlife"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0101.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.7,
-  "tags": [],
+  "tags": [
+   "swamp_wildlife"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0102.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.9,
-  "tags": [],
+  "tags": [
+   "swamp_wildlife"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0103.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.97,
-  "tags": [],
+  "tags": [
+   "swamp_wildlife"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0104.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "any"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0105.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.7,
-  "tags": [],
+  "tags": [
+   "jason_and_lucia"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0106.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.87,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0107.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "jason"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0108.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "jason"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0109.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "jason",
+   "car_driving"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0110.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "jason",
+   "car_driving"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0111.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "jason",
+   "car_driving"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0112.mp4",
@@ -1186,17 +1292,25 @@
   "file": "rockstar_rk721912_flv_en_us_1080p_0113.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "car_driving"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0114.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "jason_and_lucia",
+   "car_driving",
+   "city_skyline"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0115.mp4",
@@ -1210,129 +1324,191 @@
   "file": "rockstar_rk721912_flv_en_us_1080p_0116.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "car_driving",
+   "city_skyline"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0117.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "car_driving",
+   "jason_and_lucia",
+   "city_skyline"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0118.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.8,
-  "tags": [],
+  "tags": [
+   "jason",
+   "city_skyline"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0119.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.1,
-  "tags": [],
+  "tags": [
+   "jason",
+   "robbery_action"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0120.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.43,
-  "tags": [],
+  "tags": [
+   "any"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0121.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.6,
-  "tags": [],
+  "tags": [
+   "jason",
+   "city_skyline"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0122.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "jason",
+   "lucia"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0123.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.8,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "interior_home",
+   "robbery_action"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0124.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.83,
-  "tags": [],
+  "tags": [
+   "crowd_people"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0125.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.8,
-  "tags": [],
+  "tags": [
+   "robbery_action"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0126.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.8,
-  "tags": [],
+  "tags": [
+   "aerial_view",
+   "crowd_people"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0127.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.8,
-  "tags": [],
+  "tags": [
+   "crowd_people",
+   "nightlife_party"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0128.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "lucia"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0129.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "interior_home"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0130.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "jason_and_lucia"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0131.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "jason",
+   "lucia",
+   "crowd_people"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0132.mp4",
@@ -1346,9 +1522,15 @@
   "file": "rockstar_rk721912_flv_en_us_1080p_0133.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "jason",
+   "jason_and_lucia",
+   "nightlife_party"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0134.mp4",
@@ -1370,185 +1552,266 @@
   "file": "rockstar_rk721912_flv_en_us_1080p_0136.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.7,
-  "tags": [],
+  "tags": [
+   "nightlife_party"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0137.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.2,
-  "tags": [],
+  "tags": [
+   "jason"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0138.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.3,
-  "tags": [],
+  "tags": [
+   "jason_and_lucia"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0139.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.07,
-  "tags": [],
+  "tags": [
+   "jason"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0140.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.1,
-  "tags": [],
+  "tags": [
+   "lucia"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0141.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.9,
-  "tags": [],
+  "tags": [
+   "lucia"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0142.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.87,
-  "tags": [],
+  "tags": [
+   "jason_and_lucia"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0143.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.7,
-  "tags": [],
+  "tags": [
+   "social_media"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0144.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.7,
-  "tags": [],
+  "tags": [
+   "city_skyline",
+   "beach",
+   "crowd_people"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0145.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.83,
-  "tags": [],
+  "tags": [
+   "jason",
+   "any"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0146.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 2.73,
-  "tags": [],
+  "tags": [
+   "sunset"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0147.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "jason",
+   "nightlife_party"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0148.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.5,
-  "tags": [],
+  "tags": [
+   "social_media",
+   "crowd_people"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0149.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "jason",
+   "nightlife_party"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0150.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.5,
-  "tags": [],
+  "tags": [
+   "lucia",
+   "jason_and_lucia",
+   "social_media"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0151.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "jason",
+   "city_skyline"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0152.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "city_skyline"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0153.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.93,
-  "tags": [],
+  "tags": [
+   "city_skyline"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0154.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "jason"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0155.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.17,
-  "tags": [],
+  "tags": [
+   "jason"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0156.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.47,
-  "tags": [],
+  "tags": [
+   "lucia"
+  ],
   "ok": true,
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0157.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 3.73,
-  "tags": [],
+  "tags": [
+   "car_driving",
+   "sunset"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0158.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 1.9,
-  "tags": [],
+  "tags": [
+   "jason",
+   "sunset"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0159.mp4",
