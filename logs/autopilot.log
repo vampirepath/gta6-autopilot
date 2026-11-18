@@ -261,3 +261,30 @@ Error opening input files: Invalid data found when processing input
 2026-11-18 08:21:55,687 INFO rendered 28 shots, 54.9s
 2026-11-18 08:21:58,425 INFO video ready: 20261118_081718.mp4 (54.9s)
 2026-11-18 08:32:18,121 INFO YouTube: https://youtube.com/shorts/72b7altCJ28
+2026-11-18 17:30:46,463 INFO fetched 59 candidate stories
+2026-11-18 17:30:47,695 INFO story: How to Complete Just a Scratch in GTA 6 (GTA BOOM – Latest Articles, 1953 chars)
+2026-11-18 17:30:54,953 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-18 17:36:50,256 INFO used backup model gemini-flash-lite-latest
+2026-11-18 17:36:53,345 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-18 17:37:08,508 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-18 17:37:14,802 INFO all models busy – waiting 60 s (round 1)
+2026-11-18 17:38:18,350 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-18 17:38:32,721 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-18 17:38:38,943 INFO all models busy – waiting 60 s (round 2)
+2026-11-18 17:39:40,738 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-18 17:39:51,715 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-18 17:39:58,012 ERROR failed on 'How to Complete Just a Scratch in GTA 6': Gemini failed: gemma-3-12b-it not found
+Traceback (most recent call last):
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 125, in main
+    out = make_one(s)
+          ^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 31, in make_one
+    data = write_script(story, TAGS, lib_subjects(), has_photo=photo is not None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/writer.py", line 94, in write_script
+    raw = ask(user, system=SYSTEM.format(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/llm.py", line 79, in ask
+    raise RuntimeError(f"Gemini failed: {last}")
+RuntimeError: Gemini failed: gemma-3-12b-it not found
+
