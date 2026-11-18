@@ -1,0 +1,85 @@
+{
+  "title": "Touring the Leonida Keys in GTA 6",
+  "yt_title": "Touring The Leonida Keys In GTA 6! #shorts",
+  "description": "Explore the Leonida Keys region on day one of GTA 6 with real-life travel guide tips. Get ready for launch week on PS5 and Xbox Series X|S! #GTA6 #ViceCity #Leonida\n\nMap is fan-made and spots are estimates. Screenshots: Rockstar Games.",
+  "tags": [
+    "GTA 6",
+    "Leonida Keys",
+    "Vice City",
+    "PS5",
+    "Xbox Series X|S"
+  ],
+  "tracker_title": "LAUNCH CHECKLIST",
+  "poll": "Which region are you exploring first?",
+  "lines": [
+    {
+      "text": "Are you ready to explore the Leonida Keys?",
+      "cam": "full",
+      "card": null,
+      "pill": "LAUNCH WEEK",
+      "big": "1 DAY LEFT",
+      "tracker": 0
+    },
+    {
+      "text": "Start your journey where the criminal story officially begins.",
+      "cam": "Leonida Keys",
+      "card": {
+        "img": "screens_Leonida_Keys_01.jpg",
+        "bottom": "LEONIDA KEYS",
+        "top": "OFFICIAL SCREENSHOT"
+      },
+      "pill": null,
+      "big": null,
+      "route": false,
+      "tracker": 1
+    },
+    {
+      "text": "Travel guides note real-life Miami style right here.",
+      "cam": "Vice City",
+      "card": {
+        "img": "screens_Vice_City_01.jpg",
+        "bottom": "VICE CITY",
+        "top": "OFFICIAL SCREENSHOT"
+      },
+      "pill": null,
+      "big": null,
+      "route": true,
+      "tracker": 2
+    },
+    {
+      "text": "Hop from island to island before checking out the swamps.",
+      "cam": "Grassrivers",
+      "card": {
+        "img": "screens_Grassrivers_01.jpg",
+        "bottom": "GRASSRIVERS",
+        "top": "OFFICIAL SCREENSHOT"
+      },
+      "pill": null,
+      "big": null,
+      "route": true,
+      "tracker": 3
+    },
+    {
+      "text": "Will you visit the Keys first when you play?",
+      "cam": "full",
+      "card": null,
+      "pill": null,
+      "big": null,
+      "poll": "WHICH REGION ARE YOU EXPLORING FIRST?",
+      "tracker": 3
+    }
+  ],
+  "tour": [
+    "Leonida Keys",
+    "Vice City",
+    "Grassrivers"
+  ],
+  "theme": "night",
+  "style": {
+    "layout": "tilt",
+    "card_in": "drop",
+    "caps": "box",
+    "flash": true
+  },
+  "music": "synthwave"
+}
