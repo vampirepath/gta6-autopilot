@@ -1,0 +1,82 @@
+{
+  "title": "13 Years Of Waiting Ends Tonight",
+  "yt_title": "13 Years Of Waiting For GTA 6 Ends TONIGHT \ud83d\ude2d #shorts",
+  "description": "GTA 5 came out in 2013. GTA 6 was revealed in December 2023, delayed twice, and finally launches November 19, 2026.\n\n#GTA6 #GTAVI #GTA5 #Rockstar",
+  "theme": "night",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "pop",
+    "flash": true
+  },
+  "music": "synthwave",
+  "lines": [
+    {
+      "text": "Thirteen years. That's how long we've waited.",
+      "cam": "full",
+      "big": "13 YEARS",
+      "pill": "TONIGHT"
+    },
+    {
+      "text": "GTA 5 came out back in twenty thirteen.",
+      "cam": "full",
+      "card": {
+        "img": "art_Vice_City_Postcard_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "2013"
+      },
+      "big": "2013"
+    },
+    {
+      "text": "Then in December twenty twenty three, trailer one finally dropped.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Beach_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "TRAILER 1"
+      },
+      "big": "DEC 2023"
+    },
+    {
+      "text": "It got delayed. Then it got delayed again.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "2 DELAYS"
+      },
+      "big": "DELAYED x2"
+    },
+    {
+      "text": "But now Jason and Lucia are finally here.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Rooftop_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "JASON + LUCIA"
+      }
+    },
+    {
+      "text": "Tonight at midnight, GTA 6 is real.",
+      "cam": "full",
+      "card": {
+        "img": "art_Official_Cover_Art_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "NOVEMBER 19"
+      },
+      "big": "TONIGHT"
+    },
+    {
+      "text": "How old were you when GTA 5 came out?",
+      "cam": "full",
+      "poll": "HOW OLD WERE YOU IN 2013?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 launch",
+    "GTA 6 India",
+    "Rockstar Games"
+  ]
+}

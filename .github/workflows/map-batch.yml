@@ -7,6 +7,10 @@ on:
         description: "How many videos"
         required: true
         default: "20"
+      specs:
+        description: "Optional: ready-made script files (space separated, wildcards ok) instead of AI topics"
+        required: false
+        default: ""
       gap:
         description: "Minutes between each video going live"
         required: true
@@ -49,4 +53,8 @@ jobs:
       - name: Make and schedule videos
         run: |
           git config user.name "autopilot-bot" && git config user.email "bot@users.noreply.github.com"
-          python -m autopilot.map_batch ${{ inputs.count }} ${{ inputs.gap }}
+          if [ -n "${{ inputs.specs }}" ]; then
+            python -m autopilot.map_batch ${{ inputs.gap }} --specs ${{ inputs.specs }}
+          else
+            python -m autopilot.map_batch ${{ inputs.count }} ${{ inputs.gap }}
+          fi

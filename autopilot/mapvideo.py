@@ -546,7 +546,7 @@ class Scene:
         c = l.get("card")
         if c:
             paste_center(base, self._pill((c["bottom"],), size=46), FW / 2, 1060, back((lt - 0.2) / 0.3))
-            paste_center(base, self._pill(("OFFICIAL SCREENSHOT",), size=24, bg=(20, 22, 30), outline=(255, 255, 255)),
+            paste_center(base, self._pill((c.get("top") or "OFFICIAL SCREENSHOT",), size=24, bg=(20, 22, 30), outline=(255, 255, 255)),
                          FW / 2, 980, back((lt - 0.1) / 0.3))
         tr = l.get("tracker")
         if tr is not None and not l.get("poll"):

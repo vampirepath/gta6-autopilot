@@ -1,0 +1,81 @@
+{
+  "title": "Do This Before GTA 6 Unlocks",
+  "yt_title": "Do These 4 Things Before GTA 6 Unlocks Tonight \u2705 #shorts",
+  "description": "GTA 6 unlocks at midnight in India. Quick checklist: preload, free up storage, update your console and charge your controller.\n\n#GTA6 #GTAVI #GTA6Launch",
+  "theme": "paper",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "single",
+    "flash": true
+  },
+  "music": "trap",
+  "lines": [
+    {
+      "text": "Do these four things before GTA 6 unlocks tonight.",
+      "cam": "full",
+      "pill": "CHECKLIST"
+    },
+    {
+      "text": "One, preload it now, the preload is already open.",
+      "cam": "full",
+      "card": {
+        "img": "art_Official_Cover_Art_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "1. PRELOAD"
+      },
+      "big": "1"
+    },
+    {
+      "text": "Two, clear storage on your console, this game is huge.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "2. STORAGE"
+      },
+      "big": "2"
+    },
+    {
+      "text": "Three, update your PS5 or Xbox so nothing stops you at midnight.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Lock_And_Load_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "3. UPDATE"
+      },
+      "big": "3"
+    },
+    {
+      "text": "Four, charge your controller, you won't want to stop.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Beach_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "4. CHARGE"
+      },
+      "big": "4"
+    },
+    {
+      "text": "Then at twelve, Leonida is yours.",
+      "cam": "full",
+      "card": {
+        "img": "art_Vice_City_Postcard_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "MIDNIGHT"
+      }
+    },
+    {
+      "text": "What's the first thing you'll do in GTA 6?",
+      "cam": "full",
+      "poll": "YOUR FIRST MOVE?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 launch",
+    "GTA 6 India",
+    "Rockstar Games"
+  ]
+}

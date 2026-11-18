@@ -1,0 +1,91 @@
+{
+  "title": "Who Plays GTA 6 First In The World",
+  "yt_title": "These Countries Play GTA 6 Before India \ud83d\ude33 #shorts",
+  "description": "GTA 6 unlocks at local midnight in most regions. New Zealand is first (Nov 18, 11:00 UTC). In India it is 12:00 AM IST on November 19.\n\n#GTA6 #GTAVI #Rockstar #GTA6Launch",
+  "theme": "sunset",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "single",
+    "flash": true
+  },
+  "music": "synthwave",
+  "lines": [
+    {
+      "text": "Some players get GTA 6 before you, and it's today.",
+      "cam": "full",
+      "pill": "LAUNCH DAY"
+    },
+    {
+      "text": "New Zealand unlocks first, at four thirty PM India time.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "NEW ZEALAND"
+      },
+      "big": "4:30 PM"
+    },
+    {
+      "text": "Japan and South Korea follow at eight thirty PM.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Lock_And_Load_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "JAPAN + KOREA"
+      },
+      "big": "8:30 PM"
+    },
+    {
+      "text": "Then Singapore and Malaysia at nine thirty.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Beach_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "SINGAPORE"
+      },
+      "big": "9:30 PM"
+    },
+    {
+      "text": "And India unlocks right at midnight.",
+      "cam": "full",
+      "card": {
+        "img": "art_Official_Cover_Art_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "INDIA"
+      },
+      "big": "12:00 AM"
+    },
+    {
+      "text": "The UK has to wait until five thirty AM our time.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Motel_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "UNITED KINGDOM"
+      },
+      "big": "5:30 AM"
+    },
+    {
+      "text": "All times are India time, based on local midnight launches.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Rooftop_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "IST"
+      }
+    },
+    {
+      "text": "Which country are you playing from?",
+      "cam": "full",
+      "poll": "WHERE ARE YOU PLAYING FROM?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 launch",
+    "GTA 6 India",
+    "Rockstar Games"
+  ]
+}

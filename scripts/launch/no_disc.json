@@ -1,0 +1,78 @@
+{
+  "title": "The GTA 6 Box Has No Disc",
+  "yt_title": "Your GTA 6 Box Has NO Disc Inside \ud83d\ude33 #shorts",
+  "description": "Physical copies of GTA 6 do not include a disc, just a download code inside the box. GTA 6 launches November 19 on PS5 and Xbox Series X|S.\n\n#GTA6 #GTAVI #Rockstar",
+  "theme": "satellite",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "box",
+    "flash": true
+  },
+  "music": "synthwave",
+  "lines": [
+    {
+      "text": "If you bought a physical copy of GTA 6, open the box.",
+      "cam": "full",
+      "pill": "WARNING"
+    },
+    {
+      "text": "There's no disc inside.",
+      "cam": "full",
+      "card": {
+        "img": "art_Official_Cover_Art_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "NO DISC"
+      },
+      "big": "NO DISC"
+    },
+    {
+      "text": "Physical copies just come with a download code.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Motel_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "DOWNLOAD CODE"
+      }
+    },
+    {
+      "text": "So you'll still need to download the whole game.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Rooftop_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "FULL DOWNLOAD"
+      }
+    },
+    {
+      "text": "If your internet is slow, start downloading before midnight.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Beach_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "START NOW"
+      }
+    },
+    {
+      "text": "Because tonight, everyone's going to be online at the same time.",
+      "cam": "full",
+      "card": {
+        "img": "art_Vice_City_Postcard_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "LAUNCH NIGHT"
+      }
+    },
+    {
+      "text": "Did you buy digital or physical?",
+      "cam": "full",
+      "poll": "DIGITAL OR PHYSICAL?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 launch",
+    "GTA 6 India",
+    "Rockstar Games"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "title": "GTA 6 Price In India",
+  "yt_title": "GTA 6 Price In India: Standard vs Ultimate \ud83d\udcb0 #shorts",
+  "description": "GTA 6 costs Rs 5,999 for the Standard Edition and Rs 7,499 for the Ultimate Edition in India. It launches November 19 on PS5 and Xbox Series X|S.\n\n#GTA6 #GTA6Price #GTA6India #GTAVI",
+  "theme": "vice",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "pop",
+    "flash": false
+  },
+  "music": "trap",
+  "lines": [
+    {
+      "text": "Here's exactly what GTA 6 costs in India.",
+      "cam": "full",
+      "pill": "PRICE CHECK"
+    },
+    {
+      "text": "The Standard Edition is five thousand nine hundred ninety nine rupees.",
+      "cam": "full",
+      "card": {
+        "img": "art_Official_Cover_Art_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "STANDARD"
+      },
+      "big": "RS 5,999"
+    },
+    {
+      "text": "The Ultimate Edition goes up to seven thousand four hundred ninety nine.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Lock_And_Load_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "ULTIMATE"
+      },
+      "big": "RS 7,499"
+    },
+    {
+      "text": "That's a fifteen hundred rupee gap between the two.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "THE GAP"
+      },
+      "big": "+RS 1,500"
+    },
+    {
+      "text": "It's on PS5 and Xbox Series X and S only, PC has no date yet.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Rooftop_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "NO PC YET"
+      }
+    },
+    {
+      "text": "And it unlocks tonight at midnight.",
+      "cam": "full",
+      "card": {
+        "img": "art_Vice_City_Postcard_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "TONIGHT"
+      }
+    },
+    {
+      "text": "Standard or Ultimate, which one did you buy?",
+      "cam": "full",
+      "poll": "STANDARD OR ULTIMATE?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 launch",
+    "GTA 6 India",
+    "Rockstar Games"
+  ]
+}

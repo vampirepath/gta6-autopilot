@@ -33,7 +33,36 @@ def commit(msg):
                    'git pull -q --rebase --autostash && git push -q', shell=True)
 
 
+def run_specs(paths, gap):
+    """Render ready-made scripts and schedule them, one every `gap` minutes."""
+    start = datetime.now(timezone.utc) + timedelta(minutes=2)
+    out_dir = ROOT / "output" / "batch"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    made = 0
+    for p in paths:
+        try:
+            spec = json.loads(Path(p).read_text())
+            out = out_dir / (Path(p).stem + ".mp4")
+            MV.build(Path(p), out)
+            when = start + timedelta(minutes=gap * made)
+            publish_at = None if made == 0 else when.strftime("%Y-%m-%dT%H:%M:%SZ")
+            vid = uploaders.youtube(out, spec["yt_title"], spec["description"], spec.get("tags", []), publish_at)
+            local = when.astimezone(IST).strftime("%I:%M %p")
+            tg(f"{'✅ Live' if made == 0 else '🕒 Scheduled ' + local}: {spec['yt_title']}\nhttps://youtube.com/shorts/{vid}")
+            MW.remember(spec["title"])
+            made += 1
+            commit(f"launch video: {spec['title'][:50]}")
+        except Exception as e:
+            log.error("video failed (%s): %s", p, e)
+            traceback.print_exc()
+    tg(f"🚀 Launch batch done: {made} videos, one every {gap} min.")
+
+
 def main():
+    if "--specs" in sys.argv:
+        i = sys.argv.index("--specs")
+        gap = int(sys.argv[i - 1]) if i > 1 and sys.argv[i - 1].isdigit() else 20
+        return run_specs(sys.argv[i + 1:], gap)
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 10
     gap = int(sys.argv[2]) if len(sys.argv) > 2 else 20
     try:
