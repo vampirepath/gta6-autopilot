@@ -1,0 +1,52 @@
+name: Map Video Batch
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "How many videos"
+        required: true
+        default: "20"
+      gap:
+        description: "Minutes between each video going live"
+        required: true
+        default: "20"
+
+concurrency:
+  group: map-batch
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+      YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+      YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q -r requirements.txt
+      - name: Get official screenshots
+        run: |
+          mkdir -p library/stills
+          gh release download library -p stills.tar -D /tmp && tar -xf /tmp/stills.tar -C library/stills
+      - name: Make and schedule videos
+        run: |
+          git config user.name "autopilot-bot" && git config user.email "bot@users.noreply.github.com"
+          python -m autopilot.map_batch ${{ inputs.count }} ${{ inputs.gap }}

@@ -308,7 +308,8 @@ def _music(total: float, work: Path) -> Path:
     if tracks:
         return random.choice(tracks)
     from .beat import make_beat, make_synthwave
-    style = config().get("music_style", "synthwave")
+    import os
+    style = os.environ.get("MUSIC_STYLE") or config().get("music_style", "synthwave")
     if style == "trap":
         return make_beat(work / "beat.wav", total + 2, seed=random.randint(0, 999), bpm=random.choice([130, 140, 145]))
     return make_synthwave(work / "beat.wav", total + 2, seed=random.randint(0, 999), bpm=random.choice([100, 104, 108]))

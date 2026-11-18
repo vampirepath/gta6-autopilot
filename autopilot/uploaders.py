@@ -12,7 +12,7 @@ YT_TOKEN = SECRETS_DIR / "youtube_token.json"
 
 
 # ---------------- YouTube ---------------------------------------------------
-def youtube(video: Path, title: str, description: str, tags: list[str]) -> str:
+def youtube(video: Path, title: str, description: str, tags: list[str], publish_at: str | None = None) -> str:
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from googleapiclient.discovery import build
@@ -37,6 +37,9 @@ def youtube(video: Path, title: str, description: str, tags: list[str]) -> str:
         "status": {"privacyStatus": cfg["youtube_privacy"], "selfDeclaredMadeForKids": False,
                    "containsSyntheticMedia": True},   # honest AI-voice disclosure
     }
+    if publish_at:                     # scheduled: private now, YouTube makes it public at publish_at
+        body["status"]["privacyStatus"] = "private"
+        body["status"]["publishAt"] = publish_at
     req = yt.videos().insert(part="snippet,status", body=body,
                              media_body=MediaFileUpload(str(video), chunksize=-1, resumable=True))
     resp = None

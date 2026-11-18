@@ -26,7 +26,7 @@ FW, FH, FPS = 1080, 1920, 30
 FOCUS_Y = 860
 PINK = (255, 54, 136)
 COLORS = [(255, 64, 160), (255, 214, 0), (0, 214, 255), (90, 140, 255), (255, 140, 0), (60, 230, 120)]
-ICON_FOR = {"Vice City": "palm", "Leonida Keys": "island", "Grassrivers": "boat", "Port Gellhorn": "ghost",
+ICON_FOR = {"Lake Leonida": "boat", "Vice City": "palm", "Leonida Keys": "island", "Grassrivers": "boat", "Port Gellhorn": "ghost",
             "Ambrosia": "fire", "Mount Kalaga National Park": "target"}
 
 
@@ -46,7 +46,10 @@ def back(x):                          # overshoot pop
 
 
 # ---------------- drawing helpers -------------------------------------------------------------------
-def pill(text, size=34, fg=(255, 255, 255), bg=PINK, outline=None, pad=(26, 12)):
+def pill(text, size=34, fg=None, bg=None, outline=None, pad=(26, 12)):
+    bg = bg or PINK
+    if fg is None:   # dark text on bright accents (yellow, cyan, green)
+        fg = (15, 15, 25) if 0.299 * bg[0] + 0.587 * bg[1] + 0.114 * bg[2] > 165 else (255, 255, 255)
     f = font(size)
     l, t, r, b = f.getbbox(text)
     w, h = r - l + pad[0] * 2, size + pad[1] * 2
@@ -68,6 +71,25 @@ def paste_center(canvas, im, cx, cy, scale=1.0, alpha=1.0):
         im = im.copy()
         im.putalpha(a)
     canvas.alpha_composite(im, (int(cx - im.width / 2), int(cy - im.height / 2)))
+
+
+def caption_box(words, color, size=78):
+    f = font(size)
+    key = max(range(len(words)), key=lambda i: len(words[i].strip(",.!?")))
+    gap = 18
+    ws = [f.getlength(w) + 36 for w in words]
+    W_ = int(sum(ws) + gap * (len(words) - 1) + 40)
+    H_ = size + 70
+    im = Image.new("RGBA", (W_, H_), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    x = 20
+    for i, (w, ww) in enumerate(zip(words, ws)):
+        bg = color + (255,) if i == key else (12, 12, 20, 235)
+        d.rounded_rectangle([x, 12, x + ww, H_ - 12], 16, fill=bg)
+        fg = (15, 15, 25) if i == key and sum(color) > 450 else (255, 255, 255)
+        d.text((x + ww / 2, H_ / 2), w, font=f, fill=fg, anchor="mm")
+        x += ww + gap
+    return im
 
 
 def make_card(img_path: Path, w=900):
@@ -108,6 +130,35 @@ def make_pin(icon: str, r=46):
     return im, (cx, cy + r * 1.75)        # anchor = pin tip
 
 
+def photo_bg(path: Path, dim=.35):
+    """Full-screen 9:16 crop of an official screenshot, a bit darker at top and bottom."""
+    src = Image.open(path).convert("RGB")
+    w = int(src.height * FW / FH)
+    if w < src.width:
+        src = src.crop(((src.width - w) // 2, 0, (src.width + w) // 2, src.height))
+    src = src.resize((int(FW * 1.15), int(FH * 1.15)), Image.LANCZOS)
+    a = np.asarray(src, np.float32)
+    yy = np.linspace(0, 1, a.shape[0])[:, None, None]
+    shade = 1 - dim * (np.clip((yy - .45) * 2.2, 0, 1) + np.clip((.25 - yy) * 3, 0, 1))
+    return Image.fromarray(np.clip(a * shade, 0, 255).astype(np.uint8))
+
+
+def brand_badge(path: Path, size=360):
+    """The official GTA VI logo area of the cover art as a rounded badge."""
+    src = Image.open(path).convert("RGB")
+    w, h = src.size
+    crop = src.crop((int(w * .17), int(h * .27), int(w * .77), int(h * .71))).resize((size, int(size * .733)), Image.LANCZOS)
+    m = Image.new("L", crop.size, 0)
+    ImageDraw.Draw(m).rounded_rectangle([0, 0, crop.width - 1, crop.height - 1], 28, fill=255)
+    out = Image.new("RGBA", (crop.width + 40, crop.height + 40), (0, 0, 0, 0))
+    sh = Image.new("L", out.size, 0)
+    ImageDraw.Draw(sh).rounded_rectangle([20, 26, crop.width + 20, crop.height + 26], 28, fill=180)
+    out.paste((0, 0, 0, 255), (0, 0), sh.filter(ImageFilter.GaussianBlur(12)))
+    out.paste(crop, (20, 20), m)
+    ImageDraw.Draw(out).rounded_rectangle([18, 18, crop.width + 22, crop.height + 22], 30, outline=(255, 255, 255, 255), width=5)
+    return out
+
+
 def vignette():
     yy, xx = np.mgrid[0:FH, 0:FW].astype(np.float32)
     r = np.sqrt(((xx - FW / 2) / FW) ** 2 + ((yy - FH / 2) / FH) ** 2)
@@ -117,7 +168,9 @@ def vignette():
     return Image.fromarray(v, "RGBA")
 
 
-def caption_img(words, color, size=80):
+def caption_img(words, color, size=80, box=False):
+    if box:
+        return caption_box(words, color, size)
     f = font(size)
     text = " ".join(words)
     l, t, r, b = f.getbbox(text)
@@ -136,12 +189,65 @@ def caption_img(words, color, size=80):
     return sh
 
 
-def chunks(words):
+def big_text(text):
+    f = font(150)
+    while f.getlength(text) > 980 and f.size > 70:
+        f = font(f.size - 8)
+    w, h = int(f.getlength(text)) + 80, f.size + 80
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    sh = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    ImageDraw.Draw(sh).text((w / 2 + 6, h / 2 + 8), text, font=f, fill=(0, 0, 0, 220), anchor="mm")
+    sh = sh.filter(ImageFilter.GaussianBlur(10))
+    ImageDraw.Draw(im).text((w / 2, h / 2), text, font=f, fill=PINK, anchor="mm", stroke_width=8,
+                            stroke_fill=(255, 255, 255))
+    sh.alpha_composite(im)
+    return sh
+
+
+def _homography(src, dst):
+    """3x3 matrix mapping src points to dst points (4 pairs)."""
+    A, b = [], []
+    for (x, y), (u, v) in zip(src, dst):
+        A.append([x, y, 1, 0, 0, 0, -u * x, -u * y]); b.append(u)
+        A.append([0, 0, 0, x, y, 1, -v * x, -v * y]); b.append(v)
+    h = np.linalg.solve(np.array(A, float), np.array(b, float))
+    return np.append(h, 1).reshape(3, 3)
+
+
+# flat screen -> tilted "3D" screen (top of the map leans away from the viewer)
+_FLAT = [(0, 0), (FW, 0), (FW, FH), (0, FH)]
+_TILT = [(FW * .2, FH * .2), (FW * .8, FH * .2), (FW * 1.08, FH * 1.0), (-FW * .08, FH * 1.0)]
+H_FWD = _homography(_FLAT, _TILT)
+H_INV = _homography(_TILT, _FLAT)
+
+
+def tilt_point(x, y):
+    v = H_FWD @ np.array([x, y, 1.0])
+    return v[0] / v[2], v[1] / v[2]
+
+
+def sky(theme):
+    top = np.array(theme["deep"], np.float32) * .55
+    bot = np.array(theme["mid"], np.float32)
+    k = np.clip(np.linspace(0, 1, FH)[:, None, None] * 2.4, 0, 1)
+    g = top * (1 - k) + bot * k
+    return Image.fromarray(np.repeat(g, FW, axis=1).astype(np.uint8)).convert("RGBA")
+
+
+STYLE_CHOICES = {
+    "layout": ["flat", "tilt", "photo"],
+    "card_in": ["pop", "slide", "drop", "flip"],
+    "caps": ["pop", "box", "single"],
+    "flash": [True, False],
+}
+
+
+def chunks(words, size=3):
     out, cur = [], []
     for w in words:
         cur.append(w)
         txt = w["w"]
-        if len(cur) >= 3 or txt.endswith((",", ".", "?", "!")) or sum(len(x["w"]) for x in cur) > 12:
+        if len(cur) >= size or txt.endswith((",", ".", "?", "!")) or sum(len(x["w"]) for x in cur) > 12:
             out.append(cur)
             cur = []
     if cur:
@@ -153,6 +259,9 @@ def chunks(words):
 class Scene:
     def __init__(self, spec, lines, words, total):
         self.spec, self.lines, self.words, self.total = spec, lines, words, total
+        global PINK
+        LM.set_theme(spec.get("theme", "day"))
+        PINK = tuple(LM.THEME["accent"])
         for k, v in (spec.get("places") or {}).items():
             LM.PLACES[k] = tuple(v)
         ICON_FOR.update(spec.get("icons") or {})
@@ -165,13 +274,30 @@ class Scene:
             c = l.get("card")
             if c and c["img"] not in self.cards:
                 self.cards[c["img"]] = make_card(STILLS / c["img"])
+        st = dict(spec.get("style") or {})
+        for k, opts in STYLE_CHOICES.items():
+            st.setdefault(k, opts[0])
+        self.style = st
+        self.sky = sky(LM.THEME) if st["layout"] == "tilt" else None
+        self.photos = {}
+        if st["layout"] == "photo":
+            for l in lines:
+                c = l.get("card")
+                f = c["img"] if c else None
+                if f and f not in self.photos:
+                    self.photos[f] = photo_bg(STILLS / f)
+            self.photos["_brand"] = photo_bg(STILLS / "art_Official_Cover_Art_portrait.jpg", dim=.55)
+        self.brand = None
+        bp = STILLS / "art_Official_Cover_Art_square.jpg"
+        if bp.exists():
+            self.brand = brand_badge(bp)
         self.pills = {}
         self.caps = []
-        for i, ch in enumerate(chunks(words)):
+        for i, ch in enumerate(chunks(words, 1 if st["caps"] == "single" else 3)):
             self.caps.append((ch[0]["start"], [w["w"].upper() for w in ch], COLORS[i % len(COLORS)]))
         self.cap_imgs = []
         for _, ws, c in self.caps:
-            im = caption_img(ws, c)
+            im = caption_img(ws, c, size=110 if st["caps"] == "single" else 80, box=st["caps"] == "box")
             if im.width > 1010:                      # never run off the screen
                 k = 1010 / im.width
                 im = im.resize((1010, int(im.height * k)), Image.LANCZOS)
@@ -239,7 +365,7 @@ class Scene:
         x0, y0 = x - cw / 2, y - FOCUS_Y / z
         src, f = (self.small, 3) if z < 0.6 else (self.map, 1)
         box = (x0 / f, y0 / f, (x0 + cw) / f, (y0 + ch) / f)
-        return src.transform((FW, FH), Image.EXTENT, box, Image.BILINEAR, fillcolor=(14, 52, 104))
+        return src.transform((FW, FH), Image.EXTENT, box, Image.BILINEAR, fillcolor=tuple(LM.THEME["deep"]))
 
     def to_screen(self, mx, my, cam):
         x, y, z, _ = cam
@@ -259,6 +385,8 @@ class Scene:
         lt = t - l["start"]
         ldur = l["end"] - l["start"]
         cam = self.camera(t)
+        if self.style["layout"] == "photo":
+            return self.photo_frame(t, i, l, lt, ldur)
         base = self.view(cam[0], cam[1], cam[2]).convert("RGBA")
 
         # routes (all finished ones faint, current one drawing)
@@ -291,6 +419,11 @@ class Scene:
             if sc > 0.02:
                 pin_s = pin.resize((max(1, int(pin.width * sc)), max(1, int(pin.height * sc))), Image.BICUBIC)
                 base.alpha_composite(pin_s, (int(sx - ax * sc), int(sy - ay * sc)))
+        if self.style["layout"] == "tilt":
+            warped = base.transform((FW, FH), Image.PERSPECTIVE, list((H_INV / H_INV[2, 2]).flatten()[:8]),
+                                    Image.BILINEAR, fillcolor=(0, 0, 0, 0))
+            base = self.sky.copy()
+            base.alpha_composite(warped)
         # blur + darken when a card is on screen, and motion blur during fast moves
         card = l.get("card")
         cd = self.card_delay(l)
@@ -308,6 +441,17 @@ class Scene:
                 base = Image.blend(base, Image.new("RGBA", (FW, FH), (10, 20, 45, 255)), 0.25 * min(1, ct / 0.3))
         base.alpha_composite(self.vig)
 
+        # huge punchy text on the map
+        if l.get("big") and not card:
+            sc = back((lt - 0.15) / 0.3)
+            if l["big"] not in self.pills:
+                self.pills[l["big"]] = big_text(l["big"])
+            paste_center(base, self.pills[l["big"]], FW / 2, 560, 0.6 + 0.4 * sc, min(1, max(0, sc)))
+        # GTA VI branding: official logo badge on the hook line and on the end card
+        if self.brand is not None and (i == 0 or l.get("poll")):
+            bt = lt if i == 0 else lt - 0.1
+            yb = 520 if i == 0 else 760
+            paste_center(base, self.brand, FW / 2, yb, 0.6 + 0.4 * back(bt / 0.35), min(1, max(0, bt / 0.15)))
         # date pill / title pill
         if l.get("pill"):
             sc = back(lt / 0.3)
@@ -317,7 +461,18 @@ class Scene:
             pop = back(ct / 0.3)
             out = 1 - ease((lt - (ldur - 0.12)) / 0.12) if i + 1 < len(self.lines) and not self.lines[i + 1].get("card") else 1
             cy = 760
-            paste_center(base, self.cards[card["img"]], FW / 2, cy, 0.85 + 0.15 * pop, min(1, pop) * out)
+            cx, scl, cim = FW / 2, 0.85 + 0.15 * pop, self.cards[card["img"]]
+            mode = self.style["card_in"]
+            if mode == "slide":
+                cx, scl = FW / 2 + (1 - ease(ct / 0.35)) * FW, 1
+            elif mode == "drop":
+                cy, scl = 760 - (1 - pop) * 500, 1
+            elif mode == "flip":
+                k = ease(ct / 0.3)
+                if k < 0.98:
+                    cim = cim.resize((max(2, int(cim.width * k)), cim.height))
+                scl = 1
+            paste_center(base, cim, cx, cy, scl, min(1, max(0.05, ease(ct / 0.2))) * out)
             if card.get("top"):
                 paste_center(base, self._pill((card["top"],), size=26, bg=(20, 22, 30), outline=(255, 255, 255)),
                              FW / 2, cy - 300, back((ct - 0.12) / 0.25), out)
@@ -326,6 +481,8 @@ class Scene:
                              back((ct - 0.2) / 0.25), out)
         if not card and l.get("cam") and l["cam"] != "full":
             sx, sy = self.to_screen(*self.spot[l["cam"]], cam)
+            if self.style["layout"] == "tilt":
+                sx, sy = tilt_point(sx, sy)
             paste_center(base, self._pill((l["cam"].upper(),), size=34), sx, sy + 50, back((lt - 0.6) / 0.25))
 
         # progress tracker
@@ -344,10 +501,68 @@ class Scene:
         if ci >= 0:
             pt = t - self.caps[ci][0]
             paste_center(base, self.cap_imgs[ci], FW / 2, 1290, 0.82 + 0.18 * back(pt / 0.12))
+        self._flash(base, lt, i)
         # footer
         d = ImageDraw.Draw(base)
         d.text((FW / 2, 1880), "GTA 6 map is fan-made  |  locations are estimates  |  screenshots: Rockstar Games",
                font=font(19, False), fill=(255, 255, 255, 120), anchor="mm")
+        return base.convert("RGB")
+
+    def _flash(self, base, lt, i):
+        if self.style.get("flash") and i > 0 and lt < 0.14:
+            a = int(200 * (1 - lt / 0.14))
+            base.alpha_composite(Image.new("RGBA", (FW, FH), (255, 255, 255, a)))
+
+    def photo_frame(self, t, i, l, lt, ldur):
+        """Photo layout: full-screen official screenshot behind everything, slow zoom, no map."""
+        key = None
+        for k in range(i, -1, -1):
+            c = self.lines[k].get("card")
+            if c:
+                key = c["img"]
+                break
+        bg = self.photos.get(key) if key else self.photos["_brand"]
+        z = 1 + 0.06 * min(1, lt / max(1, ldur))
+        w, h = int(FW * z), int(FH * z)
+        sx = (bg.width - w) // 2 + int((i % 2 * 2 - 1) * 20 * lt)
+        sy = (bg.height - h) // 2
+        base = bg.crop((max(0, sx), max(0, sy), max(0, sx) + w, max(0, sy) + h)).resize((FW, FH), Image.BILINEAR).convert("RGBA")
+        if lt < 0.25 and i > 0:        # zoom-punch into each new line
+            k = 1 - lt / 0.25
+            pz = 1 + 0.08 * k
+            base = base.resize((int(FW * pz), int(FH * pz)), Image.BILINEAR).crop(
+                (int(FW * (pz - 1) / 2), int(FH * (pz - 1) / 2), int(FW * (pz - 1) / 2) + FW, int(FH * (pz - 1) / 2) + FH))
+        base.alpha_composite(self.vig)
+        if self.brand is not None and (i == 0 or l.get("poll")):
+            bt = lt if i == 0 else lt - 0.1
+            paste_center(base, self.brand, FW / 2, 470 if i == 0 else 760, 0.6 + 0.4 * back(bt / 0.35), min(1, max(0, bt / 0.15)))
+        if l.get("pill"):
+            paste_center(base, self._pill((l["pill"],), size=40, bg=(230, 40, 60)), FW / 2, 250, back(lt / 0.3))
+        if l.get("big"):
+            if l["big"] not in self.pills:
+                self.pills[l["big"]] = big_text(l["big"])
+            sc = back((lt - 0.15) / 0.3)
+            paste_center(base, self.pills[l["big"]], FW / 2, 640, 0.6 + 0.4 * sc, min(1, max(0, sc)))
+        c = l.get("card")
+        if c:
+            paste_center(base, self._pill((c["bottom"],), size=46), FW / 2, 1060, back((lt - 0.2) / 0.3))
+            paste_center(base, self._pill(("OFFICIAL SCREENSHOT",), size=24, bg=(20, 22, 30), outline=(255, 255, 255)),
+                         FW / 2, 980, back((lt - 0.1) / 0.3))
+        tr = l.get("tracker")
+        if tr is not None and not l.get("poll"):
+            self._tracker(base, tr, lt, i)
+        if l.get("poll"):
+            self._poll(base, l["poll"], lt)
+        ci = -1
+        for k, (st, _, _) in enumerate(self.caps):
+            if st <= t + 0.03:
+                ci = k
+        if ci >= 0:
+            paste_center(base, self.cap_imgs[ci], FW / 2, 1290, 0.82 + 0.18 * back((t - self.caps[ci][0]) / 0.12))
+        self._flash(base, lt, i)
+        d = ImageDraw.Draw(base)
+        d.text((FW / 2, 1880), "screenshots: Rockstar Games  |  GTA VI is a trademark of Rockstar Games",
+               font=font(19, False), fill=(255, 255, 255, 140), anchor="mm")
         return base.convert("RGB")
 
     def _tracker(self, base, idx, lt, i):
@@ -435,6 +650,8 @@ def sfx_events(scene):
             ev.append((s + 0.2, "ding", 0.25))
         if l.get("pill") or l.get("poll"):
             ev.append((s + 0.05, "ping", 0.4))
+        if l.get("big"):
+            ev.append((s + 0.15, "boom", 0.4))
     return ev
 
 
@@ -468,6 +685,9 @@ def build(spec_path: Path, out: Path, fake_voice=False, preview_only=False):
     p.stdin.close()
     p.wait()
     from .render import mix_audio
+    import os
+    if spec.get("music"):
+        os.environ["MUSIC_STYLE"] = spec["music"]
     audio = mix_audio(str(voice_mp3), total, sfx_events(scene), work)
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(silent), "-i", str(audio), "-c:v", "copy",
                     "-c:a", "copy", "-shortest", str(out)], check=True)

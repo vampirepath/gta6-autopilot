@@ -54,15 +54,53 @@ def _noise(w, h, scale, seed):
     return np.asarray(im, np.float32) / 255.0
 
 
-CACHE = Path("/tmp/leonida_base_v1.png")
+# colour themes – every video picks a different look so the map never feels the same
+THEMES = {
+    "day":       dict(deep=(14, 52, 104), mid=(28, 92, 160), shallow=(90, 190, 215), green=(118, 158, 96),
+                      dark=(78, 120, 70), sand=(214, 200, 150), swamp=(96, 140, 110), rim=(235, 222, 178),
+                      city=(225, 228, 232), lake=(70, 150, 200), road=(250, 250, 250), label=(255, 255, 255),
+                      accent=(255, 54, 136)),
+    "night":     dict(deep=(4, 8, 22), mid=(10, 22, 52), shallow=(20, 70, 110), green=(22, 30, 44),
+                      dark=(14, 20, 32), sand=(40, 46, 66), swamp=(18, 34, 44), rim=(0, 220, 255),
+                      city=(255, 200, 90), lake=(10, 40, 80), road=(255, 70, 190), label=(170, 230, 255),
+                      accent=(0, 220, 255)),
+    "sunset":    dict(deep=(40, 14, 70), mid=(110, 40, 120), shallow=(250, 130, 150), green=(250, 170, 120),
+                      dark=(220, 110, 110), sand=(255, 214, 150), swamp=(200, 120, 140), rim=(255, 240, 200),
+                      city=(255, 250, 240), lake=(120, 60, 150), road=(255, 255, 255), label=(255, 255, 255),
+                      accent=(255, 214, 0)),
+    "satellite": dict(deep=(6, 30, 52), mid=(14, 60, 90), shallow=(40, 140, 150), green=(70, 96, 52),
+                      dark=(44, 64, 36), sand=(170, 150, 100), swamp=(60, 84, 60), rim=(210, 196, 150),
+                      city=(190, 190, 195), lake=(30, 90, 120), road=(230, 220, 200), label=(255, 255, 255),
+                      accent=(255, 90, 40)),
+    "paper":     dict(deep=(166, 196, 205), mid=(190, 214, 220), shallow=(214, 232, 232), green=(236, 220, 186),
+                      dark=(220, 200, 160), sand=(245, 232, 200), swamp=(214, 210, 170), rim=(120, 84, 50),
+                      city=(160, 120, 90), lake=(150, 190, 205), road=(150, 90, 60), label=(90, 60, 40),
+                      accent=(220, 40, 40)),
+    "vice":      dict(deep=(8, 20, 60), mid=(0, 120, 170), shallow=(0, 230, 220), green=(255, 120, 200),
+                      dark=(210, 70, 170), sand=(255, 190, 230), swamp=(180, 90, 200), rim=(255, 255, 255),
+                      city=(255, 255, 255), lake=(0, 170, 210), road=(255, 255, 255), label=(255, 255, 255),
+                      accent=(0, 255, 200)),
+}
+THEME = dict(THEMES["day"], name="day")
+
+
+def set_theme(name: str):
+    THEME.clear()
+    THEME.update(THEMES.get(name, THEMES["day"]), name=name)
+    base_map.cache_clear()
+
+
+def _c(k):
+    return np.array(THEME[k], np.float32)
 
 
 @lru_cache(maxsize=1)
 def base_map() -> Image.Image:
-    if CACHE.exists():
-        return Image.open(CACHE).convert("RGB")
+    cache = Path(f"/tmp/leonida_base_v2_{THEME['name']}.png")
+    if cache.exists():
+        return Image.open(cache).convert("RGB")
     im = _draw()
-    im.save(CACHE)
+    im.save(cache)
     return im
 
 
@@ -97,21 +135,21 @@ def _draw() -> Image.Image:
     # ocean: deep blue with a lighter centre
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     r = np.sqrt(((xx - W * .55) / W) ** 2 + ((yy - H * .55) / H) ** 2)
-    deep = np.array([14, 52, 104], np.float32)
-    mid = np.array([28, 92, 160], np.float32)
+    deep = _c('deep')
+    mid = _c('mid')
     k = np.clip(r * 1.6, 0, 1)[..., None]
     img = mid * (1 - k) + deep * k
     img += (_noise(W, H, 260, 2)[..., None] - .5) * 12
     # shallow water halo
     halo = np.asarray(landI.filter(ImageFilter.MaxFilter(41)).filter(ImageFilter.GaussianBlur(28)), np.float32) / 255
-    shallow = np.array([90, 190, 215], np.float32)
+    shallow = _c('shallow')
     img = img * (1 - halo[..., None] * .75) + shallow * halo[..., None] * .75
     # land colours: green with sandy and dark patches
     n1, n2 = _noise(W, H, 320, 3), _noise(W, H, 120, 4)
-    green = np.array([118, 158, 96], np.float32)
-    dark = np.array([78, 120, 70], np.float32)
-    sand = np.array([214, 200, 150], np.float32)
-    swamp = np.array([96, 140, 110], np.float32)
+    green = _c('green')
+    dark = _c('dark')
+    sand = _c('sand')
+    swamp = _c('swamp')
     lc = green * (1 - n1[..., None]) + dark * n1[..., None]
     south = np.clip((yy - to_px(0, 26.3)[1]) / 500, 0, 1)[..., None]            # everglades tint
     lc = lc * (1 - south * .6) + swamp * south * .6
@@ -120,7 +158,7 @@ def _draw() -> Image.Image:
     lc += (_noise(W, H, 14, 5)[..., None] - .5) * 10
     beach = np.asarray(landI.filter(ImageFilter.MinFilter(9)), np.float32) / 255
     rim = (land - beach)[..., None]
-    lc = lc * (1 - rim) + np.array([235, 222, 178], np.float32) * rim
+    lc = lc * (1 - rim) + _c('rim') * rim
     img = img * (1 - land[..., None]) + lc * land[..., None]
     out = Image.fromarray(np.clip(img, 0, 255).astype(np.uint8))
 
@@ -134,7 +172,7 @@ def _draw() -> Image.Image:
             px, py = x + rr * math.cos(a), y + rr * math.sin(a)
             if land[int(min(H - 1, max(0, py))), int(min(W - 1, max(0, px)))] > 0:
                 s = rng.uniform(10, 26)
-                d.rectangle([px, py, px + s, py + s * rng.uniform(.6, 1.4)], fill=(225, 228, 232, 210))
+                d.rectangle([px, py, px + s, py + s * rng.uniform(.6, 1.4)], fill=THEME['city'] + (210,))
     # county borders (faint, only on land)
     lines = Image.new("L", (W, H), 0)
     dl = ImageDraw.Draw(lines)
@@ -142,10 +180,10 @@ def _draw() -> Image.Image:
         pts = [to_px(x, y) for x, y in poly[0]]
         dl.line(pts + [pts[0]], fill=40, width=3)
     lines = Image.fromarray((np.asarray(lines, np.float32) * land).astype(np.uint8))
-    out.paste(Image.new("RGB", (W, H), (255, 255, 255)), (0, 0), lines)
+    out.paste(Image.new("RGB", (W, H), THEME["label"]), (0, 0), lines)
     # lake
     lx, ly = to_px(*PLACES["Lake Leonida"])
-    d.ellipse([lx - 105, ly - 120, lx + 105, ly + 110], fill=(70, 150, 200, 255), outline=(235, 222, 178, 255), width=6)
+    d.ellipse([lx - 105, ly - 120, lx + 105, ly + 110], fill=THEME['lake'] + (255,), outline=THEME['rim'] + (255,), width=6)
     # highways
     roads = [[(-80.2, 25.75), (-80.12, 26.3), (-80.05, 26.9), (-80.4, 27.6), (-80.8, 28.3), (-81.1, 29.2), (-81.6, 30.3)],
              [(-80.35, 25.85), (-81.3, 26.15), (-81.8, 26.6), (-82.3, 27.4), (-82.45, 28.2), (-82.3, 29.2), (-82.6, 30.3)],
@@ -153,14 +191,14 @@ def _draw() -> Image.Image:
              [(-80.45, 25.45), (-80.6, 25.15), (-80.95, 24.85), (-81.3, 24.68), (-81.75, 24.56)]]
     for rd in roads:
         pts = [to_px(*p) for p in rd]
-        d.line(pts, fill=(250, 250, 250, 200), width=7, joint="curve")
+        d.line(pts, fill=THEME['road'] + (200,), width=7, joint="curve")
     # county labels
     f = _font(30, black=False)
     for name, lon, lat in COUNTIES:
         x, y = to_px(lon, lat)
-        d.text((x, y), name, font=f, fill=(255, 255, 255, 120), anchor="mm")
+        d.text((x, y), name, font=f, fill=THEME['label'] + (130,), anchor="mm")
     x, y = to_px(-81.3, 28.0)
-    d.text((x, y), "L E O N I D A", font=_font(110), fill=(255, 255, 255, 70), anchor="mm")
+    d.text((x, y), "L E O N I D A", font=_font(110), fill=THEME['label'] + (80,), anchor="mm")
     return out
 
 
