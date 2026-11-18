@@ -242,3 +242,13 @@ Error opening input files: Invalid data found when processing input
 2026-11-17 16:43:09,053 INFO video ready: 20261117_163535.mp4 (73.9s)
 2026-11-17 16:43:12,548 WARNING telegram sendVideo failed: {'ok': False, 'error_code': 413, 'description': 'Request Entity Too Large'}
 2026-11-17 16:43:15,678 INFO YouTube: https://youtube.com/shorts/bQVGZKbV0Qk
+2026-11-18 00:58:12,226 INFO fetched 61 candidate stories
+2026-11-18 00:58:13,662 INFO story: GTA VI Nominated For Game of the Year, Has Most Nominations (RockstarINTEL, 2254 chars)
+2026-11-18 01:04:26,850 INFO used backup model gemini-flash-lite-latest
+2026-11-18 01:10:42,062 INFO used backup model gemini-flash-lite-latest
+2026-11-18 01:10:42,200 INFO script: GTA 6 Just Got Nominated For GOTY Before Release (14 lines, 127 words)
+2026-11-18 01:10:42,200 INFO visuals: trophy, article, stat, stat, list, subject[Lucia Caminos], person, clip, clock, map, stat, stat, stat, clip
+2026-11-18 01:10:45,746 INFO voice: ElevenLabs (766 chars)
+2026-11-18 01:13:09,048 INFO rendered 19 shots, 46.8s
+2026-11-18 01:13:11,672 INFO video ready: 20261118_005813.mp4 (46.8s)
+2026-11-18 01:23:36,480 INFO YouTube: https://youtube.com/shorts/-RzBEkEwl5Q
