@@ -288,3 +288,15 @@ Traceback (most recent call last):
     raise RuntimeError(f"Gemini failed: {last}")
 RuntimeError: Gemini failed: gemma-3-12b-it not found
 
+2026-11-18 23:33:29,366 INFO fetched 62 candidate stories
+2026-11-18 23:33:30,089 INFO story: GTA 6 Has a New Save System and Will Not Let You Replay Story Missions (GTA BOOM – Latest Articles, 3733 chars)
+2026-11-18 23:36:36,506 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-18 23:36:43,595 INFO used backup model gemini-flash-lite-latest
+2026-11-18 23:36:46,897 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-18 23:36:58,051 INFO used backup model gemini-flash-lite-latest
+2026-11-18 23:36:58,114 INFO script: GTA 6 Removes Mission Replay and Changes Saving Forever (15 lines, 145 words)
+2026-11-18 23:36:58,114 INFO visuals: clip, article, subject[Vice City], list, compare, clip, subject[Jason And Lucia], subject[Jason And Lucia], stat, clip, clip, clip, warning, subject[Lucia Caminos], clip
+2026-11-18 23:37:01,760 INFO voice: ElevenLabs (843 chars)
+2026-11-18 23:39:07,282 INFO rendered 25 shots, 50.7s
+2026-11-18 23:39:10,521 INFO video ready: 20261118_233330.mp4 (50.7s)
+2026-11-18 23:49:25,682 INFO YouTube: https://youtube.com/shorts/DpuAf7QBq5w

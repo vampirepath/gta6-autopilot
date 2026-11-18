@@ -96,7 +96,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 10,
+  "uses": 11,
   "graphic": false
  },
  {
@@ -256,7 +256,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 10,
+  "uses": 11,
   "graphic": false
  },
  {
@@ -509,7 +509,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 10,
+  "uses": 11,
   "graphic": false
  },
  {
@@ -531,7 +531,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 11,
+  "uses": 12,
   "graphic": false
  },
  {
@@ -840,7 +840,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 7,
+  "uses": 8,
   "graphic": false
  },
  {
@@ -1118,7 +1118,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 4,
+  "uses": 5,
   "graphic": false
  },
  {
@@ -1196,7 +1196,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -1277,7 +1277,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1325,7 +1325,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1337,7 +1337,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1350,7 +1350,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1385,7 +1385,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 4,
+  "uses": 5,
   "graphic": false
  },
  {
@@ -1444,7 +1444,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1491,7 +1491,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1527,7 +1527,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1608,7 +1608,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1677,7 +1677,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -1688,7 +1688,7 @@
    "sunset"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1750,7 +1750,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1772,7 +1772,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1817,7 +1817,7 @@
    "sunset"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3447,7 +3447,7 @@
   "dur": 2.2,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0357.mp4",
