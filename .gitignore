@@ -6,3 +6,4 @@ library/inbox/*.mp4
 output/
 __pycache__/
 .venv/
+library/stills/

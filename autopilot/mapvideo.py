@@ -141,7 +141,7 @@ def chunks(words):
     for w in words:
         cur.append(w)
         txt = w["w"]
-        if len(cur) >= 3 or txt.endswith((",", ".", "?", "!")) or sum(len(x["w"]) for x in cur) > 13:
+        if len(cur) >= 3 or txt.endswith((",", ".", "?", "!")) or sum(len(x["w"]) for x in cur) > 12:
             out.append(cur)
             cur = []
     if cur:
@@ -153,6 +153,9 @@ def chunks(words):
 class Scene:
     def __init__(self, spec, lines, words, total):
         self.spec, self.lines, self.words, self.total = spec, lines, words, total
+        for k, v in (spec.get("places") or {}).items():
+            LM.PLACES[k] = tuple(v)
+        ICON_FOR.update(spec.get("icons") or {})
         self.map = LM.base_map()
         self.small = self.map.resize((self.map.width // 3, self.map.height // 3), Image.BILINEAR)
         self.vig = vignette()
@@ -166,7 +169,13 @@ class Scene:
         self.caps = []
         for i, ch in enumerate(chunks(words)):
             self.caps.append((ch[0]["start"], [w["w"].upper() for w in ch], COLORS[i % len(COLORS)]))
-        self.cap_imgs = [caption_img(ws, c) for _, ws, c in self.caps]
+        self.cap_imgs = []
+        for _, ws, c in self.caps:
+            im = caption_img(ws, c)
+            if im.width > 1010:                      # never run off the screen
+                k = 1010 / im.width
+                im = im.resize((1010, int(im.height * k)), Image.LANCZOS)
+            self.cap_imgs.append(im)
         # map-space spots
         self.spot = {k: LM.to_px(*v) for k, v in LM.PLACES.items()}
         land_y0, land_y1 = LM.to_px(0, 30.5)[1], LM.to_px(0, 24.45)[1]
@@ -350,7 +359,7 @@ class Scene:
         panel = Image.new("RGBA", (w, h), (0, 0, 0, 0))
         d = ImageDraw.Draw(panel)
         d.rounded_rectangle([0, 0, w - 1, h - 1], 26, fill=(14, 16, 26, 235), outline=(255, 255, 255, 40), width=2)
-        d.text((w / 2, 26), "LEONIDA TOUR", font=font(24), fill=(255, 255, 255, 230), anchor="mm")
+        d.text((w / 2, 26), self.spec.get("tracker_title", "LEONIDA TOUR"), font=font(24), fill=(255, 255, 255, 230), anchor="mm")
         x0, x1, y = 60, w - 60, 136
         d.line([(x0, y), (x1, y)], fill=(255, 255, 255, 70), width=6)
         fill_to = idx if prev is None or prev == idx else prev + (idx - prev) * ease(lt / 0.5)
@@ -365,7 +374,7 @@ class Scene:
                       outline=(255, 255, 255, 200), width=3)
         if idx >= 1:
             x = x0 + (x1 - x0) * (idx - 1) / max(1, n - 1)
-            name = tour[idx - 1].replace(" National Park", "").upper()
+            name = (self.spec.get("tracker_names") or {}).get(tour[idx - 1], tour[idx - 1]).replace(" National Park", "").upper()
             p = self._pill((name,), size=22, pad=(16, 7))
             px = min(max(x, p.width / 2 + 6), w - p.width / 2 - 6)
             panel.alpha_composite(p, (int(px - p.width / 2), int(y - 30 - p.height)))
@@ -376,7 +385,10 @@ class Scene:
         card = Image.new("RGBA", (w, h), (0, 0, 0, 0))
         d = ImageDraw.Draw(card)
         d.rounded_rectangle([0, 0, w - 1, h - 1], 30, fill=(14, 16, 26, 240), outline=PINK + (255,), width=5)
-        d.text((w / 2, 70), q, font=font(40), fill=(255, 255, 255), anchor="mm")
+        fs = 40
+        while font(fs).getlength(q) > w - 60 and fs > 22:
+            fs -= 2
+        d.text((w / 2, 70), q, font=font(fs), fill=(255, 255, 255), anchor="mm")
         d.rounded_rectangle([w / 2 - 190, 140, w / 2 + 190, 210], 35, fill=(40, 170, 90, 255))
         d.text((w / 2, 175), "COMMENT BELOW", font=font(32), fill=(255, 255, 255), anchor="mm")
         paste_center(base, card, FW / 2, 1560, 0.7 + 0.3 * back(lt / 0.35), min(1, lt / 0.2))

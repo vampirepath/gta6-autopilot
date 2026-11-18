@@ -7,6 +7,14 @@ on:
         description: "Script file to render"
         required: true
         default: "scripts/leonida_tour.json"
+      post:
+        description: "no = just send to Telegram, review = Telegram buttons (auto-post after 10 min), now = post right away"
+        required: true
+        default: "no"
+      asset:
+        description: "Optional: post an already-rendered file from the map-videos release instead of rendering"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -16,6 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
+      YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+      YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+      YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -35,12 +46,19 @@ jobs:
           mkdir -p library/stills
           gh release download library -p stills.tar -D /tmp && tar -xf /tmp/stills.tar -C library/stills
       - name: Render
+        if: inputs.asset == ''
         run: |
           mkdir -p output
           NAME=$(basename "${{ inputs.spec }}" .json)_$(date -u +%m%d_%H%M)
           echo "NAME=$NAME" >> $GITHUB_ENV
           python -m autopilot.mapvideo "${{ inputs.spec }}" --out output/$NAME.mp4
+      - name: Use an existing video
+        if: inputs.asset != ''
+        run: |
+          mkdir -p output && gh release download map-videos -p "${{ inputs.asset }}" -D output
+          echo "NAME=$(basename '${{ inputs.asset }}' .mp4)" >> $GITHUB_ENV
       - name: Send to Telegram (review only, not posted)
+        if: inputs.post == 'no' && inputs.asset == ''
         run: |
           python - <<'PY'
           import json, os, requests, subprocess
@@ -50,7 +68,7 @@ jobs:
           if v.stat().st_size > 45e6:
               small = v.with_name(v.stem + "_tg.mp4")
               subprocess.run(["ffmpeg","-y","-v","error","-i",str(v),"-vf","scale=720:-2","-crf","28","-preset","veryfast",str(small)])
-          meta = json.loads(v.with_suffix(".json").read_text())
+          meta = json.loads(Path("${{ inputs.spec }}").read_text())
           cap = f"🗺 NEW STYLE TEST (not posted)\n\n{meta['yt_title']}"
           with open(small, "rb") as f:
               r = requests.post(f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN']}/sendVideo",
@@ -58,7 +76,11 @@ jobs:
                                 files={"video": f}, timeout=300)
           print(r.json().get("ok"), r.text[:200])
           PY
+      - name: Post to YouTube
+        if: inputs.post != 'no'
+        run: python -m autopilot.post_map output/$NAME.mp4 "${{ inputs.spec }}" "${{ inputs.post }}"
       - name: Keep the video (release "map-videos")
+        if: inputs.asset == ''
         run: |
           gh release view map-videos >/dev/null 2>&1 || gh release create map-videos --title "Map videos" --notes "Rendered map-style Shorts"
           gh release upload map-videos output/$NAME.mp4 --clobber

@@ -1,0 +1,21 @@
+{
+  "title": "GTA 6's Wildlife Is Insane",
+  "yt_title": "GTA 6's Wildlife Is Insane 🐊 #shorts",
+  "description": "Rockstar's official GTA 6 screenshots already show iguanas in the Leonida Keys, sea turtles on the reefs, alligators in the Grassrivers and a panther stalking deer in Mount Kalaga. GTA 6 launches November 19 on PS5 and Xbox Series X|S.\n\nMap is fan-made and spots are estimates. Screenshots: Rockstar Games.\n\n#GTA6 #GTAVI #Leonida #ViceCity #Rockstar",
+  "tags": ["GTA 6", "GTA VI", "GTA 6 animals", "GTA 6 wildlife", "Leonida", "Rockstar Games"],
+  "tracker_title": "WILDLIFE SPOTTED",
+  "tracker_names": {"Leonida Keys": "Iguanas", "Keys Reef": "Sea turtles", "Grassrivers": "Alligators", "Mount Kalaga National Park": "Panther"},
+  "places": {"Keys Reef": [-80.42, 25.08]},
+  "icons": {"Leonida Keys": "palm", "Keys Reef": "island", "Grassrivers": "boat", "Mount Kalaga National Park": "target"},
+  "tour": ["Leonida Keys", "Keys Reef", "Grassrivers", "Mount Kalaga National Park"],
+  "lines": [
+    {"text": "GTA 6 isn't just gangs and fast cars.", "cam": "full", "pill": "OUT TOMORROW"},
+    {"text": "Rockstar's own screenshots show Leonida is packed with wildlife.", "cam": "full", "tracker": 0},
+    {"text": "Down in the Leonida Keys, giant iguanas just chill on the rocks.", "cam": "Leonida Keys", "card": {"img": "screens_Leonida_Keys_06.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "IGUANA"}, "tracker": 1},
+    {"text": "Dive under the water and there are sea turtles swimming past the divers.", "cam": "Keys Reef", "route": true, "card": {"img": "screens_Leonida_Keys_04.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "SEA TURTLE"}, "tracker": 2},
+    {"text": "Head into the Grassrivers and the locals hang out with real alligators.", "cam": "Grassrivers", "route": true, "card": {"img": "screens_Grassrivers_01.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "ALLIGATOR"}, "tracker": 3},
+    {"text": "And way up north in Mount Kalaga, a panther stalks deer by the water.", "cam": "Mount Kalaga National Park", "route": true, "card": {"img": "screens_Mount_Kalaga_National_Park_05.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "PANTHER"}, "tracker": 4},
+    {"text": "If this is just the screenshots, imagine the full map.", "cam": "full", "tracker": 4},
+    {"text": "Which animal are you finding first?", "cam": "full", "poll": "WHICH ANIMAL ARE YOU FINDING FIRST?"}
+  ]
+}
