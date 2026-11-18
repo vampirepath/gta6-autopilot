@@ -1,0 +1,19 @@
+{
+  "title": "Every GTA 6 Region Before Launch Day",
+  "yt_title": "Every GTA 6 Region You Can Visit Tomorrow #shorts",
+  "description": "GTA 6 launches November 19 on PS5 and Xbox Series X|S. Here is a quick tour of the six regions Rockstar has named in Leonida: Vice City, the Leonida Keys, Grassrivers, Port Gellhorn, Ambrosia and Mount Kalaga National Park.\n\nMap is fan-made and region spots are estimates. Screenshots: Rockstar Games.\n\n#GTA6 #GTAVI #ViceCity #Leonida #Rockstar",
+  "tags": ["GTA 6", "GTA VI", "GTA 6 map", "Leonida", "Vice City", "Rockstar Games"],
+  "tour": ["Vice City", "Leonida Keys", "Grassrivers", "Port Gellhorn", "Ambrosia", "Mount Kalaga National Park"],
+  "lines": [
+    {"text": "Tomorrow, GTA 6 finally drops you into Leonida.", "cam": "full", "pill": "NOVEMBER 19"},
+    {"text": "And Rockstar has already named six regions.", "cam": "full", "tracker": 0},
+    {"text": "It all starts in Vice City, their version of Miami.", "cam": "Vice City", "card": {"img": "screens_Vice_City_01.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "VICE CITY"}, "tracker": 1},
+    {"text": "Head south and you hit the Leonida Keys, where the story reportedly begins.", "cam": "Leonida Keys", "route": true, "card": {"img": "screens_Leonida_Keys_01.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "LEONIDA KEYS"}, "tracker": 2},
+    {"text": "Then cut inland to the Grassrivers, swamps full of gators and airboats.", "cam": "Grassrivers", "route": true, "card": {"img": "screens_Grassrivers_04.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "GRASSRIVERS"}, "tracker": 3},
+    {"text": "Over on the Gulf side is Port Gellhorn, full of run-down motels.", "cam": "Port Gellhorn", "route": true, "card": {"img": "screens_Port_Gellhorn_01.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "PORT GELLHORN"}, "tracker": 4},
+    {"text": "In the middle sits Ambrosia, refinery smoke and biker gangs.", "cam": "Ambrosia", "route": true, "card": {"img": "screens_Ambrosia_01.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "AMBROSIA"}, "tracker": 5},
+    {"text": "And up north, Mount Kalaga, built for hunting and off-road trails.", "cam": "Mount Kalaga National Park", "route": true, "card": {"img": "screens_Mount_Kalaga_National_Park_04.jpg", "top": "OFFICIAL SCREENSHOT", "bottom": "MOUNT KALAGA"}, "tracker": 6},
+    {"text": "Six regions, one state, and it all unlocks tomorrow.", "cam": "full", "tracker": 6},
+    {"text": "So where are you going first?", "cam": "full", "poll": "WHERE ARE YOU GOING FIRST?"}
+  ]
+}
