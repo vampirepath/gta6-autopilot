@@ -80,3 +80,6 @@ feeds:
 must_contain_any: ["gta 6", "gta vi", "gta6", "grand theft auto vi", "grand theft auto 6", "vice city", "leonida", "jason", "lucia"]
 # Stories containing these are skipped
 skip_if_contains: ["giveaway", "free download", "apk", "crack", "mod menu"]
+
+# when to post (India time). The robot checks every 30 min and posts once per time below.
+post_times: ["09:13", "12:43", "16:13", "19:43", "21:43", "23:43"]
