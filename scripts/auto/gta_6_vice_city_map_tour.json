@@ -1,0 +1,99 @@
+{
+  "title": "GTA 6 Vice City Map Tour",
+  "yt_title": "Explore Vice City First In GTA 6! #shorts",
+  "description": "Take a quick map tour of Vice City ahead of the GTA 6 launch on November 19, 2026. What is your first stop in Leonida? Let us know in the comments!\n\nMap is fan-made and spots are estimates. Screenshots: Rockstar Games.",
+  "tags": [
+    "GTA 6",
+    "Vice City",
+    "Leonida",
+    "GTA VI",
+    "PlayStation 5"
+  ],
+  "tracker_title": "LEONIDA TOUR",
+  "poll": "First stop in Vice City?",
+  "lines": [
+    {
+      "text": "Are you exploring Vice City first when GTA 6 launches?",
+      "cam": "full",
+      "card": null,
+      "pill": "LAUNCH WEEK",
+      "big": "1 WEEK",
+      "tracker": 0
+    },
+    {
+      "text": "Vice City is the massive main city packed with neon nightlife and beaches.",
+      "cam": "Vice City",
+      "card": {
+        "img": "screens_Vice_City_01.jpg",
+        "bottom": "VICE CITY",
+        "top": "OFFICIAL SCREENSHOT"
+      },
+      "pill": null,
+      "big": null,
+      "route": false,
+      "tracker": 1
+    },
+    {
+      "text": "Head south to the Leonida Keys where Jason and Lucia's story reportedly begins.",
+      "cam": "Leonida Keys",
+      "card": {
+        "img": "screens_Leonida_Keys_01.jpg",
+        "bottom": "LEONIDA KEYS",
+        "top": "OFFICIAL SCREENSHOT"
+      },
+      "pill": null,
+      "big": null,
+      "route": true,
+      "tracker": 2
+    },
+    {
+      "text": "Venture into the Grassrivers swamp for alligators and rough locals.",
+      "cam": "Grassrivers",
+      "card": {
+        "img": "screens_Grassrivers_01.jpg",
+        "bottom": "GRASSRIVERS",
+        "top": "OFFICIAL SCREENSHOT"
+      },
+      "pill": null,
+      "big": null,
+      "route": true,
+      "tracker": 3
+    },
+    {
+      "text": "Check out Port Gellhorn with its working port and run-down motels.",
+      "cam": "Port Gellhorn",
+      "card": {
+        "img": "screens_Port_Gellhorn_01.jpg",
+        "bottom": "PORT GELLHORN",
+        "top": "OFFICIAL SCREENSHOT"
+      },
+      "pill": null,
+      "big": null,
+      "route": true,
+      "tracker": 4
+    },
+    {
+      "text": "Which of the six regions are you exploring first on November 19?",
+      "cam": "full",
+      "card": null,
+      "pill": null,
+      "big": null,
+      "poll": "FIRST STOP IN VICE CITY?",
+      "tracker": 4
+    }
+  ],
+  "tour": [
+    "Vice City",
+    "Leonida Keys",
+    "Grassrivers",
+    "Port Gellhorn"
+  ],
+  "theme": "day",
+  "style": {
+    "layout": "flat",
+    "card_in": "slide",
+    "caps": "single",
+    "flash": false
+  },
+  "music": "synthwave"
+}
