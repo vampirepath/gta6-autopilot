@@ -252,3 +252,12 @@ Error opening input files: Invalid data found when processing input
 2026-11-18 01:13:09,048 INFO rendered 19 shots, 46.8s
 2026-11-18 01:13:11,672 INFO video ready: 20261118_005813.mp4 (46.8s)
 2026-11-18 01:23:36,480 INFO YouTube: https://youtube.com/shorts/-RzBEkEwl5Q
+2026-11-18 08:17:18,030 INFO fetched 65 candidate stories
+2026-11-18 08:17:18,568 INFO story: New Zealand Is Bragging That It Gets to Play GTA 6 First (GTA BOOM – Latest Articles, 1974 chars)
+2026-11-18 08:18:16,450 INFO article photo rejected: {'game': False, 'real_person': True, 'text_heavy': False}
+2026-11-18 08:19:59,263 INFO script: Why This Country Gets to Play GTA 6 Before Everyone Else (14 lines, 153 words)
+2026-11-18 08:19:59,263 INFO visuals: map, ai, article, person, person, clip, stat, clip, person, stat, clip, ai, subject[Vice City], clip
+2026-11-18 08:20:02,203 INFO voice: ElevenLabs (923 chars)
+2026-11-18 08:21:55,687 INFO rendered 28 shots, 54.9s
+2026-11-18 08:21:58,425 INFO video ready: 20261118_081718.mp4 (54.9s)
+2026-11-18 08:32:18,121 INFO YouTube: https://youtube.com/shorts/72b7altCJ28
