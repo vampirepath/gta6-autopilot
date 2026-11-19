@@ -328,3 +328,11 @@ RuntimeError: Gemini failed: gemma-3-12b-it not found
 2026-11-19 13:59:53,724 INFO rendered 27 shots, 58.0s
 2026-11-19 13:59:57,811 INFO video ready: 20261119_134835.mp4 (58.0s)
 2026-11-19 14:10:10,291 INFO YouTube: https://youtube.com/shorts/KOPfz6OaBAg
+2026-11-19 22:05:41,983 INFO fetched 69 candidate stories
+2026-11-19 22:05:42,601 INFO story: GTA 6 Buck Me Walkthrough and BuckMe Setup Guide (GTA BOOM – Latest Articles, 2210 chars)
+2026-11-19 22:08:40,766 INFO script: Leaked GTA 6 Bank Mission Reveals Crazy Feature (16 lines, 159 words)
+2026-11-19 22:08:40,766 INFO visuals: clip, photo, subject[Jason Duval], subject[Leonida Keys], subject[Jason And Lucia], list, clip, ai, stat, subject[Jason And Lucia], subject[Jason Lucia Lock And Load], ai, stat, subject[Brian Heder], clip, subject[Lucia Caminos]
+2026-11-19 22:08:44,781 INFO voice: ElevenLabs (971 chars)
+2026-11-19 22:10:22,872 INFO rendered 23 shots, 55.1s
+2026-11-19 22:10:25,636 INFO video ready: 20261119_220542.mp4 (55.1s)
+2026-11-19 22:20:39,790 INFO YouTube: https://youtube.com/shorts/zDjJcHf7YhM
