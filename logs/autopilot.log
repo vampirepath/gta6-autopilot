@@ -312,3 +312,19 @@ RuntimeError: Gemini failed: gemma-3-12b-it not found
 2026-11-19 04:37:49,661 INFO rendered 22 shots, 46.3s
 2026-11-19 04:37:52,170 INFO video ready: 20261119_043550.mp4 (46.3s)
 2026-11-19 04:48:08,386 INFO YouTube: https://youtube.com/shorts/0RMkrCUQzcM
+2026-11-19 13:48:35,049 INFO fetched 69 candidate stories
+2026-11-19 13:48:35,934 INFO story: How to Make Money Fast and Early in GTA 6 (GTA BOOM – Latest Articles, 5401 chars)
+2026-11-19 13:48:39,727 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-19 13:51:59,864 INFO used backup model gemini-flash-lite-latest
+2026-11-19 13:52:00,964 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-19 13:52:16,505 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-19 13:52:22,688 INFO all models busy – waiting 60 s (round 1)
+2026-11-19 13:56:29,768 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-19 13:56:46,850 INFO used backup model gemini-flash-lite-latest
+2026-11-19 13:56:46,928 INFO trimmed long line: Before the bank opens, stash your cash in the floorboard in 
+2026-11-19 13:56:46,936 INFO script: How to make $45,000 early in GTA 6 (14 lines, 158 words)
+2026-11-19 13:56:46,936 INFO visuals: subject[Jason And Lucia], article, subject[Lucia Caminos], subject[Jason Duval], clip, stat, stat[Leonida Keys], stat, subject[Port Gellhorn], stat, subject[Real Dimez], stat, stat, clip
+2026-11-19 13:56:51,305 INFO voice: ElevenLabs (901 chars)
+2026-11-19 13:59:53,724 INFO rendered 27 shots, 58.0s
+2026-11-19 13:59:57,811 INFO video ready: 20261119_134835.mp4 (58.0s)
+2026-11-19 14:10:10,291 INFO YouTube: https://youtube.com/shorts/KOPfz6OaBAg
