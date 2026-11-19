@@ -300,3 +300,15 @@ RuntimeError: Gemini failed: gemma-3-12b-it not found
 2026-11-18 23:39:07,282 INFO rendered 25 shots, 50.7s
 2026-11-18 23:39:10,521 INFO video ready: 20261118_233330.mp4 (50.7s)
 2026-11-18 23:49:25,682 INFO YouTube: https://youtube.com/shorts/DpuAf7QBq5w
+2026-11-19 04:35:49,720 INFO fetched 68 candidate stories
+2026-11-19 04:35:50,290 INFO story: How to Complete Jason's House Repairs in GTA 6 (GTA BOOM – Latest Articles, 1582 chars)
+2026-11-19 04:35:52,212 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-19 04:35:59,167 INFO used backup model gemini-flash-lite-latest
+2026-11-19 04:35:59,334 INFO gemini gemini-flash-latest 429 – trying next
+2026-11-19 04:36:09,828 INFO used backup model gemini-flash-lite-latest
+2026-11-19 04:36:09,877 INFO script: How to Complete Jason's House Repairs in GTA 6 (14 lines, 153 words)
+2026-11-19 04:36:09,877 INFO visuals: subject[Jason And Lucia], subject[Jason And Lucia], stat, subject[Vice City], clip, subject[Jason And Lucia], clip, subject[Jason And Lucia], subject[Leonida Keys], subject[Jason Lucia Lock And Load], clip, article, clip, subject[Jason And Lucia Motel]
+2026-11-19 04:36:13,484 INFO voice: ElevenLabs (841 chars)
+2026-11-19 04:37:49,661 INFO rendered 22 shots, 46.3s
+2026-11-19 04:37:52,170 INFO video ready: 20261119_043550.mp4 (46.3s)
+2026-11-19 04:48:08,386 INFO YouTube: https://youtube.com/shorts/0RMkrCUQzcM

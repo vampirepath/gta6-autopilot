@@ -96,7 +96,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 11,
+  "uses": 12,
   "graphic": false
  },
  {
@@ -176,7 +176,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 11,
+  "uses": 12,
   "graphic": false
  },
  {
@@ -256,7 +256,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 11,
+  "uses": 12,
   "graphic": false
  },
  {
@@ -509,7 +509,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 11,
+  "uses": 12,
   "graphic": false
  },
  {
@@ -840,7 +840,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 8,
+  "uses": 9,
   "graphic": false
  },
  {
@@ -1107,7 +1107,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1118,7 +1118,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -1196,7 +1196,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -1385,7 +1385,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -1564,7 +1564,7 @@
    "lucia"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1677,7 +1677,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -1877,7 +1877,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2083,7 +2083,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2107,7 +2107,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2156,7 +2156,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2203,7 +2203,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
