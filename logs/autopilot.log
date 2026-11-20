@@ -336,3 +336,45 @@ RuntimeError: Gemini failed: gemma-3-12b-it not found
 2026-11-19 22:10:22,872 INFO rendered 23 shots, 55.1s
 2026-11-19 22:10:25,636 INFO video ready: 20261119_220542.mp4 (55.1s)
 2026-11-19 22:20:39,790 INFO YouTube: https://youtube.com/shorts/zDjJcHf7YhM
+2026-11-20 11:17:42,732 INFO fetched 68 candidate stories
+2026-11-20 11:17:43,605 INFO story: GTA 6 Skunk Ape Walkthrough (Part 2 of 3): Search for Tree Effigies (GTA BOOM – Latest Articles, 2272 chars)
+2026-11-20 11:17:59,866 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-20 11:18:06,757 INFO used backup model gemini-flash-lite-latest
+2026-11-20 11:18:28,044 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-20 11:18:39,223 INFO used backup model gemini-flash-lite-latest
+2026-11-20 11:18:39,308 INFO script: GTA 6 Skunk Ape Mission: How to Find All Tree Effigies (15 lines, 169 words)
+2026-11-20 11:18:39,308 INFO visuals: subject[Grassrivers], subject[Jason And Lucia], subject[Jason Duval], clip, subject[Leonida Map Poster], clip, subject[Mount Kalaga National Park], clip, subject[Jason Lucia Lock And Load], subject[Leonida Keys], subject[Jason And Lucia Motel], subject[Port Gellhorn], clip, subject[Lucia Caminos], subject[Cover Art]
+2026-11-20 11:18:43,179 INFO voice: ElevenLabs (888 chars)
+2026-11-20 11:19:07,079 WARNING visual subject failed (ffmpeg failed: [Parsed_crop_2 @ 0x7dc1d8010880] Invalid too big or non positive size for width '1080' or height '1920'
+[Parsed_crop_2 @ 0x7dc1d8010880] Failed to configure input pad on Parsed_crop_2
+[fc#0 @ 0x56486e246ec0] Error reinitializing filters!
+[fc#0 @ 0x56486e246ec0] Task finished with error code: -22 (Invalid argument)
+[fc#0 @ 0x56486e246ec0] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x56486e2552c0] [enc:libx264 @ 0x56486e255680] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x56486e2552c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x56486e2552c0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x56486e255f80] Nothing was written into output file, because at least one of its streams received no packets.
+) – using gameplay
+2026-11-20 11:19:35,185 ERROR failed on 'GTA 6 Skunk Ape Walkthrough (Part 2 of 3): Search for Tree Effigies': ffmpeg failed: [mov,mp4,m4a,3gp,3g2,mj2 @ 0x5de015f00180] moov atom not found
+[in#12 @ 0x5de015e3fc80] Error opening input: Invalid data found when processing input
+Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/work/20261120_111743/shot_012.mp4.
+Error opening input files: Invalid data found when processing input
+
+Traceback (most recent call last):
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 125, in main
+    out = make_one(s)
+          ^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 42, in make_one
+    render(data["lines"], words, voice_mp3, total, badge, out, work, article=article, photo=photo)
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/render.py", line 505, in render
+    join_with_transitions(shots, line_starts, caps, video, total)
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/render.py", line 261, in join_with_transitions
+    _run(cmd + ["-filter_complex", ";".join(fl), "-map", "[v]", "-c:v", "libx264", "-preset", "medium", "-crf", "19",
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/render.py", line 27, in _run
+    raise RuntimeError(f"ffmpeg failed: {r.stderr[-1500:]}")
+RuntimeError: ffmpeg failed: [mov,mp4,m4a,3gp,3g2,mj2 @ 0x5de015f00180] moov atom not found
+[in#12 @ 0x5de015e3fc80] Error opening input: Invalid data found when processing input
+Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/work/20261120_111743/shot_012.mp4.
+Error opening input files: Invalid data found when processing input
+
+
