@@ -1832,5 +1832,33 @@
   "w": 1920,
   "h": 1920,
   "kind": "art"
+ },
+ {
+  "file": "art_Cover_Art_Poster.jpg",
+  "subject": "Cover Art Poster",
+  "w": 1402,
+  "h": 1920,
+  "kind": "art"
+ },
+ {
+  "file": "art_Cover_Art_Poster_Printable.jpg",
+  "subject": "Cover Art Poster Printable",
+  "w": 1404,
+  "h": 1920,
+  "kind": "art"
+ },
+ {
+  "file": "art_Leonida_Map_Poster.jpg",
+  "subject": "Leonida Map Poster",
+  "w": 1402,
+  "h": 1920,
+  "kind": "art"
+ },
+ {
+  "file": "art_Leonida_Map_Poster_Printable.jpg",
+  "subject": "Leonida Map Poster Printable",
+  "w": 1404,
+  "h": 1920,
+  "kind": "art"
  }
 ]
