@@ -1,0 +1,78 @@
+{
+  "title": "GTA 6 Has No Mission Replay",
+  "yt_title": "GTA 6 Has NO Mission Replay, Save Before This \u26a0\ufe0f #shorts",
+  "description": "Early guides say GTA 6 has no mission replay, so make manual saves before big missions. Tip: the RydeMe phone app lets you fast travel.\n\n#GTA6 #GTAVI #GTA6Tips",
+  "theme": "paper",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "pop",
+    "flash": true
+  },
+  "music": "synthwave",
+  "lines": [
+    {
+      "text": "If you're playing GTA 6, save right now.",
+      "cam": "full",
+      "pill": "WARNING"
+    },
+    {
+      "text": "There's no mission replay in GTA 6.",
+      "cam": "full",
+      "card": {
+        "img": "art_Official_Cover_Art_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "NO REPLAY"
+      },
+      "big": "NO REPLAY"
+    },
+    {
+      "text": "Mess up a big mission and you can't just pick it again from a menu.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "NO SECOND TRY"
+      }
+    },
+    {
+      "text": "So make a manual save before every major mission.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Rooftop_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "MANUAL SAVE"
+      }
+    },
+    {
+      "text": "Bonus tip, hate driving? Use the RydeMe app on your phone to fast travel.",
+      "cam": "full",
+      "card": {
+        "img": "screens_Vice_City_03.jpg",
+        "top": "OFFICIAL SCREENSHOT",
+        "bottom": "RYDEME"
+      }
+    },
+    {
+      "text": "Save this video so you don't forget.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Beach_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "SAVE IT"
+      }
+    },
+    {
+      "text": "Did you already lose a mission?",
+      "cam": "full",
+      "poll": "DID YOU LOSE A MISSION?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 tips",
+    "GTA 6 guide",
+    "Rockstar Games"
+  ]
+}

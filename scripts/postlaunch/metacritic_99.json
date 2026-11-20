@@ -1,0 +1,80 @@
+{
+  "title": "GTA 6 Got A 99 On Metacritic",
+  "yt_title": "GTA 6 Just Got A 99 On Metacritic \ud83e\udd2f #shorts",
+  "description": "GTA 6's early Metacritic score was 99 from 114 critic reviews, and Take-Two shares jumped about 6% at launch.\n\n#GTA6 #GTAVI #Rockstar",
+  "theme": "vice",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "box",
+    "flash": true
+  },
+  "music": "trap",
+  "lines": [
+    {
+      "text": "GTA 6 is out, and the critics just lost their minds.",
+      "cam": "full",
+      "pill": "REVIEWS ARE IN"
+    },
+    {
+      "text": "Its early Metacritic score was ninety nine.",
+      "cam": "full",
+      "card": {
+        "img": "art_Official_Cover_Art_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "METACRITIC"
+      },
+      "big": "99"
+    },
+    {
+      "text": "That's from one hundred fourteen critic reviews.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Rooftop_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "114 REVIEWS"
+      },
+      "big": "114"
+    },
+    {
+      "text": "Reviewers praised the detail, the huge open world and the story.",
+      "cam": "full",
+      "card": {
+        "img": "art_Vice_City_Postcard_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "PRAISE"
+      }
+    },
+    {
+      "text": "Even Take-Two's stock jumped around six percent.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "STOCK UP"
+      },
+      "big": "+6%"
+    },
+    {
+      "text": "Thirteen years of waiting, and it actually delivered.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Beach_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "WORTH IT"
+      }
+    },
+    {
+      "text": "What score would you give it?",
+      "cam": "full",
+      "poll": "YOUR SCORE OUT OF 10?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 tips",
+    "GTA 6 guide",
+    "Rockstar Games"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "title": "GTA 6 Brought Back 6 Wanted Stars",
+  "yt_title": "GTA 6's Police Are SMARTER Than You Think \ud83d\udea8 #shorts",
+  "description": "GTA 6 brings back six wanted stars. Police track your clothes, vehicle, weapon, CCTV footage and your partner, and keep watching Hot Areas after you escape.\n\n#GTA6 #GTAVI #GTA6Tips",
+  "theme": "night",
+  "style": {
+    "layout": "flat",
+    "card_in": "slide",
+    "caps": "box",
+    "flash": true
+  },
+  "music": "trap",
+  "lines": [
+    {
+      "text": "The cops in GTA 6 are a whole different level.",
+      "cam": "full",
+      "pill": "WANTED"
+    },
+    {
+      "text": "Six wanted stars are back for the first time since GTA 4.",
+      "cam": "full",
+      "big": "6 STARS"
+    },
+    {
+      "text": "And a crime has to be seen or reported before police even come.",
+      "cam": "Vice City",
+      "card": {
+        "img": "screens_Vice_City_06.jpg",
+        "top": "OFFICIAL SCREENSHOT",
+        "bottom": "WITNESSES"
+      }
+    },
+    {
+      "text": "Then they track your clothes, your car, your weapon and CCTV.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Lock_And_Load_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "THEY TRACK YOU"
+      }
+    },
+    {
+      "text": "Even your partner can give you away.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "PARTNER"
+      }
+    },
+    {
+      "text": "Escape, and police still watch that area for a while.",
+      "cam": "Grassrivers",
+      "card": {
+        "img": "screens_Grassrivers_04.jpg",
+        "top": "OFFICIAL SCREENSHOT",
+        "bottom": "HOT AREA"
+      }
+    },
+    {
+      "text": "Tip, change your outfit and ditch the car.",
+      "cam": "full",
+      "big": "CHANGE FIT"
+    },
+    {
+      "text": "What's your highest wanted level so far?",
+      "cam": "full",
+      "poll": "YOUR HIGHEST WANTED LEVEL?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 tips",
+    "GTA 6 guide",
+    "Rockstar Games"
+  ]
+}

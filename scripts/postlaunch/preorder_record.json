@@ -1,0 +1,80 @@
+{
+  "title": "GTA 6 Broke The Pre-Order Record",
+  "yt_title": "GTA 6 Broke The All-Time Pre-Order Record \ud83d\udcc8 #shorts",
+  "description": "Sony and Microsoft confirmed GTA 6 is the most pre-ordered game ever on their stores. Sensor Tower estimated about 9.69 million digital pre-orders worth $942 million before launch.\n\n#GTA6 #GTAVI #Rockstar",
+  "theme": "satellite",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "pop",
+    "flash": true
+  },
+  "music": "synthwave",
+  "lines": [
+    {
+      "text": "GTA 6 broke records before anyone even played it.",
+      "cam": "full",
+      "pill": "RECORD"
+    },
+    {
+      "text": "Sony and Microsoft both confirmed it's the most pre-ordered game on their stores.",
+      "cam": "full",
+      "card": {
+        "img": "art_Official_Cover_Art_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "MOST PRE-ORDERED"
+      }
+    },
+    {
+      "text": "Sensor Tower estimated about nine point seven million digital pre-orders.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Rooftop_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "PRE-ORDERS"
+      },
+      "big": "9.69M"
+    },
+    {
+      "text": "Worth around nine hundred forty two million dollars.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "REVENUE"
+      },
+      "big": "$942M"
+    },
+    {
+      "text": "That beat Cyberpunk's old record of eight million.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Beach_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "OLD RECORD"
+      },
+      "big": "8M"
+    },
+    {
+      "text": "And that was before launch day.",
+      "cam": "full",
+      "card": {
+        "img": "art_Vice_City_Postcard_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "BEFORE LAUNCH"
+      }
+    },
+    {
+      "text": "Did you pre-order it?",
+      "cam": "full",
+      "poll": "DID YOU PRE-ORDER?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 tips",
+    "GTA 6 guide",
+    "Rockstar Games"
+  ]
+}

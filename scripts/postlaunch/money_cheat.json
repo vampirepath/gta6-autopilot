@@ -1,0 +1,79 @@
+{
+  "title": "The GTA 6 Money Cheat Trap",
+  "yt_title": "Don't Use The GTA 6 Money Cheat Yet \u274c #shorts",
+  "description": "The $250,000 money cheat in GTA 6 only works after the story, and you can't save while it is active. Some story missions need cash to start, so earn it the real way.\n\n#GTA6 #GTAVI #GTA6Money",
+  "theme": "day",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "single",
+    "flash": false
+  },
+  "music": "trap",
+  "lines": [
+    {
+      "text": "Thinking of using the GTA 6 money cheat? Read this first.",
+      "cam": "full",
+      "pill": "MONEY CHEAT"
+    },
+    {
+      "text": "It gives you two hundred fifty thousand dollars.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "$250,000"
+      },
+      "big": "$250K"
+    },
+    {
+      "text": "But it only works after you finish the story.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Rooftop_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "AFTER STORY"
+      }
+    },
+    {
+      "text": "And you can't save your game while it's active.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Motel_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "NO SAVING"
+      },
+      "big": "NO SAVE"
+    },
+    {
+      "text": "Some story missions won't even start until you have enough cash.",
+      "cam": "full",
+      "card": {
+        "img": "screens_Jason_and_Lucia_05.jpg",
+        "top": "OFFICIAL SCREENSHOT",
+        "bottom": "NEED CASH"
+      }
+    },
+    {
+      "text": "So early on, you have to earn it the real way.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Lock_And_Load_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "EARN IT"
+      }
+    },
+    {
+      "text": "How are you making money right now?",
+      "cam": "full",
+      "poll": "HOW ARE YOU MAKING MONEY?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 tips",
+    "GTA 6 guide",
+    "Rockstar Games"
+  ]
+}

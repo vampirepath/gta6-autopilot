@@ -1,0 +1,78 @@
+{
+  "title": "Don't Die With Cash In GTA 6",
+  "yt_title": "GTA 6: Stop Carrying Cash Or You'll Lose It \ud83d\udcb8 #shorts",
+  "description": "In GTA 6, cash you carry is different from money in the bank, and you can lose cash if you die or get arrested. Stash or deposit it often.\n\n#GTA6 #GTAVI #GTA6Tips",
+  "theme": "satellite",
+  "style": {
+    "layout": "photo",
+    "card_in": "pop",
+    "caps": "single",
+    "flash": true
+  },
+  "music": "trap",
+  "lines": [
+    {
+      "text": "Stop walking around GTA 6 with a pocket full of cash.",
+      "cam": "full",
+      "pill": "BIG MISTAKE"
+    },
+    {
+      "text": "Cash in your pocket is not the same as money in the bank.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Lock_And_Load_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "CASH VS BANK"
+      }
+    },
+    {
+      "text": "Die or get arrested, and you can lose the cash you carry.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Robbery_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "YOU LOSE IT"
+      },
+      "big": "LOST"
+    },
+    {
+      "text": "So after every job, stash it at a safehouse or deposit it.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Motel_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "STASH IT"
+      }
+    },
+    {
+      "text": "Big loot works the same way, steal it, fence it, then bank the cash.",
+      "cam": "full",
+      "card": {
+        "img": "screens_Jason_and_Lucia_03.jpg",
+        "top": "OFFICIAL SCREENSHOT",
+        "bottom": "FENCE IT"
+      }
+    },
+    {
+      "text": "Bank first, then go cause chaos.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_Lucia_Rooftop_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "BANK FIRST"
+      }
+    },
+    {
+      "text": "How much cash have you lost already?",
+      "cam": "full",
+      "poll": "HOW MUCH DID YOU LOSE?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 tips",
+    "GTA 6 guide",
+    "Rockstar Games"
+  ]
+}

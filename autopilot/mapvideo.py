@@ -265,6 +265,17 @@ class Scene:
         for k, v in (spec.get("places") or {}).items():
             LM.PLACES[k] = tuple(v)
         ICON_FOR.update(spec.get("icons") or {})
+        if "tour" not in spec:                       # derive pins/routes from the camera stops
+            tour, prev = [], None
+            for l in lines:
+                c = l.get("cam", "full")
+                if c != "full":
+                    if c not in tour:
+                        tour.append(c)
+                    if "route" not in l:
+                        l["route"] = prev is not None and prev != c
+                    prev = c
+            spec["tour"] = tour
         self.map = LM.base_map()
         self.small = self.map.resize((self.map.width // 3, self.map.height // 3), Image.BILINEAR)
         self.vig = vignette()

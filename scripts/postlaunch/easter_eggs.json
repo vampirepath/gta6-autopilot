@@ -1,0 +1,69 @@
+{
+  "title": "GTA 6 Has Literal Easter Eggs",
+  "yt_title": "Rockstar Hid LITERAL Easter Eggs In GTA 6 \ud83d\ude02 #shorts",
+  "description": "Players climbing radio antennas above Vice City found bird nests with real painted Easter eggs, covered in bird poop. And you can play video games inside your safehouse.\n\n#GTA6 #GTAVI #EasterEgg",
+  "theme": "sunset",
+  "style": {
+    "layout": "tilt",
+    "card_in": "drop",
+    "caps": "pop",
+    "flash": false
+  },
+  "music": "synthwave",
+  "lines": [
+    {
+      "text": "Rockstar trolled everyone hunting for GTA 6 Easter eggs.",
+      "cam": "full",
+      "pill": "EASTER EGG"
+    },
+    {
+      "text": "Climb the giant radio antennas above Vice City.",
+      "cam": "Vice City",
+      "card": {
+        "img": "screens_Vice_City_03.jpg",
+        "top": "OFFICIAL SCREENSHOT",
+        "bottom": "VICE CITY"
+      }
+    },
+    {
+      "text": "Up top, players found bird nests with real painted Easter eggs.",
+      "cam": "Vice City",
+      "big": "REAL EGGS"
+    },
+    {
+      "text": "And of course, they're covered in bird poop.",
+      "cam": "Vice City",
+      "card": {
+        "img": "screens_Vice_City_02.jpg",
+        "top": "OFFICIAL SCREENSHOT",
+        "bottom": "WHY ROCKSTAR"
+      }
+    },
+    {
+      "text": "It gets weirder, you can play video games inside your safehouse.",
+      "cam": "full",
+      "card": {
+        "img": "art_Jason_and_Lucia_Motel_portrait.jpg",
+        "top": "OFFICIAL ART",
+        "bottom": "GAMES IN A GAME"
+      }
+    },
+    {
+      "text": "A game inside a game, inside GTA.",
+      "cam": "full",
+      "big": "INCEPTION"
+    },
+    {
+      "text": "What's the best secret you've found so far?",
+      "cam": "full",
+      "poll": "BEST SECRET YOU FOUND?"
+    }
+  ],
+  "tags": [
+    "GTA 6",
+    "GTA VI",
+    "GTA 6 tips",
+    "GTA 6 guide",
+    "Rockstar Games"
+  ]
+}
