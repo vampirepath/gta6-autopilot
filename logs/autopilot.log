@@ -378,3 +378,15 @@ Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/
 Error opening input files: Invalid data found when processing input
 
 
+2026-11-20 19:15:42,860 INFO fetched 69 candidate stories
+2026-11-20 19:15:43,793 INFO story: GTA 6 Sex, Nudity and Relationships: The Complete Guide (GTA BOOM – Latest Articles, 6000 chars)
+2026-11-20 19:15:47,305 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-20 19:15:54,524 INFO used backup model gemini-flash-lite-latest
+2026-11-20 19:16:04,263 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-20 19:16:15,743 INFO used backup model gemini-flash-lite-latest
+2026-11-20 19:16:15,829 INFO script: GTA 6's Relationship System Makes It Almost Impossible To Cheat (15 lines, 162 words)
+2026-11-20 19:16:15,829 INFO visuals: clip[Jason And Lucia], stat, stat, stat, list, subject[Jason And Lucia], clip, clip, stat, stat, article, clip[Jason], clip[Lucia], subject[Jason And Lucia], subject[Jason And Lucia]
+2026-11-20 19:16:20,115 INFO voice: ElevenLabs (965 chars)
+2026-11-20 19:19:10,625 INFO rendered 24 shots, 56.7s
+2026-11-20 19:19:14,275 INFO video ready: 20261120_191543.mp4 (56.7s)
+2026-11-20 19:29:31,181 INFO YouTube: https://youtube.com/shorts/iJqaFtD9T70
