@@ -400,3 +400,18 @@ Error opening input files: Invalid data found when processing input
 2026-11-21 08:17:43,780 INFO rendered 27 shots, 56.6s
 2026-11-21 08:17:48,557 INFO video ready: 20261121_081325.mp4 (56.6s)
 2026-11-21 08:28:15,895 INFO YouTube: https://youtube.com/shorts/2JlZ9RBRlEo
+2026-11-21 16:22:23,363 INFO fetched 69 candidate stories
+2026-11-21 16:22:24,188 INFO story: GTA 6 Don Gone Walkthrough (GTA BOOM – Latest Articles, 1789 chars)
+2026-11-21 16:24:17,767 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-21 16:24:24,806 INFO used backup model gemini-flash-lite-latest
+2026-11-21 16:24:26,046 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-21 16:24:32,886 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-21 16:24:39,193 INFO all models busy – waiting 60 s (round 1)
+2026-11-21 16:26:37,730 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-21 16:26:49,142 INFO used backup model gemini-flash-lite-latest
+2026-11-21 16:26:49,209 INFO script: GTA 6 Don Gone Walkthrough Hidden Revolver Secret (16 lines, 139 words)
+2026-11-21 16:26:49,209 INFO visuals: subject[Jason Duval], article, subject[Vice City], subject[Brian Heder], clip, subject[Jason And Lucia], clip, stat, clip, subject[Jason Lucia Lock And Load], clip, list, clip, subject[Brian Heder], subject[Lucia Caminos], subject[Jason And Lucia]
+2026-11-21 16:26:52,714 INFO voice: ElevenLabs (800 chars)
+2026-11-21 16:28:44,067 INFO rendered 22 shots, 46.0s
+2026-11-21 16:28:46,965 INFO video ready: 20261121_162224.mp4 (46.0s)
+2026-11-21 16:39:00,067 ERROR youtube upload failed: <HttpError 400 when requesting None returned "The user has exceeded the number of videos they may upload.". Details: "[{'message': 'The user has exceeded the number of videos they may upload.', 'domain': 'youtube.video', 'reason': 'uploadLimitExceeded'}]">

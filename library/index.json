@@ -417,7 +417,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -553,7 +553,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1037,7 +1037,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1118,7 +1118,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 11,
+  "uses": 12,
   "graphic": false
  },
  {
@@ -1174,7 +1174,7 @@
    "swamp_wildlife"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1185,7 +1185,7 @@
    "swamp_wildlife"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1196,7 +1196,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 12,
+  "uses": 13,
   "graphic": false
  },
  {
@@ -1385,7 +1385,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 11,
+  "uses": 12,
   "graphic": false
  },
  {
@@ -1677,7 +1677,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 12,
+  "uses": 13,
   "graphic": false
  },
  {
@@ -2071,7 +2071,7 @@
    "sunset"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2094,7 +2094,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2289,7 +2289,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2452,7 +2452,7 @@
    "police_chase"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2509,7 +2509,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2522,7 +2522,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
