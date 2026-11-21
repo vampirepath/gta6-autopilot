@@ -390,3 +390,13 @@ Error opening input files: Invalid data found when processing input
 2026-11-20 19:19:10,625 INFO rendered 24 shots, 56.7s
 2026-11-20 19:19:14,275 INFO video ready: 20261120_191543.mp4 (56.7s)
 2026-11-20 19:29:31,181 INFO YouTube: https://youtube.com/shorts/iJqaFtD9T70
+2026-11-21 08:13:24,639 INFO fetched 69 candidate stories
+2026-11-21 08:13:25,694 INFO story: GTA 6 Got Pills? Walkthrough (GTA BOOM – Latest Articles, 763 chars)
+2026-11-21 08:13:34,409 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-21 08:13:41,587 INFO used backup model gemini-flash-lite-latest
+2026-11-21 08:14:58,258 INFO script: Leaked GTA 6 Motel Mission Details Reveal New Mechanics (14 lines, 158 words)
+2026-11-21 08:14:58,258 INFO visuals: clip, list, subject[Jason And Lucia Motel], subject[Lucia Caminos], ai, subject[Jason And Lucia Motel], stat, ai, clip, clip, quote, blocks, clip, subject[Cover Art]
+2026-11-21 08:15:02,740 INFO voice: ElevenLabs (996 chars)
+2026-11-21 08:17:43,780 INFO rendered 27 shots, 56.6s
+2026-11-21 08:17:48,557 INFO video ready: 20261121_081325.mp4 (56.6s)
+2026-11-21 08:28:15,895 INFO YouTube: https://youtube.com/shorts/2JlZ9RBRlEo
