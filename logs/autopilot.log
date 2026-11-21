@@ -415,3 +415,62 @@ Error opening input files: Invalid data found when processing input
 2026-11-21 16:28:44,067 INFO rendered 22 shots, 46.0s
 2026-11-21 16:28:46,965 INFO video ready: 20261121_162224.mp4 (46.0s)
 2026-11-21 16:39:00,067 ERROR youtube upload failed: <HttpError 400 when requesting None returned "The user has exceeded the number of videos they may upload.". Details: "[{'message': 'The user has exceeded the number of videos they may upload.', 'domain': 'youtube.video', 'reason': 'uploadLimitExceeded'}]">
+2026-11-21 21:51:39,887 INFO fetched 69 candidate stories
+2026-11-21 21:51:40,802 INFO story: GTA 6 Tourist Trap Walkthrough (GTA BOOM – Latest Articles, 3121 chars)
+2026-11-21 21:57:12,861 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-21 21:57:23,715 INFO used backup model gemini-flash-lite-latest
+2026-11-21 21:57:23,791 INFO trimmed long line: At the dock approach, drag Jason to the boat while using HUD
+2026-11-21 21:57:23,799 INFO script: GTA 6 Tourist Trap Mission Walkthrough Guide (14 lines, 157 words)
+2026-11-21 21:57:23,800 INFO visuals: subject[Grassrivers], article, subject[Vice City], clip, subject[Grassrivers], subject[Jason And Lucia], clip, subject[Leonida Keys], subject[Lucia Caminos], clip, subject[Lucia Caminos], subject[Jason And Lucia], clip, subject[Vice City]
+2026-11-21 21:57:23,969 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 259 credits remaining, while 367 credits are required for this request.","status":"quota_exceeded","request_id":"a64f6391f5c54c1130067b574a462626"}} – using free voice
+2026-11-21 21:57:26,760 WARNING Edge TTS attempt 1 failed: No audio was received. Please verify that your parameters are correct.
+2026-11-21 21:57:34,293 WARNING Edge TTS attempt 2 failed: No audio was received. Please verify that your parameters are correct.
+2026-11-21 21:59:03,897 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-21 21:59:29,601 WARNING visual subject failed (ffmpeg failed: [Parsed_crop_2 @ 0x70ae74010880] Invalid too big or non positive size for width '1080' or height '1920'
+[Parsed_crop_2 @ 0x70ae74010880] Failed to configure input pad on Parsed_crop_2
+[fc#0 @ 0x5ed29c5b7ec0] Error reinitializing filters!
+[fc#0 @ 0x5ed29c5b7ec0] Task finished with error code: -22 (Invalid argument)
+[fc#0 @ 0x5ed29c5b7ec0] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5ed29c5d1500] [enc:libx264 @ 0x5ed29c5d1900] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5ed29c5d1500] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5ed29c5d1500] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5ed29c5c6f80] Nothing was written into output file, because at least one of its streams received no packets.
+) – using gameplay
+2026-11-21 22:00:00,891 WARNING visual subject failed (ffmpeg failed: [Parsed_crop_2 @ 0x7e7448010880] Invalid too big or non positive size for width '1080' or height '1920'
+[Parsed_crop_2 @ 0x7e7448010880] Failed to configure input pad on Parsed_crop_2
+[fc#0 @ 0x6487ffe26ec0] Error reinitializing filters!
+[fc#0 @ 0x6487ffe26ec0] Task finished with error code: -22 (Invalid argument)
+[fc#0 @ 0x6487ffe26ec0] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x6487ffe2dc80] [enc:libx264 @ 0x6487ffe2bb40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x6487ffe2dc80] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x6487ffe2dc80] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x6487ffe35f80] Nothing was written into output file, because at least one of its streams received no packets.
+) – using gameplay
+2026-11-21 22:00:03,380 WARNING mascot overlay failed: ffmpeg failed: [mov,mp4,m4a,3gp,3g2,mj2 @ 0x652a18f7e380] moov atom not found
+[in#0 @ 0x652a18f7e240] Error opening input: Invalid data found when processing input
+Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/work/20261121_215140/shot_024.mp4.
+Error opening input files: Invalid data found when processing input
+
+2026-11-21 22:00:07,079 ERROR failed on 'GTA 6 Tourist Trap Walkthrough': ffmpeg failed: [mov,mp4,m4a,3gp,3g2,mj2 @ 0x5c89f0c37a00] moov atom not found
+[in#9 @ 0x5c89f0c7dd00] Error opening input: Invalid data found when processing input
+Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/work/20261121_215140/shot_009.mp4.
+Error opening input files: Invalid data found when processing input
+
+Traceback (most recent call last):
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 125, in main
+    out = make_one(s)
+          ^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 42, in make_one
+    render(data["lines"], words, voice_mp3, total, badge, out, work, article=article, photo=photo)
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/render.py", line 505, in render
+    join_with_transitions(shots, line_starts, caps, video, total)
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/render.py", line 261, in join_with_transitions
+    _run(cmd + ["-filter_complex", ";".join(fl), "-map", "[v]", "-c:v", "libx264", "-preset", "medium", "-crf", "19",
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/render.py", line 27, in _run
+    raise RuntimeError(f"ffmpeg failed: {r.stderr[-1500:]}")
+RuntimeError: ffmpeg failed: [mov,mp4,m4a,3gp,3g2,mj2 @ 0x5c89f0c37a00] moov atom not found
+[in#9 @ 0x5c89f0c7dd00] Error opening input: Invalid data found when processing input
+Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/work/20261121_215140/shot_009.mp4.
+Error opening input files: Invalid data found when processing input
+
+

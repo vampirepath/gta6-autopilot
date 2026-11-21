@@ -96,7 +96,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 16,
+  "uses": 17,
   "graphic": false
  },
  {
@@ -370,7 +370,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -598,7 +598,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -840,7 +840,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 14,
+  "uses": 15,
   "graphic": false
  },
  {
@@ -1118,7 +1118,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 12,
+  "uses": 13,
   "graphic": false
  },
  {
@@ -1141,7 +1141,7 @@
    "social_media"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1196,7 +1196,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 13,
+  "uses": 14,
   "graphic": false
  },
  {
@@ -1385,7 +1385,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 12,
+  "uses": 13,
   "graphic": false
  },
  {
@@ -1677,7 +1677,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 13,
+  "uses": 14,
   "graphic": false
  },
  {
@@ -1840,7 +1840,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2008,7 +2008,7 @@
    "boat_water"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2119,7 +2119,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2191,7 +2191,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2289,7 +2289,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2312,7 +2312,7 @@
    "police_chase"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2393,7 +2393,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2497,7 +2497,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2553,7 +2553,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2825,7 +2825,7 @@
   "dur": 3.13,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0253.mp4",
@@ -2913,7 +2913,7 @@
   "dur": 2.7,
   "tags": [],
   "ok": true,
-  "uses": 0
+  "uses": 1
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0264.mp4",
