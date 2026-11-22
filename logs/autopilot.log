@@ -474,3 +474,18 @@ Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/
 Error opening input files: Invalid data found when processing input
 
 
+2026-11-22 09:40:13,327 INFO fetched 68 candidate stories
+2026-11-22 09:40:14,477 INFO story: GTA 6 Overnight Charges Walkthrough (GTA BOOM – Latest Articles, 1267 chars)
+2026-11-22 09:40:17,225 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-22 09:40:25,615 INFO used backup model gemini-flash-lite-latest
+2026-11-22 09:41:53,143 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-22 09:42:00,750 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-22 09:42:06,962 INFO all models busy – waiting 60 s (round 1)
+2026-11-22 09:43:07,827 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-22 09:43:18,540 INFO used backup model gemini-flash-lite-latest
+2026-11-22 09:43:18,620 INFO script: How to beat GTA 6's Overnight Charges mission (14 lines, 118 words)
+2026-11-22 09:43:18,620 INFO visuals: subject[Jason And Lucia Motel], article, subject[Jason And Lucia Motel], stat, subject[Vice City], clip, subject[Jason And Lucia], subject[Lucia Caminos], clip, clip, subject[Leonida Keys], subject[Port Gellhorn], clip, stat
+2026-11-22 09:43:21,541 INFO voice: ElevenLabs (634 chars)
+2026-11-22 09:45:18,784 INFO rendered 19 shots, 38.3s
+2026-11-22 09:45:21,718 INFO video ready: 20261122_094014.mp4 (38.3s)
+2026-11-22 09:55:33,556 INFO YouTube: https://youtube.com/shorts/Y7Jcuw7c9Tw

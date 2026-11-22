@@ -873,7 +873,7 @@
    "lucia"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1118,7 +1118,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 13,
+  "uses": 14,
   "graphic": false
  },
  {
@@ -1630,7 +1630,7 @@
    "lucia"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1926,7 +1926,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2682,7 +2682,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2944,7 +2944,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3037,7 +3037,7 @@
    "lucia"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3063,7 +3063,7 @@
    "police_chase"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3101,7 +3101,7 @@
    "aerial_view"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3147,7 +3147,7 @@
    "social_media"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3205,7 +3205,7 @@
    "lucia"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3261,7 +3261,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3272,7 +3272,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
