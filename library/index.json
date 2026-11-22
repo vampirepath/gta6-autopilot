@@ -74,7 +74,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -453,7 +453,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -942,7 +942,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1118,7 +1118,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 14,
+  "uses": 15,
   "graphic": false
  },
  {
@@ -1196,7 +1196,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 14,
+  "uses": 15,
   "graphic": false
  },
  {
@@ -1385,7 +1385,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 13,
+  "uses": 14,
   "graphic": false
  },
  {
@@ -1677,7 +1677,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 14,
+  "uses": 15,
   "graphic": false
  },
  {
@@ -1866,7 +1866,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": true
  },
  {
@@ -1889,7 +1889,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1949,7 +1949,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2229,7 +2229,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2253,7 +2253,7 @@
    "police_chase"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2452,7 +2452,7 @@
    "police_chase"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2509,7 +2509,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2522,7 +2522,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2534,7 +2534,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2682,7 +2682,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -2751,7 +2751,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2932,7 +2932,7 @@
    "jason_and_lucia"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": true
  },
  {
@@ -2944,7 +2944,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2992,7 +2992,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3026,7 +3026,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3272,7 +3272,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {

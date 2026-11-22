@@ -489,3 +489,22 @@ Error opening input files: Invalid data found when processing input
 2026-11-22 09:45:18,784 INFO rendered 19 shots, 38.3s
 2026-11-22 09:45:21,718 INFO video ready: 20261122_094014.mp4 (38.3s)
 2026-11-22 09:55:33,556 INFO YouTube: https://youtube.com/shorts/Y7Jcuw7c9Tw
+2026-11-22 17:46:49,671 INFO fetched 69 candidate stories
+2026-11-22 17:46:50,748 INFO story: GTA 6 Avery Pawn Robbery Walkthrough: Safe Code and Escape Route (GTA BOOM – Latest Articles, 1487 chars)
+2026-11-22 17:46:58,517 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-22 17:47:06,387 INFO used backup model gemini-flash-lite-latest
+2026-11-22 17:47:30,964 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-22 17:47:37,610 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-22 17:47:43,939 INFO all models busy – waiting 60 s (round 1)
+2026-11-22 17:49:28,332 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-22 17:49:39,826 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-22 17:49:46,156 INFO all models busy – waiting 60 s (round 2)
+2026-11-22 17:53:37,448 INFO script: Leaked GTA 6 Robbery System Changes Everything (15 lines, 155 words)
+2026-11-22 17:53:37,448 INFO visuals: subject[Jason And Lucia Robbery], article, subject[Port Gellhorn], subject[Jason And Lucia], clip, clip, clip, stat, ai, clip, list, clip, blocks, compare, subject[Cover Art]
+2026-11-22 17:53:37,797 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 357 credits are required for this request.","status":"quota_exceeded","request_id":"77754386d45ecdf00afbb8ef8cb76e1d"}} – using free voice
+2026-11-22 17:53:40,677 WARNING Edge TTS attempt 1 failed: No audio was received. Please verify that your parameters are correct.
+2026-11-22 17:53:48,287 WARNING Edge TTS attempt 2 failed: No audio was received. Please verify that your parameters are correct.
+2026-11-22 17:55:29,568 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-22 17:58:16,144 INFO rendered 26 shots, 51.6s
+2026-11-22 17:58:20,048 INFO video ready: 20261122_174650.mp4 (51.6s)
+2026-11-22 18:08:36,265 INFO YouTube: https://youtube.com/shorts/V1nsIDfh26w
