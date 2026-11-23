@@ -1152,7 +1152,7 @@
    "swamp_wildlife"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2647,7 +2647,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2671,7 +2671,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2682,7 +2682,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 4,
+  "uses": 5,
   "graphic": false
  },
  {
@@ -2763,7 +2763,7 @@
    "swamp_wildlife"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2901,7 +2901,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3127,7 +3127,7 @@
    "beach"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3576,7 +3576,7 @@
    "interior_home"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3640,7 +3640,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3664,7 +3664,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3676,7 +3676,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3699,7 +3699,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3757,7 +3757,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3838,7 +3838,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": true
  },
  {
@@ -3884,7 +3884,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": true
  },
  {
@@ -4064,7 +4064,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -4087,7 +4087,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -4156,7 +4156,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": true
  },
  {
@@ -4201,7 +4201,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -4281,7 +4281,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -4337,7 +4337,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {

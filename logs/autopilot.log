@@ -523,3 +523,16 @@ Error opening input files: Invalid data found when processing input
 2026-11-22 23:39:43,119 INFO rendered 25 shots, 49.9s
 2026-11-22 23:39:45,694 INFO video ready: 20261122_233209.mp4 (49.9s)
 2026-11-22 23:50:01,281 INFO YouTube: https://youtube.com/shorts/aXYtyAcf0zI
+2026-11-23 03:57:23,849 INFO fetched 70 candidate stories
+2026-11-23 03:57:24,667 INFO story: How to Get the Crabshack VF5 SMG for Free in GTA 6 (GTA BOOM – Latest Articles, 2556 chars)
+2026-11-23 03:57:27,514 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-23 03:57:34,589 INFO used backup model gemini-flash-lite-latest
+2026-11-23 03:57:37,462 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-23 03:57:48,401 INFO used backup model gemini-flash-lite-latest
+2026-11-23 03:57:48,470 INFO script: How To Get The Free Crabshack VF5 SMG In GTA 6 (15 lines, 160 words)
+2026-11-23 03:57:48,470 INFO visuals: clip, subject[Vice City], clip, subject[Jason And Lucia], clip, subject[Leonida Keys], clip, subject[Lucia Caminos], clip, subject[Jason Duval], stat, clip, stat, subject[Port Gellhorn], clip
+2026-11-23 03:57:48,627 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 347 credits are required for this request.","status":"quota_exceeded","request_id":"680a3e8694148d3c4a7a11ba0c721a0e"}} – using free voice
+2026-11-23 04:00:00,736 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-23 04:02:05,225 INFO rendered 26 shots, 51.6s
+2026-11-23 04:02:08,950 INFO video ready: 20261123_035724.mp4 (51.6s)
+2026-11-23 04:12:24,467 INFO YouTube: https://youtube.com/shorts/BBAtta1oQ24
