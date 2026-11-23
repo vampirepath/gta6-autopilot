@@ -536,3 +536,30 @@ Error opening input files: Invalid data found when processing input
 2026-11-23 04:02:05,225 INFO rendered 26 shots, 51.6s
 2026-11-23 04:02:08,950 INFO video ready: 20261123_035724.mp4 (51.6s)
 2026-11-23 04:12:24,467 INFO YouTube: https://youtube.com/shorts/BBAtta1oQ24
+2026-11-23 14:23:24,554 INFO fetched 69 candidate stories
+2026-11-23 14:23:25,184 INFO story: How to Find and Keep Dom's Charger in GTA 6 (GTA BOOM – Latest Articles, 3871 chars)
+2026-11-23 14:23:26,461 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-23 14:23:34,711 INFO used backup model gemini-flash-lite-latest
+2026-11-23 14:23:35,129 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-23 14:23:53,113 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-23 14:23:59,479 INFO all models busy – waiting 60 s (round 1)
+2026-11-23 14:25:00,027 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-23 14:25:07,712 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-23 14:25:13,994 INFO all models busy – waiting 60 s (round 2)
+2026-11-23 14:26:14,424 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-23 14:26:32,476 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-23 14:26:38,801 ERROR failed on 'How to Find and Keep Dom's Charger in GTA 6': Gemini failed: gemma-3-12b-it not found
+Traceback (most recent call last):
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 125, in main
+    out = make_one(s)
+          ^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/run.py", line 31, in make_one
+    data = write_script(story, TAGS, lib_subjects(), has_photo=photo is not None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/writer.py", line 94, in write_script
+    raw = ask(user, system=SYSTEM.format(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/gta6-autopilot/gta6-autopilot/autopilot/llm.py", line 79, in ask
+    raise RuntimeError(f"Gemini failed: {last}")
+RuntimeError: Gemini failed: gemma-3-12b-it not found
+
