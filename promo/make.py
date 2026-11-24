@@ -99,10 +99,14 @@ def write_script(hist):
 EL = "https://api.elevenlabs.io/v1"
 
 
+VIRAJ = "FmBhnvP58BK0vz65OOj7"   # "Viraj - Energetic, Clear Narrator" – same voice as in your ElevenLabs Studio
+
+
 def voice_id(key):
     vf = STATE / "voice.json"
     if env("PROMO_VOICE_ID"):
         return env("PROMO_VOICE_ID")
+    return VIRAJ
     if vf.exists():
         return json.loads(vf.read_text())["voice_id"]
     h = {"xi-api-key": key}
@@ -136,10 +140,16 @@ def make_voice(text, work):
     if not key:
         raise RuntimeError("ELEVENLABS_API_KEY secret is missing")
     vid = voice_id(key)
-    r = requests.post(f"{EL}/text-to-speech/{vid}/with-timestamps", params={"output_format": "mp3_44100_128"},
-                      headers={"xi-api-key": key}, timeout=240,
-                      json={"text": text, "model_id": "eleven_multilingual_v2",
-                            "voice_settings": {"stability": 0.5, "similarity_boost": 0.75, "style": 0.3, "use_speaker_boost": True}})
+    # same settings as your Studio: Eleven v4, stability 50, similarity 75 (falls back to multilingual v2 if v4 isn't allowed)
+    for model in ("eleven_v4", "eleven_multilingual_v2"):
+        r = requests.post(f"{EL}/text-to-speech/{vid}/with-timestamps", params={"output_format": "mp3_44100_128"},
+                          headers={"xi-api-key": key}, timeout=240,
+                          json={"text": text, "model_id": model,
+                                "voice_settings": {"stability": 0.5, "similarity_boost": 0.75, "use_speaker_boost": True}})
+        if r.status_code == 200:
+            log.info("voice model: %s", model)
+            break
+        log.warning("ElevenLabs %s error %s: %s", model, r.status_code, r.text[:300])
     if r.status_code != 200:
         raise RuntimeError(f"ElevenLabs error {r.status_code}: {r.text[:300]}")
     data = r.json()
@@ -375,10 +385,7 @@ def main():
             info += f"\nElevenLabs credits left: {left:,}"
         if remaining <= 6:
             info += f"\n⚠️ Only {remaining} scripts left – ask Claude for more."
-        try:
-            info += "\nVoice: " + json.loads((STATE / "voice.json").read_text())["name"]
-        except Exception:
-            pass
+        info += "\nVoice: Viraj – Energetic, Clear Narrator"
         with open(final, "rb") as f:
             r = tg("sendVideo", data={"chat_id": chat, "caption": info[:1000], "supports_streaming": "true"}, files={"video": f})
         if r and not r.get("ok"):
