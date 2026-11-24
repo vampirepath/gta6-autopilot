@@ -3583,9 +3583,13 @@
   "file": "rockstar_rk721912_flv_en_us_1080p_0308.mp4",
   "source": "rockstar_rk721912_flv_en_us_1080p.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "nightlife_party",
+   "jason"
+  ],
   "ok": true,
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "rockstar_rk721912_flv_en_us_1080p_0309.mp4",
@@ -4410,66 +4414,85 @@
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0000.mp4",
   "source": "official_GTAVI_Official_Cover_Art_Landscape.mp4",
   "dur": 4.8,
-  "tags": [],
-  "ok": true,
+  "tags": [
+   "any"
+  ],
+  "ok": false,
   "subjects": [
    "Cover Art"
   ],
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0001.mp4",
   "source": "official_GTAVI_Official_Cover_Art_Landscape.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "jason_and_lucia"
+  ],
   "ok": true,
   "subjects": [
    "Cover Art"
   ],
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0002.mp4",
   "source": "official_GTAVI_Official_Cover_Art_Landscape.mp4",
   "dur": 4.8,
-  "tags": [],
-  "ok": true,
+  "tags": [
+   "sunset"
+  ],
+  "ok": false,
   "subjects": [
    "Cover Art"
   ],
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0003.mp4",
   "source": "official_GTAVI_Official_Cover_Art_Landscape.mp4",
   "dur": 4.8,
-  "tags": [],
+  "tags": [
+   "jason_and_lucia",
+   "swamp_wildlife"
+  ],
   "ok": true,
   "subjects": [
    "Cover Art"
   ],
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0004.mp4",
   "source": "official_GTAVI_Official_Cover_Art_Landscape.mp4",
   "dur": 4.8,
-  "tags": [],
-  "ok": true,
+  "tags": [
+   "any"
+  ],
+  "ok": false,
   "subjects": [
    "Cover Art"
   ],
-  "uses": 1
+  "uses": 1,
+  "graphic": false
  },
  {
   "file": "official_GTAVI_Official_Cover_Art_Landscape_0005.mp4",
   "source": "official_GTAVI_Official_Cover_Art_Landscape.mp4",
   "dur": 4.8,
-  "tags": [],
-  "ok": true,
+  "tags": [
+   "any"
+  ],
+  "ok": false,
   "subjects": [
    "Cover Art"
   ],
-  "uses": 0
+  "uses": 0,
+  "graphic": false
  }
 ]
