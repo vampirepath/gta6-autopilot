@@ -15,7 +15,7 @@ jobs:
       - name: Install VoxCPM2 (CPU)
         run: |
           pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu
-          pip install -q "voxcpm>=2.0.3" soundfile requests
+          pip install -q "voxcpm>=2.0.3" soundfile requests && sudo apt-get install -y -qq ffmpeg
       - name: Make test voices and send to Telegram
         run: python promo/voice_test.py
       - uses: actions/upload-artifact@v4

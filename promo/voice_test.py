@@ -19,6 +19,14 @@ gen("2_clone_hindi", text=DEVA, reference_wav_path=str(ref))
 gen("3_clone_roman_hinglish", text=ROMAN, reference_wav_path=str(ref))
 tok = os.environ.get("PROMO_TELEGRAM_BOT_TOKEN") or os.environ["TELEGRAM_BOT_TOKEN"]
 chat = os.environ.get("PROMO_TELEGRAM_CHAT_ID") or os.environ["TELEGRAM_CHAT_ID"]
+import subprocess
 for name, dt, p in res:
-    with open(p, "rb") as f:
-        requests.post(f"https://api.telegram.org/bot{tok}/sendAudio", data={"chat_id": chat, "caption": f"Free voice test: {name} ({dt:.0f}s to make)"}, files={"audio": (p.name, f)}, timeout=120)
+    mp3 = p.with_suffix(".mp3"); ogg = p.with_suffix(".ogg")
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(p), "-ar", "44100", "-b:a", "192k", str(mp3)], check=True)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(p), "-c:a", "libopus", "-b:a", "64k", str(ogg)], check=True)
+    with open(ogg, "rb") as f:   # voice note: plays right inside the chat
+        r = requests.post(f"https://api.telegram.org/bot{tok}/sendVoice", data={"chat_id": chat, "caption": f"Voice test {name}"}, files={"voice": (ogg.name, f, "audio/ogg")}, timeout=120)
+    print("sendVoice", name, r.status_code, r.text[:200])
+    with open(mp3, "rb") as f:
+        r = requests.post(f"https://api.telegram.org/bot{tok}/sendAudio", data={"chat_id": chat, "title": name, "caption": f"{name} (mp3)"}, files={"audio": (mp3.name, f, "audio/mpeg")}, timeout=120)
+    print("sendAudio", name, r.status_code, r.text[:200])
