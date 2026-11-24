@@ -1,6 +1,6 @@
 """GTA 6 Super Clipper promo-reel autopilot.
 
-script (Gemini)  ->  voice (ElevenLabs, Viraj)  ->  animated reel (HTML engine + Chrome)
+script (Claude script bank)  ->  voice (ElevenLabs, Viraj)  ->  animated reel (HTML engine + Chrome)
 ->  music + SFX  ->  Telegram (video + cover + ready-to-paste caption).  Nothing is posted anywhere.
 
 Run:  python -m promo.make            (from the repo root)
@@ -12,15 +12,7 @@ import numpy as np
 import requests
 import soundfile as sf
 
-from autopilot.common import config, env, log
-import autopilot.llm as _llm
-from autopilot.llm import ask
-
-# more Gemini models to fall back on when the free tier is overloaded (503)
-_cfg = config()
-_cfg["gemini_models"] = ["gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest", "gemini-2.5-flash-lite",
-                         "gemini-2.0-flash", "gemma-3-27b-it"]
-_llm.config = lambda: _cfg
+from autopilot.common import env, log
 
 HERE = Path(__file__).resolve().parent
 ASSETS, ENGINE, STATE = HERE / "assets", HERE / "engine", HERE / "state"
@@ -61,56 +53,7 @@ def themed(text, th):
     return text
 
 
-# ---------------------------------------------------------------- script
-FACTS = """PRODUCT: "GTA 6 Super Clipper" – an Android app (works fully on mobile, no laptop needed).
-WHAT IT REALLY DOES (only claim these):
-- You copy the link of any YouTube or Twitch LIVE stream and paste it in the app, then tap Start.
-- Its Clipper Engine watches the whole stream AND the live chat.
-- A hype meter spots moments when chat suddenly explodes (OMG, LOL, 💀 spam) and the action detector spots loud / fast gameplay moments (chases, fails, crashes, insane plays).
-- It automatically makes a clip of each hype/action moment and shows a "Best moments" list.
-- "Clip from" button: clip earlier gameplay too (30 sec / 1 min / 2 min / 5 min ago), not just the latest moment.
-- You can also select your own timestamp manually.
-- Clip lengths 15/30/45/60/120 sec. Up to 50 clips from one stream.
-- Auto word-by-word captions, auto caption placement, facecam detection -> 9:16 layout with facecam on top + gameplay below.
-- Post kit for every clip: hook, title, description, hashtags + a viral score.
-- Export vertical 9:16 or wide 16:9, then upload to Instagram Reels / YouTube Shorts.
-RULES:
-- NEVER mention price, rupees, discounts, "free", "paisa", money/earning guarantees, or "Tech Samosha".
-- No fake claims (no "guaranteed viral", no "streamers use this", no follower numbers).
-- Big streamers may be named only as examples of streams people clip (CarryMinati, Mythpat, GamerFleet, IShowSpeed) – max one name drop, and never say they endorse the app.
-- CTA must be: follow karo + link bio mein hai.
-- Last line must remind: sirf unhi streamers ko clip karo jo clipping ki permission dete hain."""
-
-SCENES = """SCENE TYPES you must pick from for each beat (params in JSON):
-- "hook": first beat ONLY. params {"lines":[2-3 SHORT on-screen lines, max 16 chars each, English or Hinglish], "hl": index of line to highlight, "emoji":"one emoji", "visual":"phone"|"cards"|"face"|"sleep"}  ("sleep" only if the hook is about sleeping)
-- "name": the beat that says the app name. params {"tag":"optional short line"}
-- "streamers": talking about big streamers / YouTube / Twitch live. params {"title":"short line"}
-- "copylink": copying the live stream link. params {"step":optional number,"label":"short"}
-- "paste": pasting link in app / tapping start. params {"step":optional number,"label":"short","done":"short stamp e.g. ✅ Kaam khatam!"}
-- "monitor": app watching stream + chat. params {"kicker":"short","title":"short"}
-- "moments": types of moments (chase, fail, etc.). params {"title":"optional short","items":[[emoji,"2-3 word label"] x3]}
-- "hype": chat explodes, hype meter, moment detected, clip auto made. params {"stamp1":"short e.g. 🎯 Moment detect!","stamp2":"short e.g. ✂️ Clip ready!"}
-- "rewind": missed moment / clip earlier gameplay. params {"q":"short question","ok":"short answer"}
-- "manual": choosing your own timestamp. params {"title":"short"}
-- "count": number of clips. params {"n":50,"top":"short","sub":"optional short pill"}
-- "noedit": no hours of editing, app adds captions/editing. params {"bad":["1-2 short pains"],"good":"short"}
-- "postkit": captions/hook/title/hashtags ready. params {"title":"short","items":[[emoji,"label"] x3-4]}
-- "export": 9:16 / 16:9 export and upload to Reels/Shorts. params {}
-- "flow": X becomes Y. params {"a":"short","b":"short"}
-- "statement": anything else. params {"lines":[1-3 short lines],"hl":index,"emoji":"one"}
-- "cta": follow + link in bio beat. params {}
-- "permission": final reminder beat. params {}
-"cues": 1-4 words copied EXACTLY from that beat's text, in order, marking when the main things should pop on screen
-(e.g. for paste: the word for paste, the word for start, the word for done)."""
-
-HOOKS = ["curiosity / secret", "pain point (editing takes hours)", "bold claim with a number", "story: 'mera dost...'",
-         "challenge viewer ('tum abhi bhi...?')", "sleeping/passive income style (no money promise)", "before vs after",
-         "question to the viewer", "shock: 'ye illegal lagta hai par...' (legal)", "tutorial: 'dekho kaise'",
-         "FOMO: GTA 6 clip pages are blowing up", "comparison: laptop vs mobile"]
-
-BANNED = re.compile(r"\b(free|price|rupees?|rs\.?|paise|paisa|discount|samosha|guarantee[d]?)\b|₹", re.I)
-
-
+# ---------------------------------------------------------------- script (from Claude's script bank)
 def load_hist():
     try:
         return json.loads(HIST.read_text())
@@ -118,53 +61,38 @@ def load_hist():
         return {"n": 0, "hooks": [], "themes": []}
 
 
+BANK = HERE / "scripts.json"      # scripts written by Claude (no Gemini)
+CTAS = ["Agar tumhe bhi ye app chahiye, toh mujhe follow karo, link meri bio mein hai.",
+        "Ye app chahiye? Toh abhi follow karo, link meri bio mein hai.",
+        "App chahiye toh mujhe follow karo, link bio mein hai."]
+PERMS = ["Aur haan, sirf unhi streamers ko clip karna jo clipping ki permission dete hain.",
+         "Bas yaad rakhna, sirf wahi streamers chunna jo clipping allow karte hain."]
+FEATS = ["✅ Works with YouTube and Twitch live streams", "✅ Catches hype moments from live chat on its own 🔥",
+         "✅ Detects action: chases, fails, crashes", "✅ \"Clip from\" lets you clip earlier gameplay ⏪",
+         "✅ Auto captions + facecam layout", "✅ Hook, title & hashtags ready for every clip",
+         "✅ Export 9:16 or 16:9", "✅ Up to 50 clips from one stream 🤯", "✅ Works fully on mobile, no laptop"]
+TAGS = ["#gta6", "#gta6clips", "#livestream", "#clipping", "#streamclips", "#mobileediting", "#aitools", "#reelsindia",
+        "#shortsindia", "#gamingreels", "#contentcreator", "#clipper", "#twitchclips", "#youtubelive", "#gamingindia",
+        "#gta6news", "#streamer", "#gamingclips"]
+
+
 def write_script(hist):
-    style = random.choice(HOOKS)
-    recent = "\n".join("- " + h for h in hist["hooks"][-25:]) or "(none yet)"
-    prompt = f"""Write a NEW Instagram Reel voiceover script promoting the app below, for Indian gamers/creators.
-Language: energetic Hinglish written in ROMAN letters (like "Bhai, ye app dekho"), talking to "tum"/"bhai".
-Length: 90-115 words total (about 35-42 seconds). Short punchy sentences.
-Hook style for THIS reel: {style}. The first sentence must stop the scroll in under 2 seconds.
-Do NOT reuse or closely copy these previous hooks:
-{recent}
-
-{FACTS}
-
-{SCENES}
-
-Split the script into 8-12 beats. Beat 1 = "hook". Second-to-last beat = "cta", last beat = "permission".
-Each beat's "text" is the exact spoken words (Roman Hinglish). Use each scene type at most once (statement can repeat).
-
-Also write:
-- "caption": an ENGLISH Instagram caption: a strong 1-line hook, 2 short lines, 4-6 ✅ feature lines, "Want the app? Follow me 👉 link in bio 🔗",
-  "⚠️ Only clip streamers who allow clipping, and always give credit 🙏", "Not affiliated with Rockstar Games.", then 12-15 hashtags.
-- "cover": {{"lines":[2-3 short ENGLISH lines for the cover image, max 16 chars each],"hl":index}}
-- "hook_summary": the first sentence of the script.
-
-Return JSON: {{"hook_summary":"","beats":[{{"text":"","scene":"","params":{{}},"cues":[]}}],"caption":"","cover":{{}}}}"""
-    for attempt in range(6):
-        try:
-            d = json.loads(re.sub(r"^```(json)?|```$", "", ask(prompt).strip(), flags=re.M))
-            beats = [b for b in d["beats"] if b.get("text", "").strip()]
-            words = sum(len(b["text"].split()) for b in beats)
-            full = " ".join(b["text"] for b in beats)
-            if BANNED.search(full) or BANNED.search(d.get("caption", "").replace("free to", "")):
-                raise ValueError("banned word: " + BANNED.search(full + d.get("caption", "")).group(0))
-            if not 70 <= words <= 165:
-                raise ValueError(f"{words} words")
-            if beats[0].get("scene") != "hook":
-                beats[0]["scene"] = "hook"
-            if beats[-1].get("scene") != "permission":
-                beats.append({"text": "Aur haan, sirf unhi streamers ko clip karna jo clipping ki permission dete hain.", "scene": "permission"})
-            if not any(b.get("scene") == "cta" for b in beats):
-                beats.insert(-1, {"text": "Agar tumhe bhi ye app chahiye, toh mujhe follow karo, link meri bio mein hai.", "scene": "cta"})
-            d["beats"], d["style"] = beats, style
-            return d
-        except Exception as e:
-            log.warning("script attempt %d rejected: %s", attempt + 1, e)
-            if "Gemini failed" in str(e):
-                time.sleep(120)
-    raise RuntimeError("Gemini could not write a valid script (Google's free AI was busy – the next run will try again)")
+    bank = json.loads(BANK.read_text())
+    used = set(hist.get("used", []))
+    left = [i for i in range(len(bank)) if i not in used]
+    if not left:
+        return None, 0
+    i = left[0]
+    s = bank[i]
+    beats = [dict(b) for b in s["beats"]]
+    beats.append({"text": random.choice(CTAS), "scene": "cta", "params": {}, "cues": ["follow", "link"]})
+    beats.append({"text": random.choice(PERMS), "scene": "permission", "params": {}, "cues": []})
+    feats = random.sample(FEATS, 5)
+    cap = (f"{s['cap']}\n\nNo laptop, no editing. Just paste a live stream link and the app does the rest 😎\n\n" + "\n".join(feats) +
+           "\n\nWant the app? Follow me 👉 link in bio 🔗\n\n⚠️ Only clip streamers who allow clipping, and always give credit 🙏\n"
+           "Not affiliated with Rockstar Games.\n\n" + " ".join(random.sample(TAGS, 14)))
+    d = {"idx": i, "hook_summary": beats[0]["text"], "beats": beats, "caption": cap, "cover": s.get("cover") or {}}
+    return d, len(left) - 1
 
 
 # ---------------------------------------------------------------- voice
@@ -408,7 +336,10 @@ def main():
     work = OUT / f"reel_{stamp}"
     work.mkdir(parents=True, exist_ok=True)
     try:
-        d = write_script(hist)
+        d, remaining = write_script(hist)
+        if d is None:
+            tg("sendMessage", data={"chat_id": tg_chat(), "text": "📭 Promo reel autopilot: all scripts are used up. Ask Claude for a new batch of scripts."})
+            return
         (work / "script.json").write_text(json.dumps(d, ensure_ascii=False, indent=1))
         text = " ".join(" ".join(b["text"].split()) for b in d["beats"])
         W, dur, left = make_voice(text, work)
@@ -442,6 +373,8 @@ def main():
         info = f"🎬 Promo reel #{n} ready ({dur:.0f}s · {tname} theme)\nHook: {d.get('hook_summary', '')[:200]}"
         if left is not None:
             info += f"\nElevenLabs credits left: {left:,}"
+        if remaining <= 6:
+            info += f"\n⚠️ Only {remaining} scripts left – ask Claude for more."
         try:
             info += "\nVoice: " + json.loads((STATE / "voice.json").read_text())["name"]
         except Exception:
@@ -455,6 +388,7 @@ def main():
         tg("sendMessage", data={"chat_id": chat, "text": d.get("caption", "")[:4000]})
         hist["n"] = n
         hist["hooks"] = (hist["hooks"] + [d.get("hook_summary", "")])[-60:]
+        hist["used"] = hist.get("used", []) + [d["idx"]]
         hist["themes"] = (hist.get("themes", []) + [tname])[-10:]
         HIST.write_text(json.dumps(hist, ensure_ascii=False, indent=1))
         log.info("done: %s", final)

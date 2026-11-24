@@ -1,0 +1,2226 @@
+[
+ {
+  "cap": "Still editing stream clips for 2 hours? 😤",
+  "cover": {
+   "lines": [
+    "2 hours",
+    "for one clip?",
+    "Not anymore"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Bhai, ek clip edit karne mein do ghante lagte hain? Ab nahi.",
+    "params": {
+     "lines": [
+      "2 ghante",
+      "ek clip pe?",
+      "Ab nahi"
+     ],
+     "hl": 2,
+     "emoji": "😤",
+     "visual": "phone"
+    },
+    "cues": [
+     "nahi"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper app ye kaam khud karta hai.",
+    "params": {
+     "tag": "AI auto clipper 📱"
+    },
+    "cues": []
+   },
+   {
+    "scene": "paste",
+    "text": "Bas kisi bhi live stream ka link paste karo aur start dabao.",
+    "params": {
+     "done": "✅ Bas itna hi!"
+    },
+    "cues": [
+     "paste",
+     "start"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "Jaise hi chat mein OMG aur LOL ki baarish hoti hai, app wo moment pakad leta hai aur clip bana deta hai.",
+    "params": {
+     "stamp1": "🎯 Moment pakda!",
+     "stamp2": "✂️ Clip ready!"
+    },
+    "cues": [
+     "OMG",
+     "pakad",
+     "clip"
+    ]
+   },
+   {
+    "scene": "noedit",
+    "text": "Na captions likhne, na facecam crop karna, sab automatic.",
+    "params": {
+     "bad": [
+      "Captions likhna",
+      "Facecam crop"
+     ],
+     "good": "Sab automatic"
+    },
+    "cues": [
+     "captions",
+     "facecam"
+    ]
+   },
+   {
+    "scene": "count",
+    "text": "Ek stream se 50 tak clips.",
+    "params": {
+     "n": 50,
+     "top": "Ek stream se",
+     "sub": "🤯 Zero editing"
+    },
+    "cues": [
+     "50"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Your phone can clip live streams while you sleep 😴",
+  "cover": {
+   "lines": [
+    "Sleep.",
+    "Wake up to",
+    "50 clips"
+   ],
+   "hl": 2
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Tum so rahe ho, aur tumhare phone pe GTA 6 clips ban rahi hain.",
+    "params": {
+     "lines": [
+      "Tum so rahe ho",
+      "clips ban",
+      "rahi hain"
+     ],
+     "hl": 1,
+     "emoji": "😴",
+     "visual": "sleep"
+    },
+    "cues": [
+     "clips"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "Ye hai GTA 6 Super Clipper.",
+    "params": {
+     "tag": "Live stream → clips"
+    },
+    "cues": []
+   },
+   {
+    "scene": "streamers",
+    "text": "Raat ko kisi bade streamer ki YouTube ya Twitch live stream ka link daalo.",
+    "params": {
+     "title": "Kisi bhi live stream ka link"
+    },
+    "cues": [
+     "YouTube"
+    ]
+   },
+   {
+    "scene": "monitor",
+    "text": "App poori stream aur live chat dono pe nazar rakhta hai.",
+    "params": {
+     "kicker": "Clipper Engine",
+     "title": "Stream + chat"
+    },
+    "cues": [
+     "stream",
+     "chat"
+    ]
+   },
+   {
+    "scene": "moments",
+    "text": "Crazy chase, funny fail, insane moment, sab pakda jaata hai.",
+    "params": {
+     "items": [
+      [
+       "🚔",
+       "Crazy chase"
+      ],
+      [
+       "😂",
+       "Funny fail"
+      ],
+      [
+       "🤯",
+       "Insane moment"
+      ]
+     ]
+    },
+    "cues": [
+     "chase",
+     "fail",
+     "insane"
+    ]
+   },
+   {
+    "scene": "flow",
+    "text": "Subah uthte hi ready-to-post clips tumhara wait kar rahi hongi.",
+    "params": {
+     "a": "Raat bhar ki stream",
+     "b": "Subah ready clips ☀️"
+    },
+    "cues": [
+     "Subah",
+     "ready"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Clip any live stream from your phone in 10 seconds 📱",
+  "cover": {
+   "lines": [
+    "Clip live",
+    "streams from",
+    "your phone"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Bhai, kisi bhi live stream ko seedha mobile se clip karna hai? Dekho kaise.",
+    "params": {
+     "lines": [
+      "Live stream",
+      "mobile se",
+      "clip karo"
+     ],
+     "hl": 1,
+     "emoji": "😎",
+     "visual": "phone"
+    },
+    "cues": [
+     "Dekho"
+    ]
+   },
+   {
+    "scene": "copylink",
+    "text": "Step one, YouTube ya Twitch live kholo aur link copy karo.",
+    "params": {
+     "step": 1,
+     "label": "Link copy karo"
+    },
+    "cues": [
+     "live",
+     "copy"
+    ]
+   },
+   {
+    "scene": "paste",
+    "text": "Step two, GTA 6 Super Clipper mein paste karo aur start dabao.",
+    "params": {
+     "step": 2,
+     "label": "Paste + Start",
+     "done": "✅ Kaam khatam!"
+    },
+    "cues": [
+     "paste",
+     "start"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "Ab chat jaise hi pagal hoti hai, hype meter moment pakad leta hai aur clip ban jaati hai.",
+    "params": {
+     "stamp1": "🔥 Hype detect!",
+     "stamp2": "✂️ Auto clip!"
+    },
+    "cues": [
+     "hype",
+     "pakad",
+     "clip"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Seedha 9:16 mein export karo aur Reels pe daal do.",
+    "params": {},
+    "cues": [
+     "9:16",
+     "export",
+     "Reels"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Clip pages are blowing up with GTA 6 content 👀",
+  "cover": {
+   "lines": [
+    "GTA 6 clip",
+    "pages are",
+    "blowing up"
+   ],
+   "hl": 2
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "GTA 6 clip pages abhi sabse fast grow ho rahe hain, aur unka secret ye hai.",
+    "params": {
+     "lines": [
+      "GTA 6 clip pages",
+      "ka secret",
+      "ye hai"
+     ],
+     "hl": 1,
+     "emoji": "👀",
+     "visual": "cards"
+    },
+    "cues": [
+     "secret"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper.",
+    "params": {
+     "tag": "Live stream auto clipper"
+    },
+    "cues": []
+   },
+   {
+    "scene": "streamers",
+    "text": "Bade streamers ki live stream ka link daalo, YouTube ho ya Twitch.",
+    "params": {
+     "title": "Bade streamers ki live"
+    },
+    "cues": [
+     "YouTube"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "App chat ka hype aur gameplay ka action dono track karta hai, aur best moments khud clip karta hai.",
+    "params": {
+     "stamp1": "📈 Hype spike!",
+     "stamp2": "✂️ Best moment clipped"
+    },
+    "cues": [
+     "hype",
+     "action",
+     "clip"
+    ]
+   },
+   {
+    "scene": "postkit",
+    "text": "Har clip ke saath hook, title aur hashtags bhi ready.",
+    "params": {
+     "title": "Post kit ready",
+     "items": [
+      [
+       "🪝",
+       "Hook"
+      ],
+      [
+       "🏷️",
+       "Title"
+      ],
+      [
+       "#️⃣",
+       "Hashtags"
+      ]
+     ]
+    },
+    "cues": [
+     "hook",
+     "title",
+     "hashtags"
+    ]
+   },
+   {
+    "scene": "count",
+    "text": "Ek stream, 50 clips.",
+    "params": {
+     "n": 50,
+     "top": "Ek stream",
+     "sub": "📱 Sirf mobile se"
+    },
+    "cues": [
+     "50"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Missed the best moment of the stream? You can still clip it ⏪",
+  "cover": {
+   "lines": [
+    "Missed the",
+    "moment?",
+    "Clip it anyway"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Stream ka sabse best moment miss ho gaya? Tension mat lo.",
+    "params": {
+     "lines": [
+      "Best moment",
+      "miss ho gaya?"
+     ],
+     "hl": 1,
+     "emoji": "😱",
+     "visual": "face"
+    },
+    "cues": [
+     "Tension"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper mein ek button hai jo game change kar deta hai.",
+    "params": {
+     "tag": "⏪ Clip from"
+    },
+    "cues": []
+   },
+   {
+    "scene": "rewind",
+    "text": "Clip from dabao, aur 30 second se 5 minute peeche tak ka gameplay clip karo.",
+    "params": {
+     "q": "Peeche ka moment?",
+     "ok": "Clip from dabao"
+    },
+    "cues": [
+     "Clip",
+     "30",
+     "gameplay"
+    ]
+   },
+   {
+    "scene": "manual",
+    "text": "Ya phir khud timestamp choose karo, jahan se chahiye wahan se.",
+    "params": {
+     "title": "Ya khud timestamp choose karo"
+    },
+    "cues": [
+     "timestamp"
+    ]
+   },
+   {
+    "scene": "noedit",
+    "text": "Captions aur facecam layout app khud laga deta hai.",
+    "params": {
+     "bad": [
+      "Manual editing"
+     ],
+     "good": "Captions + facecam auto"
+    },
+    "cues": [
+     "Captions",
+     "layout"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Laptop vs phone for clipping streams? 🤔",
+  "cover": {
+   "lines": [
+    "No laptop",
+    "needed to",
+    "clip streams"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Stream clip karne ke liye laptop chahiye? Bilkul nahi.",
+    "params": {
+     "lines": [
+      "Laptop chahiye?",
+      "Bilkul nahi"
+     ],
+     "hl": 1,
+     "emoji": "❌",
+     "visual": "phone"
+    },
+    "cues": [
+     "nahi"
+    ]
+   },
+   {
+    "scene": "noedit",
+    "text": "Na Premiere Pro, na ghanton ka editing.",
+    "params": {
+     "bad": [
+      "Premiere Pro",
+      "Ghanton editing"
+     ],
+     "good": "Sirf ek phone 📱"
+    },
+    "cues": [
+     "Premiere",
+     "editing"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper sab kuch mobile pe karta hai.",
+    "params": {
+     "tag": "📱 100% mobile"
+    },
+    "cues": []
+   },
+   {
+    "scene": "paste",
+    "text": "Live stream ka link paste karo, start dabao, done.",
+    "params": {
+     "done": "✅ Done!"
+    },
+    "cues": [
+     "paste",
+     "start",
+     "done"
+    ]
+   },
+   {
+    "scene": "monitor",
+    "text": "Ab app poori stream aur chat monitor karega.",
+    "params": {
+     "title": "Auto monitoring"
+    },
+    "cues": [
+     "stream",
+     "chat"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Clips 9:16 ya 16:9 mein export karo, aur upload.",
+    "params": {},
+    "cues": [
+     "9:16",
+     "16:9",
+     "export",
+     "upload"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "This is how clip pages post 10 GTA 6 clips a day 🔥",
+  "cover": {
+   "lines": [
+    "10 clips",
+    "a day",
+    "from 1 stream"
+   ],
+   "hl": 0
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Clip pages roz das das clips kaise daalte hain? Ye dekho.",
+    "params": {
+     "lines": [
+      "Roz 10 clips",
+      "kaise?"
+     ],
+     "hl": 0,
+     "emoji": "🤔",
+     "visual": "cards"
+    },
+    "cues": [
+     "dekho"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "Wo use karte hain auto clipping, jaise GTA 6 Super Clipper.",
+    "params": {
+     "tag": "Auto clipping app"
+    },
+    "cues": []
+   },
+   {
+    "scene": "paste",
+    "text": "Ek live stream ka link daalo aur start karo.",
+    "params": {
+     "done": "▶ Engine on!"
+    },
+    "cues": [
+     "link",
+     "start"
+    ]
+   },
+   {
+    "scene": "moments",
+    "text": "Chase ho, crash ho, ya funny fail, har action moment detect hota hai.",
+    "params": {
+     "items": [
+      [
+       "🚔",
+       "Chase"
+      ],
+      [
+       "💥",
+       "Crash"
+      ],
+      [
+       "😂",
+       "Funny fail"
+      ]
+     ]
+    },
+    "cues": [
+     "Chase",
+     "crash",
+     "funny"
+    ]
+   },
+   {
+    "scene": "count",
+    "text": "Ek stream se 50 tak clips, captions ke saath.",
+    "params": {
+     "n": 50,
+     "top": "Ek stream se",
+     "sub": "💬 Captions ke saath"
+    },
+    "cues": [
+     "50"
+    ]
+   },
+   {
+    "scene": "statement",
+    "text": "Bas roz post karo aur page grow karo.",
+    "params": {
+     "lines": [
+      "Roz post karo",
+      "page grow karo"
+     ],
+     "hl": 1,
+     "emoji": "📈"
+    },
+    "cues": []
+   }
+  ]
+ },
+ {
+  "cap": "Your chat knows the best moments before you do 💬",
+  "cover": {
+   "lines": [
+    "Chat finds",
+    "the moment.",
+    "App clips it."
+   ],
+   "hl": 0
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Stream ka best moment kaun batata hai? Live chat.",
+    "params": {
+     "lines": [
+      "Best moment",
+      "kaun batata hai?"
+     ],
+     "hl": 0,
+     "emoji": "💬",
+     "visual": "face"
+    },
+    "cues": [
+     "chat"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "Jab chat mein achanak OMGGG aur skull emojis ki baarish hoti hai, hype meter upar jaata hai aur clip ban jaati hai.",
+    "params": {
+     "stamp1": "📈 Hype 96%!",
+     "stamp2": "✂️ Clip ban gayi!"
+    },
+    "cues": [
+     "OMGGG",
+     "hype",
+     "clip"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "Ye karta hai GTA 6 Super Clipper.",
+    "params": {
+     "tag": "Chat hype detector"
+    },
+    "cues": []
+   },
+   {
+    "scene": "monitor",
+    "text": "Aur sirf chat nahi, gameplay ka action bhi track karta hai.",
+    "params": {
+     "title": "Chat + action"
+    },
+    "cues": [
+     "chat",
+     "action"
+    ]
+   },
+   {
+    "scene": "postkit",
+    "text": "Har clip pe captions, hook aur title ready milta hai.",
+    "params": {
+     "items": [
+      [
+       "💬",
+       "Captions"
+      ],
+      [
+       "🪝",
+       "Hook"
+      ],
+      [
+       "🏷️",
+       "Title"
+      ]
+     ]
+    },
+    "cues": [
+     "captions",
+     "hook",
+     "title"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Stop scrubbing through 4-hour streams ⏳",
+  "cover": {
+   "lines": [
+    "4 hour stream?",
+    "Get the clips",
+    "automatically"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Char ghante ki stream mein se best moments dhoondhne baithe ho? Ruko.",
+    "params": {
+     "lines": [
+      "4 ghante",
+      "ki stream?"
+     ],
+     "hl": 0,
+     "emoji": "😩",
+     "visual": "phone"
+    },
+    "cues": [
+     "Ruko"
+    ]
+   },
+   {
+    "scene": "flow",
+    "text": "Char ghante ki stream, ab bas kuch minute mein clips ban jaati hain.",
+    "params": {
+     "a": "4 ghante ki stream",
+     "b": "Minutes mein clips ⚡"
+    },
+    "cues": [
+     "stream",
+     "minute"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper ke saath.",
+    "params": {
+     "tag": "AI live clipper"
+    },
+    "cues": []
+   },
+   {
+    "scene": "paste",
+    "text": "Link paste karo, start dabao.",
+    "params": {
+     "done": "✅ Ho gaya"
+    },
+    "cues": [
+     "paste",
+     "start"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "App hype aur action wale moments pakad ke khud clip karta hai.",
+    "params": {
+     "stamp1": "🎯 Moment mila!",
+     "stamp2": "✂️ Clip ready!"
+    },
+    "cues": [
+     "hype",
+     "pakad",
+     "clip"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Phir 9:16 mein export, aur Shorts pe upload.",
+    "params": {},
+    "cues": [
+     "9:16",
+     "export",
+     "Shorts"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Start a GTA 6 clip page without editing skills 🎮",
+  "cover": {
+   "lines": [
+    "No editing",
+    "skills?",
+    "No problem"
+   ],
+   "hl": 2
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Editing nahi aati, phir bhi GTA 6 clip page start karna hai?",
+    "params": {
+     "lines": [
+      "Editing",
+      "nahi aati?"
+     ],
+     "hl": 1,
+     "emoji": "🤷",
+     "visual": "cards"
+    },
+    "cues": [
+     "start"
+    ]
+   },
+   {
+    "scene": "statement",
+    "text": "Koi baat nahi, ab editing ki zarurat hi nahi.",
+    "params": {
+     "lines": [
+      "Koi baat nahi"
+     ],
+     "hl": 0,
+     "emoji": "😎"
+    },
+    "cues": []
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper khud clip, captions aur layout banata hai.",
+    "params": {
+     "tag": "Clip + captions + layout"
+    },
+    "cues": []
+   },
+   {
+    "scene": "streamers",
+    "text": "Bas kisi streamer ki live ka link do, YouTube ya Twitch.",
+    "params": {
+     "title": "Bas live ka link do"
+    },
+    "cues": [
+     "YouTube"
+    ]
+   },
+   {
+    "scene": "postkit",
+    "text": "Saath mein hook, title, description aur hashtags bhi.",
+    "params": {
+     "items": [
+      [
+       "🪝",
+       "Hook"
+      ],
+      [
+       "🏷️",
+       "Title"
+      ],
+      [
+       "📝",
+       "Description"
+      ],
+      [
+       "#️⃣",
+       "Hashtags"
+      ]
+     ]
+    },
+    "cues": [
+     "hook",
+     "title",
+     "description",
+     "hashtags"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Export karo aur post karo.",
+    "params": {},
+    "cues": [
+     "Export",
+     "post"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Facecam on top, gameplay below — done automatically 🎥",
+  "cover": {
+   "lines": [
+    "Facecam layout",
+    "done",
+    "automatically"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Har clip mein facecam upar, gameplay neeche, aur captions beech mein. Wo bhi automatic.",
+    "params": {
+     "lines": [
+      "Facecam upar",
+      "gameplay neeche"
+     ],
+     "hl": 0,
+     "emoji": "🎥",
+     "visual": "phone"
+    },
+    "cues": [
+     "automatic"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "Ye karta hai GTA 6 Super Clipper.",
+    "params": {
+     "tag": "Auto 9:16 layout"
+    },
+    "cues": []
+   },
+   {
+    "scene": "noedit",
+    "text": "Facecam crop karne ka jhanjhat khatam.",
+    "params": {
+     "bad": [
+      "Facecam crop"
+     ],
+     "good": "Face auto detect"
+    },
+    "cues": [
+     "Facecam",
+     "khatam"
+    ]
+   },
+   {
+    "scene": "paste",
+    "text": "Live link paste karo aur start karo.",
+    "params": {
+     "done": "▶ Clipping on!"
+    },
+    "cues": [
+     "paste",
+     "start"
+    ]
+   },
+   {
+    "scene": "moments",
+    "text": "Funny fail ho ya insane chase, clip khud banegi.",
+    "params": {
+     "items": [
+      [
+       "😂",
+       "Funny fail"
+      ],
+      [
+       "🚔",
+       "Insane chase"
+      ],
+      [
+       "✂️",
+       "Auto clip"
+      ]
+     ]
+    },
+    "cues": [
+     "Funny",
+     "chase",
+     "clip"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "9:16 mein export karo, Reels ready.",
+    "params": {},
+    "cues": [
+     "9:16",
+     "export",
+     "Reels"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Run this on a 3-hour GTA stream and see what happens 🤯",
+  "cover": {
+   "lines": [
+    "3 hour stream",
+    "→",
+    "50 clips"
+   ],
+   "hl": 2
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Teen ghante ki GTA stream pe ye app chalao, aur result dekho.",
+    "params": {
+     "lines": [
+      "3 ghante ki stream",
+      "result dekho"
+     ],
+     "hl": 1,
+     "emoji": "🤯",
+     "visual": "cards"
+    },
+    "cues": [
+     "result"
+    ]
+   },
+   {
+    "scene": "count",
+    "text": "Pachaas tak clips, bina khud edit kiye.",
+    "params": {
+     "n": 50,
+     "top": "Result",
+     "sub": "✂️ Zero editing"
+    },
+    "cues": [
+     "Pachaas"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "App ka naam hai GTA 6 Super Clipper.",
+    "params": {
+     "tag": "AI live clipper"
+    },
+    "cues": []
+   },
+   {
+    "scene": "hype",
+    "text": "Ye chat ka hype aur gameplay ka action detect karke khud clip banata hai.",
+    "params": {
+     "stamp1": "🔥 Hype detect",
+     "stamp2": "✂️ Auto clip"
+    },
+    "cues": [
+     "hype",
+     "action",
+     "clip"
+    ]
+   },
+   {
+    "scene": "postkit",
+    "text": "Captions aur title bhi ready milte hain.",
+    "params": {
+     "items": [
+      [
+       "💬",
+       "Captions"
+      ],
+      [
+       "🏷️",
+       "Title"
+      ],
+      [
+       "⭐",
+       "Viral score"
+      ]
+     ]
+    },
+    "cues": [
+     "Captions",
+     "title"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Copy. Paste. Clips. 📋✂️",
+  "cover": {
+   "lines": [
+    "Copy.",
+    "Paste.",
+    "Clips."
+   ],
+   "hl": 2
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Copy, paste, aur clips ready. Bas itna simple hai.",
+    "params": {
+     "lines": [
+      "Copy.",
+      "Paste.",
+      "Clips."
+     ],
+     "hl": 2,
+     "emoji": "✂️",
+     "visual": "phone"
+    },
+    "cues": [
+     "simple"
+    ]
+   },
+   {
+    "scene": "copylink",
+    "text": "YouTube ya Twitch live ka link copy karo.",
+    "params": {
+     "step": 1,
+     "label": "Copy"
+    },
+    "cues": [
+     "live",
+     "copy"
+    ]
+   },
+   {
+    "scene": "paste",
+    "text": "GTA 6 Super Clipper mein paste karo aur start.",
+    "params": {
+     "step": 2,
+     "label": "Paste",
+     "done": "✅ Start!"
+    },
+    "cues": [
+     "paste",
+     "start"
+    ]
+   },
+   {
+    "scene": "monitor",
+    "text": "App stream aur chat dono pe nazar rakhta hai.",
+    "params": {
+     "title": "Auto watch"
+    },
+    "cues": [
+     "stream",
+     "chat"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "Hype moment aate hi clip ready.",
+    "params": {
+     "stamp1": "🎯 Hype!",
+     "stamp2": "✂️ Clip!"
+    },
+    "cues": [
+     "Hype",
+     "clip"
+    ]
+   },
+   {
+    "scene": "count",
+    "text": "Ek stream se 50 tak clips.",
+    "params": {
+     "n": 50,
+     "top": "Ek stream se"
+    },
+    "cues": [
+     "50"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Clip CarryMinati-style moments automatically 🔥",
+  "cover": {
+   "lines": [
+    "Big streamer",
+    "moments,",
+    "auto clipped"
+   ],
+   "hl": 2
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "CarryMinati jaise bade streamers ki live mein roz kitne viral moments hote hain, socho.",
+    "params": {
+     "lines": [
+      "Bade streamers",
+      "ke viral",
+      "moments"
+     ],
+     "hl": 2,
+     "emoji": "🔥",
+     "visual": "face"
+    },
+    "cues": [
+     "socho"
+    ]
+   },
+   {
+    "scene": "streamers",
+    "text": "Unki live ka link uthao, YouTube ya Twitch se.",
+    "params": {
+     "title": "Live ka link uthao"
+    },
+    "cues": [
+     "YouTube"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "Aur GTA 6 Super Clipper mein daal do.",
+    "params": {
+     "tag": "Auto clipper"
+    },
+    "cues": []
+   },
+   {
+    "scene": "hype",
+    "text": "Jab chat pagal hoti hai, app wo moment khud clip kar leta hai.",
+    "params": {
+     "stamp1": "💬 Chat pagal!",
+     "stamp2": "✂️ Clip saved"
+    },
+    "cues": [
+     "chat",
+     "clip"
+    ]
+   },
+   {
+    "scene": "noedit",
+    "text": "Captions aur facecam layout bhi automatic.",
+    "params": {
+     "bad": [
+      "Manual captions"
+     ],
+     "good": "Sab automatic"
+    },
+    "cues": [
+     "Captions",
+     "automatic"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Your clip page, on autopilot 🤖",
+  "cover": {
+   "lines": [
+    "Clip page",
+    "on",
+    "autopilot"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Agar tumhara clip page autopilot pe chale toh?",
+    "params": {
+     "lines": [
+      "Clip page",
+      "autopilot pe?"
+     ],
+     "hl": 1,
+     "emoji": "🤖",
+     "visual": "cards"
+    },
+    "cues": [
+     "autopilot"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper ke saath ye possible hai.",
+    "params": {
+     "tag": "Auto clipping"
+    },
+    "cues": []
+   },
+   {
+    "scene": "paste",
+    "text": "Live stream ka link daalo aur start dabao.",
+    "params": {
+     "done": "🤖 Autopilot on"
+    },
+    "cues": [
+     "link",
+     "start"
+    ]
+   },
+   {
+    "scene": "monitor",
+    "text": "App khud stream aur chat dekhta rehta hai.",
+    "params": {
+     "title": "24/7 watch"
+    },
+    "cues": [
+     "stream",
+     "chat"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "Hype aur action moments pe clip apne aap banti hai.",
+    "params": {
+     "stamp1": "⚡ Action!",
+     "stamp2": "✂️ Auto clip"
+    },
+    "cues": [
+     "Hype",
+     "clip"
+    ]
+   },
+   {
+    "scene": "postkit",
+    "text": "Aur har clip ke saath hook aur title ready.",
+    "params": {
+     "items": [
+      [
+       "🪝",
+       "Hook"
+      ],
+      [
+       "🏷️",
+       "Title"
+      ],
+      [
+       "💬",
+       "Captions"
+      ]
+     ]
+    },
+    "cues": [
+     "hook",
+     "title"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "The easiest way to make GTA 6 Shorts 📱",
+  "cover": {
+   "lines": [
+    "Easiest way",
+    "to make",
+    "GTA 6 Shorts"
+   ],
+   "hl": 2
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "GTA 6 Shorts banane ka sabse easy tareeka, wo bhi mobile pe.",
+    "params": {
+     "lines": [
+      "GTA 6 Shorts",
+      "sabse easy",
+      "tareeka"
+     ],
+     "hl": 1,
+     "emoji": "📱",
+     "visual": "phone"
+    },
+    "cues": [
+     "mobile"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper app.",
+    "params": {
+     "tag": "Live → Shorts"
+    },
+    "cues": []
+   },
+   {
+    "scene": "streamers",
+    "text": "Kisi bhi YouTube ya Twitch live ka link lo.",
+    "params": {
+     "title": "Koi bhi live stream"
+    },
+    "cues": [
+     "YouTube"
+    ]
+   },
+   {
+    "scene": "paste",
+    "text": "App mein paste karo aur start karo.",
+    "params": {
+     "done": "✅ Ready"
+    },
+    "cues": [
+     "paste",
+     "start"
+    ]
+   },
+   {
+    "scene": "moments",
+    "text": "Chase, fail aur insane plays, sab ki clips khud banti hain.",
+    "params": {
+     "items": [
+      [
+       "🚔",
+       "Chase"
+      ],
+      [
+       "😂",
+       "Fail"
+      ],
+      [
+       "🎯",
+       "Insane play"
+      ]
+     ]
+    },
+    "cues": [
+     "Chase",
+     "fail",
+     "insane"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "9:16 export karo aur Shorts pe daal do.",
+    "params": {},
+    "cues": [
+     "9:16",
+     "export",
+     "Shorts"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "POV: you found the app every clip page uses 🤫",
+  "cover": {
+   "lines": [
+    "The clipping",
+    "app nobody",
+    "talks about"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Ye wo app hai jiske baare mein clip pages kisi ko nahi batate.",
+    "params": {
+     "lines": [
+      "Ye app",
+      "koi nahi batata"
+     ],
+     "hl": 1,
+     "emoji": "🤫",
+     "visual": "cards"
+    },
+    "cues": [
+     "batate"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper.",
+    "params": {
+     "tag": "AI live stream clipper"
+    },
+    "cues": []
+   },
+   {
+    "scene": "monitor",
+    "text": "Ye live stream aur chat ko monitor karta hai.",
+    "params": {
+     "title": "Stream + chat monitor"
+    },
+    "cues": [
+     "stream",
+     "chat"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "Aur jaise hi kuch crazy hota hai, clip khud ban jaati hai.",
+    "params": {
+     "stamp1": "🤯 Crazy moment",
+     "stamp2": "✂️ Clip ready"
+    },
+    "cues": [
+     "crazy",
+     "clip"
+    ]
+   },
+   {
+    "scene": "rewind",
+    "text": "Moment miss ho gaya? Clip from se peeche ka gameplay bhi clip karo.",
+    "params": {
+     "q": "Miss ho gaya?",
+     "ok": "Clip from"
+    },
+    "cues": [
+     "miss",
+     "Clip",
+     "gameplay"
+    ]
+   },
+   {
+    "scene": "count",
+    "text": "Ek stream se 50 tak clips.",
+    "params": {
+     "n": 50
+    },
+    "cues": [
+     "50"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Editing vs auto-clipping. Which one wins? ⚡",
+  "cover": {
+   "lines": [
+    "Editing",
+    "vs",
+    "Auto clipping"
+   ],
+   "hl": 2
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Ek clip manually edit karo, ya 50 clips automatically banao. Choice tumhari.",
+    "params": {
+     "lines": [
+      "1 clip manual",
+      "ya",
+      "50 clips auto?"
+     ],
+     "hl": 2,
+     "emoji": "⚡",
+     "visual": "phone"
+    },
+    "cues": [
+     "Choice"
+    ]
+   },
+   {
+    "scene": "noedit",
+    "text": "Manual editing matlab ghante barbaad.",
+    "params": {
+     "bad": [
+      "Ghante barbaad"
+     ],
+     "good": "Auto clipping ⚡"
+    },
+    "cues": [
+     "Manual",
+     "barbaad"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper live stream se khud clips banata hai.",
+    "params": {
+     "tag": "Auto clips"
+    },
+    "cues": []
+   },
+   {
+    "scene": "paste",
+    "text": "Link paste, start, bas.",
+    "params": {
+     "done": "✅ Bas"
+    },
+    "cues": [
+     "paste",
+     "start",
+     "bas"
+    ]
+   },
+   {
+    "scene": "postkit",
+    "text": "Captions, hook, title sab ready.",
+    "params": {
+     "items": [
+      [
+       "💬",
+       "Captions"
+      ],
+      [
+       "🪝",
+       "Hook"
+      ],
+      [
+       "🏷️",
+       "Title"
+      ]
+     ]
+    },
+    "cues": [
+     "Captions",
+     "hook",
+     "title"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Export karo, Reels ya Shorts pe daalo.",
+    "params": {},
+    "cues": [
+     "Export",
+     "Reels",
+     "Shorts"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Don't miss GTA 6 launch-week streams 🚀",
+  "cover": {
+   "lines": [
+    "GTA 6 streams",
+    "= endless",
+    "clips"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "GTA 6 aate hi har streamer live hoga, aur har stream mein viral moments.",
+    "params": {
+     "lines": [
+      "GTA 6 streams",
+      "= viral",
+      "moments"
+     ],
+     "hl": 1,
+     "emoji": "🚀",
+     "visual": "face"
+    },
+    "cues": [
+     "viral"
+    ]
+   },
+   {
+    "scene": "statement",
+    "text": "Sawaal ye hai, tum unhe clip kaise karoge?",
+    "params": {
+     "lines": [
+      "Clip kaise",
+      "karoge?"
+     ],
+     "hl": 0,
+     "emoji": "🤔"
+    },
+    "cues": []
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper ke saath.",
+    "params": {
+     "tag": "Live clipping"
+    },
+    "cues": []
+   },
+   {
+    "scene": "paste",
+    "text": "Link paste karo aur start dabao.",
+    "params": {
+     "done": "✅ Ready"
+    },
+    "cues": [
+     "paste",
+     "start"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "Chat ka hype aur gameplay ka action, dono se clips khud banti hain.",
+    "params": {
+     "stamp1": "🔥 Hype",
+     "stamp2": "✂️ Clips ready"
+    },
+    "cues": [
+     "hype",
+     "action",
+     "clips"
+    ]
+   },
+   {
+    "scene": "count",
+    "text": "Ek stream se 50 tak.",
+    "params": {
+     "n": 50
+    },
+    "cues": [
+     "50"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Choose your own timestamp, get a clip ⏱️",
+  "cover": {
+   "lines": [
+    "Pick a",
+    "timestamp.",
+    "Get a clip."
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Stream ka koi bhi part clip karna ho, bas timestamp chuno.",
+    "params": {
+     "lines": [
+      "Koi bhi part",
+      "clip karo"
+     ],
+     "hl": 1,
+     "emoji": "⏱️",
+     "visual": "phone"
+    },
+    "cues": [
+     "timestamp"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper mein ye feature hai.",
+    "params": {
+     "tag": "Manual + auto clips"
+    },
+    "cues": []
+   },
+   {
+    "scene": "manual",
+    "text": "Apna start time select karo aur clip ready.",
+    "params": {
+     "title": "Apna timestamp chuno"
+    },
+    "cues": [
+     "select"
+    ]
+   },
+   {
+    "scene": "rewind",
+    "text": "Ya Clip from dabao aur 5 minute peeche tak ka gameplay clip karo.",
+    "params": {
+     "q": "Peeche ka scene?",
+     "ok": "Clip from dabao"
+    },
+    "cues": [
+     "Clip",
+     "minute",
+     "gameplay"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "Aur baaki hype moments app khud clip karta hai.",
+    "params": {
+     "stamp1": "🎯 Auto detect",
+     "stamp2": "✂️ Auto clip"
+    },
+    "cues": [
+     "hype",
+     "clip"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Sab 9:16 mein export ready.",
+    "params": {},
+    "cues": [
+     "9:16",
+     "export"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "One link. Fifty clips. 🔗",
+  "cover": {
+   "lines": [
+    "One link.",
+    "50 clips."
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Ek link, aur pachaas tak clips. Haan, sach mein.",
+    "params": {
+     "lines": [
+      "Ek link",
+      "50 clips"
+     ],
+     "hl": 1,
+     "emoji": "🔗",
+     "visual": "cards"
+    },
+    "cues": [
+     "pachaas"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper mein kisi bhi live stream ka link daalo.",
+    "params": {
+     "tag": "YouTube + Twitch"
+    },
+    "cues": []
+   },
+   {
+    "scene": "monitor",
+    "text": "App poori stream aur live chat dekhta hai.",
+    "params": {
+     "title": "Poori stream scan"
+    },
+    "cues": [
+     "stream",
+     "chat"
+    ]
+   },
+   {
+    "scene": "moments",
+    "text": "Har crazy chase, har funny fail, har insane moment.",
+    "params": {
+     "items": [
+      [
+       "🚔",
+       "Crazy chase"
+      ],
+      [
+       "😂",
+       "Funny fail"
+      ],
+      [
+       "🤯",
+       "Insane moment"
+      ]
+     ]
+    },
+    "cues": [
+     "chase",
+     "fail",
+     "insane"
+    ]
+   },
+   {
+    "scene": "count",
+    "text": "Ek stream se 50 tak clips ban sakti hain.",
+    "params": {
+     "n": 50,
+     "sub": "📱 Mobile pe"
+    },
+    "cues": [
+     "50"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Export karo aur post karo.",
+    "params": {},
+    "cues": [
+     "Export",
+     "post"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "This is what happens when chat goes crazy 💀",
+  "cover": {
+   "lines": [
+    "When chat",
+    "goes crazy",
+    "→ auto clip"
+   ],
+   "hl": 0
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Jab live chat mein skull emojis ki baarish hoti hai, samajh jao kuch bada hua hai.",
+    "params": {
+     "lines": [
+      "Chat mein",
+      "💀💀💀"
+     ],
+     "hl": 1,
+     "emoji": "",
+     "visual": "face"
+    },
+    "cues": [
+     "samajh"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "GTA 6 Super Clipper ka hype meter wahi moment pakadta hai, aur turant clip bana deta hai.",
+    "params": {
+     "stamp1": "📈 Hype meter!",
+     "stamp2": "✂️ Turant clip"
+    },
+    "cues": [
+     "hype",
+     "pakadta",
+     "clip"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "Bas live stream ka link chahiye.",
+    "params": {
+     "tag": "YouTube · Twitch"
+    },
+    "cues": []
+   },
+   {
+    "scene": "noedit",
+    "text": "Captions aur facecam layout automatic.",
+    "params": {
+     "bad": [
+      "Manual captions"
+     ],
+     "good": "Auto captions"
+    },
+    "cues": [
+     "Captions",
+     "automatic"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Seedha Reels ya Shorts pe daalo.",
+    "params": {},
+    "cues": [
+     "Reels",
+     "Shorts"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Make clips while you watch the stream 🍿",
+  "cover": {
+   "lines": [
+    "Watch the",
+    "stream.",
+    "Clips make themselves."
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Tum aaram se stream dekho, clips apne aap banti rahengi.",
+    "params": {
+     "lines": [
+      "Tum stream dekho",
+      "clips khud",
+      "banengi"
+     ],
+     "hl": 1,
+     "emoji": "🍿",
+     "visual": "phone"
+    },
+    "cues": [
+     "clips"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "Ye hai GTA 6 Super Clipper.",
+    "params": {
+     "tag": "Auto live clipper"
+    },
+    "cues": []
+   },
+   {
+    "scene": "paste",
+    "text": "Link paste karo, start dabao.",
+    "params": {
+     "done": "🍿 Ab aaram karo"
+    },
+    "cues": [
+     "paste",
+     "start"
+    ]
+   },
+   {
+    "scene": "moments",
+    "text": "Chase, crash ya funny fail, sab clip hota hai.",
+    "params": {
+     "items": [
+      [
+       "🚔",
+       "Chase"
+      ],
+      [
+       "💥",
+       "Crash"
+      ],
+      [
+       "😂",
+       "Funny fail"
+      ]
+     ]
+    },
+    "cues": [
+     "Chase",
+     "crash",
+     "funny"
+    ]
+   },
+   {
+    "scene": "rewind",
+    "text": "Kuch miss hua toh Clip from se peeche ka clip bana lo.",
+    "params": {
+     "q": "Kuch miss hua?",
+     "ok": "Clip from"
+    },
+    "cues": [
+     "miss",
+     "Clip",
+     "peeche"
+    ]
+   },
+   {
+    "scene": "postkit",
+    "text": "Har clip ke saath captions aur title ready.",
+    "params": {
+     "items": [
+      [
+       "💬",
+       "Captions"
+      ],
+      [
+       "🏷️",
+       "Title"
+      ],
+      [
+       "⭐",
+       "Viral score"
+      ]
+     ]
+    },
+    "cues": [
+     "captions",
+     "title"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "Every clip comes with a viral score ⭐",
+  "cover": {
+   "lines": [
+    "Every clip",
+    "gets a",
+    "viral score"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Kaunsi clip viral jaayegi, ye post karne se pehle pata chal jaaye toh?",
+    "params": {
+     "lines": [
+      "Kaunsi clip",
+      "viral jaayegi?"
+     ],
+     "hl": 1,
+     "emoji": "⭐",
+     "visual": "cards"
+    },
+    "cues": [
+     "pehle"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper har clip ko viral score deta hai.",
+    "params": {
+     "tag": "⭐ Viral score"
+    },
+    "cues": []
+   },
+   {
+    "scene": "postkit",
+    "text": "Saath mein hook, title, description aur hashtags bhi.",
+    "params": {
+     "items": [
+      [
+       "⭐",
+       "Viral score"
+      ],
+      [
+       "🪝",
+       "Hook"
+      ],
+      [
+       "🏷️",
+       "Title"
+      ],
+      [
+       "#️⃣",
+       "Hashtags"
+      ]
+     ]
+    },
+    "cues": [
+     "hook",
+     "title",
+     "hashtags"
+    ]
+   },
+   {
+    "scene": "paste",
+    "text": "Bas live stream ka link paste karo.",
+    "params": {
+     "done": "✅ Start"
+    },
+    "cues": [
+     "paste"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "Hype moments pe clips khud banti hain.",
+    "params": {
+     "stamp1": "🔥 Hype",
+     "stamp2": "✂️ Clip"
+    },
+    "cues": [
+     "Hype",
+     "clips"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Best wali chuno aur post karo.",
+    "params": {},
+    "cues": [
+     "Best",
+     "post"
+    ]
+   }
+  ]
+ },
+ {
+  "cap": "GTA 6 clips in 9:16 and 16:9 — one tap ✂️",
+  "cover": {
+   "lines": [
+    "9:16 or 16:9",
+    "one tap"
+   ],
+   "hl": 1
+  },
+  "beats": [
+   {
+    "scene": "hook",
+    "text": "Reels ke liye vertical chahiye, YouTube ke liye wide. Dono ek hi app se.",
+    "params": {
+     "lines": [
+      "Vertical + wide",
+      "ek hi app"
+     ],
+     "hl": 1,
+     "emoji": "✂️",
+     "visual": "phone"
+    },
+    "cues": [
+     "Dono"
+    ]
+   },
+   {
+    "scene": "name",
+    "text": "GTA 6 Super Clipper.",
+    "params": {
+     "tag": "9:16 · 16:9"
+    },
+    "cues": []
+   },
+   {
+    "scene": "paste",
+    "text": "Live stream link paste karo aur start.",
+    "params": {
+     "done": "✅ Start"
+    },
+    "cues": [
+     "paste",
+     "start"
+    ]
+   },
+   {
+    "scene": "hype",
+    "text": "App hype moments detect karke clips banata hai.",
+    "params": {
+     "stamp1": "🎯 Detect",
+     "stamp2": "✂️ Clip"
+    },
+    "cues": [
+     "hype",
+     "clips"
+    ]
+   },
+   {
+    "scene": "export",
+    "text": "Phir 9:16 ya 16:9, jo chahiye wo export karo, aur Reels ya Shorts pe upload.",
+    "params": {},
+    "cues": [
+     "9:16",
+     "16:9",
+     "export",
+     "Reels"
+    ]
+   },
+   {
+    "scene": "count",
+    "text": "Ek stream se 50 tak clips.",
+    "params": {
+     "n": 50
+    },
+    "cues": [
+     "50"
+    ]
+   }
+  ]
+ }
+]
