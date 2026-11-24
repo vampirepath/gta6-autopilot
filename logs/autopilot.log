@@ -608,3 +608,20 @@ Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/
 Error opening input files: Invalid data found when processing input
 
 
+2026-11-24 12:22:45,421 INFO fetched 69 candidate stories
+2026-11-24 12:22:46,607 INFO story: How to Get the Safe Code and Disarm the Alarm at Donovan Banks & Co. in GTA 6 (GTA BOOM – Latest Articles, 2774 chars)
+2026-11-24 12:22:48,592 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-24 12:22:56,432 INFO used backup model gemini-flash-lite-latest
+2026-11-24 12:22:59,799 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-24 12:23:09,752 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-24 12:23:16,032 INFO all models busy – waiting 60 s (round 1)
+2026-11-24 12:24:16,934 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-24 12:24:31,337 INFO used backup model gemini-flash-lite-latest
+2026-11-24 12:24:31,496 INFO trimmed long line: Play as Lucia and invite Jason using Triangle or Y to watch 
+2026-11-24 12:24:31,499 INFO script: GTA 6 Donovan Banks robbery secret code revealed (14 lines, 170 words)
+2026-11-24 12:24:31,500 INFO visuals: subject[Jason And Lucia Robbery], map, stat, subject[Vice City], clip, list, stat, ai, subject[Jason And Lucia], clip, clip, ai, clip, subject[Cover Art]
+2026-11-24 12:24:31,643 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 377 credits are required for this request.","status":"quota_exceeded","request_id":"4a70e0f82a2889250f8c5463454592c1"}} – using free voice
+2026-11-24 12:24:41,396 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-24 12:27:20,898 INFO rendered 26 shots, 50.4s
+2026-11-24 12:27:24,915 INFO video ready: 20261124_122246.mp4 (50.4s)
+2026-11-24 12:37:56,406 INFO YouTube: https://youtube.com/shorts/FxP6t1GtjDo
