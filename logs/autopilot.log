@@ -625,3 +625,16 @@ Error opening input files: Invalid data found when processing input
 2026-11-24 12:27:20,898 INFO rendered 26 shots, 50.4s
 2026-11-24 12:27:24,915 INFO video ready: 20261124_122246.mp4 (50.4s)
 2026-11-24 12:37:56,406 INFO YouTube: https://youtube.com/shorts/FxP6t1GtjDo
+2026-11-24 22:45:04,601 INFO fetched 68 candidate stories
+2026-11-24 22:45:05,486 INFO story: Where to Find Arthur Morgan's Hat in GTA 6 (GTA BOOM – Latest Articles, 1073 chars)
+2026-11-24 22:45:08,255 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-24 22:45:17,714 INFO used backup model gemini-flash-lite-latest
+2026-11-24 22:45:46,630 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-24 22:45:57,892 INFO used backup model gemini-flash-lite-latest
+2026-11-24 22:45:57,955 INFO script: Arthur Morgan's Hat Is Hidden In GTA 6 (15 lines, 143 words)
+2026-11-24 22:45:57,955 INFO visuals: subject[Port Gellhorn], subject[Vice City], subject[Port Gellhorn], clip, ai, stat, clip, clip, ai, clip, subject[Lucia Caminos], clip, stat, subject[Lucia Caminos], subject[Vice City]
+2026-11-24 22:45:58,172 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 313 credits are required for this request.","status":"quota_exceeded","request_id":"26ad6907ff6da848dd07720eaba854ce"}} – using free voice
+2026-11-24 22:46:14,155 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-24 22:47:54,154 INFO rendered 22 shots, 40.8s
+2026-11-24 22:47:56,680 INFO video ready: 20261124_224505.mp4 (40.8s)
+2026-11-24 22:58:11,510 INFO YouTube: https://youtube.com/shorts/DT3x4G79sEI
