@@ -12,8 +12,15 @@ import numpy as np
 import requests
 import soundfile as sf
 
-from autopilot.common import env, log
+from autopilot.common import config, env, log
+import autopilot.llm as _llm
 from autopilot.llm import ask
+
+# more Gemini models to fall back on when the free tier is overloaded (503)
+_cfg = config()
+_cfg["gemini_models"] = ["gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest", "gemini-2.5-flash-lite",
+                         "gemini-2.0-flash", "gemma-3-27b-it"]
+_llm.config = lambda: _cfg
 
 HERE = Path(__file__).resolve().parent
 ASSETS, ENGINE, STATE = HERE / "assets", HERE / "engine", HERE / "state"
@@ -135,7 +142,7 @@ Also write:
 - "hook_summary": the first sentence of the script.
 
 Return JSON: {{"hook_summary":"","beats":[{{"text":"","scene":"","params":{{}},"cues":[]}}],"caption":"","cover":{{}}}}"""
-    for attempt in range(4):
+    for attempt in range(6):
         try:
             d = json.loads(re.sub(r"^```(json)?|```$", "", ask(prompt).strip(), flags=re.M))
             beats = [b for b in d["beats"] if b.get("text", "").strip()]
@@ -155,7 +162,9 @@ Return JSON: {{"hook_summary":"","beats":[{{"text":"","scene":"","params":{{}},"
             return d
         except Exception as e:
             log.warning("script attempt %d rejected: %s", attempt + 1, e)
-    raise RuntimeError("Gemini could not write a valid script")
+            if "Gemini failed" in str(e):
+                time.sleep(120)
+    raise RuntimeError("Gemini could not write a valid script (Google's free AI was busy – the next run will try again)")
 
 
 # ---------------------------------------------------------------- voice
