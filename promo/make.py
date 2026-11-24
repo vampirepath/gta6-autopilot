@@ -143,7 +143,7 @@ Return JSON: {{"hook_summary":"","beats":[{{"text":"","scene":"","params":{{}},"
             full = " ".join(b["text"] for b in beats)
             if BANNED.search(full) or BANNED.search(d.get("caption", "").replace("free to", "")):
                 raise ValueError("banned word: " + BANNED.search(full + d.get("caption", "")).group(0))
-            if not 70 <= words <= 140:
+            if not 70 <= words <= 165:
                 raise ValueError(f"{words} words")
             if beats[0].get("scene") != "hook":
                 beats[0]["scene"] = "hook"
