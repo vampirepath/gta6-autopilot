@@ -1,6 +1,6 @@
 """GTA 6 Super Clipper promo-reel autopilot.
 
-script (Claude script bank)  ->  voice (ElevenLabs, Viraj)  ->  animated reel (HTML engine + Chrome)
+script (Claude script bank)  ->  voice (free VoxCPM2, your chosen voice)  ->  animated reel (HTML engine + Chrome)
 ->  music + SFX  ->  Telegram (video + cover + ready-to-paste caption).  Nothing is posted anywhere.
 
 Run:  python -m promo.make            (from the repo root)
@@ -62,11 +62,16 @@ def load_hist():
 
 
 BANK = HERE / "scripts.json"      # scripts written by Claude (no Gemini)
-CTAS = ["Agar tumhe bhi ye app chahiye, toh mujhe follow karo, link meri bio mein hai.",
-        "Ye app chahiye? Toh abhi follow karo, link meri bio mein hai.",
-        "App chahiye toh mujhe follow karo, link bio mein hai."]
-PERMS = ["Aur haan, sirf unhi streamers ko clip karna jo clipping ki permission dete hain.",
-         "Bas yaad rakhna, sirf wahi streamers chunna jo clipping allow karte hain."]
+CTAS = [("Agar tumhe bhi ye app chahiye, toh mujhe follow karo, link meri bio mein hai.",
+         "अगर तुम्हें भी ये ऐप चाहिए, तो मुझे फ़ॉलो करो, लिंक मेरी बायो में है।"),
+        ("Ye app chahiye? Toh abhi follow karo, link meri bio mein hai.",
+         "ये ऐप चाहिए? तो अभी फ़ॉलो करो, लिंक मेरी बायो में है।"),
+        ("App chahiye toh mujhe follow karo, link bio mein hai.",
+         "ऐप चाहिए तो मुझे फ़ॉलो करो, लिंक बायो में है।")]
+PERMS = [("Aur haan, sirf unhi streamers ko clip karna jo clipping ki permission dete hain.",
+          "और हाँ, सिर्फ़ उन्हीं स्ट्रीमर्स को क्लिप करना जो क्लिपिंग की परमिशन देते हैं।"),
+         ("Bas yaad rakhna, sirf wahi streamers chunna jo clipping allow karte hain.",
+          "बस याद रखना, सिर्फ़ वही स्ट्रीमर्स चुनना जो क्लिपिंग अलाउ करते हैं।")]
 FEATS = ["✅ Works with YouTube and Twitch live streams", "✅ Catches hype moments from live chat on its own 🔥",
          "✅ Detects action: chases, fails, crashes", "✅ \"Clip from\" lets you clip earlier gameplay ⏪",
          "✅ Auto captions + facecam layout", "✅ Hook, title & hashtags ready for every clip",
@@ -85,8 +90,10 @@ def write_script(hist):
     i = left[0]
     s = bank[i]
     beats = [dict(b) for b in s["beats"]]
-    beats.append({"text": random.choice(CTAS), "scene": "cta", "params": {}, "cues": ["follow", "link"]})
-    beats.append({"text": random.choice(PERMS), "scene": "permission", "params": {}, "cues": []})
+    c, cd = random.choice(CTAS)
+    pm, pd = random.choice(PERMS)
+    beats.append({"text": c, "deva": cd, "scene": "cta", "params": {}, "cues": ["follow", "link"]})
+    beats.append({"text": pm, "deva": pd, "scene": "permission", "params": {}, "cues": []})
     feats = random.sample(FEATS, 5)
     cap = (f"{s['cap']}\n\nNo laptop, no editing. Just paste a live stream link and the app does the rest 😎\n\n" + "\n".join(feats) +
            "\n\nWant the app? Follow me 👉 link in bio 🔗\n\n⚠️ Only clip streamers who allow clipping, and always give credit 🙏\n"
@@ -135,60 +142,59 @@ def credits_left(key):
         return None
 
 
-def make_voice(text, work):
-    key = env("PROMO_ELEVENLABS_API_KEY") or env("ELEVENLABS_API_KEY")
-    if not key:
-        raise RuntimeError("ELEVENLABS_API_KEY secret is missing")
-    vid = voice_id(key)
-    # same settings as your Studio: Eleven v4, stability 50, similarity 75 (falls back to multilingual v2 if v4 isn't allowed)
-    for model in ("eleven_v4", "eleven_multilingual_v2"):
-        r = requests.post(f"{EL}/text-to-speech/{vid}/with-timestamps", params={"output_format": "mp3_44100_128"},
-                          headers={"xi-api-key": key}, timeout=240,
-                          json={"text": text, "model_id": model,
-                                "voice_settings": {"stability": 0.5, "similarity_boost": 0.75, "use_speaker_boost": True}})
-        if r.status_code == 200:
-            log.info("voice model: %s", model)
-            break
-        log.warning("ElevenLabs %s error %s: %s", model, r.status_code, r.text[:300])
-    if r.status_code != 200:
-        raise RuntimeError(f"ElevenLabs error {r.status_code}: {r.text[:300]}")
-    data = r.json()
-    (work / "raw.mp3").write_bytes(base64.b64decode(data["audio_base64"]))
-    al = data.get("alignment") or data["normalized_alignment"]
-    words, cur, ws, we = [], "", 0, 0
-    for c, s, e in zip(al["characters"], al["character_start_times_seconds"], al["character_end_times_seconds"]):
-        if c.isspace():
-            if cur:
-                words.append([cur, ws, we]); cur = ""
-            continue
-        if not cur:
-            ws = s
-        cur += c; we = e
-    if cur:
-        words.append([cur, ws, we])
-    # remove long pauses ("no gaps"), then speed up 1.15x like the hand-made reels
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", work / "raw.mp3", "-ac", "1", "-ar", "48000", work / "raw.wav"], check=True)
-    x, sr = sf.read(work / "raw.wav")
-    keep, shift, segs, prev_end = 0.14, 0.0, [], 0.0
-    out_words = []
-    for w, s, e in words:
-        gap = s - prev_end
-        if gap > 0.28 and out_words:
-            cut = gap - keep
-            segs.append((prev_end + keep / 2, s - keep / 2)); shift += cut
-        out_words.append([w, s - shift, e - shift]); prev_end = e
-    mask = np.ones(len(x), bool)
-    for a, b in segs:
-        mask[int(a * sr):int(b * sr)] = False
-    y = x[mask][: int((out_words[-1][2] + 0.35) * sr)]
-    sf.write(work / "tight.wav", y, sr)
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", work / "tight.wav", "-af",
-                    f"atempo={TEMPO},highpass=f=80,lowpass=f=15000,afftdn=nf=-25,equalizer=f=180:t=q:w=1:g=2,equalizer=f=3200:t=q:w=1.2:g=3,"
+# ---------------- free voice: VoxCPM2 (Apache-2.0, commercial use OK – the engine inside VoiceStudio) ----------------
+VOICE_REF = STATE / "voice_ref.wav"   # the voice you picked ("2_clone_hindi"); every reel clones it so they all sound the same
+VOICE_DESC = "(A young Indian man in his twenties, energetic and excited, clear upbeat social media narrator voice)"
+
+
+def _trim(w, sr, thr=0.012):
+    e = np.convolve(np.abs(w), np.ones(int(sr * .02)) / int(sr * .02), "same")
+    idx = np.where(e > thr)[0]
+    if not len(idx):
+        return w
+    a, b = max(0, idx[0] - int(sr * .03)), min(len(w), idx[-1] + int(sr * .06))
+    return w[a:b]
+
+
+def make_voice_beats(beats, work):
+    from voxcpm import VoxCPM
+    t0 = time.time()
+    m = VoxCPM.from_pretrained("openbmb/VoxCPM2", load_denoiser=False, optimize=False, device="cpu")
+    sr = m.tts_model.sample_rate
+    if not VOICE_REF.exists():
+        log.warning("no saved voice – designing a new one")
+        w = m.generate(text=VOICE_DESC + beats[0]["deva"], inference_timesteps=10, cfg_value=2.0)
+        sf.write(VOICE_REF, w, sr)
+    gap = np.zeros(int(sr * 0.12), dtype=np.float32)
+    parts, W, cur = [], [], 0.0
+    for k, bt in enumerate(beats):
+        w = None
+        for attempt in range(2):
+            try:
+                w = m.generate(text=bt["deva"], reference_wav_path=str(VOICE_REF), inference_timesteps=10, cfg_value=2.0)
+                break
+            except Exception as e:
+                log.warning("voice beat %d failed (%s) – retrying", k, e)
+        if w is None:
+            raise RuntimeError(f"voice failed for beat {k}")
+        w = _trim(np.asarray(w, dtype=np.float32), sr)
+        dur = len(w) / sr
+        log.info("voice beat %d/%d: %.1fs (%.0fs elapsed)", k + 1, len(beats), dur, time.time() - t0)
+        # spread the Roman (caption) words over this beat's audio by word length
+        words = bt["text"].split()
+        wts = [max(1.0, len(re.sub(r"[^A-Za-z0-9]", "", x)) * .55 + .6) for x in words]
+        tot, acc = sum(wts), cur
+        for x, wt in zip(words, wts):
+            d = dur * wt / tot
+            W.append({"w": x, "s": round(acc, 3), "e": round(acc + d, 3)}); acc += d
+        parts += [w, gap]; cur += dur + len(gap) / sr
+    y = np.concatenate(parts)
+    sf.write(work / "raw.wav", y, sr)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", work / "raw.wav", "-af",
+                    "highpass=f=80,lowpass=f=15000,equalizer=f=180:t=q:w=1:g=2,equalizer=f=3200:t=q:w=1.2:g=3,"
                     "deesser=i=0.4,acompressor=threshold=-20dB:ratio=3.5:attack=5:release=80:makeup=4,loudnorm=I=-16:TP=-1.5:LRA=9",
                     "-ar", "48000", "-ac", "1", work / "vo.wav"], check=True)
-    W = [{"w": w, "s": round(s / TEMPO, 3), "e": round(e / TEMPO, 3)} for w, s, e in out_words]
-    dur = len(sf.read(work / "vo.wav")[0]) / 48000
-    return W, dur, credits_left(key)
+    return W, len(y) / sr
 
 
 # ---------------------------------------------------------------- plan
@@ -351,8 +357,7 @@ def main():
             tg("sendMessage", data={"chat_id": tg_chat(), "text": "📭 Promo reel autopilot: all scripts are used up. Ask Claude for a new batch of scripts."})
             return
         (work / "script.json").write_text(json.dumps(d, ensure_ascii=False, indent=1))
-        text = " ".join(" ".join(b["text"].split()) for b in d["beats"])
-        W, dur, left = make_voice(text, work)
+        W, dur = make_voice_beats(d["beats"], work)
         plan = make_plan(d["beats"], W, dur)
         (work / "plan.json").write_text(json.dumps(plan, ensure_ascii=False, indent=1))
         recent = hist.get("themes", [])[-2:]
@@ -381,11 +386,9 @@ def main():
         # deliver
         chat = tg_chat()
         info = f"🎬 Promo reel #{n} ready ({dur:.0f}s · {tname} theme)\nHook: {d.get('hook_summary', '')[:200]}"
-        if left is not None:
-            info += f"\nElevenLabs credits left: {left:,}"
         if remaining <= 6:
             info += f"\n⚠️ Only {remaining} scripts left – ask Claude for more."
-        info += "\nVoice: Viraj – Energetic, Clear Narrator"
+        info += "\nVoice: free VoxCPM2 voice"
         with open(final, "rb") as f:
             r = tg("sendVideo", data={"chat_id": chat, "caption": info[:1000], "supports_streaming": "true"}, files={"video": f})
         if r and not r.get("ok"):
