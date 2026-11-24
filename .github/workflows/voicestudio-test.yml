@@ -1,0 +1,25 @@
+name: VoiceStudio voice test
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      PROMO_TELEGRAM_BOT_TOKEN: ${{ secrets.PROMO_TELEGRAM_BOT_TOKEN }}
+      OMNIVOICE_API_KEY: test-key-0123456789abcdef0123456789abcdef
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
+      - name: Start VoiceStudio (CPU)
+        run: |
+          docker run -d --name vs -p 127.0.0.1:3900:3900 -e OMNIVOICE_API_KEY -e OMNIVOICE_DATA_DIR=/app/omnivoice_data \
+            -e OMNIVOICE_CPU_GENERATE_TIMEOUT_S=1500 ghcr.io/debpalash/voicestudio:stable
+          sleep 30; docker logs --tail 30 vs
+      - name: Make test voices and send to Telegram
+        run: pip install -q requests && python promo/voice_test.py; docker logs --tail 60 vs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: voice-test, path: output/voice_test/*.wav, if-no-files-found: ignore }
