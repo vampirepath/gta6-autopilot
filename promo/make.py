@@ -375,8 +375,14 @@ def mix(work, plan, dur, seed):
 
 
 # ---------------------------------------------------------------- telegram
+# promo reels go to their OWN Telegram bot (PROMO_TELEGRAM_BOT_TOKEN), separate from the GTA 6 news bot.
+# Chat ID: PROMO_TELEGRAM_CHAT_ID if set, else your normal chat ID (same person = same ID for any bot).
+def tg_chat():
+    return env("PROMO_TELEGRAM_CHAT_ID") or env("TELEGRAM_CHAT_ID")
+
+
 def tg(method, **kw):
-    tok = env("TELEGRAM_BOT_TOKEN")
+    tok = env("PROMO_TELEGRAM_BOT_TOKEN") or env("TELEGRAM_BOT_TOKEN")
     if not tok:
         return {}
     try:
@@ -423,7 +429,7 @@ def main():
         cover = OUT / f"Super_Clipper_Cover_{n:03d}.jpg"
         render(ASSETS / "_cover.html", None, 0, stills=[(2.2, cover)])
         # deliver
-        chat = env("TELEGRAM_CHAT_ID")
+        chat = tg_chat()
         info = f"🎬 Promo reel #{n} ready ({dur:.0f}s · {tname} theme)\nHook: {d.get('hook_summary', '')[:200]}"
         if left is not None:
             info += f"\nElevenLabs credits left: {left:,}"
@@ -445,7 +451,7 @@ def main():
         log.info("done: %s", final)
     except Exception as e:
         log.exception("promo reel failed")
-        tg("sendMessage", data={"chat_id": env("TELEGRAM_CHAT_ID"), "text": f"⚠️ Promo reel autopilot failed: {str(e)[:500]}"})
+        tg("sendMessage", data={"chat_id": tg_chat(), "text": f"⚠️ Promo reel autopilot failed: {str(e)[:500]}"})
         raise
 
 
