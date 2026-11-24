@@ -136,7 +136,7 @@ def credits_left(key):
 
 
 def make_voice(text, work):
-    key = env("ELEVENLABS_API_KEY")
+    key = env("PROMO_ELEVENLABS_API_KEY") or env("ELEVENLABS_API_KEY")
     if not key:
         raise RuntimeError("ELEVENLABS_API_KEY secret is missing")
     vid = voice_id(key)
