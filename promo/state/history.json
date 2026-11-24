@@ -1,12 +1,15 @@
 {
- "n": 1,
+ "n": 2,
  "hooks": [
-  "Bhai, ek clip edit karne mein do ghante lagte hain? Ab nahi."
+  "Bhai, ek clip edit karne mein do ghante lagte hain? Ab nahi.",
+  "Tum so rahe ho, aur tumhare phone pe GTA 6 clips ban rahi hain."
  ],
  "themes": [
-  "Toxic Green"
+  "Toxic Green",
+  "Cyber Blue"
  ],
  "used": [
-  0
+  0,
+  1
  ]
 }
