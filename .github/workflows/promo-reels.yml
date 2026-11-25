@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: "13 4,9,14 * * *"     # about 9:43 AM, 2:43 PM, 7:43 PM India time (GitHub can run a bit late)
   workflow_dispatch:
+    inputs:
+      count:
+        description: "How many reels to make now"
+        required: false
+        default: "1"
 
 concurrency:
   group: promo-reels
@@ -19,7 +24,7 @@ permissions:
 jobs:
   make-reel:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 300
     env:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -27,6 +32,7 @@ jobs:
       PROMO_VOICE_ID: ${{ secrets.PROMO_VOICE_ID }}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       GH_TOKEN: ${{ github.token }}
+      PROMO_COUNT: ${{ github.event.inputs.count || '1' }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       PROMO_TELEGRAM_BOT_TOKEN: ${{ secrets.PROMO_TELEGRAM_BOT_TOKEN }}
       PROMO_TELEGRAM_CHAT_ID: ${{ secrets.PROMO_TELEGRAM_CHAT_ID }}

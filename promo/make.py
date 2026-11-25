@@ -87,7 +87,8 @@ def write_script(hist):
     left = [i for i in range(len(bank)) if i not in used]
     if not left:
         return None, 0
-    i = left[0]
+    pri = [i for i in left if bank[i].get("priority")]          # scripts you asked for first
+    i = pri[0] if pri else left[0]
     s = bank[i]
     beats = [dict(b) for b in s["beats"]]
     c, cd = random.choice(CTAS)
@@ -517,4 +518,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    n_ok = 0
+    for _ in range(max(1, int(env("PROMO_COUNT", "1") or 1))):   # make several reels in one run (manual runs)
+        try:
+            main(); n_ok += 1
+        except Exception:
+            pass
+    if not n_ok:
+        sys.exit(1)

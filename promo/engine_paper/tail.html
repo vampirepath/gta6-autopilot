@@ -3,6 +3,10 @@ const PH=[];{let cur=[];W.forEach((w,i)=>{cur.push(i);const end=/[.,?!]$/.test(w
 function caption(t){const capEl=document.getElementById('cap');let ph=PH.find(p=>t>=W[p[0]].s-0.02&&t<W[p[p.length-1]].e);if(!ph){ph=PH.filter(p=>W[p[0]].s<=t).pop()||[]; if(ph.length&&t>W[ph[ph.length-1]].e+.25)ph=[]}
  capEl.innerHTML=ph.length?`<span class="box">${ph.map(i=>{const w=W[i];const on=t>=w.s&&t<w.e;return `<span class="${on?'on':''}">${w.w.replace(/[.,]$/,'')}</span>`}).join(' ')}</span>`:'';}
 // ===================== RENDER =====================
+// full-screen gameplay background (your clips + GTA 6 footage), changes every ~3.5 s
+const GBG=[['g1',1],['vp',26],['g2',0.5],['g1',8],['vp',20.6],['g2',4],['g1',12],['vp',6.4],['vp',28]];const GBGN={g1:471,g2:252,vp:951};
+function gbgSrc(t){const k=Math.floor(t/3.5)%GBG.length;const [d,s]=GBG[k];const n=GBGN[d];let f=Math.floor((s+(t%3.5))*30)%n+1;return `a/${d}/${String(f).padStart(4,'0')}.jpg`}
+if(window.USE_GBG!==false)document.body.classList.add('gbg');else document.getElementById('gbg').style.display='none';
 window.render=function(t){
  let flashA=0,flashC='#fff',shake=0,wipe=-1;
  SC.forEach((s,i)=>{const on=t>=s.start&&t<s.end;s.el.style.display=on?'block':'none';
@@ -21,6 +25,7 @@ window.render=function(t){
  caption(t);
 };
 window.renderA=async function(t){window.render(t);const ps=[];
+ if(window.USE_GBG!==false){const gi=document.getElementById('gbgi');const src=gbgSrc(t);if(gi.getAttribute('src')!==src){gi.setAttribute('src',src);ps.push(gi.decode().catch(()=>{}))}const z=1.04+.03*Math.sin(t*.3);gi.style.transform=`scale(${z})`}
  SC.forEach(s=>{if(!(t>=s.start&&t<s.end))return;const lt=t-s.start;s.el.querySelectorAll('img.vclip').forEach(im=>{
   const n=+im.dataset.n;let f=Math.floor((+im.dataset.s+lt)*30)+1;const a0=+im.dataset.a||1;f=a0+((f-a0)%(n-a0+1)+(n-a0+1))%(n-a0+1);f=Math.max(1,Math.min(n,f));const src=`${im.dataset.d}/${String(f).padStart(4,'0')}.jpg`;
   if(im.getAttribute('src')!==src){im.setAttribute('src',src);ps.push(im.decode().catch(()=>{}))}})});
