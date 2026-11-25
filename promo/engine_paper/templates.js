@@ -4,9 +4,12 @@
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
 const fit=(lines,max=120,w=960)=>{const L=Math.max(...lines.map(l=>String(l).length),4);return Math.max(52,Math.min(max,Math.floor(w/(L*.52))))};
 const VP=(s,st='')=>`<img class="vclip" data-d="a/vp" data-n="951" data-s="${s}" data-a="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;${st}">`;
+// your own GTA 6 gameplay clips: g1 = police SUV chase/flip (9:16), g2 = roadside action (16:9)
+const GN={vp:951,g1:471,g2:252};
+const GV=(src,s=0,st='')=>`<img class="vclip" data-d="a/${src}" data-n="${GN[src]}" data-s="${s}" data-a="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;${st}">`;
 const fmtIN=n=>Math.round(n).toLocaleString('en-IN');
 const pick=(a,i)=>a[((i%a.length)+a.length)%a.length];
-const CUT_SETS=[[26.0,6.4,20.6,9.6,28.0],[6.4,24.0,9.6,20.6,26.0],[20.6,28.0,6.4,26.0,9.6]];
+const CUT_SETS=[[['g1',4.2],['vp',26.0],['g2',2.0],['g1',11.5],['vp',20.6]],[['vp',6.4],['g1',11.5],['vp',24.0],['g2',3.5],['g1',4.2]],[['g1',11.5],['vp',28.0],['g1',1.0],['vp',26.0],['g2',2.0]]];
 const MK=(l,hl,i)=>i===hl?`<span class="mk">${esc(l)}</span>`:esc(l);
 const C=(C,i,d)=>C[i]!=null?C[i]:d;
 const T={};
@@ -16,11 +19,11 @@ T.hook=(s,e,p,Cs,ix)=>{const D=e-s;const lines=(p.lines||['GTA 6 clips','auto ba
  const c0=C(Cs,0,Math.min(1.6,D*.55));const sz=fit(lines,104,880);
  scene(s,e,`
  <div style="position:absolute;left:40px;top:40px;right:40px;bottom:330px;border:6px solid ${INK};border-radius:34px;overflow:hidden;box-shadow:14px 14px 0 ${INK};background:#000">
-  ${cuts.map((c,i)=>`<div class="hk_c" style="position:absolute;inset:0;opacity:0">${VP(c-i*step)}</div>`).join('')}
+  ${cuts.map(([src,c],i)=>`<div class="hk_c" style="position:absolute;inset:0;opacity:0">${GV(src,c-i*step)}</div>`).join('')}
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 40%,rgba(0,0,0,.5))"></div></div>
  <div id="hk_lg" style="position:absolute;left:260px;top:470px;width:560px;height:420px;border:7px solid ${INK};border-radius:28px;overflow:hidden;box-shadow:14px 14px 0 ${ORG};opacity:0;z-index:3"><img src="gta6logo.jpg" style="width:100%;height:100%;object-fit:cover"></div>
  <div id="hk_t" style="position:absolute;left:70px;right:70px;top:110px;opacity:0;z-index:4"><div style="display:inline-block;background:${YEL};border:6px solid ${INK};box-shadow:12px 12px 0 ${INK};padding:18px 30px 24px;transform:rotate(-2deg)"><div class="h" style="font-size:${sz}px;line-height:1;color:var(--onhl)">${lines.map((l,i)=>MK(l,hl,i)).join('<br>')} ${esc(p.emoji||'')}</div></div></div>
- ${[0,1,2].map(i=>`<div class="hk_k" data-r="${[-8,4,10][i]}" style="position:absolute;left:${[60,380,700][i]}px;top:${[1000,1040,990][i]}px;width:300px;background:#fff;border:5px solid ${INK};box-shadow:8px 8px 0 ${INK};padding:10px 10px 14px;opacity:0;z-index:4"><div style="position:relative;height:380px;overflow:hidden;border:3px solid ${INK}">${VP(cuts[i])}<div style="position:absolute;left:8px;top:8px;padding:5px 10px;background:${ORG};color:#fff;font:800 22px/1 B;border-radius:6px">✂️ CLIP 0${i+1}</div></div><div style="font:800 28px/1 B;margin-top:10px">${p.cover?'📱 9:16 ready':'✅ auto clipped'}</div></div>`).join('')}
+ ${[0,1,2].map(i=>`<div class="hk_k" data-r="${[-8,4,10][i]}" style="position:absolute;left:${[60,380,700][i]}px;top:${[1000,1040,990][i]}px;width:300px;background:#fff;border:5px solid ${INK};box-shadow:8px 8px 0 ${INK};padding:10px 10px 14px;opacity:0;z-index:4"><div style="position:relative;height:380px;overflow:hidden;border:3px solid ${INK}">${GV(cuts[i][0],cuts[i][1])}<div style="position:absolute;left:8px;top:8px;padding:5px 10px;background:${ORG};color:#fff;font:800 22px/1 B;border-radius:6px">✂️ CLIP 0${i+1}</div></div><div style="font:800 28px/1 B;margin-top:10px">${p.cover?'📱 9:16 ready':'✅ auto clipped'}</div></div>`).join('')}
  ${p.cover?NAMEB('hk_nm',1630):''}`,
  (el,lt)=>{el.querySelectorAll('.hk_c').forEach((c,i)=>{const d=i*step,en=(i+1)*step;const last=i===cuts.length-1;c.style.opacity=(lt>=d&&(lt<en+.05||last))?1:0;c.style.transform=`scale(${1.12-.12*ease((lt-d)/.5)})`});
   const lg=el.querySelector('#hk_lg');const q=clamp((lt-.08)/.22);lg.style.opacity=q;lg.style.transform=`rotate(-3deg) scale(${2.2-1.2*back(q)})`;
@@ -71,12 +74,12 @@ T.monitor=(s,e,p,Cs)=>{const D=e-s;const c0=C(Cs,0,D*.35),c1=C(Cs,1,D*.65);
 // ---- MOMENTS (polaroids) ----
 T.moments=(s,e,p,Cs)=>{const D=e-s;const it=(p.items&&p.items.length?p.items:[['🚔','Crazy chase'],['😂','Funny fail'],['🤯','Insane moment']]).slice(0,3);
  scene(s,e,`${p.title?H('mm_t',esc(p.title),170,90):''}
- <div style="position:absolute;left:40px;right:40px;top:${p.title?360:220}px;display:flex;gap:18px">${it.map(([i,t],k)=>`<div class="mm_c" data-r="${[-4,3,-2][k]}" style="flex:1;background:#fff;border:5px solid ${INK};box-shadow:8px 8px 0 ${INK};padding:12px 12px 18px;opacity:0"><div style="position:relative;height:${p.title?600:720}px;overflow:hidden;border:3px solid ${INK}">${RV(k+1,k*3)}</div><div style="font:800 ${String(t).length>11?32:40}px/1.1 B;margin-top:12px;text-align:center">${esc(i)} ${esc(t)}</div></div>`).join('')}</div>`,
+ <div style="position:absolute;left:40px;right:40px;top:${p.title?360:220}px;display:flex;gap:18px">${it.map(([i,t],k)=>`<div class="mm_c" data-r="${[-4,3,-2][k]}" style="flex:1;background:#fff;border:5px solid ${INK};box-shadow:8px 8px 0 ${INK};padding:12px 12px 18px;opacity:0"><div style="position:relative;height:${p.title?600:720}px;overflow:hidden;border:3px solid ${INK}">${k==0?GV('g1',4.0):k==1?GV('g2',1.0):RV(3,6)}</div><div style="font:800 ${String(t).length>11?32:40}px/1.1 B;margin-top:12px;text-align:center">${esc(i)} ${esc(t)}</div></div>`).join('')}</div>`,
  (el,lt)=>{const t=el.querySelector('#mm_t');if(t)slideIn(t,lt,0,0,60);el.querySelectorAll('.mm_c').forEach((c,i)=>popIn(c,lt,C(Cs,i,.15+i*D*.28)))},{shakeAt:C(Cs,0,.15)});};
 
 // ---- HYPE: chat flood + gauge + detect + clip ----
 T.hype=(s,e,p,Cs)=>{const D=e-s;const c0=C(Cs,0,D*.3),c1=C(Cs,1,D*.6),c2=C(Cs,2,D*.82);
- scene(s,e,`<div id="hy_v" class="card" style="left:60px;top:170px;width:600px;height:340px;opacity:0">${RV(3,2)}<div style="position:absolute;left:12px;top:12px" class="live">LIVE</div></div>
+ scene(s,e,`<div id="hy_v" class="card" style="left:60px;top:170px;width:600px;height:340px;opacity:0">${GV('g2',.5)}<div style="position:absolute;left:12px;top:12px" class="live">LIVE</div></div>
  <div id="hy_ch" class="card" style="left:690px;top:170px;width:330px;height:700px;padding:16px;opacity:0"><div style="font:800 30px/1 B;margin-bottom:12px">💬 Live chat</div><div id="hy_m"></div></div>
  <div id="hy_g" class="card" style="left:60px;top:540px;width:600px;height:330px;padding:20px;opacity:0"><div style="font:800 34px/1 B">🔥 Hype meter</div>
   <svg width="560" height="250" style="position:absolute;left:20px;top:70px"><path d="M 60 230 A 220 220 0 0 1 500 230" fill="none" stroke="#eee" stroke-width="40"/><path id="hy_arc" d="M 60 230 A 220 220 0 0 1 500 230" fill="none" stroke="${ORG}" stroke-width="40" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><line id="hy_nd" x1="280" y1="230" x2="280" y2="50" stroke="${INK}" stroke-width="10" stroke-linecap="round"/><circle cx="280" cy="230" r="18" fill="${INK}"/></svg>
@@ -93,7 +96,7 @@ T.hype=(s,e,p,Cs)=>{const D=e-s;const c0=C(Cs,0,D*.3),c1=C(Cs,1,D*.6),c2=C(Cs,2,
 T.rewind=(s,e,p,Cs)=>{const D=e-s;const c0=C(Cs,0,D*.3),c1=C(Cs,1,D*.5),c2=C(Cs,2,D*.75);
  scene(s,e,`${H('rw_q',`${esc(p.q||'Moment miss ho gaya?')} 😱`,160,fit([(p.q||'')+'xxx'],92,960))}
  <div id="rw_ok" style="position:absolute;left:60px;top:300px;opacity:0"><span class="h" style="color:var(--onhl);display:inline-block;padding:6px 26px 14px;background:${YEL};border:5px solid ${INK};box-shadow:8px 8px 0 ${INK};font-size:70px">${esc(p.ok||'Koi tension nahi')} 😌</span></div>
- <div class="card" style="left:60px;top:450px;width:960px;height:500px">${RV(2,4)}<div id="rw_rw" style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;font-size:160px;opacity:0">⏪</div></div>
+ <div class="card" style="left:60px;top:450px;width:960px;height:500px">${GV('g2',3)}<div id="rw_rw" style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;font-size:160px;opacity:0">⏪</div></div>
  <div style="position:absolute;left:90px;right:90px;top:1010px;height:26px;border:4px solid ${INK};border-radius:13px;background:#fff"><div id="rw_sel" style="position:absolute;top:-16px;left:38%;width:16%;height:50px;border:5px solid ${ORG};border-radius:12px;background:${ORG}33;opacity:0"></div><div id="rw_ph" style="position:absolute;top:-24px;width:14px;height:66px;border-radius:7px;background:${INK}"></div></div>
  <div style="position:absolute;left:0;right:0;top:1090px;display:flex;justify-content:center;gap:16px">${['30s','1 min','2 min','5 min'].map((t,i)=>`<span class="rw_c tag" style="opacity:0;white-space:nowrap;font-size:36px;background:${i==2?YEL:'#fff'}">⏪ ${t}</span>`).join('')}</div>
  <div id="rw_d" class="note" data-r="-4" style="left:270px;top:1250px;opacity:0;background:${ORG};color:#fff;white-space:nowrap;font-size:56px">✂️ Peeche ka clip!</div>`,
@@ -148,7 +151,7 @@ T.flow=(s,e,p,Cs)=>{const D=e-s;const c0=C(Cs,0,D*.3),c1=C(Cs,1,D*.6);
 // ---- STATEMENT ----
 T.statement=(s,e,p,Cs,ix)=>{const lines=(p.lines||['Ye app game changer hai']).slice(0,3);const c0=C(Cs,0,.5);const hl=p.hl==null?lines.length-1:p.hl;
  scene(s,e,`<div id="sm_t" style="position:absolute;left:60px;right:60px;top:200px;opacity:0"><div class="h" style="font-size:${fit(lines,118,940)}px">${lines.map((l,i)=>MK(l,hl,i)).join('<br>')} ${esc(p.emoji||'')}</div></div>
- <div id="sm_v" data-r="-3" style="position:absolute;left:120px;top:${330+lines.length*fit(lines,118,940)}px;width:840px;background:#fff;border:5px solid ${INK};box-shadow:10px 10px 0 ${INK};padding:14px 14px 20px;opacity:0"><div style="position:relative;height:440px;overflow:hidden;border:3px solid ${INK}">${(ix%2)?VP(pick([26,6.4,20.6,28],ix)):RV(1+(ix%3),2)}</div></div>`,
+ <div id="sm_v" data-r="-3" style="position:absolute;left:120px;top:${330+lines.length*fit(lines,118,940)}px;width:840px;background:#fff;border:5px solid ${INK};box-shadow:10px 10px 0 ${INK};padding:14px 14px 20px;opacity:0"><div style="position:relative;height:440px;overflow:hidden;border:3px solid ${INK}">${pick([GV('g1',6),VP(26),GV('g2',2),VP(20.6),RV(1+(ix%3),2)],ix)}</div></div>`,
  (el,lt)=>{slideIn(el.querySelector('#sm_t'),lt,0,-200,0);mark(el,lt,.3);slideIn(el.querySelector('#sm_v'),lt,c0,0,200)},{flashAt:0,flashColor:YEL});};
 
 // ---- CTA ----
