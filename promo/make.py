@@ -294,13 +294,49 @@ def make_plan(beats, W, dur):
     return out
 
 
+
+# ---------------- editing styles: a different look (fonts, background, colours) every reel ----------------
+F = "f/"
+SKINS = {
+ "Paper Notebook": dict(fonts=dict(B="bricolage-grotesque-latin-800-normal", H="bricolage-grotesque-latin-800-normal", S="instrument-serif-latin-400-italic", C="caveat-latin-700-normal"),
+    bg="#f3eee3", pat="radial-gradient(#141414 1.6px,transparent 1.7px)", patsz="44px 44px", patop=".11", grain=".18", headc="#141414", ink="#141414", line="#141414",
+    card="#ffffff", acc="#ff4a1c", hl="#ffe14a", onhl="#141414", blu="#2f6bff", grn="#21c46b", sh="#141414", rad="26px", hw="800", hlh=".98", hls="-.035em", htt="none", w1="#141414", w2="#ff4a1c", capbg="#ffffff", capc="#141414"),
+ "Neon Night": dict(fonts=dict(B="space-grotesk-latin-700-normal", H="anton", S="dm-serif-display-latin-400-italic", C="permanent-marker-latin-400-normal"),
+    bg="radial-gradient(70% 50% at 50% 30%,#1b1446,#0a0b1f 70%)", pat="linear-gradient(rgba(46,242,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(46,242,255,.35) 1px,transparent 1px)", patsz="90px 90px", patop=".25", grain=".05", headc="#ffffff", ink="#0a0b1f", line="#0a0b1f",
+    card="#ffffff", acc="#ff2e88", hl="#2ef2ff", onhl="#0a0b1f", blu="#7c4dff", grn="#18d47b", sh="#ff2e88", rad="18px", hw="400", hlh="1.0", hls=".005em", htt="uppercase", w1="#2ef2ff", w2="#ff2e88", capbg="#0a0b1f", capc="#ffffff"),
+ "Comic Pop": dict(fonts=dict(B="archivo-black-latin-400-normal", H="bangers-latin-400-normal", S="bangers-latin-400-normal", C="permanent-marker-latin-400-normal"),
+    bg="#ffd400", pat="radial-gradient(#e8212b 3px,transparent 3.5px)", patsz="34px 34px", patop=".22", grain=".08", headc="#111111", ink="#111111", line="#111111",
+    card="#ffffff", acc="#e8212b", hl="#4fc3ff", onhl="#111111", blu="#1e5bff", grn="#16b85a", sh="#111111", rad="8px", hw="400", hlh="1.0", hls=".03em", htt="uppercase", w1="#111111", w2="#e8212b", capbg="#ffffff", capc="#111111"),
+ "Clean Mono": dict(fonts=dict(B="space-grotesk-latin-700-normal", H="space-grotesk-latin-700-normal", S="dm-serif-display-latin-400-italic", C="caveat-latin-700-normal"),
+    bg="#fafafa", pat="linear-gradient(#e6e6e6 1px,transparent 1px),linear-gradient(90deg,#e6e6e6 1px,transparent 1px)", patsz="60px 60px", patop=".9", grain=".0", headc="#0a0a0a", ink="#0a0a0a", line="#0a0a0a",
+    card="#ffffff", acc="#2f5bff", hl="#d7ff3a", onhl="#0a0a0a", blu="#2f5bff", grn="#11b866", sh="#2f5bff", rad="30px", hw="700", hlh="1.0", hls="-.04em", htt="none", w1="#0a0a0a", w2="#2f5bff", capbg="#0a0a0a", capc="#ffffff"),
+ "Vice Sunset": dict(fonts=dict(B="righteous-latin-400-normal", H="righteous-latin-400-normal", S="dm-serif-display-latin-400-italic", C="permanent-marker-latin-400-normal"),
+    bg="linear-gradient(180deg,#2b0a3d 0%,#7a1f6b 45%,#ff5f8f 75%,#ffb36b 100%)", pat="repeating-linear-gradient(0deg,rgba(255,255,255,.12) 0 2px,transparent 2px 22px)", patsz="auto", patop=".6", grain=".06", headc="#ffffff", ink="#2b0a3d", line="#2b0a3d",
+    card="#ffffff", acc="#ff2e88", hl="#29f2ff", onhl="#2b0a3d", blu="#6a4cff", grn="#18d47b", sh="#2b0a3d", rad="22px", hw="400", hlh="1.0", hls=".01em", htt="uppercase", w1="#29f2ff", w2="#ff2e88", capbg="#ffffff", capc="#2b0a3d"),
+ "Kraft Marker": dict(fonts=dict(B="archivo-black-latin-400-normal", H="archivo-black-latin-400-normal", S="dm-serif-display-latin-400-italic", C="permanent-marker-latin-400-normal"),
+    bg="#c9a27a", pat="radial-gradient(rgba(60,30,10,.35) 1.2px,transparent 1.4px)", patsz="18px 18px", patop=".5", grain=".35", headc="#2a1a0e", ink="#2a1a0e", line="#2a1a0e",
+    card="#fff8ec", acc="#d7261e", hl="#fff3a0", onhl="#2a1a0e", blu="#1d4ed8", grn="#2f8f46", sh="#2a1a0e", rad="6px", hw="400", hlh="1.02", hls="-.02em", htt="uppercase", w1="#2a1a0e", w2="#d7261e", capbg="#fff8ec", capc="#2a1a0e"),
+ "Terminal Green": dict(fonts=dict(B="jetbrains-mono-latin-800-normal", H="jetbrains-mono-latin-800-normal", S="dm-serif-display-latin-400-italic", C="permanent-marker-latin-400-normal"),
+    bg="#050805", pat="repeating-linear-gradient(0deg,rgba(57,255,106,.10) 0 2px,transparent 2px 6px)", patsz="auto", patop="1", grain=".05", headc="#39ff6a", ink="#06110a", line="#39ff6a",
+    card="#eaffef", acc="#39ff6a", hl="#ffb000", onhl="#06110a", blu="#00c2ff", grn="#39ff6a", sh="#39ff6a", rad="4px", hw="800", hlh="1.0", hls="-.04em", htt="uppercase", w1="#39ff6a", w2="#ffb000", capbg="#06110a", capc="#39ff6a"),
+}
+
+
+def skin_css(sk):
+    faces = "".join(f"@font-face{{font-family:{k};src:url({F}{v}.woff2);font-weight:100 900;font-style:normal}}" for k, v in sk["fonts"].items())
+    vars_ = ";".join(f"--{k}:{v}" for k, v in sk.items() if k != "fonts")
+    return faces + ":root{" + vars_ + ";--bgc:" + (sk["bg"] if sk["bg"].startswith("#") else "#000") + ";--mkc:" + sk["onhl"] + "}"
+
 ENGINE_PAPER = HERE / "engine_paper"
 
 
-def build_html(plan, W, theme, path):
-    """Notebook / paper style with GTA 6 trailer hook (theme kept for the old dark engine, unused here)."""
+def build_html(plan, W, skin, path):
+    """Paper-engine reel with GTA 6 trailer hook, in one of the SKINS (fonts, background, colours)."""
     E = ENGINE_PAPER
-    html = (E / "head.html").read_text() + (E / "helpers.js").read_text() + "\nconst PLAN=" + json.dumps(plan, ensure_ascii=False) + ";\n" \
+    sk = SKINS.get(skin) or SKINS["Paper Notebook"]
+    head = (E / "head.html").read_text().replace("/*SKIN*/", skin_css(sk))
+    js_skin = "const SKIN=" + json.dumps({k: v for k, v in sk.items() if k != "fonts"}) + ";\n"
+    html = head + js_skin + (E / "helpers.js").read_text() + "\nconst PLAN=" + json.dumps(plan, ensure_ascii=False) + ";\n" \
         + (E / "templates.js").read_text() + "\n" + (E / "tail.html").read_text()
     path.write_text(html.replace("const W=WORDS;", "const W=" + json.dumps(W, ensure_ascii=False) + ";"))
 
@@ -374,7 +410,7 @@ def sfx_events(plan, dur, rng):
     return ev
 
 
-def mix(work, plan, dur, seed):
+def mix(work, plan, dur, seed, skin=""):
     rng = np.random.default_rng(seed)
     progs = [[[41, [65, 69, 72, 76]], [38, [62, 65, 69, 72]], [46, [65, 70, 74, 77]], [36, [64, 67, 70, 74]]],
              [[45, [69, 72, 76, 79]], [41, [65, 69, 72, 76]], [43, [67, 71, 74, 77]], [40, [64, 67, 71, 74]]],
@@ -384,7 +420,11 @@ def mix(work, plan, dur, seed):
     cfg = {"D": dur + 0.5, "seed": int(seed), "bpm": int(rng.integers(116, 128)), "prog": progs[int(rng.integers(0, 4))],
            "drop": round(drop, 2), "end": round(dur + 0.2, 2), "sfx": sfx_events(plan, dur, rng)}
     (work / "music.json").write_text(json.dumps(cfg))
-    subprocess.run([sys.executable, HERE / "music_house.py", work / "music.json", work / "vo.wav", work / "music.wav", work / "sfx.wav"], check=True)
+    engine = "music.py" if skin in ("Neon Night", "Terminal Green", "Vice Sunset") else "music_house.py"   # trap beat for dark styles, house for light
+    if engine == "music.py":
+        cfg["bpm"] = int(rng.integers(128, 146))
+        (work / "music.json").write_text(json.dumps(cfg))
+    subprocess.run([sys.executable, HERE / engine, work / "music.json", work / "vo.wav", work / "music.wav", work / "sfx.wav"], check=True)
 
 
 # ---------------------------------------------------------------- telegram
@@ -426,13 +466,13 @@ def main():
             W, dur = make_voice_beats(d["beats"], work)
         plan = make_plan(d["beats"], W, dur)
         (work / "plan.json").write_text(json.dumps(plan, ensure_ascii=False, indent=1))
-        recent = hist.get("themes", [])[-2:]
-        tname = random.choice([t for t in THEMES if t not in recent])
-        theme = THEMES[tname]
+        recent = hist.get("skins", [])[-3:]
+        tname = random.choice([s for s in SKINS if s not in recent])
+        theme = tname
         html = ASSETS / "_reel.html"
         build_html(plan, W, theme, html)
         render(html, work / "video.mp4", dur + 0.5)
-        mix(work, plan, dur, seed=int(time.time()) % 100000)
+        mix(work, plan, dur, seed=int(time.time()) % 100000, skin=tname)
         final = OUT / f"Super_Clipper_Reel_{n:03d}.mp4"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", work / "video.mp4", "-i", work / "vo.wav", "-i", work / "music.wav", "-i", work / "sfx.wav",
                         "-filter_complex", "[1:a]volume=1.0[v];[2:a]volume=0.24[m];[3:a]volume=0.34[s];[v][m][s]amix=inputs=3:normalize=0:duration=first,"
@@ -451,7 +491,7 @@ def main():
         render(ASSETS / "_cover.html", None, 0, stills=[(2.2, cover)])
         # deliver
         chat = tg_chat()
-        info = f"🎬 Promo reel #{n} ready ({dur:.0f}s · {tname} theme)\nHook: {d.get('hook_summary', '')[:200]}"
+        info = f"🎬 Promo reel #{n} ready ({dur:.0f}s · {tname} style)\nHook: {d.get('hook_summary', '')[:200]}"
         if remaining <= 6:
             info += f"\n⚠️ Only {remaining} scripts left – ask Claude for more."
         info += f"\nVoice: {voice_note}"
@@ -467,7 +507,7 @@ def main():
         hist["n"] = n
         hist["hooks"] = (hist["hooks"] + [d.get("hook_summary", "")])[-60:]
         hist["used"] = hist.get("used", []) + [d["idx"]]
-        hist["themes"] = (hist.get("themes", []) + [tname])[-10:]
+        hist["skins"] = (hist.get("skins", []) + [tname])[-10:]
         HIST.write_text(json.dumps(hist, ensure_ascii=False, indent=1))
         log.info("done: %s", final)
     except Exception as e:

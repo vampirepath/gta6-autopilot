@@ -1,5 +1,5 @@
 // ===== helpers (paper / notebook style) =====
-const INK='#141414',ORG='#ff4a1c',YEL='#ffe14a',BLU='#2f6bff',GRN='#21c46b';
+const INK=SKIN.ink,ORG=SKIN.acc,YEL=SKIN.hl,BLU=SKIN.blu,GRN=SKIN.grn;
 function popIn(e,lt,d,dur=.3){const q=clamp((lt-d)/dur);e.style.opacity=q;e.style.transform=(e.dataset.r?`rotate(${e.dataset.r}deg) `:'')+`scale(${.5+.5*back(q)})`}
 function slideIn(e,lt,d,dx=0,dy=120){const q=ease((lt-d)/.35);e.style.opacity=clamp((lt-d)/.15);e.style.transform=(e.dataset.r?`rotate(${e.dataset.r}deg) `:'')+`translate(${(1-q)*dx}px,${(1-q)*dy}px)`}
 function stampIn(e,lt,d){const q=clamp((lt-d)/.18);e.style.opacity=q;e.style.transform=`rotate(${e.dataset.r||-6}deg) scale(${2.2-1.2*back(q)})`}
