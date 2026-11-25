@@ -1,8 +1,9 @@
 {
- "n": 2,
+ "n": 3,
  "hooks": [
   "Bhai, ek clip edit karne mein do ghante lagte hain? Ab nahi.",
-  "Tum so rahe ho, aur tumhare phone pe GTA 6 clips ban rahi hain."
+  "Tum so rahe ho, aur tumhare phone pe GTA 6 clips ban rahi hain.",
+  "Bhai, kisi bhi live stream ko seedha mobile se clip karna hai? Dekho kaise."
  ],
  "themes": [
   "Toxic Green",
@@ -10,6 +11,10 @@
  ],
  "used": [
   0,
-  1
+  1,
+  2
+ ],
+ "skins": [
+  "Neon Night"
  ]
 }
