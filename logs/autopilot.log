@@ -638,3 +638,19 @@ Error opening input files: Invalid data found when processing input
 2026-11-24 22:47:54,154 INFO rendered 22 shots, 40.8s
 2026-11-24 22:47:56,680 INFO video ready: 20261124_224505.mp4 (40.8s)
 2026-11-24 22:58:11,510 INFO YouTube: https://youtube.com/shorts/DT3x4G79sEI
+2026-11-25 05:24:25,482 INFO fetched 68 candidate stories
+2026-11-25 05:24:27,315 INFO story: GTA VI Official Trading Cards Announced by Panini (RockstarINTEL, 2537 chars)
+2026-11-25 05:24:31,436 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-25 05:24:38,442 INFO used backup model gemini-flash-lite-latest
+2026-11-25 05:24:49,501 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-25 05:24:57,390 INFO gemini gemini-flash-lite-latest 503 – trying next
+2026-11-25 05:25:03,657 INFO all models busy – waiting 60 s (round 1)
+2026-11-25 05:26:25,386 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-25 05:26:36,739 INFO used backup model gemini-flash-lite-latest
+2026-11-25 05:26:36,830 INFO script: GTA 6 Official Trading Cards Just Announced! (15 lines, 133 words)
+2026-11-25 05:26:36,830 INFO visuals: clip, stat, subject[Real Dimez], subject[Vice City], list, stat, clip, subject[Jason And Lucia], list, clip, clip, stat, article, clip, clip
+2026-11-25 05:26:37,090 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 343 credits are required for this request.","status":"quota_exceeded","request_id":"5c657932f8765389c02e06552fdd509e"}} – using free voice
+2026-11-25 05:26:43,789 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-25 05:29:28,247 INFO rendered 22 shots, 47.0s
+2026-11-25 05:29:31,704 INFO video ready: 20261125_052427.mp4 (47.0s)
+2026-11-25 05:39:48,229 INFO YouTube: https://youtube.com/shorts/Sm2T-tOXNhU
