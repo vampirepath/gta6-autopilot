@@ -142,6 +142,65 @@ def credits_left(key):
         return None
 
 
+
+VIRAJ_SOFT = "P1bg08DkjqiVEzOn76yG"   # "Viraj - Rich and Soft" (your current ElevenLabs voice)
+
+
+def make_voice_el(beats, work):
+    key = env("PROMO_ELEVENLABS_API_KEY") or env("ELEVENLABS_API_KEY")
+    if not key:
+        raise RuntimeError("no ElevenLabs key")
+    text = " ".join(" ".join(b["text"].split()) for b in beats)
+    vid = env("PROMO_VOICE_ID") or VIRAJ_SOFT
+    r = None
+    for model in ("eleven_v4", "eleven_multilingual_v2"):
+        r = requests.post(f"{EL}/text-to-speech/{vid}/with-timestamps", params={"output_format": "mp3_44100_128"},
+                          headers={"xi-api-key": key}, timeout=240,
+                          json={"text": text, "model_id": model,
+                                "voice_settings": {"stability": 0.5, "similarity_boost": 0.75, "use_speaker_boost": True}})
+        if r.status_code == 200:
+            log.info("voice: ElevenLabs %s", model)
+            break
+        log.warning("ElevenLabs %s error %s: %s", model, r.status_code, r.text[:300])
+        if "quota" in r.text or r.status_code in (401, 402):
+            break
+    if r is None or r.status_code != 200:
+        raise RuntimeError(f"ElevenLabs {r.status_code if r is not None else '?'}: {r.text[:160] if r is not None else ''}")
+    data = r.json()
+    (work / "raw.mp3").write_bytes(base64.b64decode(data["audio_base64"]))
+    al = data.get("alignment") or data["normalized_alignment"]
+    words, cur, ws, we = [], "", 0, 0
+    for c, s, e in zip(al["characters"], al["character_start_times_seconds"], al["character_end_times_seconds"]):
+        if c.isspace():
+            if cur:
+                words.append([cur, ws, we]); cur = ""
+            continue
+        if not cur:
+            ws = s
+        cur += c; we = e
+    if cur:
+        words.append([cur, ws, we])
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", work / "raw.mp3", "-ac", "1", "-ar", "48000", work / "raw.wav"], check=True)
+    x, sr = sf.read(work / "raw.wav")
+    keep, shift, segs, prev_end, out = 0.12, 0.0, [], 0.0, []
+    for w, s, e in words:                       # remove pauses longer than ~0.25 s ("no gaps")
+        gap = s - prev_end
+        if gap > 0.25 and out:
+            segs.append((prev_end + keep / 2, s - keep / 2)); shift += gap - keep
+        out.append([w, s - shift, e - shift]); prev_end = e
+    mask = np.ones(len(x), bool)
+    for a, b in segs:
+        mask[int(a * sr):int(b * sr)] = False
+    y = x[mask][: int((out[-1][2] + 0.3) * sr)]
+    sf.write(work / "tight.wav", y, sr)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", work / "tight.wav", "-af",
+                    f"atempo={TEMPO},highpass=f=80,lowpass=f=15000,afftdn=nf=-25,equalizer=f=180:t=q:w=1:g=2,equalizer=f=3200:t=q:w=1.2:g=3,"
+                    "deesser=i=0.4,acompressor=threshold=-20dB:ratio=3.5:attack=5:release=80:makeup=4,loudnorm=I=-16:TP=-1.5:LRA=9",
+                    "-ar", "48000", "-ac", "1", work / "vo.wav"], check=True)
+    W = [{"w": w, "s": round(s / TEMPO, 3), "e": round(e / TEMPO, 3)} for w, s, e in out]
+    return W, len(sf.read(work / "vo.wav")[0]) / 48000, credits_left(key)
+
+
 # ---------------- free voice: VoxCPM2 (Apache-2.0, commercial use OK – the engine inside VoiceStudio) ----------------
 VOICE_REF = STATE / "voice_ref.wav"   # the voice you picked ("2_clone_hindi"); every reel clones it so they all sound the same
 VOICE_DESC = "(A young Indian man in his twenties, energetic and excited, clear upbeat social media narrator voice)"
@@ -235,13 +294,14 @@ def make_plan(beats, W, dur):
     return out
 
 
+ENGINE_PAPER = HERE / "engine_paper"
+
+
 def build_html(plan, W, theme, path):
-    head = themed((ENGINE / "head.html").read_text(), theme)
-    lib = themed((ENGINE / "lib.js").read_text(), theme)
-    tpl = themed((ENGINE / "templates.js").read_text(), theme)
-    tail = themed((ENGINE / "tail.html").read_text(), theme)
-    consts = f"const BG1='{theme['bg1']}',BG4='{theme['bg4']}',MUT='{theme['mut']}',LT='{theme['lt']}';\nconst PLAN={json.dumps(plan, ensure_ascii=False)};\n"
-    html = head + lib + "\n" + consts + tpl + "\n" + tail
+    """Notebook / paper style with GTA 6 trailer hook (theme kept for the old dark engine, unused here)."""
+    E = ENGINE_PAPER
+    html = (E / "head.html").read_text() + (E / "helpers.js").read_text() + "\nconst PLAN=" + json.dumps(plan, ensure_ascii=False) + ";\n" \
+        + (E / "templates.js").read_text() + "\n" + (E / "tail.html").read_text()
     path.write_text(html.replace("const W=WORDS;", "const W=" + json.dumps(W, ensure_ascii=False) + ";"))
 
 
@@ -316,15 +376,15 @@ def sfx_events(plan, dur, rng):
 
 def mix(work, plan, dur, seed):
     rng = np.random.default_rng(seed)
-    progs = [[[37, [56, 61, 65]], [42, [57, 61, 66]], [39, [58, 63, 66]], [44, [56, 59, 63]]],
-             [[38, [57, 62, 65]], [34, [58, 62, 65]], [36, [55, 60, 64]], [33, [57, 60, 64]]],
-             [[40, [59, 64, 67]], [36, [60, 64, 67]], [43, [59, 62, 67]], [38, [57, 62, 66]]],
-             [[33, [57, 60, 64]], [41, [57, 60, 65]], [36, [55, 60, 64]], [40, [56, 59, 64]]]]
+    progs = [[[41, [65, 69, 72, 76]], [38, [62, 65, 69, 72]], [46, [65, 70, 74, 77]], [36, [64, 67, 70, 74]]],
+             [[45, [69, 72, 76, 79]], [41, [65, 69, 72, 76]], [43, [67, 71, 74, 77]], [40, [64, 67, 71, 74]]],
+             [[43, [67, 71, 74, 78]], [40, [64, 67, 71, 74]], [36, [64, 67, 71, 72]], [38, [62, 66, 69, 72]]],
+             [[38, [62, 65, 69, 72]], [43, [65, 67, 71, 74]], [36, [64, 67, 71, 76]], [45, [64, 67, 69, 72]]]]
     drop = plan[1]["s"] if len(plan) > 1 and plan[1]["s"] > 1.2 else 3.0
-    cfg = {"D": dur + 0.5, "seed": int(seed), "bpm": int(rng.integers(124, 146)), "prog": progs[int(rng.integers(0, 4))],
+    cfg = {"D": dur + 0.5, "seed": int(seed), "bpm": int(rng.integers(116, 128)), "prog": progs[int(rng.integers(0, 4))],
            "drop": round(drop, 2), "end": round(dur + 0.2, 2), "sfx": sfx_events(plan, dur, rng)}
     (work / "music.json").write_text(json.dumps(cfg))
-    subprocess.run([sys.executable, HERE / "music.py", work / "music.json", work / "vo.wav", work / "music.wav", work / "sfx.wav"], check=True)
+    subprocess.run([sys.executable, HERE / "music_house.py", work / "music.json", work / "vo.wav", work / "music.wav", work / "sfx.wav"], check=True)
 
 
 # ---------------------------------------------------------------- telegram
@@ -357,7 +417,13 @@ def main():
             tg("sendMessage", data={"chat_id": tg_chat(), "text": "📭 Promo reel autopilot: all scripts are used up. Ask Claude for a new batch of scripts."})
             return
         (work / "script.json").write_text(json.dumps(d, ensure_ascii=False, indent=1))
-        W, dur = make_voice_beats(d["beats"], work)
+        voice_note, left = "ElevenLabs Viraj", None
+        try:
+            W, dur, left = make_voice_el(d["beats"], work)
+        except Exception as ex:
+            log.warning("ElevenLabs failed (%s) – using the free voice", ex)
+            voice_note = f"free voice (ElevenLabs: {str(ex)[:80]})"
+            W, dur = make_voice_beats(d["beats"], work)
         plan = make_plan(d["beats"], W, dur)
         (work / "plan.json").write_text(json.dumps(plan, ensure_ascii=False, indent=1))
         recent = hist.get("themes", [])[-2:]
@@ -388,7 +454,9 @@ def main():
         info = f"🎬 Promo reel #{n} ready ({dur:.0f}s · {tname} theme)\nHook: {d.get('hook_summary', '')[:200]}"
         if remaining <= 6:
             info += f"\n⚠️ Only {remaining} scripts left – ask Claude for more."
-        info += "\nVoice: free VoxCPM2 voice"
+        info += f"\nVoice: {voice_note}"
+        if left is not None:
+            info += f"\nElevenLabs credits left: {left:,}"
         with open(final, "rb") as f:
             r = tg("sendVideo", data={"chat_id": chat, "caption": info[:1000], "supports_streaming": "true"}, files={"video": f})
         if r and not r.get("ok"):
