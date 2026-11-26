@@ -1,5 +1,5 @@
 {
- "n": 9,
+ "n": 10,
  "hooks": [
   "Bhai, ek clip edit karne mein do ghante lagte hain? Ab nahi.",
   "Tum so rahe ho, aur tumhare phone pe GTA 6 clips ban rahi hain.",
@@ -9,7 +9,8 @@
   "Tum abhi bhi GTA 6 clips haath se edit kar rahe ho? Tab tak koi aur 50 clips post kar chuka hai.",
   "GTA 6 aa gaya hai, aur clip pages ka season shuru ho chuka hai. Ye video save kar lo, baad mein dhoondhoge.",
   "Raat ke 3 baje, tum so rahe ho, aur kisi ke phone pe GTA 6 clips ban rahi hain. Aisa kaise?",
-  "GTA 6 clip pages abhi sabse fast grow ho rahe hain, aur unka secret ye hai."
+  "GTA 6 clip pages abhi sabse fast grow ho rahe hain, aur unka secret ye hai.",
+  "Stream ka sabse best moment miss ho gaya? Tension mat lo."
  ],
  "themes": [
   "Toxic Green",
@@ -24,7 +25,8 @@
   27,
   28,
   29,
-  3
+  3,
+  4
  ],
  "skins": [
   "Neon Night",
@@ -33,6 +35,7 @@
   "Clean Mono",
   "Terminal Green",
   "Paper Notebook",
-  "Comic Pop"
+  "Comic Pop",
+  "Kraft Marker"
  ]
 }
