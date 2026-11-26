@@ -725,3 +725,16 @@ Error opening input file /home/runner/work/gta6-autopilot/gta6-autopilot/output/
 Error opening input files: Invalid data found when processing input
 
 
+2026-11-26 08:51:47,019 INFO fetched 68 candidate stories
+2026-11-26 08:51:48,065 INFO story: GTA 6 The Cartel Heist Walkthrough: Full Guide & Max Payout Tips (GTA BOOM – Latest Articles, 6000 chars)
+2026-11-26 08:51:50,868 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-26 08:51:58,726 INFO used backup model gemini-flash-lite-latest
+2026-11-26 08:52:08,693 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-26 08:52:20,232 INFO used backup model gemini-flash-lite-latest
+2026-11-26 08:52:20,317 INFO script: GTA 6 Cartel Heist: How to Save Nicole and Max Payout (15 lines, 162 words)
+2026-11-26 08:52:20,317 INFO visuals: clip, article, stat, list, stat, clip, clip, subject[Jason And Lucia], stat, subject[Vice City], stat, clip, clip, subject[Lucia Caminos], subject[Jason And Lucia]
+2026-11-26 08:52:20,576 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 396 credits are required for this request.","status":"quota_exceeded","request_id":"d854979d037e42773cff1a7615a2249a"}} – using free voice
+2026-11-26 08:52:37,552 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-26 08:55:21,327 INFO rendered 25 shots, 55.1s
+2026-11-26 08:55:25,331 INFO video ready: 20261126_085148.mp4 (55.1s)
+2026-11-26 09:05:41,764 INFO YouTube: https://youtube.com/shorts/Y-wcu9TzNGs
