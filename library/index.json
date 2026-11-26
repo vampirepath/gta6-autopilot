@@ -442,7 +442,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1422,7 +1422,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2071,7 +2071,7 @@
    "sunset"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -2416,7 +2416,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2485,7 +2485,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2751,7 +2751,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -2844,7 +2844,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -2901,7 +2901,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -2947,7 +2947,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -3029,7 +3029,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -3278,7 +3278,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -3311,7 +3311,7 @@
    "car_driving"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3668,7 +3668,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -3680,7 +3680,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -3703,7 +3703,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -3761,7 +3761,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -3969,7 +3969,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": true
  },
  {
@@ -4068,7 +4068,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -4205,7 +4205,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
@@ -4241,7 +4241,7 @@
    "aerial_view"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -4341,7 +4341,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 5,
+  "uses": 6,
   "graphic": false
  },
  {
