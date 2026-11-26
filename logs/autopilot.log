@@ -738,3 +738,16 @@ Error opening input files: Invalid data found when processing input
 2026-11-26 08:55:21,327 INFO rendered 25 shots, 55.1s
 2026-11-26 08:55:25,331 INFO video ready: 20261126_085148.mp4 (55.1s)
 2026-11-26 09:05:41,764 INFO YouTube: https://youtube.com/shorts/Y-wcu9TzNGs
+2026-11-26 18:58:09,231 INFO fetched 69 candidate stories
+2026-11-26 18:58:11,433 INFO story: GTA 6 Security Expert Walkthrough and Nicole Park Location (GTA BOOM – Latest Articles, 1320 chars)
+2026-11-26 18:58:14,761 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-26 18:58:24,479 INFO used backup model gemini-flash-lite-latest
+2026-11-26 18:58:26,878 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-26 18:58:38,029 INFO used backup model gemini-flash-lite-latest
+2026-11-26 18:58:38,096 INFO script: GTA 6 Security Expert Mission Walkthrough & Missable Item Guide (16 lines, 152 words)
+2026-11-26 18:58:38,096 INFO visuals: clip, article, subject[Vice City], clip, subject[Jason And Lucia], subject[Lucia Caminos], clip, subject[Leonida Keys], clip, subject[Lucia Caminos], clip, subject[Jason Duval], clip, subject[Port Gellhorn], clip, subject[Grassrivers]
+2026-11-26 18:58:38,204 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 344 credits are required for this request.","status":"quota_exceeded","request_id":"61c1250a4c2a8b0534a43e2eb1583a50"}} – using free voice
+2026-11-26 18:58:49,387 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-26 19:00:26,106 INFO rendered 22 shots, 43.4s
+2026-11-26 19:00:28,953 INFO video ready: 20261126_185811.mp4 (43.4s)
+2026-11-26 19:10:43,183 INFO YouTube: https://youtube.com/shorts/JjNsbhNz4og

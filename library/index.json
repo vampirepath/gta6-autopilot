@@ -1207,7 +1207,7 @@
    "jason_and_lucia"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -1374,7 +1374,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1444,7 +1444,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -1597,7 +1597,7 @@
    "jason_and_lucia"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -2659,7 +2659,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -2855,7 +2855,7 @@
    "nightlife_party"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3078,7 +3078,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -3461,7 +3461,7 @@
    "nightlife_party"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3599,7 +3599,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3632,7 +3632,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -3761,7 +3761,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 6,
+  "uses": 7,
   "graphic": false
  },
  {
@@ -3958,7 +3958,7 @@
    "jason"
   ],
   "ok": true,
-  "uses": 0,
+  "uses": 1,
   "graphic": false
  },
  {
@@ -4068,7 +4068,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 7,
+  "uses": 8,
   "graphic": false
  },
  {
@@ -4285,7 +4285,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 7,
+  "uses": 8,
   "graphic": false
  },
  {
@@ -4319,7 +4319,7 @@
    "sunset"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
