@@ -751,3 +751,16 @@ Error opening input files: Invalid data found when processing input
 2026-11-26 19:00:26,106 INFO rendered 22 shots, 43.4s
 2026-11-26 19:00:28,953 INFO video ready: 20261126_185811.mp4 (43.4s)
 2026-11-26 19:10:43,183 INFO YouTube: https://youtube.com/shorts/JjNsbhNz4og
+2026-11-27 10:48:09,150 INFO fetched 70 candidate stories
+2026-11-27 10:48:10,645 INFO story: GTA 6 The Missing Link Walkthrough and Photo Room Pistol Location (GTA BOOM – Latest Articles, 2507 chars)
+2026-11-27 10:48:12,061 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-27 10:48:18,779 INFO used backup model gemini-flash-lite-latest
+2026-11-27 10:48:38,283 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-27 10:48:53,712 INFO used backup model gemini-flash-lite-latest
+2026-11-27 10:48:53,796 INFO script: GTA 6 The Missing Link Mission Walkthrough Revealed (15 lines, 148 words)
+2026-11-27 10:48:53,797 INFO visuals: clip, person, subject[Vice City], subject[Vice City], clip, subject[Jason And Lucia], clip, clip, subject[Vice City], subject[Jason And Lucia], subject[Raul Bautista], clip, subject[Raul Bautista], clip, subject[Jason And Lucia]
+2026-11-27 10:48:54,012 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 338 credits are required for this request.","status":"quota_exceeded","request_id":"660c16e72c002959c6e4523c6671e517"}} – using free voice
+2026-11-27 10:49:07,601 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-27 10:51:00,857 INFO rendered 20 shots, 43.5s
+2026-11-27 10:51:04,286 INFO video ready: 20261127_104810.mp4 (43.5s)
+2026-11-27 11:01:18,280 INFO YouTube: https://youtube.com/shorts/K9k3daE-T4o
