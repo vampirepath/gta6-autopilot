@@ -764,3 +764,12 @@ Error opening input files: Invalid data found when processing input
 2026-11-27 10:51:00,857 INFO rendered 20 shots, 43.5s
 2026-11-27 10:51:04,286 INFO video ready: 20261127_104810.mp4 (43.5s)
 2026-11-27 11:01:18,280 INFO YouTube: https://youtube.com/shorts/K9k3daE-T4o
+2026-11-27 19:53:44,506 INFO fetched 70 candidate stories
+2026-11-27 19:53:45,417 INFO story: GTA 6 Bricked Up Walkthrough for the Red Bag and Jason’s Pickup (GTA BOOM – Latest Articles, 2246 chars)
+2026-11-27 19:56:57,674 INFO script: Leaked GTA 6 Walkthrough Details a Wild Police Ambush (15 lines, 163 words)
+2026-11-27 19:56:57,674 INFO visuals: clip, article, subject[Leonida Map Poster], subject[Boobie Ike], subject[Jason Duval], stat, clip, ai, subject[Lucia Caminos], subject[Jason And Lucia], subject[Jason Lucia Lock And Load], clip, list, subject[Vice City], subject[Cover Art]
+2026-11-27 19:56:57,853 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 386 credits are required for this request.","status":"quota_exceeded","request_id":"c4b42f8d291f9e99f4a7e45a65c1f29d"}} – using free voice
+2026-11-27 19:57:12,161 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-27 19:59:07,462 INFO rendered 18 shots, 50.5s
+2026-11-27 19:59:10,509 INFO video ready: 20261127_195345.mp4 (50.5s)
+2026-11-27 20:09:26,113 INFO YouTube: https://youtube.com/shorts/uSP6A7EYoV4

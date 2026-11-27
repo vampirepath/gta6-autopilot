@@ -2229,7 +2229,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -2289,7 +2289,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -2947,7 +2947,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 8,
+  "uses": 9,
   "graphic": false
  },
  {
@@ -2995,7 +2995,7 @@
    "city_skyline"
   ],
   "ok": true,
-  "uses": 2,
+  "uses": 3,
   "graphic": false
  },
  {
@@ -3668,7 +3668,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 8,
+  "uses": 9,
   "graphic": false
  },
  {
@@ -3703,7 +3703,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 8,
+  "uses": 9,
   "graphic": false
  },
  {
@@ -3936,7 +3936,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": true
  },
  {
@@ -4091,7 +4091,7 @@
    "robbery_action"
   ],
   "ok": true,
-  "uses": 1,
+  "uses": 2,
   "graphic": false
  },
  {
@@ -4205,7 +4205,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 7,
+  "uses": 8,
   "graphic": false
  },
  {
@@ -4341,7 +4341,7 @@
    "any"
   ],
   "ok": true,
-  "uses": 8,
+  "uses": 9,
   "graphic": false
  },
  {
