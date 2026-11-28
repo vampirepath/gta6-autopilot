@@ -785,3 +785,14 @@ Error opening input files: Invalid data found when processing input
 2026-11-28 11:01:37,475 INFO rendered 23 shots, 39.5s
 2026-11-28 11:01:40,120 INFO video ready: 20261128_105018.mp4 (39.5s)
 2026-11-28 11:11:52,589 INFO YouTube: https://youtube.com/shorts/gMAE1T-jGdg
+2026-11-28 18:50:07,709 INFO fetched 70 candidate stories
+2026-11-28 18:50:08,835 INFO story: GTA 6 Ocean Beach Lab Robbery Guide to the Zodiac Nipper.38 and Safe Loot (GTA BOOM – Latest Articles, 1662 chars)
+2026-11-28 18:50:11,954 INFO gemini gemini-flash-latest 503 – trying next
+2026-11-28 18:50:18,670 INFO used backup model gemini-flash-lite-latest
+2026-11-28 18:55:32,825 INFO script: GTA 6 Ocean Beach Robbery Leaks Secret Gun (15 lines, 161 words)
+2026-11-28 18:55:32,825 INFO visuals: subject[Jason And Lucia Robbery], article, subject[Vice City], clip, ai, clip, stat, blocks, clip, quote, clip, list, clip, subject[Lucia Caminos], subject[Jason Duval]
+2026-11-28 18:55:33,013 WARNING ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 37742. You have 5 credits remaining, while 375 credits are required for this request.","status":"quota_exceeded","request_id":"90facfe1e44f653c2de84cab4a4cc4ad"}} – using free voice
+2026-11-28 18:55:54,713 INFO voice: Edge TTS (en-US-AndrewNeural)
+2026-11-28 18:58:40,162 INFO rendered 24 shots, 49.4s
+2026-11-28 18:58:43,942 INFO video ready: 20261128_185008.mp4 (49.4s)
+2026-11-28 19:08:58,931 INFO YouTube: https://youtube.com/shorts/ptPFQxURct8
